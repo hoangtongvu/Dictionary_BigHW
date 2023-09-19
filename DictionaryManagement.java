@@ -29,7 +29,6 @@ public class DictionaryManagement
         scanner = new Scanner(file, "UTF-8");
 
 
-        int wordBlockCount = 0;
         WordBlock newWordBlock = null;
         WordDefinition newWordDefinition = null;
         WordDescription newWordDescription = null;
@@ -45,7 +44,6 @@ public class DictionaryManagement
                 switch (line.charAt(0)) 
                 {
                     case '@':
-                        wordBlockCount++;
                         newWordBlock = new WordBlock();
 
 
@@ -94,8 +92,17 @@ public class DictionaryManagement
 
                         newWordExample = new WordExample(example, definitionOfExample);
                         newWordExample = newWordDefinition.AddWordExample(newWordExample);
+                    // case '!':
+                    //     example = line.substring(1);
+                    //     definitionOfExample = "todo later";//scanner.nextLine().substring(1);
 
-                        break;
+                    //     //System.out.println("example: " + example);
+                    //     //System.out.println("definitionOfExample: " + definitionOfExample);
+
+                    //     newWordExample = new WordExample(example, definitionOfExample);
+                    //     newWordExample = newWordDefinition.AddWordExample(newWordExample);
+
+                    //     break;
                     default:
                         break;
                 }

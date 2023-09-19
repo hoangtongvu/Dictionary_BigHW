@@ -13,7 +13,9 @@ public class WordExample
 
     public void PrintOut()
     {
-        System.out.println("example: " + this.example);
-        System.out.println("exampleDef: " + this.exampleDefinition);
+        // System.out.println("example: " + this.example);
+        // System.out.println("exampleDef: " + this.exampleDefinition);
+        System.out.println("\t" + this.example);
+        System.out.println("\t->" + this.exampleDefinition);
     }
 }

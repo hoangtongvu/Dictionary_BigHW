@@ -25,7 +25,7 @@ public class WordDescription
 
     public void PrintOut()
     {
-        System.out.println("word type: " + this.wordType);
+        System.out.println("* " + this.wordType);
         for (WordDefinition wordDefinition : wordDefinitions) 
         {
             wordDefinition.PrintOut();
