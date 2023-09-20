@@ -1,6 +1,12 @@
+package Dictionary;
 import java.io.File;
 import java.util.Collections;
 import java.util.Scanner;
+
+import Word.WordBlock;
+import Word.WordDefinition;
+import Word.WordDescription;
+import Word.WordExample;
 
 public class DictionaryManagement 
 {

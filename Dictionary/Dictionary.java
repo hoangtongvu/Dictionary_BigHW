@@ -1,5 +1,8 @@
+package Dictionary;
 import java.util.ArrayList;
 import java.util.List;
+
+import Word.WordBlock;
 
 public class Dictionary 
 {

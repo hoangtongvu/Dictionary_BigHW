@@ -1,7 +1,7 @@
-package CommandLineWindow;
+package CmdWindow.CmdOptions;
 
 
-public class ClearScreenOption extends CommandLineWindowOption
+public class ClearScreenOption extends CmdWindowOption
 {
     public ClearScreenOption() 
     {

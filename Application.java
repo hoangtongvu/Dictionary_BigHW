@@ -1,4 +1,5 @@
-import java.util.Scanner;
+import Dictionary.DictionaryCmd;
+import Dictionary.DictionaryManagement;
 
 public class Application 
 {
@@ -12,7 +13,7 @@ public class Application
         //dictionaryManagement.LookUpWord("minute");
 
         //application.DictionaryCommandline(dictionaryManagement);
-        DictionaryCommandline dictionaryCommandline = new DictionaryCommandline();
+        DictionaryCmd dictionaryCommandline = new DictionaryCmd();
         dictionaryCommandline.Update();
         
         
@@ -20,57 +21,5 @@ public class Application
     }
 
     
-    private void DictionaryCommandline(DictionaryManagement dictionaryManagement)
-    {
-        this.Clrscr();
-        Scanner scanner = new Scanner(System.in);
-
-        int inputCommand;
-
-        do 
-        {
-            this.PrintCommandline();
-            System.out.print("Type your command: ");
-            inputCommand = scanner.nextInt();
-
-            switch (inputCommand) 
-            {
-                case 1:
-                    this.Clrscr();
-                    break;
-                case 2:
-                    this.Clrscr();
-                    System.out.print("Looking up word: ");
-                    String lookUpWord = scanner.nextLine();
-                    //dictionaryManagement.LookUpWord(lookUpWord);
-                    break;
-                default:
-                    break;
-            }
-
-
-
-            
-        } while (inputCommand != 0);
-
-
-
-        scanner.close();
-    }
-
-
-    private void PrintCommandline()
-    {
-        System.out.println("___[Dictionary made with Java]___");
-        System.out.println("[" + 0 + "] Exit.");
-        System.out.println("[" + 1 + "] Clrscr.");
-        System.out.println("[" + 2 + "] Look-up for word.");
-    }
-
-    private void Clrscr()
-    {
-        System.out.print("\033[H\033[2J");
-    }
-
 
 }
