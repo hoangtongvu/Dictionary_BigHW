@@ -8,13 +8,13 @@ import Word.WordDefinition;
 import Word.WordDescription;
 import Word.WordExample;
 
-public class DictionaryManagement 
+public class DicManager 
 {
     
     private Dictionary dictionary;
     private String defaultFilePath = "D:\\Java\\Dictionary_BigHW\\data\\anhviet109K.txt";
 
-    public DictionaryManagement()
+    public DicManager()
     {
         this.dictionary = new Dictionary();
     }
@@ -145,6 +145,15 @@ public class DictionaryManagement
         dummy.SetWordAndSpelling(lookupString, "");
         int lookupPos = Collections.binarySearch(this.dictionary.getWordBlocks(), dummy);
         this.dictionary.ShowWordAt(lookupPos);
+    }
+
+    public String LookUpWordString(String lookupString)
+    {
+        WordBlock dummy = new WordBlock();
+        dummy.SetWordAndSpelling(lookupString, "");
+        int lookupPos = Collections.binarySearch(this.dictionary.getWordBlocks(), dummy);
+        if (lookupPos < 0) return "Can't find your word.";
+        return this.dictionary.GetWordInfoAt(lookupPos);
     }
 
 

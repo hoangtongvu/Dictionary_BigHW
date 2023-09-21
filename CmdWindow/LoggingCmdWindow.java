@@ -19,11 +19,6 @@ public class LoggingCmdWindow extends CmdWindow
         this.cmdWindowOptions.add(logging1);
     }
 
-    protected void RenderInputText()
-    {
-        super.RenderInputText();
-        System.out.print("Type your text: ");
-    }
 
 
 }

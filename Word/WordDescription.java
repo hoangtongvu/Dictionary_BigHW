@@ -33,4 +33,16 @@ public class WordDescription
             
         }
     }
+
+    public String GetInfo()
+    {
+        String temp = "* " + this.wordType + "\n";
+        for (WordDefinition wordDefinition : wordDefinitions) 
+        {
+            temp += wordDefinition.GetInfo();
+            
+        }
+        return temp;
+    }
+
 }

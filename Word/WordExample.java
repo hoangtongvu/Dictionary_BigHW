@@ -14,9 +14,13 @@ public class WordExample
 
     public void PrintOut()
     {
-        // System.out.println("example: " + this.example);
-        // System.out.println("exampleDef: " + this.exampleDefinition);
         System.out.println("\t" + this.example);
         System.out.println("\t->" + this.exampleDefinition);
+    }
+
+    public String GetInfo()
+    {
+        String temp = "\t" + this.example + "\n\t->" + this.exampleDefinition;
+        return temp;
     }
 }
