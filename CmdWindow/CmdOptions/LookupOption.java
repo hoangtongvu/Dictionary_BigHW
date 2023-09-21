@@ -1,21 +1,23 @@
 package CmdWindow.CmdOptions;
 
 import CmdWindow.CmdWindow;
-import Dictionary.DictionaryCmd;
+import Dictionary.DicCmdCtrl;
 
 public class LookupOption extends CmdWindowOption
 {
-    public LookupOption() 
+    public LookupOption(CmdWindow cmdWindow) 
     {
-        super();
+        super(cmdWindow);
         this.title = "Look up word.";
     }
 
     @Override
-    public void Action(DictionaryCmd dictionaryCmd) 
+    public void Action() 
     {
-        CmdWindow newCmdWindow = dictionaryCmd.getLookupCmdWindow();
-        dictionaryCmd.SwitchCmdWindow(newCmdWindow);
+        //CmdWindow newCmdWindow = dictionaryCmd.getLookupCmdWindow();
+        DicCmdCtrl dicCmdCtrl = this.cmdWindow.getDicCmdCtrl();
+        CmdWindow newCmdWindow = dicCmdCtrl.getLookupCmdWindow();
+        dicCmdCtrl.getDicCmdManager().SwitchCmdWindow(newCmdWindow);
         
     }
 }

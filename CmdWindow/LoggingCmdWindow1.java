@@ -1,18 +1,13 @@
 package CmdWindow;
 
-
+import Dictionary.DicCmdCtrl;
 
 public class LoggingCmdWindow1 extends CmdWindow
 {
 
-    public LoggingCmdWindow1()
+    public LoggingCmdWindow1(DicCmdCtrl dicCmdCtrl) 
     {
-        super();
-        this.AddOptions();
-    }
-
-    private void AddOptions()
-    {
+        super(dicCmdCtrl);
     }
 
     protected void RenderInputText()

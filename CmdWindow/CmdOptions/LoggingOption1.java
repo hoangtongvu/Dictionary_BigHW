@@ -1,21 +1,22 @@
 package CmdWindow.CmdOptions;
 
 import CmdWindow.CmdWindow;
-import Dictionary.DictionaryCmd;
+import Dictionary.DicCmdCtrl;
 
 public class LoggingOption1 extends CmdWindowOption
 {
-    public LoggingOption1() 
+    public LoggingOption1(CmdWindow cmdWindow) 
     {
-        super();
+        super(cmdWindow);
         this.title = "Logging 111111.";
     }
 
     @Override
-    public void Action(DictionaryCmd dictionaryCmd) 
+    public void Action() 
     {
-        CmdWindow newCmdWindow = dictionaryCmd.getLoggingCmdWindow1();
-        dictionaryCmd.SwitchCmdWindow(newCmdWindow);
+        DicCmdCtrl dicCmdCtrl = this.cmdWindow.getDicCmdCtrl();
+        CmdWindow newCmdWindow = dicCmdCtrl.getLoggingCmdWindow1();
+        dicCmdCtrl.getDicCmdManager().SwitchCmdWindow(newCmdWindow);
         
     }
 }

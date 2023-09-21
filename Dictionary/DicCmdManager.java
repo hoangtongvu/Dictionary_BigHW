@@ -2,57 +2,23 @@ package Dictionary;
 import java.util.Scanner;
 
 import CmdWindow.CmdWindow;
-import CmdWindow.LoggingCmdWindow;
-import CmdWindow.LoggingCmdWindow1;
-import CmdWindow.LookupCmdWindow;
-import CmdWindow.MainCMDWindow;
 
-public class DictionaryCmd 
+public class DicCmdManager 
 {
+
+    private DicCmdCtrl dicCmdCtrl;
     private boolean isClose = false;
-
-
-    public boolean isClose() {
-        return isClose;
-    }
-
     private CmdWindow currentCmdWindow;
     
-    private MainCMDWindow mainCommandLineWindow;
-    private LoggingCmdWindow loggingCmdWindow;
-    private LoggingCmdWindow1 loggingCmdWindow1;
-    private LookupCmdWindow LookupCmdWindow;
-
-    public LookupCmdWindow getLookupCmdWindow() {
-        return LookupCmdWindow;
-    }
-
-    public LoggingCmdWindow1 getLoggingCmdWindow1() {
-        return loggingCmdWindow1;
-    }
-
-    public LoggingCmdWindow getLoggingCmdWindow() {
-        return loggingCmdWindow;
-    }
-
-    public MainCMDWindow getMainCommandLineWindow() {
-        return mainCommandLineWindow;
-    }
-
-
+        
     /**
      * Constructor.
      */
-    public DictionaryCmd()
+    public DicCmdManager(DicCmdCtrl _dicCmdCtrl)
     {
-        this.mainCommandLineWindow = new MainCMDWindow();
-        this.loggingCmdWindow = new LoggingCmdWindow();
-        this.loggingCmdWindow1 = new LoggingCmdWindow1();
-        this.LookupCmdWindow = new LookupCmdWindow();
-
-        this.currentCmdWindow = this.mainCommandLineWindow;
+        this.dicCmdCtrl = _dicCmdCtrl;
+        this.currentCmdWindow = this.dicCmdCtrl.getMainCommandLineWindow();
     }
-
 
 
     public void Update()
@@ -60,18 +26,16 @@ public class DictionaryCmd
         this.Clrscr();
         Scanner scanner = new Scanner(System.in);
 
-        int inputCommand;
+        String inputCommand;
 
         do 
         {
             this.Clrscr();
             this.currentCmdWindow.Update();
-            inputCommand = scanner.nextInt();
+            inputCommand = scanner.nextLine();
             this.currentCmdWindow.CheckInputCommand(inputCommand, this);
             
         } while (!isClose);
-
-
 
         scanner.close();
     }

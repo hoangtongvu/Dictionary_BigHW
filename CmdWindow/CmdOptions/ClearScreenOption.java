@@ -1,11 +1,12 @@
 package CmdWindow.CmdOptions;
 
+import CmdWindow.CmdWindow;
 
 public class ClearScreenOption extends CmdWindowOption
 {
-    public ClearScreenOption() 
+    public ClearScreenOption(CmdWindow cmdWindow) 
     {
-        super();
+        super(cmdWindow);
         this.title = "Clear screen.";
     }
 

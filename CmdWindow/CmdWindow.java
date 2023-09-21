@@ -4,39 +4,59 @@ import java.util.ArrayList;
 import java.util.List;
 
 import CmdWindow.CmdOptions.CmdWindowOption;
-import Dictionary.DictionaryCmd;
+import Dictionary.DicCmdCtrl;
+import Dictionary.DicCmdManager;
 
 public abstract class CmdWindow 
 {
+    protected DicCmdCtrl dicCmdCtrl;
+
     protected CmdWindow previousCmdWindow;
     
     protected List<CmdWindowOption> cmdWindowOptions;
     protected boolean isMainCommandLineWindow;
+
+    protected String windowTitle;
     
     public CmdWindow getPreviousCmdWindow() {
         return previousCmdWindow;
     }
-
+    
     public void setPreviousCmdWindow(CmdWindow previousCmdWindow) {
         this.previousCmdWindow = previousCmdWindow;
     }
-
+    
     public boolean isMainCommandLineWindow() {
         return isMainCommandLineWindow;
     }
+
 
     public void setMainCommandLineWindow(boolean isMainCommandLineWindow) {
         this.isMainCommandLineWindow = isMainCommandLineWindow;
     }
 
-    public CmdWindow()
+    public DicCmdCtrl getDicCmdCtrl() {
+        return dicCmdCtrl;
+    }
+
+    /**
+     * Constructor.
+     */
+    public CmdWindow(DicCmdCtrl dicCmdCtrl)
     {
+        this.windowTitle = "No Title";
+        this.dicCmdCtrl = dicCmdCtrl;
         this.previousCmdWindow = null;
         this.cmdWindowOptions = new ArrayList<>();
         this.isMainCommandLineWindow = false;
+
+
+        this.AddingOptions();
+
+
     }
 
-
+    protected void AddingOptions() {};
 
     public void Update()
     {
@@ -45,14 +65,22 @@ public abstract class CmdWindow
 
     public void Render()
     {
+        this.RenderWindowTitle();
         this.RenderOptions();
+        this.RenderContents();
         this.RenderInputText();
 
+    }
 
+
+    protected void RenderWindowTitle() 
+    {
+        System.out.println(windowTitle);
     }
 
     protected void RenderOptions()
     {
+        System.out.println();
         //Render List of options
         int size = this.cmdWindowOptions.size();
         for (int i = 1; i <= size; i++) 
@@ -69,6 +97,13 @@ public abstract class CmdWindow
         System.out.println("[" + 0 + "] " + specialOptionText);
     }
 
+
+    protected void RenderContents() 
+    {
+        System.out.println();
+    }
+
+
     protected void RenderInputText()
     {
         System.out.println();
@@ -80,25 +115,46 @@ public abstract class CmdWindow
         this.cmdWindowOptions.add(commandLineWindowOption);
     }
 
-    public boolean CheckInputCommand(int inputCommand, DictionaryCmd dictionaryCmd)
+    public boolean CheckInputCommand(String rawInputCommand, DicCmdManager dictionaryCmd)
     {
-        if (inputCommand == 0) 
+        if (!isNumeric(rawInputCommand))
         {
-            if (this.isMainCommandLineWindow) 
-            {
-                dictionaryCmd.ExitCmd();
-            }
-            else
-            {
-                dictionaryCmd.Switch2PreviousWindow();
-            }
+            this.StringInputCommand();
             return true;
         }
-        int size = this.cmdWindowOptions.size();
-        int actualInput = inputCommand - 1;
-        if (actualInput >= size || actualInput < 0) return false;
-        this.cmdWindowOptions.get(actualInput).Action(dictionaryCmd);
-        return true;
+        else
+        {
+            Integer inputCommand = Integer.parseInt(rawInputCommand);
+            if (inputCommand == 0) 
+            {
+                if (this.isMainCommandLineWindow) 
+                {
+                    dictionaryCmd.ExitCmd();
+                }
+                else
+                {
+                    dictionaryCmd.Switch2PreviousWindow();
+                }
+                return true;
+            }
+            int size = this.cmdWindowOptions.size();
+            int actualInput = inputCommand - 1;
+            if (actualInput >= size || actualInput < 0) return false;
+            this.cmdWindowOptions.get(actualInput).Action();
+            return true;
+
+        }
+    }
+
+
+    private static boolean isNumeric(String str)
+    {
+        return str != null && str.matches("[0-9.]+");
+    }
+
+    protected void StringInputCommand()
+    {
+
     }
 
 }

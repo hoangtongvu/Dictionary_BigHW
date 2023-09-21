@@ -1,19 +1,21 @@
 package CmdWindow;
 
 import CmdWindow.CmdOptions.*;
+import Dictionary.DicCmdCtrl;
 
 public class LoggingCmdWindow extends CmdWindow
 {
 
-    public LoggingCmdWindow()
+
+    public LoggingCmdWindow(DicCmdCtrl dicCmdCtrl) 
     {
-        super();
-        this.AddOptions();
+        super(dicCmdCtrl);
     }
 
-    private void AddOptions()
+    @Override
+    protected void AddingOptions()
     {
-        CmdWindowOption logging1 = new LoggingOption1();
+        CmdWindowOption logging1 = new LoggingOption1(this);
         this.cmdWindowOptions.add(logging1);
     }
 
