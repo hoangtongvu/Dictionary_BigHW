@@ -39,14 +39,6 @@ public class Dictionary
     }
 
     
-    public String GetWordInfoAt(int i)
-    {
-        WordBlock wordBlock = this.wordBlocks.get(i);
-        return wordBlock.GetInfo();
-    }
-
-    
-
     public WordBlock AddWordBlock(WordBlock wordBlock)
     {
         this.wordBlocks.add(wordBlock);

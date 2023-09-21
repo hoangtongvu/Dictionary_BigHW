@@ -14,18 +14,17 @@ public class LookupCmdWindow extends CmdWindow
 
 
     @Override
-    protected String GetInputText()
+    protected void RenderInputText()
     {
-        return "Type option or text: ";
+        super.RenderInputText();
+        System.out.print("Type command or text: ");
     }
 
     @Override
-    protected void StringInputCommands(String stringCommand)
+    protected void StringInputCommand()
     {
-
-        //this.ClearWindowContent();
-        String content = this.dicCmdCtrl.getDicManager().LookUpWordString(stringCommand);
-        this.windowContent = content;
+        CmdWindow newCmdWindow = this.dicCmdCtrl.getLookedUpWordCmdWindow();
+        this.dicCmdCtrl.getDicCmdManager().SwitchCmdWindow(newCmdWindow);
     }
     
 

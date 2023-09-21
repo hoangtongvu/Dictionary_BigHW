@@ -28,5 +28,11 @@ public class MainCMDWindow extends CmdWindow
     }
 
 
+    protected void RenderInputText()
+    {
+        super.RenderInputText();
+        System.out.print("Type your command: ");
+    }
+
 
 }

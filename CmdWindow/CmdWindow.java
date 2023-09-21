@@ -17,7 +17,6 @@ public abstract class CmdWindow
     protected boolean isMainCommandLineWindow;
 
     protected String windowTitle;
-    protected String windowContent;
     
     public CmdWindow getPreviousCmdWindow() {
         return previousCmdWindow;
@@ -46,7 +45,6 @@ public abstract class CmdWindow
     public CmdWindow(DicCmdCtrl dicCmdCtrl)
     {
         this.windowTitle = "No Title";
-        this.windowContent = "";
         this.dicCmdCtrl = dicCmdCtrl;
         this.previousCmdWindow = null;
         this.cmdWindowOptions = new ArrayList<>();
@@ -77,7 +75,7 @@ public abstract class CmdWindow
 
     protected void RenderWindowTitle() 
     {
-        System.out.println("| " + windowTitle + " |");
+        System.out.println(windowTitle);
     }
 
     protected void RenderOptions()
@@ -102,22 +100,15 @@ public abstract class CmdWindow
 
     protected void RenderContents() 
     {
-        if (this.windowContent == "") return;
-        System.out.println("__________________");
-        System.out.println(this.windowContent);
+        System.out.println();
     }
 
 
-    private void RenderInputText()
+    protected void RenderInputText()
     {
-        System.out.println("__________________");
-        System.out.print(this.GetInputText());
+        System.out.println();
+
     }   
-
-    protected String GetInputText()
-    {
-        return "Type option: ";
-    }
 
     public void AddCommandlineOption(CmdWindowOption commandLineWindowOption)
     {
@@ -128,7 +119,7 @@ public abstract class CmdWindow
     {
         if (!isNumeric(rawInputCommand))
         {
-            this.StringInputCommands(rawInputCommand);
+            this.StringInputCommand();
             return true;
         }
         else
@@ -161,14 +152,9 @@ public abstract class CmdWindow
         return str != null && str.matches("[0-9.]+");
     }
 
-    protected void StringInputCommands(String stringCommand)
+    protected void StringInputCommand()
     {
-        this.windowContent = stringCommand + " is invalid input command";
-    }
 
-    protected void ClearWindowContent()
-    {
-        this.windowContent = "";
     }
 
 }

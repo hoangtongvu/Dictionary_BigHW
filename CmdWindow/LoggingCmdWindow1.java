@@ -10,10 +10,11 @@ public class LoggingCmdWindow1 extends CmdWindow
         super(dicCmdCtrl);
     }
 
-    @Override
-    protected String GetInputText()
+    protected void RenderInputText()
     {
-        return "Type your text 1111111111: ";
+        super.RenderInputText();
+        System.out.print("Type your text 1111111111: ");
     }
+
 
 }

@@ -45,17 +45,6 @@ public class WordBlock implements Comparable<WordBlock>
         }
     }
 
-    public String GetInfo()
-    {
-        String temp = this.word + "\n" + this.spelling + "\n";
-
-        for (WordDescription wordDescription : wordDescriptions) 
-        {
-            temp += wordDescription.GetInfo() ;
-        }
-        return temp;
-    }
-
     @Override
     public int compareTo(WordBlock o) 
     {

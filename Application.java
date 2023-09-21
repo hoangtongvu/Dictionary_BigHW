@@ -1,17 +1,16 @@
 import Dictionary.DicCmdCtrl;
-import Dictionary.DicManager;
+import Dictionary.DictionaryManagement;
 
 public class Application 
 {
 
     public static void main(String[] args) throws Exception
     {
-        DicManager dicManager = new DicManager();
-        dicManager.LoadNewWordFromFile();
+        DictionaryManagement dictionaryManagement = new DictionaryManagement();
+        dictionaryManagement.LoadNewWordFromFile();
         
 
         DicCmdCtrl dicCmdCtrl = new DicCmdCtrl();
-        dicCmdCtrl.setDicManager(dicManager);
         dicCmdCtrl.getDicCmdManager().Update();
         
         //dictionaryManagement.ShowAllWords();
