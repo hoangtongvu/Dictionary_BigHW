@@ -29,4 +29,16 @@ public class WordDefinition
         }
     }
 
+    public String GetInfo()
+    {
+        String temp = "  => " + this.definition + "\n";
+            
+        if (this.wordExamples == null) return temp;
+        for (WordExample wordExample : wordExamples) 
+        {
+            temp += wordExample.GetInfo() + "\n";
+        }
+        return temp;
+    }
+
 }
