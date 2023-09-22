@@ -13,12 +13,12 @@ public class Dictionary
         return wordBlocks;
     }
 
-
     public Dictionary()
     {
         this.wordBlocks = new ArrayList<>();
     }
 
+    
     public void ShowAllWords()
     {
         int count = 1;
@@ -26,16 +26,16 @@ public class Dictionary
         {
             System.out.println("");
             System.out.print(count + ". ");
-            wordBlock.PrintOut();
+            System.out.print(wordBlock.GetInfo());
             count++;
         }
 
     }
 
+
     public void ShowWordAt(int i)
     {
-        WordBlock wordBlock = this.wordBlocks.get(i);
-        wordBlock.PrintOut();
+        System.out.println(this.GetWordInfoAt(i));
     }
 
     
@@ -45,7 +45,6 @@ public class Dictionary
         return wordBlock.GetInfo();
     }
 
-    
 
     public WordBlock AddWordBlock(WordBlock wordBlock)
     {

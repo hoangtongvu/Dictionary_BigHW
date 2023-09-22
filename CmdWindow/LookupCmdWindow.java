@@ -1,5 +1,7 @@
 package CmdWindow;
 
+import CmdWindow.CmdOptions.CmdWindowOption;
+import CmdWindow.CmdOptions.*;
 import Dictionary.DicCmdCtrl;
 
 public class LookupCmdWindow extends CmdWindow
@@ -14,6 +16,13 @@ public class LookupCmdWindow extends CmdWindow
 
 
     @Override
+    protected void AddingOptions()
+    {
+        CmdWindowOption clrscrOption = new ClearScreenOption(this);
+        this.cmdWindowOptions.add(clrscrOption);
+    }
+
+    @Override
     protected String GetInputText()
     {
         return "Type option or text: ";
@@ -24,7 +33,7 @@ public class LookupCmdWindow extends CmdWindow
     {
 
         //this.ClearWindowContent();
-        String content = this.dicCmdCtrl.getDicManager().LookUpWordString(stringCommand);
+        String content = this.dicCmdCtrl.getDicManager().LookUpWord(stringCommand);
         this.windowContent = content;
     }
     

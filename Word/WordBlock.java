@@ -34,16 +34,6 @@ public class WordBlock implements Comparable<WordBlock>
         this.wordDescriptions = new ArrayList<>();
     }
 
-    public void PrintOut()
-    {
-        System.out.println(this.word);
-        System.out.println(this.spelling);
-        for (WordDescription wordDescription : wordDescriptions) 
-        {
-            wordDescription.PrintOut();
-            
-        }
-    }
 
     public String GetInfo()
     {

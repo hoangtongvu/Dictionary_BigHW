@@ -12,7 +12,14 @@ public class DicManager
 {
     
     private Dictionary dictionary;
-    private String defaultFilePath = "D:\\Java\\Dictionary_BigHW\\data\\anhviet109K.txt";
+    
+    //private String defaultFilePath = "D:\\Java\\Dictionary_BigHW\\data\\anhviet109K.txt";
+    private String currentWorkingDir = System.getProperty("user.dir");
+    private String defaultFilePath = this.currentWorkingDir + "/data/anhviet109K.txt";
+    
+    public Dictionary getDictionary() {
+        return dictionary;
+    }
 
     public DicManager()
     {
@@ -20,10 +27,14 @@ public class DicManager
     }
 
 
-    public void LoadNewWordFromFile() throws Exception
+    public void LoadWords_Default() throws Exception
     {
-        //String filePath = "D:\\Java\\Dictionary_BigHW\\data\\anhviet109K.txt";
-        File file = new File(this.defaultFilePath);
+        this.LoadWordsFromFile(this.defaultFilePath);
+    }
+
+    public void LoadWordsFromFile(String filePath) throws Exception
+    {
+        File file = new File(filePath);
 
         Scanner scanner;
         if (!file.exists()) 
@@ -40,16 +51,18 @@ public class DicManager
         WordDescription newWordDescription = null;
         WordExample newWordExample = null;
 
+        String prevLine = null;
+
         while (scanner.hasNextLine()) 
         {
-            String line = scanner.nextLine();//remember to enter 1 time at dictionary.txt;
+            String line = scanner.nextLine();//TODO: remember to enter 1 time at dictionary.txt; unknown error if not do so.
 
 
             if (line != "") 
             {
                 switch (line.charAt(0)) 
                 {
-                    case '@':
+                    case '@'://word and its spelling
                         newWordBlock = new WordBlock();
 
 
@@ -58,14 +71,10 @@ public class DicManager
                         String word = 0 < size ? rawEngWord[0].strip() : "null";
                         String spelling = "/" + (1 < size ? rawEngWord[1].strip() : "null");
 
-                        //System.out.println("");
-                        //System.out.println(wordBlockCount + ". " + word);
-                        //System.out.println(spelling);
-
                         newWordBlock.SetWordAndSpelling(word, spelling);
 
                         break;
-                    case '*':
+                    case '*'://word type
                         newWordDescription = new WordDescription();
 
                         String wordType = line.substring(1).strip();
@@ -75,17 +84,22 @@ public class DicManager
                         newWordDescription.setWordType(wordType);
                         newWordDescription = newWordBlock.AddWordDescription(newWordDescription);
                         break;
-                    case '-':
-                        newWordDefinition = new WordDefinition();
-
+                    case '-'://word def
+                    
                         String definition = line.substring(1).strip();
-
-                        //System.out.println("definition: " + definition);
-
-                        newWordDefinition.setDefinition(definition);
-                        newWordDefinition = newWordDescription.AddWordDefinition(newWordDefinition);
+                        
+                        if (prevLine.charAt(0) != '!')
+                        {
+                            newWordDefinition = new WordDefinition();
+                            newWordDefinition.setDefinition(definition);
+                            newWordDefinition = newWordDescription.AddWordDefinition(newWordDefinition);
+                        }
+                        else if (prevLine.charAt(0) == '!')
+                        {
+                            newWordExample.setExampleDefinition(definition);
+                        }
                         break;
-                    case '=':
+                    case '='://word example
                     
                         String rawExample = line.substring(1).strip();
                         String[] splitString = rawExample.split("\\+ ");
@@ -93,22 +107,17 @@ public class DicManager
                         String example = 0 < length ? splitString[0] : "null";
                         String definitionOfExample = 1 < length ? splitString[1] : "null";
 
-                        //System.out.println("example: " + example);
-                        //System.out.println("definitionOfExample: " + definitionOfExample);
+                        newWordExample = new WordExample(example, definitionOfExample);
+                        newWordExample = newWordDefinition.AddWordExample(newWordExample);
+                        break;
+                    case '!'://word phrase
+                        example = line.substring(1);
+                        definitionOfExample = "todo later";//scanner.nextLine().substring(1);
 
                         newWordExample = new WordExample(example, definitionOfExample);
                         newWordExample = newWordDefinition.AddWordExample(newWordExample);
-                    // case '!':
-                    //     example = line.substring(1);
-                    //     definitionOfExample = "todo later";//scanner.nextLine().substring(1);
 
-                    //     //System.out.println("example: " + example);
-                    //     //System.out.println("definitionOfExample: " + definitionOfExample);
-
-                    //     newWordExample = new WordExample(example, definitionOfExample);
-                    //     newWordExample = newWordDefinition.AddWordExample(newWordExample);
-
-                    //     break;
+                        break;
                     default:
                         break;
                 }
@@ -120,6 +129,8 @@ public class DicManager
                 //todo add all in to list
                 this.AddNewWord(newWordBlock);
             }
+
+            prevLine = line;
             
         }
         
@@ -128,26 +139,14 @@ public class DicManager
         scanner.close();
     }
 
+
     public WordBlock AddNewWord(WordBlock wordBlock)
     {
         return this.dictionary.AddWordBlock(wordBlock);
     }
 
-    
-    public void ShowAllWords()
-    {
-        this.dictionary.ShowAllWords();
-    }
 
-    public void LookUpWord(String lookupString)
-    {
-        WordBlock dummy = new WordBlock();
-        dummy.SetWordAndSpelling(lookupString, "");
-        int lookupPos = Collections.binarySearch(this.dictionary.getWordBlocks(), dummy);
-        this.dictionary.ShowWordAt(lookupPos);
-    }
-
-    public String LookUpWordString(String lookupString)
+    public String LookUpWord(String lookupString)
     {
         WordBlock dummy = new WordBlock();
         dummy.SetWordAndSpelling(lookupString, "");

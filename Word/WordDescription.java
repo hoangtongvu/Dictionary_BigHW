@@ -24,15 +24,6 @@ public class WordDescription
         return this.wordDefinitions.get(lastPos - 1);
     }
 
-    public void PrintOut()
-    {
-        System.out.println("* " + this.wordType);
-        for (WordDefinition wordDefinition : wordDefinitions) 
-        {
-            wordDefinition.PrintOut();
-            
-        }
-    }
 
     public String GetInfo()
     {

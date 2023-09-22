@@ -55,7 +55,6 @@ public abstract class CmdWindow
 
         this.AddingOptions();
 
-
     }
 
     protected void AddingOptions() {};

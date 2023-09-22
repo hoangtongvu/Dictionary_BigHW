@@ -19,15 +19,6 @@ public class WordDefinition
         return this.wordExamples.get(lastPos - 1);
     }
 
-    public void PrintOut()
-    {
-        System.out.println("  => " + this.definition);
-        if (this.wordExamples == null) return;
-        for (WordExample wordExample : wordExamples) 
-        {
-            wordExample.PrintOut();
-        }
-    }
 
     public String GetInfo()
     {

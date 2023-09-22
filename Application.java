@@ -3,22 +3,32 @@ import Dictionary.DicManager;
 
 public class Application 
 {
+    private DicManager dicManager;
+    private DicCmdCtrl dicCmdCtrl;
 
+    Application()
+    {
+        this.dicManager = new DicManager();
+        this.dicCmdCtrl = new DicCmdCtrl();
+        dicCmdCtrl.setDicManager(dicManager);
+    }
     public static void main(String[] args) throws Exception
     {
-        DicManager dicManager = new DicManager();
-        dicManager.LoadNewWordFromFile();
-        
 
-        DicCmdCtrl dicCmdCtrl = new DicCmdCtrl();
-        dicCmdCtrl.setDicManager(dicManager);
-        dicCmdCtrl.getDicCmdManager().Update();
+        //dicManager.getDictionary().ShowWordAt(7);
+        //dicManager.getDictionary().ShowAllWords();
+
+        Application application = new Application();
+        application.RunCmd();
         
-        //dictionaryManagement.ShowAllWords();
-        //dictionaryManagement.LookUpWord("minute");
         
     }
 
     
+    public void RunCmd() throws Exception
+    {
+        this.dicManager.LoadWords_Default();
+        this.dicCmdCtrl.getDicCmdManager().Update();
+    }
 
 }
