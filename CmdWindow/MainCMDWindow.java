@@ -8,7 +8,7 @@ import Dictionary.DicCmdCtrl;
 
 public class MainCMDWindow extends CmdWindow
 {
-
+    
     public MainCMDWindow(DicCmdCtrl dicCmdCtrl)
     {
         super(dicCmdCtrl);
@@ -16,7 +16,7 @@ public class MainCMDWindow extends CmdWindow
         this.isMainCommandLineWindow = true;
         this.AddOptions();
     }
-
+    
     private void AddOptions()
     {
         CmdWindowOption clrscrOption = new ClearScreenOption(this);

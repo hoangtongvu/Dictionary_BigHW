@@ -6,6 +6,14 @@ public class Application
     private DicManager dicManager;
     private DicCmdCtrl dicCmdCtrl;
 
+    public DicManager getDicManager() {
+        return dicManager;
+    }
+
+    public DicCmdCtrl getDicCmdCtrl() {
+        return dicCmdCtrl;
+    }
+
     Application()
     {
         this.dicManager = new DicManager();
@@ -19,7 +27,12 @@ public class Application
         //dicManager.getDictionary().ShowAllWords();
 
         Application application = new Application();
-        application.RunCmd();
+        DicManager dicManager = application.getDicManager();
+        dicManager.getDicWordLoader().DefaultLoad();
+        System.out.println(dicManager.getDicWordSearcher().Search("transform"));
+        // application.RunCmd();
+
+        
         
         
     }
@@ -27,7 +40,7 @@ public class Application
     
     public void RunCmd() throws Exception
     {
-        this.dicManager.LoadWords_Default();
+        this.dicManager.getDicWordLoader().DefaultLoad();
         this.dicCmdCtrl.getDicCmdManager().Update();
     }
 

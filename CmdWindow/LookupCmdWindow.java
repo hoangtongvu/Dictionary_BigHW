@@ -14,7 +14,7 @@ public class LookupCmdWindow extends CmdWindow
         this.windowTitle = "Looking up word Window";
     }
 
-
+    
     @Override
     protected void AddingOptions()
     {
