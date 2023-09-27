@@ -32,6 +32,7 @@ public class Application
         System.out.println(dicManager.getDicWordSearcher().Search("transform"));
         // application.RunCmd();
 
+        System.out.println(dicManager.LookUpWord("long"));
         
         
         
