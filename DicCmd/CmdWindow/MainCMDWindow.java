@@ -1,10 +1,10 @@
-package CmdWindow;
+package DicCmd.CmdWindow;
 
-import CmdWindow.CmdOptions.ClearScreenOption;
-import CmdWindow.CmdOptions.CmdWindowOption;
-import CmdWindow.CmdOptions.LoggingOption;
-import CmdWindow.CmdOptions.LookupOption;
-import Dictionary.DicCmdCtrl;
+import DicCmd.DicCmdCtrl;
+import DicCmd.CmdWindow.CmdOptions.ClearScreenOption;
+import DicCmd.CmdWindow.CmdOptions.CmdWindowOption;
+import DicCmd.CmdWindow.CmdOptions.LoggingOption;
+import DicCmd.CmdWindow.CmdOptions.LookupOption;
 
 public class MainCMDWindow extends CmdWindow
 {

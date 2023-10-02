@@ -1,6 +1,6 @@
-package CmdWindow.CmdOptions;
+package DicCmd.CmdWindow.CmdOptions;
 
-import CmdWindow.CmdWindow;
+import DicCmd.CmdWindow.CmdWindow;
 
 public abstract class CmdWindowOption 
 {

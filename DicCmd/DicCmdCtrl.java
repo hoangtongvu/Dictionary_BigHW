@@ -1,8 +1,9 @@
-package Dictionary;
-import CmdWindow.LoggingCmdWindow;
-import CmdWindow.LoggingCmdWindow1;
-import CmdWindow.LookupCmdWindow;
-import CmdWindow.MainCMDWindow;
+package DicCmd;
+import DicCmd.CmdWindow.LoggingCmdWindow;
+import DicCmd.CmdWindow.LoggingCmdWindow1;
+import DicCmd.CmdWindow.LookupCmdWindow;
+import DicCmd.CmdWindow.MainCMDWindow;
+import Dictionary.DicManager;
 
 public class DicCmdCtrl 
 {
@@ -16,6 +17,17 @@ public class DicCmdCtrl
     private LoggingCmdWindow loggingCmdWindow;
     private LoggingCmdWindow1 loggingCmdWindow1;
     private LookupCmdWindow LookupCmdWindow;
+
+
+    private static DicCmdCtrl instance;
+    
+
+    public static DicCmdCtrl getInstance() {
+        if (instance == null) {
+            instance = new DicCmdCtrl();
+        }
+        return instance;
+    }
 
 
     public LookupCmdWindow getLookupCmdWindow() {

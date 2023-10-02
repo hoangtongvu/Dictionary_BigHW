@@ -1,7 +1,7 @@
-package Dictionary;
+package DicCmd;
 import java.util.Scanner;
 
-import CmdWindow.CmdWindow;
+import DicCmd.CmdWindow.CmdWindow;
 
 public class DicCmdManager 
 {
@@ -21,7 +21,7 @@ public class DicCmdManager
     }
 
 
-    public void Update()
+    public void Run()
     {
         this.Clrscr();
         Scanner scanner = new Scanner(System.in);

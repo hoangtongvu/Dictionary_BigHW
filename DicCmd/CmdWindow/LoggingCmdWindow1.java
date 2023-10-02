@@ -1,6 +1,6 @@
-package CmdWindow;
+package DicCmd.CmdWindow;
 
-import Dictionary.DicCmdCtrl;
+import DicCmd.DicCmdCtrl;
 
 public class LoggingCmdWindow1 extends CmdWindow
 {

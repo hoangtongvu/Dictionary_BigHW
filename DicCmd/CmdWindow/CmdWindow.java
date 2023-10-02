@@ -1,11 +1,11 @@
-package CmdWindow;
+package DicCmd.CmdWindow;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import CmdWindow.CmdOptions.CmdWindowOption;
-import Dictionary.DicCmdCtrl;
-import Dictionary.DicCmdManager;
+import DicCmd.DicCmdCtrl;
+import DicCmd.DicCmdManager;
+import DicCmd.CmdWindow.CmdOptions.CmdWindowOption;
 
 public abstract class CmdWindow 
 {
