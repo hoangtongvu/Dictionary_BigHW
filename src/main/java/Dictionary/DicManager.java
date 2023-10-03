@@ -1,12 +1,14 @@
 package Dictionary;
-import java.util.Collections;
+
 import Word.WordBlock;
+
+import java.util.Collections;
 
 
 public class DicManager 
 {
-    
     private static DicManager instance;
+    
 
     public static DicManager getInstance() {
         if (instance == null) {
@@ -15,14 +17,23 @@ public class DicManager
         return instance;
     }
 
+
     private Dictionary dictionary;
     private DicWordLoader dicWordLoader;
     private DicWordSearcher dicWordSearcher;
 
     
-    public DicWordSearcher getDicWordSearcher() { return dicWordSearcher; }
-    public Dictionary getDictionary() { return dictionary; }
-    public DicWordLoader getDicWordLoader() { return dicWordLoader; }
+    public DicWordSearcher getDicWordSearcher() {
+        return dicWordSearcher;
+    }
+
+    public Dictionary getDictionary() {
+        return dictionary;
+    }
+
+    public DicWordLoader getDicWordLoader() {
+        return dicWordLoader;
+    }
 
 
     public DicManager()
@@ -36,6 +47,7 @@ public class DicManager
     {
         return this.dictionary.AddWordBlock(wordBlock);
     }
+
 
     public String LookUpWord(String lookupString)
     {

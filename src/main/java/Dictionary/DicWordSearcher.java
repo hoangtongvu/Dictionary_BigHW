@@ -32,7 +32,6 @@ public class DicWordSearcher
         Dictionary dictionary = this.dicManager.getDictionary();
         int suggestCounter = 0;
         List<String> suggestedWords = new ArrayList<>();
-        
         if (searchString == "") return suggestedWords;
         if (this.dicManager.getDictionary().getWordBlocks().isEmpty()) return suggestedWords;
 

@@ -1,4 +1,0 @@
-!ex
--def
-@word
--defOfWord
