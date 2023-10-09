@@ -4,6 +4,7 @@ import java.util.List;
 
 public class WordDefinition 
 {
+    private String prefixSymbol = "▶ ";
     private String definition;
     private List<WordExample> wordExamples;//not mandatory
 
@@ -20,14 +21,15 @@ public class WordDefinition
     }
 
 
-    public String GetInfo()
+    public String GetInfo(String prefixSpace)
     {
-        String temp = "  => " + this.definition + "\n";
+        String temp = prefixSpace + this.prefixSymbol + this.definition + "\n";
             
         if (this.wordExamples == null) return temp;
+
         for (WordExample wordExample : wordExamples) 
         {
-            temp += wordExample.GetInfo() + "\n";
+            temp += wordExample.GetInfo(prefixSpace + "\t") + "\n";
         }
         return temp;
     }

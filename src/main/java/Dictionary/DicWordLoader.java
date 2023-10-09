@@ -3,10 +3,7 @@ package Dictionary;
 import java.io.File;
 import java.util.Scanner;
 
-import Word.WordBlock;
-import Word.WordDefinition;
-import Word.WordDescription;
-import Word.WordExample;
+import Word.*;
 
 public class DicWordLoader 
 {
@@ -46,9 +43,11 @@ public class DicWordLoader
         WordBlock newWordBlock = null;
         WordDefinition newWordDefinition = null;
         WordDescription newWordDescription = null;
+        WordPhrase newWordPhrase = null;
         WordExample newWordExample = null;
 
-        String prevLine = null;
+        boolean inPhraseBlock = false;
+
 
         while (scanner.hasNextLine()) 
         {
@@ -60,6 +59,7 @@ public class DicWordLoader
                 switch (line.charAt(0)) 
                 {
                     case '@'://word and its spelling
+                        inPhraseBlock = false;
                         newWordBlock = new WordBlock();
 
 
@@ -72,11 +72,11 @@ public class DicWordLoader
 
                         break;
                     case '*'://word type
+                        inPhraseBlock = false;
                         newWordDescription = new WordDescription();
 
                         String wordType = line.substring(1).strip();
 
-                        //System.out.println("wordType: " + wordType);
 
                         newWordDescription.setWordType(wordType);
                         newWordDescription = newWordBlock.AddWordDescription(newWordDescription);
@@ -84,17 +84,15 @@ public class DicWordLoader
                     case '-'://word def
                     
                         String definition = line.substring(1).strip();
-                        
-                        if (prevLine.charAt(0) != '!')
-                        {
-                            newWordDefinition = new WordDefinition();
-                            newWordDefinition.setDefinition(definition);
+
+                        newWordDefinition = new WordDefinition();
+                        newWordDefinition.setDefinition(definition);
+
+                        if (!inPhraseBlock)//in wordBlock
                             newWordDefinition = newWordDescription.AddWordDefinition(newWordDefinition);
-                        }
-                        else if (prevLine.charAt(0) == '!')
-                        {
-                            newWordExample.setExampleDefinition(definition);
-                        }
+                        else//in phraseBlock
+                            newWordDefinition = newWordPhrase.AddDefinition(newWordDefinition);
+                        
                         break;
                     case '='://word example
                     
@@ -106,13 +104,14 @@ public class DicWordLoader
 
                         newWordExample = new WordExample(example, definitionOfExample);
                         newWordExample = newWordDefinition.AddWordExample(newWordExample);
+
                         break;
                     case '!'://word phrase
-                        example = line.substring(1);
-                        definitionOfExample = "todo later";//scanner.nextLine().substring(1);
+                        inPhraseBlock = true;
 
-                        newWordExample = new WordExample(example, definitionOfExample);
-                        newWordExample = newWordDefinition.AddWordExample(newWordExample);
+                        String phrase = line.substring(1).strip();
+                        newWordPhrase = new WordPhrase(phrase);
+                        newWordPhrase = newWordDescription.AddWordPhrase(newWordPhrase);
 
                         break;
                     default:
@@ -127,8 +126,6 @@ public class DicWordLoader
                 this.dicManager.AddNewWord(newWordBlock);
             }
 
-            prevLine = line;
-            
         }
         
         this.dicManager.AddNewWord(newWordBlock);//add last

@@ -3,6 +3,7 @@ package Word;
 
 public class WordExample 
 {
+    private String prefixSymbol = "➥ ";
     private String example;
     private String exampleDefinition;
 
@@ -16,9 +17,10 @@ public class WordExample
         this.exampleDefinition = def;
     }
 
-    public String GetInfo()
+    public String GetInfo(String prefixSpace)
     {
-        String temp = "\t" + this.example + "\n\t->" + this.exampleDefinition;
+        String temp = prefixSpace + this.example + "\n";
+        temp += prefixSpace + this.prefixSymbol + this.exampleDefinition;
         return temp;
     }
 }
