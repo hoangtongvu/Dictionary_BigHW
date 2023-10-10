@@ -23,8 +23,7 @@ public class ChoiceGameCtrl
         return choiceQuesLoader;
     }
 
-
-
+    
     public String GetInfoAllQuestions()
     {
         int length = this.questions.size();
@@ -42,11 +41,6 @@ public class ChoiceGameCtrl
         if (index >= length) return "Question not found";
 
         return (index + 1) + ". " + this.questions.get(index).GetInfo() + "\n";
-    }
-
-    public int NumberOfQuestion()
-    {
-        return this.questions.size();
     }
 
 
