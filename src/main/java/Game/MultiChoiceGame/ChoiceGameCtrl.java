@@ -10,9 +10,9 @@ public class ChoiceGameCtrl
         return instance;
     }
 
-    private ChoiceGameManager choiceGameManager;
-    private ChoiceQuesLoader choiceQuesLoader;
-    private ChoiceQuesGenerator choiceQuesGenerator;
+    private final ChoiceGameManager choiceGameManager;
+    private final ChoiceQuesLoader choiceQuesLoader;
+    private final ChoiceQuesGenerator choiceQuesGenerator;
 
     public ChoiceQuesLoader getChoiceQuesLoader() {
         return choiceQuesLoader;
@@ -30,6 +30,7 @@ public class ChoiceGameCtrl
     {
         this.choiceGameManager = new ChoiceGameManager(this);
         this.choiceQuesLoader = new ChoiceQuesLoader(this);
+        this.choiceQuesGenerator = new ChoiceQuesGenerator(this);
     }
 
 

@@ -1,14 +1,13 @@
 package Game.MultiChoiceGame;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChoiceGameManager
 {
 
-    private ChoiceGameCtrl choiceGameCtrl;
-    private List<MultiChoiceQues> questions;
+    private final ChoiceGameCtrl choiceGameCtrl;
+    private final List<MultiChoiceQues> questions;
 
     public List<MultiChoiceQues> getQuestions()
     {

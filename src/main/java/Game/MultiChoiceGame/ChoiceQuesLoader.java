@@ -7,12 +7,12 @@ import java.util.Scanner;
 public class ChoiceQuesLoader
 {
 
-    private String currentWorkingDir = System.getProperty("user.dir");
-    private String folderDir = this.currentWorkingDir + "/src/main/resources/MultiChoiceGame/";
-    private String questionFilePath;
-    private String rightAnswerFilePath;
+    private final String currentWorkingDir = System.getProperty("user.dir");
+    private final String folderDir = this.currentWorkingDir + "/src/main/resources/MultiChoiceGame/";
+    private final String questionFilePath;
+    private final String rightAnswerFilePath;
 
-    private ChoiceGameCtrl choiceGameCtrl;
+    private final ChoiceGameCtrl choiceGameCtrl;
     public ChoiceQuesLoader(ChoiceGameCtrl choiceGameCtrl)
     {
         this.choiceGameCtrl = choiceGameCtrl;
@@ -43,7 +43,7 @@ public class ChoiceQuesLoader
         while (scanner.hasNextLine())
         {
             String ques = "";
-            String answers[] = new String[4];
+            String[] answers = new String[4];
 
 
             for (int i = 0; i < 2; i++) {

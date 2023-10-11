@@ -1,29 +1,30 @@
 package Game.MultiChoiceGame;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class ChoiceQuesGenerator
 {
-    private ChoiceGameCtrl choiceGameCtrl;
+    private final ChoiceGameCtrl choiceGameCtrl;
 
     public ChoiceQuesGenerator(ChoiceGameCtrl choiceGameCtrl)
     {
         this.choiceGameCtrl = choiceGameCtrl;
     }
 
+
     /**
      * Get random distinct multi-choice questions.
-     * @numberOfQuestions is number of questions you want to generate.
+     * @param numberOfQuestions is number of questions you want to generate.
+     * @return list of randomized questions.
      */
     public List<MultiChoiceQues> GetRandomQuestions(int numberOfQuestions)
     {
         List<MultiChoiceQues> randomQuestions = new ArrayList<>();
         List<MultiChoiceQues> questions = this.choiceGameCtrl.getChoiceGameManager().getQuestions();
         int length = questions.size();
-        if (length <= 0) return null;
+        if (length == 0) return null;
 
         Random random = new Random();
         int randomIndex;
