@@ -67,7 +67,7 @@ public class ChoiceQuesLoader
 
             }
 
-            this.choiceGameCtrl.getQuestions().add(new MultiChoiceQues(ques, answers));
+            this.choiceGameCtrl.getChoiceGameManager().getQuestions().add(new MultiChoiceQues(ques, answers));
         }
 
 
@@ -90,7 +90,7 @@ public class ChoiceQuesLoader
         int length = line.length();
         for (int i = 0; i < length; i++)
         {
-            this.choiceGameCtrl.getQuestions().get(i).setRightAnswerCode(line.substring(i, i + 1));
+            this.choiceGameCtrl.getChoiceGameManager().getQuestions().get(i).setRightAnswerCode(line.substring(i, i + 1));
         }
 
 
