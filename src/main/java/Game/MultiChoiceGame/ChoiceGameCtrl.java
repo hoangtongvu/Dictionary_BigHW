@@ -12,12 +12,16 @@ public class ChoiceGameCtrl
 
     private ChoiceGameManager choiceGameManager;
     private ChoiceQuesLoader choiceQuesLoader;
+    private ChoiceQuesGenerator choiceQuesGenerator;
 
     public ChoiceQuesLoader getChoiceQuesLoader() {
         return choiceQuesLoader;
     }
     public ChoiceGameManager getChoiceGameManager() {
         return choiceGameManager;
+    }
+    public ChoiceQuesGenerator getChoiceQuesGenerator() {
+        return choiceQuesGenerator;
     }
 
 
@@ -39,6 +43,5 @@ public class ChoiceGameCtrl
         boolean check = choiceGameCtrl.getChoiceGameManager().getQuestions().get(0).CheckAnswer(ChoiceCode.C);
         System.out.println(check);
     }
-
 
 }
