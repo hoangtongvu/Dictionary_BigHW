@@ -33,7 +33,7 @@ public class MainSceneController implements Initializable {
     private ScrollPane contentScrollPane;
 
     @FXML
-    private TextField tfTitle;
+    private TextField searchBar;
 
     @FXML
     void btnOKClicked(ActionEvent event) {
@@ -62,7 +62,7 @@ public class MainSceneController implements Initializable {
     @FXML
     public void LookupWord() {
         //System.out.println("null");
-        String lookUpRes = DicManager.getInstance().LookUpWord(this.tfTitle.getText());//Cant find cause dic load default on button click
+        String lookUpRes = DicManager.getInstance().LookUpWord(this.searchBar.getText());//Cant find cause dic load default on button click
         Text text = new Text(lookUpRes);
         this.contentScrollPane.setContent(text);
 
@@ -71,7 +71,7 @@ public class MainSceneController implements Initializable {
 
     @FXML
     public void OnTextChange() {
-        String text = tfTitle.getText();
+        String text = searchBar.getText();
         if (text == "") return;
         
         //List<String> suggestions = DicManager.getInstance().getDicWordSearcher().Search(text);
@@ -95,11 +95,11 @@ public class MainSceneController implements Initializable {
             System.out.println("Can't load dic file");
         }
         
-        AutoCompletionBinding auto = TextFields.bindAutoCompletion(this.tfTitle,
+        AutoCompletionBinding auto = TextFields.bindAutoCompletion(this.searchBar,
                 new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<String>>() {
                     @Override
                     public Collection<String> call(AutoCompletionBinding.ISuggestionRequest iSuggestionRequest) {
-                        if (tfTitle.getText().length() <= 1) return Collections.emptyList();
+                        if (searchBar.getText().length() <= 1) return Collections.emptyList();
                         return possibleSuggestions;
                     }
                 }
@@ -108,7 +108,7 @@ public class MainSceneController implements Initializable {
         auto.setDelay(0);
         
         //sync width with textField
-        auto.prefWidthProperty().bind(this.tfTitle.widthProperty());
+        auto.prefWidthProperty().bind(this.searchBar.widthProperty());
 
 //        TextFields.bindAutoCompletion(this.tfTitle, input ->
 //            {
