@@ -4,8 +4,8 @@ module MainGroup.application {
 
     requires org.controlsfx.controls;
 
-    opens MainGroup.application to javafx.fxml;
-    exports MainGroup.application;
-    opens MainGroup.SceneControllers to javafx.fxml;
-    exports MainGroup.SceneControllers;
+    opens Main.application to javafx.fxml;
+    exports Main.application;
+    opens Main.SceneControllers to javafx.fxml;
+    exports Main.SceneControllers;
 }

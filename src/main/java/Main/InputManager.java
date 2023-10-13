@@ -1,4 +1,4 @@
-package MainGroup;
+package Main;
 
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;

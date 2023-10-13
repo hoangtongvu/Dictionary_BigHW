@@ -1,4 +1,4 @@
-package MainGroup.application;
+package Main.application;
 
 import java.io.IOException;
 
@@ -23,7 +23,7 @@ public class App extends Application
         Parent root;
         try
         {
-            root = FXMLLoader.load(getClass().getResource("MainScene.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/fxml/application/MainScene.fxml"));
             Scene scene = new Scene(root);
 
             //InputManager inputManager = new InputManager(scene);

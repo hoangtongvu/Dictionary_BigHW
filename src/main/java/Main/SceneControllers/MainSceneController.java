@@ -1,4 +1,4 @@
-package MainGroup.SceneControllers;
+package Main.SceneControllers;
 
 import Dictionary.DicManager;
 import javafx.event.ActionEvent;
