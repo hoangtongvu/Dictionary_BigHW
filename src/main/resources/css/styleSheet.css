@@ -1,0 +1,22 @@
+#main_top_bar{
+    -fx-background-color: #1e3264;
+}
+
+#main_search_bar{
+    -fx-background-color: #141946;
+}
+
+#option_box{
+    -fx-background-color: GREY;
+}
+
+#menuBar{
+    -fx-background-color: #141946FF;
+}
+
+.topBar {
+    -fx-background-color: #1e3264;
+}
+.blur {
+    -fx-background-color: rgba(169, 169, 169, 0.5);
+}
