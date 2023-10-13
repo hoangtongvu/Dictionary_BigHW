@@ -95,7 +95,7 @@ public class MainSceneController implements Initializable
         {
             System.out.println("Can't load dic file");
         }
-
+        
         AutoCompletionBinding auto = TextFields.bindAutoCompletion(this.tfTitle,
                 new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<String>>()
                 {
@@ -107,7 +107,9 @@ public class MainSceneController implements Initializable
                     }
                 }
         );
-
+        
+        auto.setDelay(0);
+        
         //sync width with textField
         auto.prefWidthProperty().bind(this.tfTitle.widthProperty());
 
