@@ -21,8 +21,6 @@ public class MainSceneController extends StandardScene implements Initializable 
     //private Timer timer;
     //private TimerTask timerTask;
 
-    private AutoCompletionBinding autoCompletionBinding;
-
     private  List<String> possibleSuggestions = new ArrayList<>();
 
     @FXML
@@ -67,18 +65,11 @@ public class MainSceneController extends StandardScene implements Initializable 
 
     @FXML
     public void OnTextChange() {
-        try {
-            String text = searchBar.getText();
-            //List<String> suggestions = DicManager.getInstance().getDicWordSearcher().Search(text);
-            //System.out.println(suggestions);
 
+        String text = searchBar.getText();
+        if (text.isEmpty()) return;
+        this.possibleSuggestions = DicManager.getInstance().getDicWordSearcher().Search(text);
 
-//        if (this.autoCompletionBinding != null) this.autoCompletionBinding.dispose();
-//        this.autoCompletionBinding = TextFields.bindAutoCompletion(this.tfTitle, suggestions);
-            this.possibleSuggestions = DicManager.getInstance().getDicWordSearcher().Search(text);
-        } catch (Exception ignored) {
-
-        }
     }
 
     @Override
