@@ -1,18 +1,14 @@
-package Main.SceneControllers;
+package Main.SceneControllers.Dictionary;
 
 import Dictionary.DicManager;
-import javafx.animation.FadeTransition;
-import javafx.animation.TranslateTransition;
+import Main.SceneControllers.Standard.StandardScene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
-import javafx.util.Duration;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -20,7 +16,7 @@ import java.net.URL;
 import java.util.*;
 
 
-public class MainSceneController implements Initializable {
+public class MainSceneController extends StandardScene implements Initializable {
 
     //private Timer timer;
     //private TimerTask timerTask;
@@ -71,19 +67,19 @@ public class MainSceneController implements Initializable {
 
     @FXML
     public void OnTextChange() {
-        String text = searchBar.getText();
-        if (text == "") return;
-        
-        //List<String> suggestions = DicManager.getInstance().getDicWordSearcher().Search(text);
-        //System.out.println(suggestions);
+        try {
+            String text = searchBar.getText();
+            //List<String> suggestions = DicManager.getInstance().getDicWordSearcher().Search(text);
+            //System.out.println(suggestions);
 
 
 //        if (this.autoCompletionBinding != null) this.autoCompletionBinding.dispose();
 //        this.autoCompletionBinding = TextFields.bindAutoCompletion(this.tfTitle, suggestions);
-        this.possibleSuggestions = DicManager.getInstance().getDicWordSearcher().Search(text);
+            this.possibleSuggestions = DicManager.getInstance().getDicWordSearcher().Search(text);
+        } catch (Exception ignored) {
 
+        }
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -117,51 +113,6 @@ public class MainSceneController implements Initializable {
 //            }
 //        );
 
-    }
-
-
-    /**This part is dedicated to drawer menu.*/
-    /**blurPane is a grey transparent pane used to create blur effect when menu is active
-     * this function set blurPane to not be visible by default.*/
-    @FXML
-    public void initialize() {
-        blurPane.setVisible(false);
-    }
-
-    @FXML
-    private AnchorPane drawerMenu;
-    @FXML
-    private Pane blurPane;
-
-    /**Activate drawer menu translateTransition for drawer menu, fadeTransition for blurPane.*/
-    @FXML
-    public void onMenuButton() {
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5),drawerMenu);
-        translateTransition.setByX(+235);
-        translateTransition.play();
-
-        blurPane.setVisible(true);
-
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
-        fadeTransition.setFromValue(0);
-        fadeTransition.setToValue(1);
-        fadeTransition.play();
-    }
-
-    /**setOnFinished(lambdaExpression) to wait for the blur animation to finish before set blurPane invisible,
-     * otherwise, blurPane will disappear immediately.*/
-    @FXML
-    public void onMenuExit() {
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5),drawerMenu);
-        translateTransition.setByX(-235);
-        translateTransition.play();
-
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
-        fadeTransition.setFromValue(1);
-        fadeTransition.setToValue(0);
-        fadeTransition.play();
-
-        fadeTransition.setOnFinished(event -> {blurPane.setVisible(false);});
     }
 
 }

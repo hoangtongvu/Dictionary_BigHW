@@ -1,0 +1,11 @@
+.topBar {
+    -fx-background-color: #1e3264;
+}
+
+.secondaryTopBar {
+    -fx-background-color: #141946;
+}
+
+.blur {
+    -fx-background-color: rgba(169, 169, 169, 0.5);
+}
