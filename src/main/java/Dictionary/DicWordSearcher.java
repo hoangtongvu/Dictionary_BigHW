@@ -29,6 +29,7 @@ public class DicWordSearcher
 
     public List<String> Search(String searchString)
     {
+        searchString = searchString.strip();
         Dictionary dictionary = this.dicManager.getDictionary();
         int suggestCounter = 0;
         List<String> suggestedWords = new ArrayList<>();
