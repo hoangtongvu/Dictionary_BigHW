@@ -101,7 +101,7 @@ public class MainSceneController extends StandardScene implements Initializable 
                 }
         );
         
-        auto.setDelay(0);
+        auto.setDelay(50);
         
         //sync width with textField
         auto.prefWidthProperty().bind(this.searchBar.widthProperty());
