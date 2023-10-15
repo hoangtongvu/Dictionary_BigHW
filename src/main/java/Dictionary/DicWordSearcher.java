@@ -29,34 +29,47 @@ public class DicWordSearcher
 
     public List<String> Search(String searchString)
     {
+        //strip searchString before searching.
         searchString = searchString.strip();
-        Dictionary dictionary = this.dicManager.getDictionary();
-        int suggestCounter = 0;
-        List<String> suggestedWords = new ArrayList<>();
-        if (searchString.equals("")) return suggestedWords;
-        if (this.dicManager.getDictionary().getWordBlocks().isEmpty()) return suggestedWords;
+        if (searchString.isEmpty()) return Collections.emptyList();
 
+        //get wordBlocks from Dictionary.
+        List<WordBlock> wordBlocks = this.dicManager.getDictionary().getWordBlocks();
+        if (wordBlocks.isEmpty()) return Collections.emptyList();
+
+        //initialize return list;
+        List<String> suggestedWords = new ArrayList<>();
+
+        //create dummy WordBlock for binarySearch.
         WordBlock dummy = new WordBlock();
         dummy.SetWordAndSpelling(searchString, "");
 
-        int searchPos = Collections.binarySearch(dictionary.getWordBlocks(), dummy);
+        //store search position.
+        int searchPos = Collections.binarySearch(wordBlocks, dummy);
 
         int insertPos = searchPos >= 0 ? searchPos : - searchPos - 1;
 
-        boolean isMatched = false;
-        do 
-        {
-            String word = dictionary.getWordBlocks().get(insertPos).getWord();
-            isMatched = word.matches(searchString + "(.*)");
-            insertPos++;
-            if (isMatched && suggestCounter < suggestLimit) 
-            {
-                suggestedWords.add(word);
-                suggestCounter++;
-            }
-        } while (isMatched);
 
-        return suggestedWords;
+        int suggestCounter = 0;
+        boolean isMatched = false;
+        int wordBlocksSize = wordBlocks.size();
+
+
+        do
+        {
+            if (insertPos >= wordBlocksSize) return suggestedWords;
+            String word = wordBlocks.get(insertPos).getWord();
+
+            isMatched = word.matches(searchString + "(.*)");
+
+            if (!isMatched || suggestCounter >= 5) return suggestedWords;
+
+            suggestedWords.add(word);
+            suggestCounter++;
+            insertPos++;
+
+        } while (true);
+
     }
 
 }
