@@ -83,6 +83,7 @@ public class DicWordSearcher
         //loop through searchedWords in reversed order (newest searchedWord lay in bottom of the list).
         for (int i = searchedWords.size() - 1; i >= 0; i--)
         {
+            if (counter >= suggestLimit) return;
             String s = searchedWords.get(i);
 
             //check if searchResults contains s.
