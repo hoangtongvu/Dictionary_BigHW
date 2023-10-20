@@ -2,6 +2,7 @@ package Dictionary;
 
 import java.io.File;
 import java.net.URL;
+import java.util.List;
 import java.util.Scanner;
 
 public class RecentlySearchedWordLoader
@@ -29,14 +30,17 @@ public class RecentlySearchedWordLoader
             return;
         }
 
+        List<String> searchedWords = this.recentlySearchedWordManager.getSearchedWords();
+        if (!searchedWords.isEmpty()) searchedWords.clear();
+
         Scanner scanner;
         scanner = new Scanner(file, "UTF-8");
 
-        String line = "";
+        String line;
         while (scanner.hasNextLine())
         {
             line = scanner.nextLine().strip();
-            this.recentlySearchedWordManager.AddSearchedWord(line);
+            searchedWords.add(line);
 
 
         }
