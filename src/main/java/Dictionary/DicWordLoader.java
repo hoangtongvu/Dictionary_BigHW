@@ -3,6 +3,7 @@ package Dictionary;
 import java.io.File;
 import java.util.Scanner;
 
+import Main.ProjectDirectory;
 import Word.*;
 
 public class DicWordLoader 
@@ -10,8 +11,7 @@ public class DicWordLoader
 
     private DicManager dicManager;
 
-    private String currentWorkingDir = System.getProperty("user.dir");
-    private String defaultFilePath = this.currentWorkingDir + "/src/main/java/data/anhviet109K.txt";
+    private String defaultFilePath = ProjectDirectory.resourcesPath + "/data/anhviet109K.txt";
 
 
     public DicWordLoader(DicManager dicManager)
@@ -32,7 +32,7 @@ public class DicWordLoader
         if (!file.exists()) 
         {
             System.out.println("FILE NOT FOUND");
-            System.out.println("UserDir = " + this.currentWorkingDir);
+            System.out.println("UserDir = " + ProjectDirectory.currentWorkingDir);
 
             return;
         }
