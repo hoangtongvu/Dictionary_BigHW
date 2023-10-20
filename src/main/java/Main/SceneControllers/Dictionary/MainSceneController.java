@@ -77,6 +77,7 @@ public class MainSceneController extends StandardScene implements Initializable 
         blurPane.setVisible(false);
         try {
             DicManager.getInstance().getDicWordLoader().DefaultLoad();
+            DicManager.getInstance().getRecentlySearchedWordManager().getRecentlySearchedWordLoader().Load();
             
         } catch (Exception e) {
             System.out.println("Can't load dic file");
