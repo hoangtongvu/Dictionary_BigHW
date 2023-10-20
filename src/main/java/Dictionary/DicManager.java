@@ -21,26 +21,28 @@ public class DicManager
     private Dictionary dictionary;
     private DicWordLoader dicWordLoader;
     private DicWordSearcher dicWordSearcher;
+    private RecentlySearchedWordManager recentlySearchedWordManager;
 
-    
-    public DicWordSearcher getDicWordSearcher() {
-        return dicWordSearcher;
-    }
 
     public Dictionary getDictionary() {
         return dictionary;
     }
-
     public DicWordLoader getDicWordLoader() {
         return dicWordLoader;
     }
-
+    public DicWordSearcher getDicWordSearcher() {
+        return dicWordSearcher;
+    }
+    public RecentlySearchedWordManager getRecentlySearchedWordManager() {
+        return recentlySearchedWordManager;
+    }
 
     public DicManager()
     {
         this.dictionary = new Dictionary();
         this.dicWordLoader = new DicWordLoader(this);
         this.dicWordSearcher = new DicWordSearcher(this);
+        this.recentlySearchedWordManager = new RecentlySearchedWordManager();
     }
 
     public WordBlock AddNewWord(WordBlock wordBlock)
@@ -58,7 +60,6 @@ public class DicManager
         return this.dictionary.GetWordInfoAt(lookupPos);
     }
 
-    
 
 
 }
