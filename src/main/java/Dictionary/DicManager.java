@@ -18,10 +18,10 @@ public class DicManager
     }
 
 
-    private Dictionary dictionary;
-    private DicWordLoader dicWordLoader;
-    private DicWordSearcher dicWordSearcher;
-    private RecentlySearchedWordManager recentlySearchedWordManager;
+    private final Dictionary dictionary;
+    private final DicWordLoader dicWordLoader;
+    private final DicWordSearcher dicWordSearcher;
+    private final RecentlySearchedWordManager recentlySearchedWordManager;
 
 
     public Dictionary getDictionary() {

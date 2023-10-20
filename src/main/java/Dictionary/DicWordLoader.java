@@ -9,9 +9,9 @@ import Word.*;
 public class DicWordLoader 
 {
 
-    private DicManager dicManager;
+    private final DicManager dicManager;
 
-    private String defaultFilePath = ProjectDirectory.resourcesPath + "/data/anhviet109K.txt";
+    private final String defaultFilePath = ProjectDirectory.resourcesPath + "/data/anhviet109K.txt";
 
 
     public DicWordLoader(DicManager dicManager)
@@ -54,7 +54,7 @@ public class DicWordLoader
             String line = scanner.nextLine();//TODO: remember to enter 1 time at dictionary.txt; unknown error if not do so.
 
 
-            if (line != "") 
+            if (!line.isEmpty())
             {
                 switch (line.charAt(0)) 
                 {
@@ -120,7 +120,7 @@ public class DicWordLoader
 
                 
             }
-            else if (line == "")
+            else
             {
                 //todo add all in to list
                 this.dicManager.AddNewWord(newWordBlock);
