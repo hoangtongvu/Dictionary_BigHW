@@ -57,6 +57,9 @@ public class DicManager
         dummy.SetWordAndSpelling(lookupString, "");
         int lookupPos = Collections.binarySearch(this.dictionary.getWordBlocks(), dummy);
         if (lookupPos < 0) return "Can't find your word.";
+
+        RecentlySearchedWordSaver recentlySearchedWordSaver = this.recentlySearchedWordManager.getRecentlySearchedWordSaver();
+        recentlySearchedWordSaver.Save(lookupString);
         return this.dictionary.GetWordInfoAt(lookupPos);
     }
 
