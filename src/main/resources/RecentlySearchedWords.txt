@@ -1,5 +1,5 @@
 hello
-hi-fi
-hibernal
-long
-short
+trace
+target
+hi
+targe
