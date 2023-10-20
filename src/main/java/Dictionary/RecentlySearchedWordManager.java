@@ -7,6 +7,7 @@ public class RecentlySearchedWordManager
 {
 
     private final RecentlySearchedWordLoader recentlySearchedWordLoader;
+    private final RecentlySearchedWordSaver recentlySearchedWordSaver;
 
     private final List<String> searchedWords;
 
@@ -14,12 +15,16 @@ public class RecentlySearchedWordManager
     public RecentlySearchedWordManager()
     {
         this.recentlySearchedWordLoader = new RecentlySearchedWordLoader(this);
+        this.recentlySearchedWordSaver = new RecentlySearchedWordSaver(this);
         this.searchedWords = new ArrayList<>();
     }
 
-    public void AddSearchedWord(String word)
-    {
-        this.searchedWords.add(word);
+    public RecentlySearchedWordSaver getRecentlySearchedWordSaver() {
+        return recentlySearchedWordSaver;
+    }
+
+    public RecentlySearchedWordLoader getRecentlySearchedWordLoader() {
+        return recentlySearchedWordLoader;
     }
 
     public List<String> getSearchedWords()
@@ -27,7 +32,9 @@ public class RecentlySearchedWordManager
         return this.searchedWords;
     }
 
-    public RecentlySearchedWordLoader getRecentlySearchedWordLoader() {
-        return recentlySearchedWordLoader;
-    }
+
+
+
+
+
 }
