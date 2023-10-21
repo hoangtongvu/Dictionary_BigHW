@@ -1,5 +1,7 @@
 package Game.MultiChoiceGame;
 
+import Main.ProjectDirectory;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -7,17 +9,16 @@ import java.util.Scanner;
 public class ChoiceQuesLoader
 {
 
-    private final String currentWorkingDir = System.getProperty("user.dir");
-    private final String folderDir = this.currentWorkingDir + "/src/main/resources/MultiChoiceGame/";
-    private final String questionFilePath;
-    private final String rightAnswerFilePath;
+    private final String folderDir = ProjectDirectory.resourcesPath + "/MultiChoiceGame/";
+    private final String questionFilePath = this.folderDir + "multiChoiceQues.txt";
+    private final String rightAnswerFilePath = this.folderDir + "multiChoiceAnswer.txt";
 
     private final ChoiceGameCtrl choiceGameCtrl;
+
+
     public ChoiceQuesLoader(ChoiceGameCtrl choiceGameCtrl)
     {
         this.choiceGameCtrl = choiceGameCtrl;
-        this.questionFilePath = this.folderDir + "multiChoiceQues.txt";
-        this.rightAnswerFilePath = this.folderDir + "multiChoiceAnswer.txt";
     }
 
 
@@ -29,16 +30,9 @@ public class ChoiceQuesLoader
 
     private void LoadQuestions() throws FileNotFoundException
     {
-        File file = new File(questionFilePath);
-        Scanner scanner;
-        if (!file.exists())
-        {
-            System.out.println("FILE NOT FOUND");
-            System.out.println("UserDir = " + currentWorkingDir);
 
-            return;
-        }
-        scanner = new Scanner(file, "UTF-8");
+        Scanner scanner = this.GetScanner(this.questionFilePath);
+
 
         while (scanner.hasNextLine())
         {
@@ -75,16 +69,8 @@ public class ChoiceQuesLoader
 
     private void LoadAnswers() throws FileNotFoundException
     {
-        File file = new File(this.rightAnswerFilePath);
-        Scanner scanner;
-        if (!file.exists())
-        {
-            System.out.println("FILE NOT FOUND");
-            System.out.println("UserDir = " + currentWorkingDir);
 
-            return;
-        }
-        scanner = new Scanner(file, "UTF-8");
+        Scanner scanner = this.GetScanner(this.rightAnswerFilePath);
 
         String line = scanner.nextLine();
         int length = line.length();
@@ -94,6 +80,20 @@ public class ChoiceQuesLoader
         }
 
 
+    }
+
+
+    private Scanner GetScanner(String path) throws FileNotFoundException
+    {
+        File file = new File(path);
+
+        if (!file.exists())
+        {
+            System.out.println("FILE NOT FOUND");
+            System.out.println("UserDir = " + ProjectDirectory.currentWorkingDir);
+            throw new FileNotFoundException("can't find file with path: " + path);
+        }
+        return new Scanner(file, "UTF-8");
     }
 
 
