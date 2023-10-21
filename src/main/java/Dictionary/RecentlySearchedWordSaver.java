@@ -1,22 +1,20 @@
 package Dictionary;
 
-import Main.ProjectDirectory;
 
 import java.io.*;
 import java.util.List;
 
 public class RecentlySearchedWordSaver
 {
-
-    private final String filePath = ProjectDirectory.resourcesPath + "/RecentlySearchedWords.txt";
     private final RecentlySearchedWordManager recentlySearchedWordManager;
+
+
 
 
     public RecentlySearchedWordSaver(RecentlySearchedWordManager recentlySearchedWordManager)
     {
         this.recentlySearchedWordManager = recentlySearchedWordManager;
     }
-
 
 
     public void Save(String newWord)
@@ -34,9 +32,10 @@ public class RecentlySearchedWordSaver
 
     private void Save(List<String> searchedWords)
     {
+        File file = this.recentlySearchedWordManager.getFile();
         try
         {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 
             int size = searchedWords.size();
             for (int i = 0; i < size; i++)
