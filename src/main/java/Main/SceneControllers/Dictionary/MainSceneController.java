@@ -1,6 +1,7 @@
-package MainGroup.SceneControllers;
+package Main.SceneControllers.Dictionary;
 
 import Dictionary.DicManager;
+import Main.SceneControllers.Standard.StandardScene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,13 +16,10 @@ import java.net.URL;
 import java.util.*;
 
 
-public class MainSceneController implements Initializable
-{
+public class MainSceneController extends StandardScene implements Initializable {
 
     //private Timer timer;
     //private TimerTask timerTask;
-
-    private AutoCompletionBinding autoCompletionBinding;
 
     private  List<String> possibleSuggestions = new ArrayList<>();
 
@@ -29,11 +27,10 @@ public class MainSceneController implements Initializable
     private ScrollPane contentScrollPane;
 
     @FXML
-    private TextField tfTitle;
+    private TextField searchBar;
 
     @FXML
-    void btnOKClicked(ActionEvent event) 
-    {
+    void btnOKClicked(ActionEvent event) {
         //Stage mainWindow = (Stage) this.ttTitle.getScene().getWindow(); 
         //String title = this.ttTitle.getText();
         //mainWindow.setTitle(title);
@@ -57,10 +54,9 @@ public class MainSceneController implements Initializable
 
 
     @FXML
-    public void LookupWord()
-    {
+    public void LookupWord() {
         //System.out.println("null");
-        String lookUpRes = DicManager.getInstance().LookUpWord(this.tfTitle.getText());//Cant find cause dic load default on button click
+        String lookUpRes = DicManager.getInstance().LookUpWord(this.searchBar.getText());//Cant find cause dic load default on button click
         Text text = new Text(lookUpRes);
         this.contentScrollPane.setContent(text);
 
@@ -68,48 +64,39 @@ public class MainSceneController implements Initializable
 
 
     @FXML
-    public void OnTextChange()
-    {
-        String text = tfTitle.getText();
-        if (text == "") return;
-        
-        //List<String> suggestions = DicManager.getInstance().getDicWordSearcher().Search(text);
-        //System.out.println(suggestions);
+    public void OnTextChange() {
 
-
-//        if (this.autoCompletionBinding != null) this.autoCompletionBinding.dispose();
-//        this.autoCompletionBinding = TextFields.bindAutoCompletion(this.tfTitle, suggestions);
+        String text = searchBar.getText();
+        if (text.isEmpty()) return;
         this.possibleSuggestions = DicManager.getInstance().getDicWordSearcher().Search(text);
 
     }
 
-
     @Override
-    public void initialize(URL location, ResourceBundle resources) 
-    {
-        try 
-        {
+    public void initialize(URL location, ResourceBundle resources) {
+        blurPane.setVisible(false);
+        try {
             DicManager.getInstance().getDicWordLoader().DefaultLoad();
+            DicManager.getInstance().getRecentlySearchedWordManager().getRecentlySearchedWordLoader().Load();
             
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Can't load dic file");
         }
-
-        AutoCompletionBinding auto = TextFields.bindAutoCompletion(this.tfTitle,
-                new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<String>>()
-                {
+        
+        AutoCompletionBinding auto = TextFields.bindAutoCompletion(this.searchBar,
+                new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<String>>() {
                     @Override
-                    public Collection<String> call(AutoCompletionBinding.ISuggestionRequest iSuggestionRequest)
-                    {
-                        if (tfTitle.getText().length() <= 1) return Collections.emptyList();
+                    public Collection<String> call(AutoCompletionBinding.ISuggestionRequest iSuggestionRequest) {
+                        if (searchBar.getText().length() <= 1) return Collections.emptyList();
                         return possibleSuggestions;
                     }
                 }
         );
-
+        
+        auto.setDelay(50);
+        
         //sync width with textField
-        auto.prefWidthProperty().bind(this.tfTitle.widthProperty());
+        auto.prefWidthProperty().bind(this.searchBar.widthProperty());
 
 //        TextFields.bindAutoCompletion(this.tfTitle, input ->
 //            {
