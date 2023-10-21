@@ -24,6 +24,16 @@ public class MultiChoiceQues
         return s;
     }
 
+    public String[] getAnswers()
+    {
+        return this.answers;
+    }
+
+    public String getQuestion()
+    {
+        return this.question;
+    }
+
     public ChoiceCode getRightAnswerCode() {
         return rightAnswerCode;
     }
