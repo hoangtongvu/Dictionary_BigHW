@@ -10,18 +10,18 @@
     <children>
         <Pane prefHeight="41.0" prefWidth="854.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css">
             <children>
+            <Button id="learning_button" fx:id="dictionary_button" layoutX="205.0" layoutY="5.0" mnemonicParsing="false" onAction="#onDictionaryButton" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Dictionary" />
+            <Button id="statistics_button" layoutX="136.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Games" />
+            <Button id="dictionary_button" layoutX="54.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Learning" />
                 <ImageView fx:id="menuButton" fitHeight="30.0" fitWidth="427.0" layoutX="14.0" layoutY="6.0" onMouseClicked="#onMenuButton" pickOnBounds="true" preserveRatio="true" styleClass="menuButton">
                     <image>
                         <Image url="@../../png/menuIcon.png" />
                     </image>
                 </ImageView>
-                <Button id="learning_button" fx:id="dictionaryButton" layoutX="174.0" layoutY="9.0" mnemonicParsing="false" onAction="#onDictionaryButton" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Dictionary" />
-                <Button id="statistics_button" layoutX="120.0" layoutY="9.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Games" />
-                <Button id="dictionary_button" layoutX="55.0" layoutY="9.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Learning" />
             </children>
         </Pane>
-        <Pane fx:id="blurPane" layoutY="-494.0" prefHeight="494.0" prefWidth="854.0" styleClass="blur" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="494.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-494.0" />
-        <AnchorPane fx:id="drawerMenu" layoutX="-236.0" prefHeight="494.0" prefWidth="235.0" style="-fx-background-color: white;" stylesheets="@../../css/ApplicationStyle.css">
+        <Pane fx:id="blurPane" prefHeight="494.0" prefWidth="854.0" styleClass="blur" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <AnchorPane fx:id="drawerMenu" layoutX="-236.0" prefHeight="494.0" prefWidth="235.0" styleClass="sideMenu" stylesheets="@../../css/ApplicationStyle.css">
             <children>
                 <Pane prefHeight="46.0" prefWidth="235.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css">
                     <children>
