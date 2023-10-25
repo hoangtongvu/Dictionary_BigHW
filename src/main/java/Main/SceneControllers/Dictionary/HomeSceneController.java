@@ -1,4 +1,4 @@
-package Main.SceneControllers.Standard;
+package Main.SceneControllers.Dictionary;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -7,27 +7,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-/** This class is the standard template for a scene, which include:
- * - Top navigation bar
- * - Drawer menu from the side
- * - Instruction included in StandardScene.fxml*/
-
-/*<!--THIS SCENE IS NOT MEANT TO BE USED DIRECTLY
-    This is the standard template to build other scene which includes:
-    - Top bar and buttons
-    - Drawer menu
-    HOW TO USE:
-    - Create new scene, copy and paste this file into the newly created FXML scene file
-    - Create controller class that extends StandardScene.java
-    - Example:
-        + Created GameSceneController.java & GameScene.fxml
-        + Copy StandardScene.fxml to GameScene.fxml
-        + Change fx:controller in GameScene.fxml to GameSceneController.java !-->*/
-
-abstract public class StandardScene {
-    /**This part is dedicated to drawer menu.*/
-    /**blurPane is a grey transparent pane used to create blur effect when menu is active
-     * this function set blurPane to not be visible by default.*/
+public class HomeSceneController {
+    /**This part is for side menu*/
     @FXML
     public void initialize() {
         blurPane.setVisible(false);
