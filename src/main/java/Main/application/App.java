@@ -23,7 +23,7 @@ public class App extends Application
         Parent root;
         try
         {
-            root = FXMLLoader.load(getClass().getResource("/fxml/application/MainScene.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/fxml/application/HomeScene.fxml"));
             Scene scene = new Scene(root);
 
             //InputManager inputManager = new InputManager(scene);
@@ -37,8 +37,6 @@ public class App extends Application
         {
             System.out.println(e.getMessage());
         }
-
-
     }
 
 

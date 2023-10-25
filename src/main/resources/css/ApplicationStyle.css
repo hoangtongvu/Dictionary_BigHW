@@ -11,17 +11,13 @@
 }
 
 .blur {
-    -fx-background-color: rgba(169, 169, 169, 0.5);
+    -fx-background-color: rgba(21, 18, 18, 0.5);
 }
 
 .menuButton {
     -fx-background-size: 24px 24px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-}
-
-.menuButton:hover {
-    -fx-effect: Bloom;
 }
 
 
@@ -31,16 +27,31 @@
     -fx-text-fill: white;
 }
 
+.horizontalButton:hover {
+    -fx-text-fill: #f6dcac;
+}
+
 .sideMenuButton {
-    -fx-background-color: white;
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+    -fx-text-fill: #c2f8ff;
+    -fx-font-size: 20;
+}
+
+.sideMenuButton:hover {
+    -fx-background-color: #a1d4d1;
     -fx-font-weight: bold;
     -fx-text-fill: black;
     -fx-font-size: 20;
 }
 
-.menuButton:hover {
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0);
+
+
+
+.sideMenu {
+    -fx-background-color: #151515;
 }
+
 
 .textArea {
     -fx-background-color: #2f2f2f;
@@ -53,6 +64,7 @@
     -fx-font-size: 20;
     -fx-text-fill: white;
 }
+
 
 
 

@@ -66,7 +66,7 @@ public class MainSceneController implements Initializable {
         //System.out.println("null");
         String lookUpRes = DicManager.getInstance().LookUpWord(searchBar.getText());//Cant find cause dic load default on button click
         Text text = new Text(lookUpRes);
-        textArea.setText(text.toString());
+        textArea.setText(text.getText());
     }
 
 

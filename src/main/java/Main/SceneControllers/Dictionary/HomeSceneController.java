@@ -2,10 +2,20 @@ package Main.SceneControllers.Dictionary;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.controlsfx.control.action.Action;
+
+import java.io.IOException;
+import java.util.Objects;
 
 public class HomeSceneController {
     /**This part is for side menu*/
@@ -18,6 +28,15 @@ public class HomeSceneController {
     protected AnchorPane drawerMenu;
     @FXML
     protected Pane blurPane;
+
+    /**Switching scene*/
+    @FXML
+    public void onDictionaryButton(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/application/MainScene.fxml")));
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(root);
+        stage.show();
+    }
 
     /**Activate drawer menu translateTransition for drawer menu, fadeTransition for blurPane.*/
     @FXML

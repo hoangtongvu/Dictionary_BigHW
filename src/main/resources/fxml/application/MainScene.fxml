@@ -30,8 +30,8 @@
             <TextField fx:id="searchBar" layoutX="58.0" layoutY="25.0" onAction="#LookupWord" onKeyTyped="#OnTextChange" prefHeight="26.0" prefWidth="655.0" />
          </children>
       </Pane>
-      <Pane fx:id="blurPane" layoutY="-493.0" prefHeight="494.0" prefWidth="854.0" styleClass="blur" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="493.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-493.0" />
-      <AnchorPane fx:id="drawerMenu" layoutX="-236.0" prefHeight="494.0" prefWidth="235.0" style="-fx-background-color: white;" stylesheets="@../../css/ApplicationStyle.css">
+      <Pane fx:id="blurPane" layoutX="-1.0" prefHeight="494.0" prefWidth="854.0" styleClass="blur" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="drawerMenu" layoutX="-237.0" prefHeight="494.0" prefWidth="235.0" styleClass="sideMenu" stylesheets="@../../css/ApplicationStyle.css">
          <children>
             <Pane prefHeight="46.0" prefWidth="235.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css">
                <children>
