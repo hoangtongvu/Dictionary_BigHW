@@ -1,33 +1,24 @@
-package Main.SceneControllers.Standard;
+package Main.SceneControllers.Dictionary;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.controlsfx.control.action.Action;
 
-/** This class is the standard template for a scene, which include:
- * - Top navigation bar
- * - Drawer menu from the side
- * - Instruction included in StandardScene.fxml*/
+import java.io.IOException;
+import java.util.Objects;
 
-/*<!--THIS SCENE IS NOT MEANT TO BE USED DIRECTLY
-    This is the standard template to build other scene which includes:
-    - Top bar and buttons
-    - Drawer menu
-    HOW TO USE:
-    - Create new scene, copy and paste this file into the newly created FXML scene file
-    - Create controller class that extends StandardScene.java
-    - Example:
-        + Created GameSceneController.java & GameScene.fxml
-        + Copy StandardScene.fxml to GameScene.fxml
-        + Change fx:controller in GameScene.fxml to GameSceneController.java !-->*/
-
-abstract public class StandardScene {
-    /**This part is dedicated to drawer menu.*/
-    /**blurPane is a grey transparent pane used to create blur effect when menu is active
-     * this function set blurPane to not be visible by default.*/
+public class HomeSceneController {
+    /**This part is for side menu*/
     @FXML
     public void initialize() {
         blurPane.setVisible(false);
@@ -37,6 +28,15 @@ abstract public class StandardScene {
     protected AnchorPane drawerMenu;
     @FXML
     protected Pane blurPane;
+
+    /**Switching scene*/
+    @FXML
+    public void onDictionaryButton(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/application/MainScene.fxml")));
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(root);
+        stage.show();
+    }
 
     /**Activate drawer menu translateTransition for drawer menu, fadeTransition for blurPane.*/
     @FXML

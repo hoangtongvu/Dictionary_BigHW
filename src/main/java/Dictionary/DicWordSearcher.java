@@ -8,7 +8,7 @@ import Word.WordBlock;
 
 public class DicWordSearcher 
 {
-    private DicManager dicManager;
+    private final DicManager dicManager;
     private int suggestLimit = 5;
 
 

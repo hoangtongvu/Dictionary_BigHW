@@ -6,7 +6,7 @@ import Word.WordBlock;
 
 public class Dictionary 
 {
-    private List<WordBlock> wordBlocks;
+    private final List<WordBlock> wordBlocks;
 
 
     public List<WordBlock> getWordBlocks() {
