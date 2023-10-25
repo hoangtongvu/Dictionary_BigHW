@@ -7,3 +7,7 @@ long
 londoner
 lone
 loneliness
+good
+apple
+help
+bow

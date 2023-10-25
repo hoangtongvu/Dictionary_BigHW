@@ -8,6 +8,5 @@ module MainGroup.application {
     exports Main.application;
     exports Main.SceneControllers.Dictionary;
     opens Main.SceneControllers.Dictionary to javafx.fxml;
-    exports Main.SceneControllers.Standard;
-    opens Main.SceneControllers.Standard to javafx.fxml;
+
 }

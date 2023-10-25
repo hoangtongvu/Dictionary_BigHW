@@ -27,7 +27,7 @@ public class App extends Application
             Scene scene = new Scene(root);
 
             //InputManager inputManager = new InputManager(scene);
-
+            primaryStage.setResizable(false);
             primaryStage.setTitle("Hello World!");
             primaryStage.setScene(scene);
             primaryStage.show();

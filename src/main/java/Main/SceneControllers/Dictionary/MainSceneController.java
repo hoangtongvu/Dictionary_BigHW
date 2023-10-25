@@ -1,14 +1,23 @@
 package Main.SceneControllers.Dictionary;
 
 import Dictionary.DicManager;
-import Main.SceneControllers.Standard.StandardScene;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
+import javafx.util.Duration;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -16,7 +25,7 @@ import java.net.URL;
 import java.util.*;
 
 
-public class MainSceneController extends StandardScene implements Initializable {
+public class MainSceneController implements Initializable {
 
     //private Timer timer;
     //private TimerTask timerTask;
@@ -24,7 +33,7 @@ public class MainSceneController extends StandardScene implements Initializable 
     private  List<String> possibleSuggestions = new ArrayList<>();
 
     @FXML
-    private ScrollPane contentScrollPane;
+    TextArea textArea;
 
     @FXML
     private TextField searchBar;
@@ -52,14 +61,12 @@ public class MainSceneController extends StandardScene implements Initializable 
 
     }
 
-
     @FXML
     public void LookupWord() {
         //System.out.println("null");
-        String lookUpRes = DicManager.getInstance().LookUpWord(this.searchBar.getText());//Cant find cause dic load default on button click
+        String lookUpRes = DicManager.getInstance().LookUpWord(searchBar.getText());//Cant find cause dic load default on button click
         Text text = new Text(lookUpRes);
-        this.contentScrollPane.setContent(text);
-
+        textArea.setText(text.toString());
     }
 
 
@@ -69,12 +76,17 @@ public class MainSceneController extends StandardScene implements Initializable 
         String text = searchBar.getText();
         if (text.isEmpty()) return;
         this.possibleSuggestions = DicManager.getInstance().getDicWordSearcher().Search(text);
-
     }
+
+    @FXML
+    ImageView menuButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         blurPane.setVisible(false);
+        textArea.setWrapText(true);
+        textArea.setEditable(false);
+
         try {
             DicManager.getInstance().getDicWordLoader().DefaultLoad();
             DicManager.getInstance().getRecentlySearchedWordManager().getRecentlySearchedWordLoader().Load();
@@ -107,4 +119,45 @@ public class MainSceneController extends StandardScene implements Initializable 
 
     }
 
+    /**This part is for side menu*/
+    @FXML
+    public void initialize() {
+        blurPane.setVisible(false);
+    }
+
+    @FXML
+    protected AnchorPane drawerMenu;
+    @FXML
+    protected Pane blurPane;
+
+    /**Activate drawer menu translateTransition for drawer menu, fadeTransition for blurPane.*/
+    @FXML
+    protected void onMenuButton() {
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5),drawerMenu);
+        translateTransition.setByX(+235);
+        translateTransition.play();
+
+        blurPane.setVisible(true);
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+        fadeTransition.play();
+    }
+
+    /**setOnFinished(lambdaExpression) to wait for the blur animation to finish before set blurPane invisible,
+     * otherwise, blurPane will disappear immediately.*/
+    @FXML
+    protected void onMenuExit() {
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5),drawerMenu);
+        translateTransition.setByX(-235);
+        translateTransition.play();
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(0);
+        fadeTransition.play();
+
+        fadeTransition.setOnFinished(event -> {blurPane.setVisible(false);});
+    }
 }
