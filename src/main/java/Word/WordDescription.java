@@ -37,16 +37,16 @@ public class WordDescription
 
     public String GetInfo()
     {
-        String temp = this.prefixSymbol + this.wordType + "\n";
+        String temp = "<h2>" + wordType + "</h2>";
         for (WordDefinition wordDefinition : wordDefinitions) 
         {
             temp += wordDefinition.GetInfo("\t");
         }
 
-        if (this.wordPhrases == null) return temp;
-        for (WordPhrase wordPhrase : this.wordPhrases)
+        if (wordPhrases == null) return temp;
+        for (WordPhrase wordPhrase : wordPhrases)
         {
-            temp += wordPhrase.GetInfo("\t");
+            temp += wordPhrase.GetInfo("\t") ;
         }
 
         return temp;

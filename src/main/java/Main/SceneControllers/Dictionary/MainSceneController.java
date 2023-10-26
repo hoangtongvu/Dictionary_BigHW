@@ -16,6 +16,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
@@ -33,10 +35,16 @@ public class MainSceneController implements Initializable {
     private  List<String> possibleSuggestions = new ArrayList<>();
 
     @FXML
-    TextArea textArea;
-
-    @FXML
     private TextField searchBar;
+    @FXML
+    protected AnchorPane drawerMenu;
+    @FXML
+    protected Pane blurPane;
+    @FXML
+    ImageView menuButton;
+    @FXML
+    WebView webView;
+    private WebEngine webEngine;
 
     @FXML
     void btnOKClicked(ActionEvent event) {
@@ -57,16 +65,20 @@ public class MainSceneController implements Initializable {
         // };
 
         //this.timer.scheduleAtFixedRate(timerTask, 0, 500);
+    }
 
-
+    public void setupWebView(String content) {
+        String encoding = "<meta charset=\"UTF-8\">";
+        String cssPath = getClass().getResource("/css/htmlStyle.css").toExternalForm();
+        String styleSheet = "<link rel=\"stylesheet\" href=\"" + cssPath + "\">";
+        webEngine.loadContent("<html>" + styleSheet + encoding + content + "</html>");
     }
 
     @FXML
     public void LookupWord() {
         //System.out.println("null");
         String lookUpRes = DicManager.getInstance().LookUpWord(searchBar.getText());//Cant find cause dic load default on button click
-        Text text = new Text(lookUpRes);
-        textArea.setText(text.getText());
+        setupWebView(lookUpRes);
     }
 
 
@@ -78,15 +90,10 @@ public class MainSceneController implements Initializable {
         this.possibleSuggestions = DicManager.getInstance().getDicWordSearcher().Search(text);
     }
 
-    @FXML
-    ImageView menuButton;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         blurPane.setVisible(false);
-        textArea.setWrapText(true);
-        textArea.setEditable(false);
-
+        webEngine = webView.getEngine();
         try {
             DicManager.getInstance().getDicWordLoader().DefaultLoad();
             DicManager.getInstance().getRecentlySearchedWordManager().getRecentlySearchedWordLoader().Load();
@@ -120,16 +127,6 @@ public class MainSceneController implements Initializable {
     }
 
     /**This part is for side menu*/
-    @FXML
-    public void initialize() {
-        blurPane.setVisible(false);
-    }
-
-    @FXML
-    protected AnchorPane drawerMenu;
-    @FXML
-    protected Pane blurPane;
-
     /**Activate drawer menu translateTransition for drawer menu, fadeTransition for blurPane.*/
     @FXML
     protected void onMenuButton() {

@@ -11,4 +11,6 @@ good
 help
 eat
 apple
+bob
+how
 bow
