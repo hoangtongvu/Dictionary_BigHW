@@ -23,7 +23,7 @@ public class WordDefinition
 
     public String GetInfo(String prefixSpace)
     {
-        String temp = "<h3><pre>" + prefixSpace + prefixSymbol + definition + "\n" + "</pre></h3>";
+        String temp = "<h3>" + prefixSpace + prefixSymbol + definition + "\n" + "</h3>";
             
         if (wordExamples == null) {
             return temp;

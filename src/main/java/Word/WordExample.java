@@ -19,8 +19,8 @@ public class WordExample
 
     public String GetInfo(String prefixSpace)
     {
-        String temp = "<h3><pre>" + prefixSpace + this.example + "\n" + "</pre></h3>";
-        temp += "<h4><pre>" + prefixSpace + this.prefixSymbol + this.exampleDefinition + "</pre><h4>";
+        String temp = "<h3>" + prefixSpace + this.example + "\n" + "</h3>";
+        temp += "<h4>" + prefixSpace + this.prefixSymbol + this.exampleDefinition + "<h4>";
         return temp;
     }
 }

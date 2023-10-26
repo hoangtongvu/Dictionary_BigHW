@@ -66,12 +66,11 @@ public class MainSceneController implements Initializable {
 
         //this.timer.scheduleAtFixedRate(timerTask, 0, 500);
     }
-
+    private final String cssPath = getClass().getResource("/css/htmlStyle.css").toExternalForm();
+    private final String  styleSheet = "<link rel=\"stylesheet\" href=\"" + cssPath + "\">";
     public void setupWebView(String content) {
         String encoding = "<meta charset=\"UTF-8\">";
-        String cssPath = getClass().getResource("/css/htmlStyle.css").toExternalForm();
-        String styleSheet = "<link rel=\"stylesheet\" href=\"" + cssPath + "\">";
-        webEngine.loadContent("<html>" + styleSheet + encoding + content + "</html>");
+        webEngine.loadContent("<html><body>" + styleSheet + encoding + content + "</body></html>");
     }
 
     @FXML
@@ -94,6 +93,7 @@ public class MainSceneController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         blurPane.setVisible(false);
         webEngine = webView.getEngine();
+        webEngine.loadContent("<html><body>" + styleSheet + "</body></html>");
         try {
             DicManager.getInstance().getDicWordLoader().DefaultLoad();
             DicManager.getInstance().getRecentlySearchedWordManager().getRecentlySearchedWordLoader().Load();

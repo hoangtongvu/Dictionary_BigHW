@@ -2,3 +2,12 @@ h1 {
     color: #CE5E82;
     font-family: Arial, serif;
 }
+
+body {
+    background-color: #2f2f2f;
+}
+
+
+* {
+    color: white;
+}

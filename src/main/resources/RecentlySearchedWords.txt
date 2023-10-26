@@ -1,4 +1,3 @@
-hello
 trace
 target
 hi
@@ -10,7 +9,13 @@ loneliness
 good
 help
 eat
-apple
 bob
-how
+apple
+food
 bow
+where
+how
+bye
+hello
+when
+why
