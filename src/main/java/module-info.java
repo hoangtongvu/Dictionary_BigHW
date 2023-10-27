@@ -3,6 +3,7 @@ module MainGroup.application {
     requires javafx.fxml;
 
     requires org.controlsfx.controls;
+    requires javafx.web;
 
     opens Main.application to javafx.fxml;
     exports Main.application;

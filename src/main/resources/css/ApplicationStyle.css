@@ -23,6 +23,7 @@
 
 .horizontalButton {
     -fx-background-color: transparent;
+    -fx-font-size: 15;
     -fx-font-weight: bold;
     -fx-text-fill: white;
 }
@@ -32,6 +33,8 @@
 }
 
 .sideMenuButton {
+    -fx-alignment: left;
+    -fx-padding: 0 0 0 70;
     -fx-background-color: transparent;
     -fx-font-weight: bold;
     -fx-text-fill: #c2f8ff;
@@ -39,17 +42,14 @@
 }
 
 .sideMenuButton:hover {
-    -fx-background-color: #a1d4d1;
+    -fx-background-color: linear-gradient(to right,#200D3A, #292651, #2E4770);
     -fx-font-weight: bold;
-    -fx-text-fill: black;
+    -fx-text-fill: white;
     -fx-font-size: 20;
 }
 
-
-
-
 .sideMenu {
-    -fx-background-color: #151515;
+    -fx-background-color: #2f2f2f;
 }
 
 

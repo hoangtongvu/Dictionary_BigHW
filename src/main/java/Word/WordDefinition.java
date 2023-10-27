@@ -23,12 +23,13 @@ public class WordDefinition
 
     public String GetInfo(String prefixSpace)
     {
-        String temp = prefixSpace + this.prefixSymbol + this.definition + "\n";
+        String temp = "<h3>" + prefixSpace + prefixSymbol + definition + "\n" + "</h3>";
             
-        if (this.wordExamples == null) return temp;
+        if (wordExamples == null) {
+            return temp;
+        }
 
-        for (WordExample wordExample : wordExamples) 
-        {
+        for (WordExample wordExample : wordExamples) {
             temp += wordExample.GetInfo(prefixSpace + "\t") + "\n";
         }
         return temp;
