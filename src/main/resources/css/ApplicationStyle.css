@@ -33,7 +33,7 @@
 }
 
 .sideMenuButton {
-    -fx-alignment: left;
+    -fx-alignment: baseline-left;
     -fx-padding: 0 0 0 70;
     -fx-background-color: transparent;
     -fx-font-weight: bold;
