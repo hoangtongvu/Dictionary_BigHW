@@ -6,30 +6,30 @@ public class WordDefinition
 {
     private String prefixSymbol = "▶ ";
     private String definition;
-    private List<WordExample> wordExamples;//not mandatory
+    private List<WordExample> exampleList;//not mandatory
 
     public void setDefinition(String definition) {
         this.definition = definition;
     }
     
-    public WordExample AddWordExample(WordExample wordExample)
-    {
-        if (this.wordExamples == null) this.wordExamples = new ArrayList<WordExample>();
-        this.wordExamples.add(wordExample);
-        int lastPos = this.wordExamples.size();
-        return this.wordExamples.get(lastPos - 1);
+    public WordExample AddWordExample(WordExample wordExample) {
+        if (exampleList == null) {
+            this.exampleList = new ArrayList<>();
+        }
+        exampleList.add(wordExample);
+        int lastPos = this.exampleList.size();
+        return this.exampleList.get(lastPos - 1);
     }
 
 
-    public String GetInfo(String prefixSpace)
-    {
+    public String GetInfo(String prefixSpace) {
         String temp = "<h3>" + prefixSpace + prefixSymbol + definition + "\n" + "</h3>";
             
-        if (wordExamples == null) {
+        if (exampleList == null) {
             return temp;
         }
 
-        for (WordExample wordExample : wordExamples) {
+        for (WordExample wordExample : exampleList) {
             temp += wordExample.GetInfo(prefixSpace + "\t") + "\n";
         }
         return temp;

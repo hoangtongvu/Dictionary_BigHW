@@ -10,32 +10,29 @@ public class WordPhrase
 {
     private String prefixSymbol = "➤ ";
     private String phrase;
-    private List<WordDefinition> definitions;
+    private List<WordDefinition> definitionList;
 
-    public WordPhrase(String phrase)
-    {
+    public WordPhrase(String phrase) {
         this.phrase = phrase;
-
     }
 
-    public WordDefinition AddDefinition(WordDefinition definition)
-    {
-        if (this.definitions == null) this.definitions = new ArrayList<>();
-        this.definitions.add(definition);
-        int lastPos = this.definitions.size();
-        return this.definitions.get(lastPos - 1);
+    public WordDefinition AddDefinition(WordDefinition definition) {
+        if (definitionList == null) definitionList = new ArrayList<>();
+        definitionList.add(definition);
+        int lastPos = definitionList.size();
+        return definitionList.get(lastPos - 1);
     }
 
-    public String GetInfo(String prefixSpace)
-    {
+    public String GetInfo(String prefixSpace) {
         String temp = "<h2>" + prefixSpace + this.prefixSymbol + this.phrase + "\n" + "</h2>";
-        if (this.definitions == null) return temp;
 
-        for (WordDefinition wordDefinition : this.definitions)
-        {
-            temp += wordDefinition.GetInfo(prefixSpace + "\t");
+        if (definitionList == null) {
+            return temp;
         }
 
+        for (WordDefinition wordDefinition : definitionList) {
+            temp += wordDefinition.GetInfo(prefixSpace + "\t");
+        }
 
         return temp;
     }

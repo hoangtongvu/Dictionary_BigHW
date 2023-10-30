@@ -11,16 +11,16 @@ public class WordExample
         this.exampleDefinition = exampleDefinition;
     }
 
-    public WordExample(String ex, String def)
+    public WordExample(String example, String exampleDefinition)
     {
-        this.example = ex;
-        this.exampleDefinition = def;
+        this.example = example;
+        this.exampleDefinition = exampleDefinition;
     }
 
     public String GetInfo(String prefixSpace)
     {
-        String temp = "<h3>" + prefixSpace + this.example + "\n" + "</h3>";
-        temp += "<h4>" + prefixSpace + this.prefixSymbol + this.exampleDefinition + "<h4>";
+        String temp = "<h3>" + prefixSpace + example + "\n" + "</h3>";
+        temp += "<h4>" + prefixSpace + prefixSymbol + exampleDefinition + "<h4>";
         return temp;
     }
 }
