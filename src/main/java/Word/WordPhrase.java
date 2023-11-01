@@ -28,7 +28,7 @@ public class WordPhrase
 
     public String GetInfo(String prefixSpace)
     {
-        String temp = prefixSpace + this.prefixSymbol + this.phrase + "\n";
+        String temp = "<h2>" + prefixSpace + this.prefixSymbol + this.phrase + "\n" + "</h2>";
         if (this.definitions == null) return temp;
 
         for (WordDefinition wordDefinition : this.definitions)

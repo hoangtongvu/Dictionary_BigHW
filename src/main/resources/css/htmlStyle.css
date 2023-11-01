@@ -1,0 +1,28 @@
+h1 {
+    color: #CE5E82;
+    font-family: Arial, serif;
+}
+
+h2 {
+    text-indent: 0px;
+    color: #c2f8ff;
+}
+
+h3 {
+    text-indent: 50px;
+    color: #f6dcac;
+}
+
+h4 {
+    text-indent: 90px;
+    color: white;
+}
+
+body {
+    background-color: #2f2f2f;
+}
+
+* {
+    color: white;
+    font-family: "Roboto", sans-serif;
+}

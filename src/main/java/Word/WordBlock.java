@@ -37,7 +37,7 @@ public class WordBlock implements Comparable<WordBlock>
 
     public String GetInfo()
     {
-        String temp = this.word + "\n" + this.spelling + "\n";
+        String temp = "<h1>" + word + "\n" + spelling + "</h1>";
 
         for (WordDescription wordDescription : wordDescriptions) 
         {

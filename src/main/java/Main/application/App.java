@@ -18,30 +18,21 @@ public class App extends Application
 
 
     @Override
-    public void start(Stage primaryStage)
-    {
+    public void start(Stage primaryStage) {
         Parent root;
-        try
-        {
+        try {
             root = FXMLLoader.load(getClass().getResource("/fxml/application/MainScene.fxml"));
             Scene scene = new Scene(root);
 
             //InputManager inputManager = new InputManager(scene);
-
+            primaryStage.setMinWidth(854);
+            primaryStage.setMinHeight(494);
             primaryStage.setTitle("Hello World!");
             primaryStage.setScene(scene);
             primaryStage.show();
-
         }
-        catch (IOException e)
-        {
+        catch (IOException e) {
             System.out.println(e.getMessage());
         }
-
-
     }
-
-
-
-
 }

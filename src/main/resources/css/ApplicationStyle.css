@@ -1,11 +1,70 @@
 .topBar {
-    -fx-background-color: #1e3264;
+    -fx-background-color: #200D3A;
 }
 
 .secondaryTopBar {
-    -fx-background-color: #141946;
+    -fx-background-color: linear-gradient(to right, #200D3A, #292651, #2E4770, #CE5E82);
+}
+
+.anchorPane {
+    -fx-background-color: #2f2f2f;
 }
 
 .blur {
-    -fx-background-color: rgba(169, 169, 169, 0.5);
+    -fx-background-color: rgba(21, 18, 18, 0.5);
 }
+
+.menuButton {
+    -fx-background-size: 24px 24px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+
+.horizontalButton {
+    -fx-background-color: transparent;
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.horizontalButton:hover {
+    -fx-text-fill: #f6dcac;
+}
+
+.sideMenuButton {
+    -fx-alignment: baseline-left;
+    -fx-padding: 0 0 0 70;
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+    -fx-text-fill: #c2f8ff;
+    -fx-font-size: 20;
+}
+
+.sideMenuButton:hover {
+    -fx-background-color: linear-gradient(to right,#200D3A, #292651, #2E4770);
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+}
+
+.sideMenu {
+    -fx-background-color: #2f2f2f;
+}
+
+
+.textArea {
+    -fx-background-color: #2f2f2f;
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+}
+
+.textArea .content {
+    -fx-background-color: #2f2f2f;
+    -fx-font-size: 20;
+    -fx-text-fill: white;
+}
+
+
+
+
