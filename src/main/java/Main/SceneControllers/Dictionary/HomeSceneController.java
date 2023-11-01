@@ -1,5 +1,7 @@
 package Main.SceneControllers.Dictionary;
 
+import Main.FxmlFileManager;
+import Main.application.App;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -18,24 +20,29 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class HomeSceneController {
-    /**This part is for side menu*/
-    @FXML
-    public void initialize() {
-        blurPane.setVisible(false);
-    }
-
     @FXML
     protected AnchorPane drawerMenu;
+
     @FXML
     protected Pane blurPane;
+
+
+    /**This part is for side menu*/
+    @FXML
+    public void initialize()
+    {
+        blurPane.setVisible(false);
+        //this.SwitchToLookUpScene(); //dunno why this bug.
+    }
 
     /**Switching scene*/
     @FXML
     public void onDictionaryButton(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/application/MainScene.fxml")));
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(root);
-        stage.show();
+//        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/application/MainScene.fxml")));
+//        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+//        stage.getScene().setRoot(root);
+//        stage.show();
+        this.SwitchToLookUpScene();
     }
 
     /**Activate drawer menu translateTransition for drawer menu, fadeTransition for blurPane.*/
@@ -68,4 +75,19 @@ public class HomeSceneController {
 
         fadeTransition.setOnFinished(event -> {blurPane.setVisible(false);});
     }
+
+
+    public void SwitchScene(Parent newScene)
+    {
+        Stage primaryStage = App.getPrimaryStage();
+        primaryStage.getScene().setRoot(newScene);
+        primaryStage.show();
+    }
+
+    public void SwitchToLookUpScene()
+    {
+        Parent root = FxmlFileManager.getInstance().root;
+        this.SwitchScene(root);
+    }
+
 }

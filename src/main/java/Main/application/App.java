@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 
 public class App extends Application
 {
+
+    private static Stage primaryStage;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -17,9 +20,10 @@ public class App extends Application
 
     @Override
     public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
         Parent root;
         //root = FXMLLoader.load(getClass().getResource("/fxml/application/MainScene.fxml"));
-        root = FxmlFileManager.getInstance().root;
+        root = FxmlFileManager.getInstance().homeScene;
         Scene scene = new Scene(root);
 
         //InputManager inputManager = new InputManager(scene);
@@ -28,5 +32,9 @@ public class App extends Application
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    public static Stage getPrimaryStage() {
+        return primaryStage;
     }
 }

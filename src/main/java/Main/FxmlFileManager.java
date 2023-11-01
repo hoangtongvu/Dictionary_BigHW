@@ -18,6 +18,7 @@ public class FxmlFileManager
 
 
     public final Parent root;
+    public final Parent homeScene;
 
 
 
@@ -27,6 +28,7 @@ public class FxmlFileManager
         try
         {
             this.root = FXMLLoader.load(getClass().getResource("/fxml/application/MainScene.fxml"));
+            this.homeScene = FXMLLoader.load(getClass().getResource("/fxml/application/HomeScene.fxml"));
         }
         catch (IOException e)
         {
