@@ -45,6 +45,12 @@ public class HomeSceneController {
         this.SwitchToLookUpScene();
     }
 
+    @FXML
+    public void onGameButton(ActionEvent event) throws IOException
+    {
+        this.SwitchScene(FxmlFileManager.getInstance().multiChoiceWordGameScene);
+    }
+
     /**Activate drawer menu translateTransition for drawer menu, fadeTransition for blurPane.*/
     @FXML
     protected void onMenuButton() {
