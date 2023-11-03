@@ -3,6 +3,7 @@ package Main.SceneControllers;
 import Game.MultiChoiceGame.ChoiceCode;
 import Game.MultiChoiceGame.ChoiceGameCtrl;
 import Game.MultiChoiceGame.MultiChoiceQues;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -85,12 +86,32 @@ public class GameSceneController implements Initializable
     public void MoveToNextQuestion()
     {
 
-        //if (this.choseAnswer == null) return;
-        this.ResetChoseAnswer();
-        this.currentQuesPos++;
-        this.SetProgressBar(this.currentQuesPos, this.maxQues);
+//        //if (this.choseAnswer == null) return;
+//        this.ResetChoseAnswer();
+//        this.currentQuesPos++;
+//        this.SetProgressBar(this.currentQuesPos, this.maxQues);
+//
+//        if (this.currentQuesPos >= this.maxQues) return;
+//        this.SetQuestion(this.questions.get(this.currentQuesPos).getQuestion());
+//        this.SetAnswers(this.questions.get(this.currentQuesPos).getAnswers());
+//
+//        for (ChoiceCode code : this.userAnswers)
+//        {
+//            System.out.print(code + " ");
+//        }
+//        System.out.println();
+        this.MoveToQuestionAt(this.currentQuesPos + 1);
+    }
 
-        if (this.currentQuesPos >= this.maxQues) return;
+    @FXML
+    public void MoveToQuestionAt(int i)
+    {
+
+        if (i >= this.maxQues) return;
+        this.currentQuesPos = i;
+        this.ResetChoseAnswer();
+        this.SetProgressBar(this.GetNumOfAnsweredQues(), this.maxQues);
+
         this.SetQuestion(this.questions.get(this.currentQuesPos).getQuestion());
         this.SetAnswers(this.questions.get(this.currentQuesPos).getAnswers());
 
@@ -101,7 +122,15 @@ public class GameSceneController implements Initializable
         System.out.println();
     }
 
-
+    private int GetNumOfAnsweredQues()
+    {
+        int count = 0;
+        for (int i = 0; i < this.userAnswers.length; i++)
+        {
+            if (this.userAnswers[i] != null) count++;
+        }
+        return count;
+    }
 
 
     @FXML
@@ -183,9 +212,37 @@ public class GameSceneController implements Initializable
 
     private void ResetChoseAnswer()
     {
-        if (this.choseAnswer == null) return;
-        this.choseAnswer.setSelected(false);
-        this.choseAnswer = null;
+
+        if (this.choseAnswer != null)
+        {
+            this.choseAnswer.setSelected(false);
+            this.choseAnswer = null;
+        }
+
+        ChoiceCode choseAnswerCode = this.userAnswers[this.currentQuesPos];
+        if (choseAnswerCode == null) return;
+        switch (choseAnswerCode)
+        {
+            case A:
+                this.choseAnswer = this.answerA;
+                break;
+            case B:
+                this.choseAnswer = this.answerB;
+                break;
+            case C:
+                this.choseAnswer = this.answerC;
+                break;
+            case D:
+                this.choseAnswer = this.answerD;
+                break;
+            default:
+                break;
+        }
+
+
+        this.choseAnswer.setSelected(true);
+
+
     }
 
     private void AddingButtonsToGridPane()
@@ -203,6 +260,12 @@ public class GameSceneController implements Initializable
                 Button newBut = new Button(Integer.toString(quesCount));
                 newBut.setMaxWidth(Integer.MAX_VALUE);
                 newBut.setMaxHeight(Integer.MAX_VALUE);
+
+                //add event to per button.
+                int finalQuesCount = quesCount;
+                newBut.addEventHandler(ActionEvent.ACTION, e -> this.MoveToQuestionAt(finalQuesCount - 1) );
+
+                //add buttons to gridPane.
                 this.quesGridPane.add(newBut, j, i);
 
                 quesCount++;
