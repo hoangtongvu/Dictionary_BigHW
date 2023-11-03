@@ -6,9 +6,12 @@ import Game.MultiChoiceGame.MultiChoiceQues;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Effect;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
@@ -184,6 +187,7 @@ public class GameSceneController implements Initializable
 
         this.userAnswers[this.currentQuesPos] = choiceCode;
         this.choseAnswer.setSelected(true);
+        this.UpdateGridPaneButtonColor();
 
     }
 
@@ -261,6 +265,10 @@ public class GameSceneController implements Initializable
                 newBut.setMaxWidth(Integer.MAX_VALUE);
                 newBut.setMaxHeight(Integer.MAX_VALUE);
 
+                //add colorAdjust effect.
+                ColorAdjust colorAdjust = new ColorAdjust();
+                newBut.setEffect(colorAdjust);
+
                 //add event to per button.
                 int finalQuesCount = quesCount;
                 newBut.addEventHandler(ActionEvent.ACTION, e -> this.MoveToQuestionAt(finalQuesCount - 1) );
@@ -273,5 +281,30 @@ public class GameSceneController implements Initializable
 
         }
     }
+
+
+    private void UpdateGridPaneButtonColor()
+    {
+        List<Node> buttons = this.quesGridPane.getChildren();
+        int count = 0;
+        for (Node node : buttons)
+        {
+            Button button = (Button) node;
+            if (this.userAnswers[count] != null)
+            {
+                this.SetButtonColorGreen(button);
+            }
+            count++;
+        }
+    }
+
+    private void SetButtonColorGreen(Button button)
+    {
+        ColorAdjust colorAdjust = (ColorAdjust) button.getEffect();
+        colorAdjust.setHue(0.5);
+        colorAdjust.setSaturation(1);
+    }
+
+
 
 }
