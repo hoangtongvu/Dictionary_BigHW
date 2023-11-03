@@ -125,9 +125,9 @@ public class GameSceneController implements Initializable
     private int GetNumOfAnsweredQues()
     {
         int count = 0;
-        for (int i = 0; i < this.userAnswers.length; i++)
+        for (ChoiceCode userAnswer : this.userAnswers)
         {
-            if (this.userAnswers[i] != null) count++;
+            if (userAnswer != null) count++;
         }
         return count;
     }
