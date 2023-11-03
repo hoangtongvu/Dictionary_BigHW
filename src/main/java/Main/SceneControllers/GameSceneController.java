@@ -11,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.Effect;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
@@ -112,7 +111,8 @@ public class GameSceneController implements Initializable
 
         if (i >= this.maxQues) return;
         this.currentQuesPos = i;
-        this.ResetChoseAnswer();
+        this.ClearChoseAnswer();
+        this.TickAnswerBasedOnUserAnswer();
         this.SetProgressBar(this.GetNumOfAnsweredQues(), this.maxQues);
 
         this.SetQuestion(this.questions.get(this.currentQuesPos).getQuestion());
@@ -214,15 +214,15 @@ public class GameSceneController implements Initializable
         this.answerD.setText(answers[3]);
     }
 
-    private void ResetChoseAnswer()
+    private void ClearChoseAnswer()
     {
+        if (this.choseAnswer == null) return;
+        this.choseAnswer.setSelected(false);
+        this.choseAnswer = null;
+    }
 
-        if (this.choseAnswer != null)
-        {
-            this.choseAnswer.setSelected(false);
-            this.choseAnswer = null;
-        }
-
+    private void TickAnswerBasedOnUserAnswer()
+    {
         ChoiceCode choseAnswerCode = this.userAnswers[this.currentQuesPos];
         if (choseAnswerCode == null) return;
         switch (choseAnswerCode)
@@ -245,8 +245,6 @@ public class GameSceneController implements Initializable
 
 
         this.choseAnswer.setSelected(true);
-
-
     }
 
     private void AddingButtonsToGridPane()
