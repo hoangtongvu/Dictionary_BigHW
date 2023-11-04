@@ -1,5 +1,10 @@
 aba
 aback
 abaci
+<<<<<<< HEAD
 bed
+=======
+apple
+bed
+>>>>>>> 61973af7561a77c8be0aa959aa9774901c9a4c34
 apple

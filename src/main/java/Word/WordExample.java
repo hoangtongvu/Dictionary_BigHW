@@ -1,26 +1,46 @@
 package Word;
 
 
-public class WordExample 
+import java.sql.SQLException;
+
+public class WordExample
 {
     private String prefixSymbol = "➥ ";
-    private String example;
-    private String exampleDefinition;
+    private String example = "";
+    private String translation = "";
 
-    public void setExampleDefinition(String exampleDefinition) {
-        this.exampleDefinition = exampleDefinition;
+    public WordExample(){}
+    public WordExample(String example, String translation) {
+        if (example != null ) {
+            this.example = example;
+        }
+        if (translation != null) {
+            this.translation = translation;
+        }
     }
 
-    public WordExample(String ex, String def)
-    {
-        this.example = ex;
-        this.exampleDefinition = def;
+    public String getExample() {
+        return example;
     }
+
+    public void setExample(String example) {
+        this.example = example;
+    }
+
+    public String getTranslation() {
+        return translation;
+    }
+
+    public void setTranslation(String translation) {
+        this.translation = translation;
+    }
+
 
     public String GetInfo(String prefixSpace)
     {
-        String temp = "<h3>" + prefixSpace + this.example + "\n" + "</h3>";
-        temp += "<h4>" + prefixSpace + this.prefixSymbol + this.exampleDefinition + "<h4>";
+        String temp = "<h3>" + prefixSpace + example + "\n" + "</h3>";
+        temp += "<h4>" + prefixSpace + prefixSymbol + translation + "<h4>";
         return temp;
     }
+
 }

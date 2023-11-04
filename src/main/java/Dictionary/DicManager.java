@@ -2,6 +2,7 @@ package Dictionary;
 
 import Word.WordBlock;
 
+import java.sql.SQLException;
 import java.util.Collections;
 
 
@@ -45,17 +46,14 @@ public class DicManager
         this.recentlySearchedWordManager = new RecentlySearchedWordManager();
     }
 
-    public WordBlock AddNewWord(WordBlock wordBlock)
-    {
-        return this.dictionary.AddWordBlock(wordBlock);
+    public void addWordBlock(WordBlock wordBlock) {
+        dictionary.AddWordBlock(wordBlock);
     }
 
 
-    public String LookUpWord(String lookupString)
-    {
-        WordBlock dummy = new WordBlock();
-        dummy.SetWordAndSpelling(lookupString, "");
-        int lookupPos = Collections.binarySearch(this.dictionary.getWordBlocks(), dummy);
+    public String LookUpWord(String lookupString) throws SQLException {
+        WordBlock dummy = new WordBlock(lookupString,"");
+        int lookupPos = Collections.binarySearch(dictionary.getWordBlocks(), dummy);
         if (lookupPos < 0) return "Can't find your word.";
 
         RecentlySearchedWordSaver recentlySearchedWordSaver = this.recentlySearchedWordManager.getRecentlySearchedWordSaver();
