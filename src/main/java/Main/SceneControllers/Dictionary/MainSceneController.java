@@ -89,11 +89,10 @@ public class MainSceneController implements Initializable {
         webEngine = webView.getEngine();
         webEngine.loadContent("<html><body>" + styleSheet + "</body></html>");
         try {
-            DicManager.getInstance().getDicWordLoader().DefaultLoad();
             DicManager.getInstance().getRecentlySearchedWordManager().getRecentlySearchedWordLoader().Load();
             
         } catch (Exception e) {
-            System.out.println("Can't load dic file");
+            e.printStackTrace();
         }
         
         AutoCompletionBinding auto = TextFields.bindAutoCompletion(this.searchBar,

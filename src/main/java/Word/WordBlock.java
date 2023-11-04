@@ -45,11 +45,11 @@ public class WordBlock implements Comparable<WordBlock> {
     }
 
     @Override
-    public int compareTo(WordBlock o) 
-    {
+    public int compareTo(WordBlock wordBlock) {
         //throw new UnsupportedOperationException("Unimplemented method 'compareTo'");
-        return word.compareToIgnoreCase(o.getWord());
+        return word.compareToIgnoreCase(wordBlock.getWord());
     }
+
 
 
 }
