@@ -13,24 +13,22 @@ public class WordDescription
         this.wordType = wordType;
     }
 
-
-    public WordDescription() {
-        definitionList = new ArrayList<>();
+    public String getWordType() {
+        return wordType;
     }
 
-    public WordDefinition AddWordDefinition(WordDefinition wordDefinition)
-    {
+    public void addDefinition(WordDefinition wordDefinition) {
+        if (definitionList == null) {
+            definitionList =new ArrayList<>();
+        }
         definitionList.add(wordDefinition);
-        int lastPos = definitionList.size();
-        return this.definitionList.get(lastPos - 1);
     }
 
-    public WordPhrase AddWordPhrase(WordPhrase wordPhrase)
-    {
-        if (phraseList == null) phraseList = new ArrayList<>();
+    public void addPhrase(WordPhrase wordPhrase) {
+        if (phraseList == null) {
+            phraseList = new ArrayList<>();
+        }
         phraseList.add(wordPhrase);
-        int lastPos = phraseList.size();
-        return phraseList.get(lastPos - 1);
     }
 
 
