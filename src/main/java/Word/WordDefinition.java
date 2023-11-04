@@ -6,19 +6,21 @@ public class WordDefinition
 {
     private String prefixSymbol = "▶ ";
     private String definition;
-    private List<WordExample> exampleList;//not mandatory
+    private List<WordExample> exampleList;
+
+    public String getDefinition() {
+        return definition;
+    }
 
     public void setDefinition(String definition) {
         this.definition = definition;
     }
     
-    public WordExample AddWordExample(WordExample wordExample) {
+    public void addExample(WordExample wordExample) {
         if (exampleList == null) {
             this.exampleList = new ArrayList<>();
         }
         exampleList.add(wordExample);
-        int lastPos = this.exampleList.size();
-        return this.exampleList.get(lastPos - 1);
     }
 
 
