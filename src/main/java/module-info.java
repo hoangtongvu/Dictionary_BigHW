@@ -4,6 +4,7 @@ module MainGroup.application {
 
     requires org.controlsfx.controls;
     requires javafx.web;
+    requires java.sql;
 
     opens Main.application to javafx.fxml;
     exports Main.application;

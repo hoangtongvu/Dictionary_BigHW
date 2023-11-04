@@ -1,57 +1,86 @@
 package Word;
+import Main.Database;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WordBlock implements Comparable<WordBlock>
-{
+public class WordBlock implements Comparable<WordBlock> {
     private String word;
     private String spelling;
-    private List<WordDescription> wordDescriptions;
+    private List<WordDescription> descriptionsList;
+    private static WordDescription wordDescription = null;
+    private String wordID = "";
+
+    public String getWordID() {
+        return wordID;
+    }
+
+    public void setWordID(String wordID) {
+        this.wordID = wordID;
+    }
+
+    public WordBlock(String word, String spelling) {
+        this.word = word;
+        this.spelling = spelling;
+    }
 
     public String getWord() {
         return word;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
     }
 
     public String getSpelling() {
         return spelling;
     }
 
-    public void SetWordAndSpelling(String w, String s)
-    {
-        this.word = w;
-        this.spelling = s;
+    public void setSpelling(String spelling) {
+        this.spelling = spelling;
     }
 
-    public WordDescription AddWordDescription(WordDescription wd)
-    {
-        this.wordDescriptions.add(wd);
-        int lastPos = this.wordDescriptions.size();
-        return this.wordDescriptions.get(lastPos - 1);
-    }
-
-    public WordBlock()
-    {
-        this.wordDescriptions = new ArrayList<>();
-    }
-
-
-    public String GetInfo()
-    {
-        String temp = "<h1>" + word + "\n" + spelling + "</h1>";
-
-        for (WordDescription wordDescription : wordDescriptions) 
-        {
-            temp += wordDescription.GetInfo() ;
+    public void addDescription(WordDescription wordDescription) {
+        if (descriptionsList == null) {
+            descriptionsList = new ArrayList<>();
         }
+        descriptionsList.add(wordDescription);
+    }
+
+
+    public String GetInfo() {
+        String temp = "<h1>" + word + "\n" + spelling + "</h1>";
+        if (descriptionsList != null) {
+            for (WordDescription wordDescription : descriptionsList) {
+                temp += wordDescription.GetInfo() ;
+            }
+        }
+
         return temp;
     }
 
     @Override
-    public int compareTo(WordBlock o) 
-    {
+    public int compareTo(WordBlock wordBlock) {
         //throw new UnsupportedOperationException("Unimplemented method 'compareTo'");
-        return this.word.compareToIgnoreCase(o.getWord());
+        return word.compareToIgnoreCase(wordBlock.getWord());
     }
+
+    public void loadData(String wordID) throws SQLException {
+        Statement statement = Database.getConnection().createStatement();
+        String query = "SELECT * FROM description where word_id =" + wordID;
+        ResultSet resultSet = statement.executeQuery(query);
+
+
+        while (resultSet.next()) {
+            wordDescription = new WordDescription();
+            wordDescription.loadData(wordID);
+            addDescription(wordDescription);
+        }
+    }
+
 
 
 }
