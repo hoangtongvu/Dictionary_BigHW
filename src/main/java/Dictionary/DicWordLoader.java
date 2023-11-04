@@ -11,7 +11,7 @@ public class DicWordLoader
 
     private final DicManager dicManager;
 
-    private final String defaultFilePath = ProjectDirectory.resourcesPath + "/data/anhviet109K.txt";
+        private final String defaultFilePath = ProjectDirectory.resourcesPath + "/data/anhviet109K.txt";
 
 
     public DicWordLoader(DicManager dicManager)
@@ -118,7 +118,7 @@ public class DicWordLoader
                         break;
                 }
 
-                
+
             }
             else
             {
