@@ -6,27 +6,28 @@ public class WordBlock implements Comparable<WordBlock> {
     private String word;
     private String spelling;
     private List<WordDescription> descriptionsList;
+
     public String getWord() {
         return word;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
     }
 
     public String getSpelling() {
         return spelling;
     }
 
-    public void SetWordAndSpelling(String word, String spelling) {
-        this.word = word;
+    public void setSpelling(String spelling) {
         this.spelling = spelling;
     }
 
-    public WordDescription AddWordDescription(WordDescription wd) {
-        descriptionsList.add(wd);
-        int lastPos = this.descriptionsList.size();
-        return this.descriptionsList.get(lastPos - 1);
-    }
-
-    public WordBlock() {
-        descriptionsList = new ArrayList<>();
+    public void addDescription(WordDescription wordDescription) {
+        if (descriptionsList == null) {
+            descriptionsList = new ArrayList<>();
+        }
+        descriptionsList.add(wordDescription);
     }
 
 
