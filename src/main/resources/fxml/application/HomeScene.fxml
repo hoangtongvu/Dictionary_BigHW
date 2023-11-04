@@ -11,7 +11,7 @@
         <Pane prefHeight="41.0" prefWidth="854.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css">
             <children>
             <Button id="learning_button" fx:id="dictionary_button" layoutX="205.0" layoutY="5.0" mnemonicParsing="false" onAction="#onDictionaryButton" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Dictionary" />
-            <Button id="statistics_button" layoutX="136.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Games" />
+            <Button id="statistics_button" layoutX="136.0" layoutY="5.0" mnemonicParsing="false" onAction="#onGameButton" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Games" />
             <Button id="dictionary_button" layoutX="54.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Learning" />
                 <ImageView fx:id="menuButton" fitHeight="30.0" fitWidth="427.0" layoutX="14.0" layoutY="6.0" onMouseClicked="#onMenuButton" pickOnBounds="true" preserveRatio="true" styleClass="menuButton">
                     <image>
