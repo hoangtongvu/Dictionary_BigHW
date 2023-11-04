@@ -7,6 +7,11 @@ public class WordBlock implements Comparable<WordBlock> {
     private String spelling;
     private List<WordDescription> descriptionsList;
 
+    public WordBlock(String word, String spelling) {
+        this.word = word;
+        this.spelling = spelling;
+    }
+
     public String getWord() {
         return word;
     }

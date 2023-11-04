@@ -45,16 +45,14 @@ public class DicManager
         this.recentlySearchedWordManager = new RecentlySearchedWordManager();
     }
 
-    public WordBlock AddNewWord(WordBlock wordBlock)
-    {
-        return this.dictionary.AddWordBlock(wordBlock);
+    public void AddNewWord(WordBlock wordBlock) {
+        dictionary.AddWordBlock(wordBlock);
     }
 
 
     public String LookUpWord(String lookupString)
     {
-        WordBlock dummy = new WordBlock();
-        dummy.SetWordAndSpelling(lookupString, "");
+        WordBlock dummy = new WordBlock(lookupString,"");
         int lookupPos = Collections.binarySearch(this.dictionary.getWordBlocks(), dummy);
         if (lookupPos < 0) return "Can't find your word.";
 
