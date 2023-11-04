@@ -1,7 +1,6 @@
 package Word;
 import Main.Database;
 
-import javax.xml.transform.Result;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -43,14 +42,15 @@ public class WordDefinition
         return temp;
     }
 
-    public void loadData(int flag, int baseID) throws SQLException {
+    public void loadData(String definitionID) throws SQLException {
         Statement statement = Database.getConnection().createStatement();
-        String query = "SELECT * FROM example where example_id =" + String.valueOf(baseID) + ")";
+        String query = "SELECT * FROM definition where definition_id =" + definitionID;
         ResultSet resultSet = statement.executeQuery(query);
 
+        query = "SELECT * FROM example where definition_id=" + definitionID;
+        resultSet = statement.executeQuery(query);
         while (resultSet.next()) {
-            exampleList.add(new WordExample(resultSet.getString("example"),
-                                            resultSet.getString("translation")));
+            exampleList.add(new WordExample(resultSet.getString("example"), resultSet.getString("translation")));
         }
     }
 

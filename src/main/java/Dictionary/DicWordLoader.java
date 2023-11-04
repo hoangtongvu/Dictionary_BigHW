@@ -14,7 +14,7 @@ import Word.*;
 public class DicWordLoader {
     private final DicManager dicManager;
 //    private final String defaultFilePath = ProjectDirectory.resourcesPath + "/data/anhviet109K.txt";
-
+    private static WordBlock wordBlock;
 
     public DicWordLoader(DicManager dicManager) {
         this.dicManager = dicManager;
@@ -24,18 +24,15 @@ public class DicWordLoader {
 //        LoadFromDatabase(this.defaultFilePath);
 //    }
 
-    public void LoadFromDatabase(String filePath) throws SQLException {
+    public void LoadFromDatabase() throws SQLException {
         Statement statement =  Database.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM word");
 
-        WordBlock       wordBlock       = null;
-        WordDescription description     = null;
-        WordExample     example         = null;
-        WordDefinition  definition      = null;
-        WordPhrase      phrase          = null;
-
         while (resultSet.next()) {
-
+            wordBlock = new WordBlock(resultSet.getString("word"),resultSet.getString("sound"));
+            wordBlock.loadData(resultSet.getString("word_id"));
+            System.out.println(wordBlock.getWord());
+            DicManager.getInstance().addWordBlock(wordBlock);
         }
 
     }

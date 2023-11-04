@@ -1,4 +1,9 @@
 package Word;
+import Main.Database;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -8,6 +13,8 @@ public class WordDescription
     private String wordType;
     private List<WordDefinition> definitionList;
     private List<WordPhrase> phraseList;
+    private static WordDefinition wordDefinition;
+    private static WordPhrase wordPhrase;
 
     public void setWordType(String wordType) {
         this.wordType = wordType;
@@ -22,6 +29,7 @@ public class WordDescription
             definitionList =new ArrayList<>();
         }
         definitionList.add(wordDefinition);
+
     }
 
     public void addPhrase(WordPhrase wordPhrase) {
@@ -47,4 +55,26 @@ public class WordDescription
         return temp;
     }
 
+    public void loadData(String descriptionID) throws SQLException {
+        Statement statement = Database.getConnection().createStatement();
+        String query = "SELECT * FROM description where description_id=" + descriptionID + ")";
+        ResultSet resultSet = statement.executeQuery(query);
+        wordType = resultSet.getString("wordType");
+
+        query = "SELECT * FROM phrase where description_id =" + descriptionID;
+        resultSet = statement.executeQuery(query);
+        while (resultSet.next()) {
+            wordPhrase = new WordPhrase();
+            wordPhrase.loadData(resultSet.getString("phrase_id"));
+            phraseList.add(wordPhrase);
+        }
+
+        query = "SELECT * FROM definition where description_id =" + descriptionID;
+        resultSet = statement.executeQuery(query);
+        while (resultSet.next()) {
+            wordDefinition = new WordDefinition();
+            wordDefinition.loadData(resultSet.getString("definition_id"));
+            definitionList.add(wordDefinition);
+        }
+    }
 }

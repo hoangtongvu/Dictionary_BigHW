@@ -6,13 +6,17 @@ import java.sql.SQLException;
 public class WordExample
 {
     private String prefixSymbol = "➥ ";
-    private String example;
-    private String translation;
+    private String example = "";
+    private String translation = "";
 
     public WordExample(){}
     public WordExample(String example, String translation) {
-        this.example = example;
-        this.translation = translation;
+        if (example != null ) {
+            this.example = example;
+        }
+        if (translation != null) {
+            this.translation = translation;
+        }
     }
 
     public String getExample() {

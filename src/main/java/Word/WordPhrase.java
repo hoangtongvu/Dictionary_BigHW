@@ -1,5 +1,10 @@
 package Word;
 
+import Main.Database;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +16,14 @@ public class WordPhrase
     private String prefixSymbol = "➤ ";
     private String phrase;
     private List<WordDefinition> definitionList;
+    private static WordDefinition wordDefinition;
 
     public WordPhrase(String phrase) {
         this.phrase = phrase;
+    }
+
+    public WordPhrase() {
+
     }
 
     public void setPhrase(String phrase) {
@@ -44,6 +54,22 @@ public class WordPhrase
         }
 
         return temp;
+    }
+
+    public void loadData(String phraseID) throws SQLException {
+        Statement statement = Database.getConnection().createStatement();
+        String query = "SELECT * FROM definition where phrase_id =" + phraseID;
+        ResultSet resultSet = statement.executeQuery(query);
+        phrase = resultSet.getString("phrase");
+
+        query = "SELECT * FROM definition where phrase_id =" + phraseID;
+        statement.executeQuery(query);
+
+        while (resultSet.next()) {
+            wordDefinition = new WordDefinition();
+            wordDefinition.loadData(resultSet.getString("definition_id"));
+            definitionList.add(wordDefinition);
+        }
     }
 
 }

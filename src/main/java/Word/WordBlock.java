@@ -1,4 +1,9 @@
 package Word;
+import Main.Database;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,6 +11,7 @@ public class WordBlock implements Comparable<WordBlock> {
     private String word;
     private String spelling;
     private List<WordDescription> descriptionsList;
+    private static WordDescription wordDescription = null;
 
     public WordBlock(String word, String spelling) {
         this.word = word;
@@ -48,6 +54,19 @@ public class WordBlock implements Comparable<WordBlock> {
     public int compareTo(WordBlock wordBlock) {
         //throw new UnsupportedOperationException("Unimplemented method 'compareTo'");
         return word.compareToIgnoreCase(wordBlock.getWord());
+    }
+
+    public void loadData(String wordID) throws SQLException {
+        Statement statement = Database.getConnection().createStatement();
+        String query = "SELECT * FROM description where word_id =" + wordID + ")";
+        ResultSet resultSet = statement.executeQuery(query);
+
+
+        while (resultSet.next()) {
+            wordDescription = new WordDescription();
+            wordDescription.loadData(wordID);
+            descriptionsList.add(wordDescription);
+        }
     }
 
 
