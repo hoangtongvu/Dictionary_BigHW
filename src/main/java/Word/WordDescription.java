@@ -42,8 +42,10 @@ public class WordDescription
 
     public String GetInfo() {
         String temp = "<h2>" + wordType + "</h2>";
-        for (WordDefinition wordDefinition : definitionList) {
-            temp += wordDefinition.GetInfo("\t");
+        if (definitionList != null) {
+            for (WordDefinition wordDefinition : definitionList) {
+                temp += wordDefinition.GetInfo("\t");
+            }
         }
 
         if (phraseList == null) {
@@ -55,12 +57,12 @@ public class WordDescription
         return temp;
     }
 
-    public void loadData(String descriptionID) throws SQLException {
+    public void loadData(String wordID) throws SQLException {
         Statement statement = Database.getConnection().createStatement();
-        String query = "SELECT * FROM description where description_id=" + descriptionID + ")";
+        String query = "SELECT * FROM description where word_id=" + wordID;
         ResultSet resultSet = statement.executeQuery(query);
-        wordType = resultSet.getString("wordType");
-
+        wordType = resultSet.getString("word_type");
+        String descriptionID = resultSet.getString("description_id");
         query = "SELECT * FROM phrase where description_id =" + descriptionID;
         resultSet = statement.executeQuery(query);
         while (resultSet.next()) {
@@ -74,7 +76,7 @@ public class WordDescription
         while (resultSet.next()) {
             wordDefinition = new WordDefinition();
             wordDefinition.loadData(resultSet.getString("definition_id"));
-            definitionList.add(wordDefinition);
+            addDefinition(wordDefinition);
         }
     }
 }

@@ -50,7 +50,7 @@ public class WordDefinition
         query = "SELECT * FROM example where definition_id=" + definitionID;
         resultSet = statement.executeQuery(query);
         while (resultSet.next()) {
-            exampleList.add(new WordExample(resultSet.getString("example"), resultSet.getString("translation")));
+            addExample(new WordExample(resultSet.getString("example"), resultSet.getString("translation")));
         }
     }
 

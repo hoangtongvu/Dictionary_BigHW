@@ -44,9 +44,12 @@ public class WordBlock implements Comparable<WordBlock> {
 
     public String GetInfo() {
         String temp = "<h1>" + word + "\n" + spelling + "</h1>";
-        for (WordDescription wordDescription : descriptionsList) {
-            temp += wordDescription.GetInfo() ;
+        if (descriptionsList != null) {
+            for (WordDescription wordDescription : descriptionsList) {
+                temp += wordDescription.GetInfo() ;
+            }
         }
+
         return temp;
     }
 
@@ -58,14 +61,14 @@ public class WordBlock implements Comparable<WordBlock> {
 
     public void loadData(String wordID) throws SQLException {
         Statement statement = Database.getConnection().createStatement();
-        String query = "SELECT * FROM description where word_id =" + wordID + ")";
+        String query = "SELECT * FROM description where word_id =" + wordID;
         ResultSet resultSet = statement.executeQuery(query);
 
 
         while (resultSet.next()) {
             wordDescription = new WordDescription();
             wordDescription.loadData(wordID);
-            descriptionsList.add(wordDescription);
+            addDescription(wordDescription);
         }
     }
 

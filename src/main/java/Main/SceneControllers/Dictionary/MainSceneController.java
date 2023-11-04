@@ -89,6 +89,7 @@ public class MainSceneController implements Initializable {
         webEngine = webView.getEngine();
         webEngine.loadContent("<html><body>" + styleSheet + "</body></html>");
         try {
+            DicManager.getInstance().getDicWordLoader().LoadFromDatabase();
             DicManager.getInstance().getRecentlySearchedWordManager().getRecentlySearchedWordLoader().Load();
             
         } catch (Exception e) {

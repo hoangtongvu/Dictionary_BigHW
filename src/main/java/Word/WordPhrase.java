@@ -35,7 +35,7 @@ public class WordPhrase
     }
 
 
-    public void AddDefinition(WordDefinition wordDefinition) {
+    public void addDefinition(WordDefinition wordDefinition) {
         if (definitionList == null) {
             definitionList = new ArrayList<>();
         }
@@ -58,7 +58,7 @@ public class WordPhrase
 
     public void loadData(String phraseID) throws SQLException {
         Statement statement = Database.getConnection().createStatement();
-        String query = "SELECT * FROM definition where phrase_id =" + phraseID;
+        String query = "SELECT * FROM phrase where phrase_id =" + phraseID;
         ResultSet resultSet = statement.executeQuery(query);
         phrase = resultSet.getString("phrase");
 
@@ -68,7 +68,7 @@ public class WordPhrase
         while (resultSet.next()) {
             wordDefinition = new WordDefinition();
             wordDefinition.loadData(resultSet.getString("definition_id"));
-            definitionList.add(wordDefinition);
+            addDefinition(wordDefinition);
         }
     }
 

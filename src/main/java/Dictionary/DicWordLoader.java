@@ -28,11 +28,14 @@ public class DicWordLoader {
         Statement statement =  Database.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM word");
 
+        int i = 0;
         while (resultSet.next()) {
+            i++;
             wordBlock = new WordBlock(resultSet.getString("word"),resultSet.getString("sound"));
             wordBlock.loadData(resultSet.getString("word_id"));
             System.out.println(wordBlock.getWord());
             DicManager.getInstance().addWordBlock(wordBlock);
+            if (i == 100) break;
         }
 
     }
