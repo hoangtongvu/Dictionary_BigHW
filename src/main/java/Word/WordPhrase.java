@@ -16,11 +16,20 @@ public class WordPhrase
         this.phrase = phrase;
     }
 
-    public WordDefinition AddDefinition(WordDefinition definition) {
-        if (definitionList == null) definitionList = new ArrayList<>();
-        definitionList.add(definition);
-        int lastPos = definitionList.size();
-        return definitionList.get(lastPos - 1);
+    public void setPhrase(String phrase) {
+        this.phrase = phrase;
+    }
+
+    public String getPhrase() {
+        return phrase;
+    }
+
+
+    public void AddDefinition(WordDefinition wordDefinition) {
+        if (definitionList == null) {
+            definitionList = new ArrayList<>();
+        }
+        definitionList.add(wordDefinition);
     }
 
     public String GetInfo(String prefixSpace) {
