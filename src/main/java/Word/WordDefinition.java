@@ -46,6 +46,7 @@ public class WordDefinition
         Statement statement = Database.getConnection().createStatement();
         String query = "SELECT * FROM definition where definition_id =" + definitionID;
         ResultSet resultSet = statement.executeQuery(query);
+        definition =  resultSet.getString("definition");
 
         query = "SELECT * FROM example where definition_id=" + definitionID;
         resultSet = statement.executeQuery(query);

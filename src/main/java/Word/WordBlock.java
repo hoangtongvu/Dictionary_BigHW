@@ -12,6 +12,15 @@ public class WordBlock implements Comparable<WordBlock> {
     private String spelling;
     private List<WordDescription> descriptionsList;
     private static WordDescription wordDescription = null;
+    private String wordID = "";
+
+    public String getWordID() {
+        return wordID;
+    }
+
+    public void setWordID(String wordID) {
+        this.wordID = wordID;
+    }
 
     public WordBlock(String word, String spelling) {
         this.word = word;

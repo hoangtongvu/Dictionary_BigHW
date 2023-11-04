@@ -63,12 +63,14 @@ public class WordDescription
         ResultSet resultSet = statement.executeQuery(query);
         wordType = resultSet.getString("word_type");
         String descriptionID = resultSet.getString("description_id");
+
+
         query = "SELECT * FROM phrase where description_id =" + descriptionID;
         resultSet = statement.executeQuery(query);
         while (resultSet.next()) {
             wordPhrase = new WordPhrase();
             wordPhrase.loadData(resultSet.getString("phrase_id"));
-            phraseList.add(wordPhrase);
+            addPhrase(wordPhrase);
         }
 
         query = "SELECT * FROM definition where description_id =" + descriptionID;

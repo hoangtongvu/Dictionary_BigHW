@@ -2,6 +2,7 @@ package Dictionary;
 
 import Word.WordBlock;
 
+import java.sql.SQLException;
 import java.util.Collections;
 
 
@@ -50,10 +51,9 @@ public class DicManager
     }
 
 
-    public String LookUpWord(String lookupString)
-    {
+    public String LookUpWord(String lookupString) throws SQLException {
         WordBlock dummy = new WordBlock(lookupString,"");
-        int lookupPos = Collections.binarySearch(this.dictionary.getWordBlocks(), dummy);
+        int lookupPos = Collections.binarySearch(dictionary.getWordBlocks(), dummy);
         if (lookupPos < 0) return "Can't find your word.";
 
         RecentlySearchedWordSaver recentlySearchedWordSaver = this.recentlySearchedWordManager.getRecentlySearchedWordSaver();

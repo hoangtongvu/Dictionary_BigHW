@@ -18,6 +18,7 @@ import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.*;
 
 
@@ -68,7 +69,7 @@ public class MainSceneController implements Initializable {
     }
 
     @FXML
-    public void LookupWord() {
+    public void LookupWord() throws SQLException {
         //System.out.println("null");
         String lookUpRes = DicManager.getInstance().LookUpWord(searchBar.getText());//Cant find cause dic load default on button click
         setupWebView(lookUpRes);
@@ -109,7 +110,7 @@ public class MainSceneController implements Initializable {
         auto.setDelay(50);
         
         //sync width with textField
-        auto.prefWidthProperty().bind(this.searchBar.widthProperty());
+        auto.prefWidthProperty().bind(searchBar.widthProperty());
 
 //        TextFields.bindAutoCompletion(this.tfTitle, input ->
 //            {
