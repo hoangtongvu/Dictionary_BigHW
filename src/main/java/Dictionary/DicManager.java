@@ -45,7 +45,7 @@ public class DicManager
         this.recentlySearchedWordManager = new RecentlySearchedWordManager();
     }
 
-    public void AddNewWord(WordBlock wordBlock) {
+    public void addWordBlock(WordBlock wordBlock) {
         dictionary.AddWordBlock(wordBlock);
     }
 

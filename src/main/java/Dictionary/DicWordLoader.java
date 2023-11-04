@@ -4,6 +4,7 @@ import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Dictionary;
 import java.util.Scanner;
 
 import Main.Database;
@@ -27,11 +28,11 @@ public class DicWordLoader {
         Statement statement =  Database.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM word");
 
-        WordBlock       blockPtr    = null;
-        WordDescription descPtr     = null;
-        WordExample     examplePtr  = null;
-        WordDefinition  defPtr      = null;
-        WordPhrase      phrasePtr   = null;
+        WordBlock       wordBlock       = null;
+        WordDescription description     = null;
+        WordExample     example         = null;
+        WordDefinition  definition      = null;
+        WordPhrase      phrase          = null;
 
         while (resultSet.next()) {
 

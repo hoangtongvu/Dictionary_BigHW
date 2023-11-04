@@ -1,7 +1,9 @@
 package Word;
 
 
-public class WordExample 
+import java.sql.SQLException;
+
+public class WordExample
 {
     private String prefixSymbol = "➥ ";
     private String example;
@@ -36,4 +38,5 @@ public class WordExample
         temp += "<h4>" + prefixSpace + prefixSymbol + translation + "<h4>";
         return temp;
     }
+
 }

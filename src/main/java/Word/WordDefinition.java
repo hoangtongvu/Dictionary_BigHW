@@ -1,4 +1,10 @@
 package Word;
+import Main.Database;
+
+import javax.xml.transform.Result;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +41,17 @@ public class WordDefinition
             temp += wordExample.GetInfo(prefixSpace + "\t") + "\n";
         }
         return temp;
+    }
+
+    public void loadData(int flag, int baseID) throws SQLException {
+        Statement statement = Database.getConnection().createStatement();
+        String query = "SELECT * FROM example where example_id =" + String.valueOf(baseID) + ")";
+        ResultSet resultSet = statement.executeQuery(query);
+
+        while (resultSet.next()) {
+            exampleList.add(new WordExample(resultSet.getString("example"),
+                                            resultSet.getString("translation")));
+        }
     }
 
 }
