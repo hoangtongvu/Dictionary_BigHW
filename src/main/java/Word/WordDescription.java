@@ -58,13 +58,11 @@ public class WordDescription
         return "<div class = \"descripition\"> " + wordTypeFormat + body + " </div>";
     }
 
-    public void loadData(String wordID) throws SQLException {
+    public void loadData(String descriptionID) throws SQLException {
         Statement statement = Database.getConnection().createStatement();
-        String query = "SELECT * FROM description where word_id=" + wordID;
+        String query = "SELECT * FROM description where description_id=" + descriptionID;
         ResultSet resultSet = statement.executeQuery(query);
         wordType = resultSet.getString("word_type");
-        String descriptionID = resultSet.getString("description_id");
-
 
         query = "SELECT * FROM phrase where description_id =" + descriptionID;
         resultSet = statement.executeQuery(query);

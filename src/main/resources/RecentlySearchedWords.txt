@@ -36,5 +36,5 @@ repel
 dog
 acquit
 apple
-bow
 kick
+bow

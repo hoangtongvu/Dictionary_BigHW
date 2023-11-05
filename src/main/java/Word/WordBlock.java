@@ -78,7 +78,7 @@ public class WordBlock implements Comparable<WordBlock> {
 
         while (resultSet.next()) {
             wordDescription = new WordDescription();
-            wordDescription.loadData(wordID);
+            wordDescription.loadData(resultSet.getString("description_id"));
             addDescription(wordDescription);
         }
     }
