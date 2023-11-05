@@ -41,25 +41,25 @@ public class WordDescription
 
 
     public String GetInfo() {
-        String temp = "<div class = \"descripition\"> " + "</div>";
-        if (definitionList != null) {
-            for (WordDefinition wordDefinition : definitionList) {
-                temp += wordDefinition.GetInfo("\t");
-            }
-        }
-
-        if (phraseList == null) {
-            return temp;
-        }
-        for (WordPhrase wordPhrase : phraseList) {
-            temp += wordPhrase.GetInfo("\t") ;
-        }
-        return temp;
+        compileFormat();
     }
 
     public String compileFormat() {
         String wordTypeFormat = "<div class = \"wordType\"> <h2> " + wordType + "</h2> </div>";
-        String descriptionBlock = "<div class = \"descripition\"> %s </div>";
+        String body = "";
+        if (definitionList != null) {
+            for (WordDefinition wordDefinition : definitionList) {
+                body += wordDefinition.GetInfo("\t");
+            }
+        }
+
+        if (phraseList != null) {
+            for (WordPhrase wordPhrase : phraseList) {
+                body += wordPhrase.GetInfo("\t") ;
+            }
+        }
+
+        return "<div class = \"descripition\"> " + wordTypeFormat + body + " </div>";
 
     }
 
