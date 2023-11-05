@@ -43,17 +43,14 @@ public class WordPhrase
     }
 
     public String GetInfo(String prefixSpace) {
-        String temp = "<h2>" + prefixSpace + this.prefixSymbol + this.phrase + "\n" + "</h2>";
-
-        if (definitionList == null) {
-            return temp;
+        String definitionFormat = "";
+        if (definitionList != null) {
+            for (WordDefinition definition : definitionList) {
+                definitionFormat += definition.GetInfo(prefixSpace + "\t") + "\n";
+            }
         }
-
-        for (WordDefinition wordDefinition : definitionList) {
-            temp += wordDefinition.GetInfo(prefixSpace + "\t");
-        }
-
-        return temp;
+        String phraseFormat = "<div class = \"phrase\">" + "<h3>" + prefixSpace + prefixSymbol + phrase + "</h3>" + definitionFormat + "</div>";
+        return phraseFormat;
     }
 
     public void loadData(String phraseID) throws SQLException {

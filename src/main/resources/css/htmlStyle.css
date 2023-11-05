@@ -1,28 +1,64 @@
-h1 {
-    color: #CE5E82;
-    font-family: Arial, serif;
-}
-
-h2 {
-    text-indent: 0px;
-    color: #c2f8ff;
-}
-
-h3 {
-    text-indent: 50px;
-    color: #f6dcac;
-}
-
-h4 {
-    text-indent: 90px;
-    color: white;
-}
-
-body {
-    background-color: #2f2f2f;
-}
-
 * {
-    color: white;
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+
+.wordBox {
+    padding-top: 10px;
+    border: 2px solid transparent;
+    background-color: rgb(0, 0, 50); /* Darker blue */
+    color: rgb(100, 100, 200); /* Lighter blue */
+    margin-bottom: 20px;
+    box-shadow: 5px 5px 0px rgb(255, 0, 100); /* Dark pink */
+    width: 800px;
+    height: auto;
+    margin-left: 50px;
+    padding-left: 20px;
+}
+
+.wordBox h1 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.wordBox h2 {
+    margin-top: 0px;
+}
+
+.descripition {
+    border: 0px solid transparent;
+    background-color: rgb(0, 0, 50); /* Darker blue */
+    color: rgb(100, 100, 200); /* Lighter blue */
+    margin-bottom: 20px;
+    margin-left: 50px;
+    box-shadow: 5px 5px 0px rgb(255, 0, 100); /* Dark pink */
+    width: 800px;
+    height: auto;
+    padding-bottom: 40px;
+}
+
+.descripition h3 {
+    margin-left: 20px;
+    margin-bottom: 0px;
+}
+
+.exampleText {
+    padding-left: 40px;
+}
+
+.translation {
+    color: #CE5E82;
+}
+
+
+.wordType {
+    height: 50px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgb(25, 0, 50); /* Very dark indigo */
+    color: rgb(255,20,147); /* Deep pink */
+}
+
+.wordType h2 {
+    padding-top: 10px;
+    margin-left: 20px;
 }

@@ -36,11 +36,10 @@ public class WordExample
     }
 
 
-    public String GetInfo(String prefixSpace)
-    {
-        String temp = "<h3>" + prefixSpace + example + "\n" + "</h3>";
-        temp += "<h4>" + prefixSpace + prefixSymbol + translation + "<h4>";
-        return temp;
+    public String GetInfo(String prefixSpace)   {
+        String exampleText= "<span class = \"exampleText\"> " + prefixSpace + prefixSymbol + example + ": </span>";
+        exampleText += "<span class=\"translation\">" + translation  + "</span> <br>";
+        return exampleText;
     }
 
 }

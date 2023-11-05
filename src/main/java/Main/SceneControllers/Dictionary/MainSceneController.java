@@ -66,6 +66,7 @@ public class MainSceneController implements Initializable {
     public void setupWebView(String content) {
         String encoding = "<meta charset=\"UTF-8\">";
         webEngine.loadContent("<html><body>" + styleSheet + encoding + content + "</body></html>");
+        System.out.println("<html><body>" + styleSheet + encoding + content + "</body></html>");
     }
 
     @FXML

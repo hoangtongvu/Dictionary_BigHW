@@ -26,7 +26,6 @@ appal
 face
 fascist
 nazi
-bow
 dictionary
 d
 e
@@ -35,4 +34,7 @@ boar
 snake
 repel
 dog
+acquit
 apple
+bow
+kick

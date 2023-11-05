@@ -30,16 +30,15 @@ public class WordDefinition
 
 
     public String GetInfo(String prefixSpace) {
-        String temp = "<h3>" + prefixSpace + prefixSymbol + definition + "\n" + "</h3>";
-            
-        if (exampleList == null) {
-            return temp;
+        String exampleFormat = "<div class = \"example\">";
+        if (exampleList != null) {
+            for (WordExample wordExample : exampleList) {
+                exampleFormat += wordExample.GetInfo(prefixSpace + "\t") + "\n";
+            }
         }
-
-        for (WordExample wordExample : exampleList) {
-            temp += wordExample.GetInfo(prefixSpace + "\t") + "\n";
-        }
-        return temp;
+        exampleFormat += "</div>";
+        String definitionFormat = "<div class = \"definition\">" + "<h3>" + prefixSpace + prefixSymbol + definition + "</h3>" + exampleFormat + "</div>";
+        return definitionFormat;
     }
 
     public void loadData(String definitionID) throws SQLException {

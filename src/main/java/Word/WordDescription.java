@@ -41,10 +41,6 @@ public class WordDescription
 
 
     public String GetInfo() {
-        compileFormat();
-    }
-
-    public String compileFormat() {
         String wordTypeFormat = "<div class = \"wordType\"> <h2> " + wordType + "</h2> </div>";
         String body = "";
         if (definitionList != null) {
@@ -60,7 +56,6 @@ public class WordDescription
         }
 
         return "<div class = \"descripition\"> " + wordTypeFormat + body + " </div>";
-
     }
 
     public void loadData(String wordID) throws SQLException {
