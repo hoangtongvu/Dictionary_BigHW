@@ -1,0 +1,78 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+.wordBox {
+    padding-top: 10;
+    border: 2px solid transparent;
+    background-color: rgb(0, 0, 50); /* Darker blue */
+    color: rgb(100, 100, 200); /* Lighter blue */
+    margin-bottom: 20px;
+    box-shadow: 5px 5px 0px rgb(255, 0, 100); /* Dark pink */
+    width: 800px;
+    height: auto;
+    margin-left: 50px;
+}
+
+.wordBox h1 {
+    margin-bottom: 0px;
+    margin-left: 20px;
+}
+
+.wordBox h2 {
+    margin-top: 0px;
+    margin-left: 20px;
+}
+
+.definition {
+    border: 0px solid transparent;
+    background-color: rgb(0, 0, 50); /* Darker blue */
+    color: rgb(100, 100, 200); /* Lighter blue */
+    margin-bottom: 20px;
+    margin-left: 50px;
+    box-shadow: 5px 5px 0px rgb(255, 0, 100); /* Dark pink */
+    width: 800px;
+    height: auto;
+    padding-bottom: 10px;
+}
+
+.wordType {
+    height: 50px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgb(25, 0, 50); /* Very dark indigo */
+    color: rgb(255,20,147); /* Deep pink */
+}
+
+.wordType h2 {
+    padding-top: 10px;
+    margin-left: 20px;
+}
+
+.definition h3 {
+    margin-left: 20px;
+    margin-bottom: 0px;
+}
+
+.definition p {
+    margin-left: 40px;
+}
+
+.definition .translation {
+    color: aliceblue;
+}
+
+.phrase {
+    color: rgb(255,69,0); /* Orange red */
+}
+
+.phrase .translation {
+    color: rgb(249, 255, 145);
+}
+
+.example {
+    color: rgb(100,149,237); /* Cornflower blue */
+}
+
+.body {
+    background-color: black; 
+}
