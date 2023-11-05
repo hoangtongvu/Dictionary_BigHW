@@ -5,35 +5,39 @@
 .wordBox {
     padding-top: 10px;
     border: 2px solid transparent;
-    background-color: rgb(0, 0, 50); /* Darker blue */
-    color: rgb(100, 100, 200); /* Lighter blue */
+    background-color: #200D3A; /* Darker blue */
+    color: #CE5E82; /* Neon purple */
     margin-bottom: 20px;
-    box-shadow: 5px 5px 0px rgb(255, 0, 100); /* Dark pink */
+    box-shadow: 5px 5px 0px #CE5E82; /* Neon pink */
     width: 800px;
     height: auto;
-    margin-left: 50px;
-    padding-left: 20px;
+    margin-left: 10px;
 }
 
 .wordBox h1 {
     margin-top: 0px;
     margin-bottom: 0px;
+    margin-left: 20px;
+    color: #CE5E82;
 }
 
 .wordBox h2 {
     margin-top: 0px;
+    margin-left: 20px;
+    color: #f6dcac;
 }
 
 .descripition {
     border: 0px solid transparent;
-    background-color: rgb(0, 0, 50); /* Darker blue */
-    color: rgb(100, 100, 200); /* Lighter blue */
+    background-color: #200D3A; /* Darker blue */
+    color: #CE5E82; /* Neon purple */
     margin-bottom: 20px;
-    margin-left: 50px;
-    box-shadow: 5px 5px 0px rgb(255, 0, 100); /* Dark pink */
+    margin-left: 10px;
+    box-shadow: 5px 5px 0px #CE5E82; /* Neon pink */
     width: 800px;
     height: auto;
     padding-bottom: 40px;
+
 }
 
 .descripition h3 {
@@ -46,19 +50,33 @@
 }
 
 .translation {
-    color: #CE5E82;
+    color: #CE5E82; /* Neon pink */
 }
-
 
 .wordType {
     height: 50px;
     width: 100%;
     box-sizing: border-box;
-    background-color: rgb(25, 0, 50); /* Very dark indigo */
-    color: rgb(255,20,147); /* Deep pink */
+    background-color: #200D3A; /* Very dark indigo */
+    color: #ffffff; /* Neon purple */
 }
 
 .wordType h2 {
     padding-top: 10px;
     margin-left: 20px;
+}
+.definition h3 {
+    color: turquoise;
+}
+.phrase h3{
+    color: aliceblue;
+}
+
+.phrase .definition h3 {
+    color: turquoise;
+    margin-left: 50px;
+}
+
+.phrase .example {
+    margin-left: 30px;
 }
