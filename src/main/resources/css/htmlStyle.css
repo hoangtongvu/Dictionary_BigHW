@@ -2,6 +2,9 @@
     font-family: 'Roboto', sans-serif;
 }
 
+body {
+    background-color: #2f2f2f;
+}
 .wordBox {
     padding-top: 10px;
     border: 2px solid transparent;
