@@ -52,16 +52,21 @@ public class WordBlock implements Comparable<WordBlock> {
 
 
     public String GetInfo() {
-        String temp = "<h1>" + word + "\n" + spelling + "</h1>";
+        String wordBlock = compileFormat();
         if (descriptionsList != null) {
             for (WordDescription wordDescription : descriptionsList) {
-                temp += wordDescription.GetInfo() ;
+                wordBlock += wordDescription.GetInfo() ;
             }
         }
-
-        return temp;
+        return wordBlock;
     }
 
+    public String compileFormat() {
+        return "<div class = \"wordBox\"> " +
+                        "<h1>" + word + "</h1> <br>" +
+                        "<h1>" + spelling + "</h1> " +
+                        "</div>";
+    }
     @Override
     public int compareTo(WordBlock wordBlock) {
         //throw new UnsupportedOperationException("Unimplemented method 'compareTo'");

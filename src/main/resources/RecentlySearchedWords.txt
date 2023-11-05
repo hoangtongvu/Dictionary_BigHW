@@ -31,8 +31,8 @@ dictionary
 d
 e
 a
-dog
 boar
 snake
-apple
 repel
+dog
+apple

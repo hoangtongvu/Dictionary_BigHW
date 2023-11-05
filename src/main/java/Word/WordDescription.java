@@ -41,7 +41,7 @@ public class WordDescription
 
 
     public String GetInfo() {
-        String temp = "<h2>" + wordType + "</h2>";
+        String temp = "<div class = \"descripition\"> " + "</div>";
         if (definitionList != null) {
             for (WordDefinition wordDefinition : definitionList) {
                 temp += wordDefinition.GetInfo("\t");
@@ -55,6 +55,12 @@ public class WordDescription
             temp += wordPhrase.GetInfo("\t") ;
         }
         return temp;
+    }
+
+    public String compileFormat() {
+        String wordTypeFormat = "<div class = \"wordType\"> <h2> " + wordType + "</h2> </div>";
+        String descriptionBlock = "<div class = \"descripition\"> %s </div>";
+
     }
 
     public void loadData(String wordID) throws SQLException {
