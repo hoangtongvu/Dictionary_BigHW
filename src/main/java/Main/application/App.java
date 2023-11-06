@@ -27,9 +27,9 @@ public class App extends Application
         Scene scene = new Scene(root);
 
         //InputManager inputManager = new InputManager(scene);
-        primaryStage.setMinWidth(854);
-        primaryStage.setMinHeight(494);
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setMinWidth(1200);
+        primaryStage.setMinHeight(600);
+        primaryStage.setTitle("MyBigDic");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

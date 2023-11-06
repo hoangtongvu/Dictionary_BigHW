@@ -65,6 +65,27 @@
     -fx-text-fill: white;
 }
 
+#webView .scroll-bar {
+    visibility: false;
+}
 
+.dictionarySplitView {
+    -fx-background-color: transparent;
+}
 
+.dictionarySplitView:horizontal > .split-pane-divider {
+    -fx-background-color: #333841;
+    -fx-padding: 0 0 0.9 0.9;
+}
+
+.dictionaryRightNav {
+    -fx-background-color: #282c34;
+    -fx-border-color: transparent;
+}
+
+.right-nav-box {
+    -fx-effect: dropshadow(three-pass-box, #ce5e82 ,0,1,5,5);
+    -fx-background-color: #200D3A;
+    /*-fx-effect: dropshadow(type,color,radius,spread,offsetx,offsety);*/
+}
 
