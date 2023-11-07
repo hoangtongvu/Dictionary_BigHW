@@ -1,5 +1,7 @@
 package Timer;
 
+import Event.CustomEvent;
+
 import java.util.*;
 
 public class CustomTimer
@@ -61,15 +63,6 @@ public class CustomTimer
     public void ResetCounter()
     {
         this.counter = 0;
-    }
-
-
-    public static void main(String[] args)
-    {
-        CustomTimer customTimer = new CustomTimer(10);
-        TestClass testClass = new TestClass(customTimer);
-
-        customTimer.Start();
     }
 
 
