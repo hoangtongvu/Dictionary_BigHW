@@ -7,10 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-
-public class App extends Application
-{
-
+public class App extends Application {
     private static Stage primaryStage;
 
     public static void main(String[] args) {
@@ -27,7 +24,7 @@ public class App extends Application
         Scene scene = new Scene(root);
 
         //InputManager inputManager = new InputManager(scene);
-        primaryStage.setMinWidth(1200);
+        primaryStage.setMinWidth(800);
         primaryStage.setMinHeight(600);
         primaryStage.setTitle("MyBigDic");
         primaryStage.setScene(scene);
