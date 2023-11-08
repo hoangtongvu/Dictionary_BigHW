@@ -65,6 +65,19 @@
     -fx-text-fill: white;
 }
 
+#webView .scroll-bar {
+    visibility: false;
+}
 
+.dictionaryRightNav {
+    -fx-background-color: #2f2f2f;
+    -fx-border-color: transparent;
+}
 
+.right-nav-box {
+    -fx-effect: dropshadow(three-pass-box, #ce5e82 ,0,1,5,5);
+    -fx-background-radius: 10px;
+    -fx-background-color: #200D3A;
+    /*-fx-effect: dropshadow(type,color,radius,spread,offsetx,offsety);*/
+}
 

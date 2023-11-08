@@ -1,5 +1,5 @@
 * {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Arial', sans-serif;
 }
 
 body {
@@ -7,14 +7,17 @@ body {
 }
 .wordBox {
     padding-top: 10px;
-    border: 2px solid transparent;
+    border: 0px solid transparent;
     background-color: #200D3A; /* Darker blue */
     color: #CE5E82; /* Neon purple */
+    margin-top: 20px;
     margin-bottom: 20px;
     box-shadow: 5px 5px 0px #CE5E82; /* Neon pink */
-    width: 800px;
+    width: 95%;
     height: auto;
     margin-left: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
 }
 
 .wordBox h1 {
@@ -30,38 +33,51 @@ body {
     color: #f6dcac;
 }
 
-.descripition {
+.description {
+    border-radius: 10px;
     border: 0px solid transparent;
     background-color: #200D3A; /* Darker blue */
     color: #CE5E82; /* Neon purple */
     margin-bottom: 20px;
     margin-left: 10px;
     box-shadow: 5px 5px 0px #CE5E82; /* Neon pink */
-    width: 800px;
+    width: 95%;
     height: auto;
     padding-bottom: 40px;
 
 }
 
-.descripition h3 {
+.description h3 {
     margin-left: 20px;
     margin-bottom: 0px;
 }
 
-.exampleText {
+/*.exampleText {*/
+/*    padding-left: 40px;*/
+/*}*/
+
+.definition .example {
+    margin-top: 5px;
     padding-left: 40px;
+}
+
+.exampleText {
+    color: #f6dcac;
 }
 
 .translation {
     color: #CE5E82; /* Neon pink */
+    margin-left: 20px;
 }
 
 .wordType {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
     height: 50px;
     width: 100%;
     box-sizing: border-box;
-    background-color: #200D3A; /* Very dark indigo */
-    color: #ffffff; /* Neon purple */
+    background-color: #2b0e4d; /* Very dark indigo */
+    color: #CE5E82; /* Neon purple */
 }
 
 .wordType h2 {
@@ -69,16 +85,20 @@ body {
     margin-left: 20px;
 }
 .definition h3 {
-    color: turquoise;
+    color: #006f73;
 }
 .phrase h3{
     color: aliceblue;
+    margin-bottom: 0px;
+    color: darksalmon;
 }
 
 .phrase .definition h3 {
-    color: turquoise;
+    color: #006f73;
     margin-left: 50px;
+    margin-top: 5px;
 }
+
 
 .phrase .example {
     margin-left: 30px;
