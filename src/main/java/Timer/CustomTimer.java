@@ -13,11 +13,25 @@ public class CustomTimer
     private final Timer timer;
 
     private int counter = 0;
-    private final int maxTimeSecond;
+    private int maxTimeSecond;
 
     public int getCounter()
     {
         return this.counter;
+    }
+
+    public void setMaxTimeSecond(int maxTimeSecond)
+    {
+        this.maxTimeSecond = maxTimeSecond;
+    }
+
+    public CustomTimer()
+    {
+        this.maxTimeSecond = 0;
+        this.timer = new Timer();
+
+        this.onTickEvent = new CustomEvent();
+        this.onStopEvent = new CustomEvent();
     }
 
     public CustomTimer(int maxTimeSecond)
