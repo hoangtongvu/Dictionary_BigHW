@@ -69,7 +69,6 @@ public class CustomTimer
 
     private void Tick()
     {
-        System.out.println(this.counter);
         counter++;
         this.onTickEvent.Invoke();
     }
