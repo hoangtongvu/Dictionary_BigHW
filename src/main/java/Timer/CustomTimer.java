@@ -47,17 +47,8 @@ public class CustomTimer
 
     public void Start()
     {
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run()
-            {
-                Tick();
-                if (counter >= maxTimeSecond) Stop();
-            }
-        };
-
-        int delayTime = 1000;
-        this.timer.scheduleAtFixedRate(timerTask, 0, delayTime);
+        this.ResetCounter();
+        this.AddTimerTask();
     }
 
     public void Stop()
@@ -78,5 +69,19 @@ public class CustomTimer
         this.counter = 0;
     }
 
+    private void AddTimerTask()
+    {
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run()
+            {
+                Tick();
+                if (counter >= maxTimeSecond) Stop();
+            }
+        };
+
+        int delayTime = 1000;
+        this.timer.scheduleAtFixedRate(timerTask, 0, delayTime);
+    }
 
 }
