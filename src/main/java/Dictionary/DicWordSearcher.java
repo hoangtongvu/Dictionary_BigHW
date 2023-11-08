@@ -32,8 +32,7 @@ public class DicWordSearcher
     }
 
 
-    private List<String> SearchInDictionary(String searchString)
-    {
+    private List<String> SearchInDictionary(String searchString) {
         //get wordBlocks from Dictionary.
         List<WordBlock> wordBlocks = this.dicManager.getDictionary().getWordBlocks();
         if (wordBlocks.isEmpty()) return Collections.emptyList();
@@ -42,8 +41,7 @@ public class DicWordSearcher
         List<String> suggestedWords = new ArrayList<>();
 
         //create dummy WordBlock for binarySearch.
-        WordBlock dummy = new WordBlock();
-        dummy.SetWordAndSpelling(searchString, "");
+        WordBlock dummy = new WordBlock(searchString, "");
 
         //store search position.
         int searchPos = Collections.binarySearch(wordBlocks, dummy);

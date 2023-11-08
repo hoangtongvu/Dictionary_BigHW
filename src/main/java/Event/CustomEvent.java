@@ -1,4 +1,4 @@
-package Timer;
+package Event;
 
 import java.util.ArrayList;
 import java.util.List;

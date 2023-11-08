@@ -4,9 +4,11 @@ module MainGroup.application {
 
     requires org.controlsfx.controls;
     requires javafx.web;
+    requires java.sql;
 
     opens Main.application to javafx.fxml;
     exports Main.application;
+
     exports Main.SceneControllers.Dictionary;
     opens Main.SceneControllers.Dictionary to javafx.fxml;
     exports Main.SceneControllers;
