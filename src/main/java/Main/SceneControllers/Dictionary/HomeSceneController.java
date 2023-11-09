@@ -38,7 +38,7 @@ public class HomeSceneController {
     /**Switching scene*/
     @FXML
     public void onDictionaryButton(ActionEvent event) throws IOException {
-//        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/application/MainScene.fxml")));
+//        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/application/DictionaryScene.fxml")));
 //        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 //        stage.getScene().setRoot(root);
 //        stage.show();
