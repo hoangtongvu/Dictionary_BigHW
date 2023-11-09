@@ -7,8 +7,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.ArrayList;
 
-public class WordDescription 
-{
+public class WordDescription extends DictionaryComponent{
     private String prefixSymbol = "\uD83D\uDF93 ";
     private String wordType;
     private List<WordDefinition> definitionList;

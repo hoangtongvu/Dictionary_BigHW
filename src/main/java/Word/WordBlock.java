@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WordBlock implements Comparable<WordBlock> {
+public class WordBlock extends DictionaryComponent implements Comparable<WordBlock> {
     private String word;
     private String spelling;
     private List<WordDescription> descriptionsList;
