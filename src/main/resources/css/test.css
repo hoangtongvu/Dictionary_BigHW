@@ -16,6 +16,11 @@
     -fx-background-color: white;
 }
 
+/*noinspection CssInvalidPseudoSelector*/
+.node-pane:clicked {
+    -fx-background-color: green;
+}
+
 .node-title {
     -fx-alignment: center;
 }

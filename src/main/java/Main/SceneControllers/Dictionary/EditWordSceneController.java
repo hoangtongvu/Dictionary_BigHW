@@ -1,6 +1,6 @@
 package Main.SceneControllers.Dictionary;
 
-import AddWordGraph.DescriptionWordSceneNode;
+import AddWordGraph.DescriptionNode;
 import AddWordGraph.WordSceneNode;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
@@ -25,7 +25,7 @@ public class EditWordSceneController {
 
     @FXML
     public void addDescription() {
-        WordSceneNode tmp = new DescriptionWordSceneNode();
+        WordSceneNode tmp = new DescriptionNode();
         wordSceneNodeList.add(tmp);
         AnchorPane canvasPane = (AnchorPane) canvas.getContent();
         canvasPane.getChildren().add(tmp.getNodePane());
@@ -33,6 +33,9 @@ public class EditWordSceneController {
 
     @FXML
     public void canvasMousePressed (MouseEvent event) {
+        if (event.getClickCount() >= 2) {
+            WordSceneNode.deselectAll();
+        }
         if (event.getButton() == MouseButton.PRIMARY) {
             mouseStartX = event.getX();
             mouseStartY = event.getY();
@@ -41,6 +44,7 @@ public class EditWordSceneController {
             selectionRectangle.setVisible(true);
             selectionRectangle.toFront();
         }
+
     }
     @FXML
     public void canvasDrag(MouseEvent event) {
@@ -62,6 +66,9 @@ public class EditWordSceneController {
             selectionRectangle.setWidth(width);
             selectionRectangle.setHeight(height);
 
+            for (WordSceneNode node : wordSceneNodeList) {
+                node.compareWithMouse(selectionRectangle);
+            }
         } else if (event.getButton() == MouseButton.SECONDARY) {
             canvas.setPannable(true);
         }

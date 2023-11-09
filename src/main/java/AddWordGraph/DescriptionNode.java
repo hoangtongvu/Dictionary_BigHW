@@ -1,9 +1,7 @@
 package AddWordGraph;
 
-import javafx.scene.layout.VBox;
-
-public class DescriptionWordSceneNode extends WordSceneNode {
-    public DescriptionWordSceneNode() {
+public class DescriptionNode extends WordSceneNode {
+    public DescriptionNode() {
         super("Description");
     }
 
