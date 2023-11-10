@@ -10,7 +10,7 @@ public class CustomTimer
     public final CustomEvent onTickEvent;
     public final CustomEvent onStopEvent;
 
-    private final Timer timer;
+    private Timer timer;
     private boolean isRunning = false;
 
     private int counter = 0;
@@ -30,7 +30,6 @@ public class CustomTimer
     public CustomTimer()
     {
         this.maxTimeSecond = 0;
-        this.timer = new Timer();
 
         this.onTickEvent = new CustomEvent();
         this.onStopEvent = new CustomEvent();
@@ -39,7 +38,6 @@ public class CustomTimer
     public CustomTimer(int maxTimeSecond)
     {
         this.maxTimeSecond = maxTimeSecond;
-        this.timer = new Timer();
 
         this.onTickEvent = new CustomEvent();
         this.onStopEvent = new CustomEvent();
@@ -50,6 +48,7 @@ public class CustomTimer
     public void Start()
     {
         if (this.isRunning) return;
+        this.AssignNewTimer();
         this.isRunning = true;
         this.ResetCounter();
         this.AddTimerTask();
@@ -71,6 +70,10 @@ public class CustomTimer
         this.onTickEvent.Invoke();
     }
 
+    private void AssignNewTimer()
+    {
+        this.timer = new Timer();
+    }
     public void ResetCounter()
     {
         this.counter = 0;
@@ -90,6 +93,7 @@ public class CustomTimer
         int delayTime = 1000;
         this.timer.scheduleAtFixedRate(timerTask, 0, delayTime);
     }
+
 
 
 
