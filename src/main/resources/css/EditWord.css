@@ -13,14 +13,25 @@
 }
 
 .node-pane {
-    -fx-background-color: white;
+    -fx-min-width: 200;
+    -fx-background-color: #ffffff;
+    -fx-border-style: solid;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
 }
 
 /*noinspection CssInvalidPseudoSelector*/
 .node-pane:clicked {
-    -fx-background-color: green;
+    -fx-background-color: #426A70FF;
+    -fx-border-color: #006d79;
 }
 
 .node-title {
+
+    -fx-background-color: #ffee92;
+    -fx-text-fill: #000000;
     -fx-alignment: center;
 }
+
+
+

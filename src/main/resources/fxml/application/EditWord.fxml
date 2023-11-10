@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" stylesheets="@../../css/test.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Dictionary.EditWordSceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" stylesheets="@../../css/EditWord.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Dictionary.EditWordSceneController">
    <children>
       <Pane layoutX="10.0" layoutY="10.0" prefHeight="41.0" prefWidth="854.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -24,7 +24,7 @@
             </ImageView>
          </children>
       </Pane>
-      <AnchorPane layoutY="41.0" prefHeight="517.0" prefWidth="800.0" styleClass="anchor-pane" stylesheets="@../../css/test.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="41.0">
+      <AnchorPane layoutY="41.0" prefHeight="517.0" prefWidth="800.0" styleClass="anchor-pane" stylesheets="@../../css/EditWord.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="41.0">
          <children>
             <SplitPane dividerPositions="0.7997375954198473" prefHeight="520.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
@@ -33,7 +33,7 @@
                         <FlowPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Button fx:id="addDescription" mnemonicParsing="false" onAction="#addDescription" prefWidth="102.0" text="Add Description" />
-                              <Button fx:id="addDefinition" mnemonicParsing="false" text="Add Definition" />
+                              <Button fx:id="addDefinition" mnemonicParsing="false" onAction="#addDefinition" text="Add Definition" />
                               <Button fx:id="addPhrase" mnemonicParsing="false" text="Add Phrase" />
                               <Button fx:id="addExample" mnemonicParsing="false" text="Add Example" />
                               <Button mnemonicParsing="false" text="Save" />
@@ -43,9 +43,9 @@
                               <Button mnemonicParsing="false" text="Connect" />
                            </children>
                         </FlowPane>
-                        <ScrollPane fx:id="canvas" layoutX="42.0" layoutY="86.0" prefHeight="450.0" prefWidth="759.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="41.0">
+                        <ScrollPane fx:id="canvas" layoutY="41.0" onKeyPressed="#deleteNode" prefHeight="450.0" prefWidth="759.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="41.0">
                           <content>
-                            <AnchorPane maxHeight="4000.0" maxWidth="4000.0" minHeight="4000.0" minWidth="4000.0" onMouseDragged="#canvasDrag" onMousePressed="#canvasMousePressed" onMouseReleased="#canvasMouseReleased" prefHeight="4000.0" prefWidth="4000.0" styleClass="anchor-pane" stylesheets="@../../css/test.css">
+                            <AnchorPane maxHeight="4000.0" maxWidth="4000.0" minHeight="4000.0" minWidth="4000.0" onMouseDragged="#canvasDrag" onMousePressed="#canvasMousePressed" onMouseReleased="#canvasMouseReleased" prefHeight="4000.0" prefWidth="4000.0" styleClass="anchor-pane" stylesheets="@../../css/EditWord.css">
                                  <children>
                                     <Rectangle fx:id="selectionRectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" layoutX="-5.0" layoutY="-5.0" stroke="BLACK" strokeType="INSIDE" styleClass="selectionRectangle" />
                                  </children></AnchorPane>
