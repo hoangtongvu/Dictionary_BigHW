@@ -125,6 +125,7 @@ public class GameSceneController implements Initializable
         this.answerResultVbox.setVisible(true);
         this.finalPointText.setVisible(true);
         this.ShowTimeOutScreen();
+        this.DisableCheckBoxes();
     }
 
     @FXML
@@ -334,6 +335,14 @@ public class GameSceneController implements Initializable
         this.finalQuestionStateText.setText(quesState);
         this.rightAnswerIfIncorrectText.setText(message);
 
+    }
+
+    private void DisableCheckBoxes()
+    {
+        this.answerA.setDisable(true);
+        this.answerB.setDisable(true);
+        this.answerC.setDisable(true);
+        this.answerD.setDisable(true);
     }
 
 }
