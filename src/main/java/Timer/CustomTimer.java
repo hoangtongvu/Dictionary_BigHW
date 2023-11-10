@@ -25,6 +25,7 @@ public class CustomTimer
     {
         this.maxTimeSecond = maxTimeSecond;
     }
+    public int getMaxTimeSecond() { return this.maxTimeSecond; }
 
     public CustomTimer()
     {
