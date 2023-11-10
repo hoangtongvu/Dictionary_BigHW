@@ -24,6 +24,9 @@ public class FxmlFileManager
     public final Parent multiChoiceWordGameScene;
     public final GameSceneController multiChoiceGameSceneController;
 
+    public final Parent multiChoiceGameStartScene;
+
+
 
 
     private FxmlFileManager()
@@ -37,6 +40,9 @@ public class FxmlFileManager
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/application/GameScene.fxml"));
             this.multiChoiceWordGameScene = loader.load();
             this.multiChoiceGameSceneController = loader.getController();
+
+            loader = new FXMLLoader(getClass().getResource("/fxml/application/StartGameScreenScene.fxml"));
+            this.multiChoiceGameStartScene = loader.load();
         }
         catch (IOException e)
         {
