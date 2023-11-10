@@ -2,6 +2,7 @@ package Main.SceneControllers;
 
 import Game.MultiChoiceGame.ChoiceCode;
 import Game.MultiChoiceGame.ChoiceGameCtrl;
+import Game.MultiChoiceGame.ChoiceGameTimerManager;
 import Game.MultiChoiceGame.MultiChoiceQues;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,7 +40,13 @@ public class GameSceneController implements Initializable
     private Button nextButton;
 
     @FXML
+    private Button endGameButton;
+
+    @FXML
     private Text question;
+
+    @FXML
+    private Text timerText;
 
     @FXML
     private ProgressBar answeredProgress;
@@ -58,12 +65,14 @@ public class GameSceneController implements Initializable
     private int currentQuesPos = 0;
     private ChoiceCode[] userAnswers;
 
+    private ChoiceGameTimerManager timerManager;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         this.choiceGameCtrl = ChoiceGameCtrl.getInstance();
+        this.timerManager = new ChoiceGameTimerManager(this.timerText);
 
         try {
             this.choiceGameCtrl.getChoiceQuesLoader().LoadDefault();
@@ -80,6 +89,8 @@ public class GameSceneController implements Initializable
         this.SetAnswers(this.questions.get(0).getAnswers());
 
         this.AddingButtonsToGridPane();
+        this.SubTimerEvent();
+        this.StartGame();
 
     }
 
@@ -135,34 +146,17 @@ public class GameSceneController implements Initializable
         return count;
     }
 
+    @FXML
+    public void ChooseAnswerA() {this.ChooseAnswer(ChoiceCode.A);}
 
     @FXML
-    public void ChooseAnswerA()
-    {
-        this.ChooseAnswer(ChoiceCode.A);
-
-    }
+    public void ChooseAnswerB() {this.ChooseAnswer(ChoiceCode.B);}
 
     @FXML
-    public void ChooseAnswerB()
-    {
-        this.ChooseAnswer(ChoiceCode.B);
-
-    }
+    public void ChooseAnswerC() {this.ChooseAnswer(ChoiceCode.C);}
 
     @FXML
-    public void ChooseAnswerC()
-    {
-        this.ChooseAnswer(ChoiceCode.C);
-
-    }
-
-    @FXML
-    public void ChooseAnswerD()
-    {
-        this.ChooseAnswer(ChoiceCode.D);
-
-    }
+    public void ChooseAnswerD() {this.ChooseAnswer(ChoiceCode.D);}
 
     private void ChooseAnswer(ChoiceCode choiceCode)
     {
@@ -280,7 +274,6 @@ public class GameSceneController implements Initializable
         }
     }
 
-
     private void UpdateGridPaneButtonColor()
     {
         List<Node> buttons = this.quesGridPane.getChildren();
@@ -303,6 +296,32 @@ public class GameSceneController implements Initializable
         colorAdjust.setSaturation(1);
     }
 
+    private void SubTimerEvent()
+    {
+        this.timerManager.getCustomTimer().onStopEvent.AddListener(this::EndGame);
+    }
 
+    private void StartGame()
+    {
+        System.out.println("Start");
+        this.timerManager.getCustomTimer().Start();
+    }
+
+    @FXML
+    private void EndGameButton()
+    {
+        this.timerManager.getCustomTimer().Stop();
+    }
+
+    private void EndGame()
+    {
+        this.endGameButton.setDisable(true);
+        this.ShowTimeOutScreen();
+    }
+
+    private void ShowTimeOutScreen()
+    {
+        System.out.println("Time out.");
+    }
 
 }

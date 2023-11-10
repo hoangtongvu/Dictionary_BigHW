@@ -11,6 +11,7 @@ public class CustomTimer
     public final CustomEvent onStopEvent;
 
     private final Timer timer;
+    private boolean isRunning = false;
 
     private int counter = 0;
     private int maxTimeSecond;
@@ -47,14 +48,19 @@ public class CustomTimer
 
     public void Start()
     {
+        if (this.isRunning) return;
+        this.isRunning = true;
         this.ResetCounter();
         this.AddTimerTask();
     }
 
     public void Stop()
     {
+        if (!this.isRunning) return;
+        this.isRunning = false;
         this.timer.cancel();
         this.onStopEvent.Invoke();
+        this.timer.purge();
 
     }
 
@@ -83,5 +89,7 @@ public class CustomTimer
         int delayTime = 1000;
         this.timer.scheduleAtFixedRate(timerTask, 0, delayTime);
     }
+
+
 
 }
