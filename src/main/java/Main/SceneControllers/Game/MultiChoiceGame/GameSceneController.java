@@ -1,4 +1,4 @@
-package Main.SceneControllers;
+package Main.SceneControllers.Game.MultiChoiceGame;
 
 import Game.MultiChoiceGame.ChoiceCode;
 import Game.MultiChoiceGame.ChoiceGameCtrl;
