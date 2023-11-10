@@ -354,6 +354,7 @@ public class GameSceneController implements Initializable
         //show number of correct and incorrect answers.
         //set color of correct and incorrect answers button.
         //show right answer if user's answer is incorrect.
+        this.MoveToQuestionAt(0);
         this.CheckAnswers();
         this.endGameButton.setDisable(true);
         this.answerResultVbox.setVisible(true);
