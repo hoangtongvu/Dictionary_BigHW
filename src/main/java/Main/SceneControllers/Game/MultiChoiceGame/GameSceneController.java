@@ -66,9 +66,7 @@ public class GameSceneController implements Initializable
     //endregion
 
     private CheckBox choseAnswer;
-
     private List<MultiChoiceQues> questions;
-
     private ChoiceGameCtrl choiceGameCtrl;
     private int maxQues = 20;
     private int currentQuesPos = 0;
@@ -76,9 +74,9 @@ public class GameSceneController implements Initializable
     private ChoiceGameTimerManager timerManager;
     private QuesGridPaneManager quesGridPaneManager;
 
+
     public void setMaxQues(int maxQues) { this.maxQues = maxQues; }
     public ChoiceGameTimerManager getTimerManager() { return this.timerManager; }
-
 
 
     @Override
@@ -98,6 +96,36 @@ public class GameSceneController implements Initializable
 
     }
 
+    public void StartGame()
+    {
+        this.timerManager.getCustomTimer().Start();
+
+        this.LoadQuestions();
+        this.choseAnswer = null;
+
+        this.userAnswers = new ChoiceCode[this.maxQues];
+
+        this.SetQuestion(this.questions.get(0).getQuestion());
+        this.SetAnswers(this.questions.get(0).getAnswers());
+
+        this.quesGridPaneManager.AddingButtonsToGridPane(this.maxQues);
+        this.AddEventToGridPaneButton();
+
+    }
+
+    private void EndGame()
+    {
+        //show point.
+        //show number of correct and incorrect answers.
+        //set color of correct and incorrect answers button.
+        //show right answer if user's answer is incorrect.
+        this.MoveToQuestionAt(0);
+        this.CheckAnswers();
+        this.endGameButton.setDisable(true);
+        this.answerResultVbox.setVisible(true);
+        this.finalPointText.setVisible(true);
+        this.ShowTimeOutScreen();
+    }
 
     @FXML
     private void MoveToNextQuestion()
@@ -121,10 +149,7 @@ public class GameSceneController implements Initializable
     private int GetNumOfAnsweredQues()
     {
         int count = 0;
-        for (ChoiceCode userAnswer : this.userAnswers)
-        {
-            if (userAnswer != null) count++;
-        }
+        for (ChoiceCode userAnswer : this.userAnswers) if (userAnswer != null) count++;
         return count;
     }
 
@@ -222,11 +247,9 @@ public class GameSceneController implements Initializable
             default:
                 break;
         }
-
-
         this.choseAnswer.setSelected(true);
-    }
 
+    }
 
     private void AddEventToGridPaneButton()
     {
@@ -241,47 +264,15 @@ public class GameSceneController implements Initializable
         }
     }
 
-
     private void SubTimerEvent()
     {
         this.timerManager.getCustomTimer().onStopEvent.AddListener(this::EndGame);
-    }
-
-    public void StartGame()
-    {
-        this.timerManager.getCustomTimer().Start();
-
-        this.LoadQuestions();
-        this.choseAnswer = null;
-
-        this.userAnswers = new ChoiceCode[this.maxQues];
-
-        this.SetQuestion(this.questions.get(0).getQuestion());
-        this.SetAnswers(this.questions.get(0).getAnswers());
-
-        this.quesGridPaneManager.AddingButtonsToGridPane(this.maxQues);
-        this.AddEventToGridPaneButton();
-
     }
 
     @FXML
     private void EndGameButton()
     {
         this.timerManager.getCustomTimer().Stop();
-    }
-
-    private void EndGame()
-    {
-        //show point.
-        //show number of correct and incorrect answers.
-        //set color of correct and incorrect answers button.
-        //show right answer if user's answer is incorrect.
-        this.MoveToQuestionAt(0);
-        this.CheckAnswers();
-        this.endGameButton.setDisable(true);
-        this.answerResultVbox.setVisible(true);
-        this.finalPointText.setVisible(true);
-        this.ShowTimeOutScreen();
     }
 
     private void ShowTimeOutScreen()
@@ -301,13 +292,11 @@ public class GameSceneController implements Initializable
             {
                 correctAnswerAmount++;
                 this.quesGridPaneManager.SetButCorrect(i);
-            }
-            else
-            {
-                incorrectAnswerAmount++;
-                this.quesGridPaneManager.SetButIncorrect(i);
+                continue;
             }
 
+            incorrectAnswerAmount++;
+            this.quesGridPaneManager.SetButIncorrect(i);
         }
 
         finalPoint = (double) correctAnswerAmount / this.maxQues * 10;
