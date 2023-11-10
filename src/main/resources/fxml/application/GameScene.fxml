@@ -41,7 +41,7 @@
             </CheckBox>
          </children>
       </VBox>
-      <Text fx:id="question" layoutX="30.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="698.4000000000001" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="40.0" />
+      <Text fx:id="question" layoutX="30.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="574.4000000000001" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="40.0" />
       <GridPane fx:id="quesGridPane" hgap="5.0" layoutX="456.0" layoutY="39.0" prefHeight="213.0" prefWidth="184.0" vgap="5.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="40.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -60,6 +60,25 @@
       <Text fx:id="timerText" layoutX="670.0" layoutY="332.0" strokeType="INSIDE" strokeWidth="0.0" text="0:0" textAlignment="CENTER" wrappingWidth="134.9368896484375" AnchorPane.rightAnchor="49.0">
          <font>
             <Font size="23.0" />
+         </font>
+      </Text>
+      <VBox fx:id="answerResultVbox" layoutX="30.0" layoutY="291.0" prefHeight="98.0" prefWidth="470.0" spacing="5.0" visible="false" AnchorPane.leftAnchor="30.0">
+         <children>
+            <Text fx:id="finalQuestionStateText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Incorrect" wrappingWidth="478.13670349121094">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Text>
+            <Text fx:id="rightAnswerIfIncorrectText" layoutX="10.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Right answer is B" wrappingWidth="478.13670349121094">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
+      <Text fx:id="finalPointText" layoutX="347.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Point: 8.0" textAlignment="CENTER" visible="false" wrappingWidth="160.0" AnchorPane.leftAnchor="347.0" AnchorPane.rightAnchor="347.0" AnchorPane.topAnchor="15.0">
+         <font>
+            <Font size="19.0" />
          </font>
       </Text>
    </children>
