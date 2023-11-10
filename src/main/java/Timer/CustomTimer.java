@@ -11,13 +11,29 @@ public class CustomTimer
     public final CustomEvent onStopEvent;
 
     private final Timer timer;
+    private boolean isRunning = false;
 
     private int counter = 0;
-    private final int maxTimeSecond;
+    private int maxTimeSecond;
 
     public int getCounter()
     {
         return this.counter;
+    }
+
+    public void setMaxTimeSecond(int maxTimeSecond)
+    {
+        this.maxTimeSecond = maxTimeSecond;
+    }
+    public int getMaxTimeSecond() { return this.maxTimeSecond; }
+
+    public CustomTimer()
+    {
+        this.maxTimeSecond = 0;
+        this.timer = new Timer();
+
+        this.onTickEvent = new CustomEvent();
+        this.onStopEvent = new CustomEvent();
     }
 
     public CustomTimer(int maxTimeSecond)
@@ -33,6 +49,35 @@ public class CustomTimer
 
     public void Start()
     {
+        if (this.isRunning) return;
+        this.isRunning = true;
+        this.ResetCounter();
+        this.AddTimerTask();
+    }
+
+    public void Stop()
+    {
+        if (!this.isRunning) return;
+        this.isRunning = false;
+        this.timer.cancel();
+        this.onStopEvent.Invoke();
+        this.timer.purge();
+
+    }
+
+    private void Tick()
+    {
+        counter++;
+        this.onTickEvent.Invoke();
+    }
+
+    public void ResetCounter()
+    {
+        this.counter = 0;
+    }
+
+    private void AddTimerTask()
+    {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run()
@@ -46,24 +91,6 @@ public class CustomTimer
         this.timer.scheduleAtFixedRate(timerTask, 0, delayTime);
     }
 
-    public void Stop()
-    {
-        this.timer.cancel();
-        this.onStopEvent.Invoke();
-
-    }
-
-    private void Tick()
-    {
-        System.out.println(this.counter);
-        counter++;
-        this.onTickEvent.Invoke();
-    }
-
-    public void ResetCounter()
-    {
-        this.counter = 0;
-    }
 
 
 }

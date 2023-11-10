@@ -2,6 +2,7 @@ package Main.SceneControllers;
 
 import Game.MultiChoiceGame.ChoiceCode;
 import Game.MultiChoiceGame.ChoiceGameCtrl;
+import Game.MultiChoiceGame.ChoiceGameTimerManager;
 import Game.MultiChoiceGame.MultiChoiceQues;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +13,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
 import java.io.FileNotFoundException;
@@ -39,13 +42,31 @@ public class GameSceneController implements Initializable
     private Button nextButton;
 
     @FXML
+    private Button endGameButton;
+
+    @FXML
     private Text question;
+
+    @FXML
+    private Text timerText;
 
     @FXML
     private ProgressBar answeredProgress;
 
     @FXML
     private GridPane quesGridPane;
+
+    @FXML
+    private VBox answerResultVbox;
+
+    @FXML
+    private Text finalQuestionStateText;
+
+    @FXML
+    private Text rightAnswerIfIncorrectText;
+
+    @FXML
+    private Text finalPointText;
 
     //endregion
 
@@ -58,12 +79,18 @@ public class GameSceneController implements Initializable
     private int currentQuesPos = 0;
     private ChoiceCode[] userAnswers;
 
+    private ChoiceGameTimerManager timerManager;
 
+
+    public void setMaxQues(int maxQues) { this.maxQues = maxQues; }
+
+    public ChoiceGameTimerManager getTimerManager() { return this.timerManager; }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         this.choiceGameCtrl = ChoiceGameCtrl.getInstance();
+        this.timerManager = new ChoiceGameTimerManager(this.timerText);
 
         try {
             this.choiceGameCtrl.getChoiceQuesLoader().LoadDefault();
@@ -71,52 +98,40 @@ public class GameSceneController implements Initializable
             throw new RuntimeException(e);
         }
 
-        this.LoadQuestions();
-        this.choseAnswer = null;
+//        this.LoadQuestions();
+//        this.choseAnswer = null;
+//
+//        this.userAnswers = new ChoiceCode[this.maxQues];
+//
+//        this.SetQuestion(this.questions.get(0).getQuestion());
+//        this.SetAnswers(this.questions.get(0).getAnswers());
+//
+//        this.AddingButtonsToGridPane();
 
-        this.userAnswers = new ChoiceCode[this.maxQues];
-
-        this.SetQuestion(this.questions.get(0).getQuestion());
-        this.SetAnswers(this.questions.get(0).getAnswers());
-
-        this.AddingButtonsToGridPane();
+        this.SubTimerEvent();
+        //this.StartGame();
 
     }
 
 
     @FXML
-    public void MoveToNextQuestion()
+    private void MoveToNextQuestion()
     {
-
-//        //if (this.choseAnswer == null) return;
-//        this.ResetChoseAnswer();
-//        this.currentQuesPos++;
-//        this.SetProgressBar(this.currentQuesPos, this.maxQues);
-//
-//        if (this.currentQuesPos >= this.maxQues) return;
-//        this.SetQuestion(this.questions.get(this.currentQuesPos).getQuestion());
-//        this.SetAnswers(this.questions.get(this.currentQuesPos).getAnswers());
-//
-//        for (ChoiceCode code : this.userAnswers)
-//        {
-//            System.out.print(code + " ");
-//        }
-//        System.out.println();
         this.MoveToQuestionAt(this.currentQuesPos + 1);
     }
 
     @FXML
-    public void MoveToQuestionAt(int i)
+    private void MoveToQuestionAt(int i)
     {
 
         if (i >= this.maxQues) return;
         this.currentQuesPos = i;
         this.ClearChoseAnswer();
         this.TickAnswerBasedOnUserAnswer();
-        this.SetProgressBar(this.GetNumOfAnsweredQues(), this.maxQues);
 
         this.SetQuestion(this.questions.get(this.currentQuesPos).getQuestion());
         this.SetAnswers(this.questions.get(this.currentQuesPos).getAnswers());
+        this.SetAnswerResultVbox();
 
         for (ChoiceCode code : this.userAnswers)
         {
@@ -135,34 +150,17 @@ public class GameSceneController implements Initializable
         return count;
     }
 
+    @FXML
+    private void ChooseAnswerA() {this.ChooseAnswer(ChoiceCode.A);}
 
     @FXML
-    public void ChooseAnswerA()
-    {
-        this.ChooseAnswer(ChoiceCode.A);
-
-    }
+    private void ChooseAnswerB() {this.ChooseAnswer(ChoiceCode.B);}
 
     @FXML
-    public void ChooseAnswerB()
-    {
-        this.ChooseAnswer(ChoiceCode.B);
-
-    }
+    private void ChooseAnswerC() {this.ChooseAnswer(ChoiceCode.C);}
 
     @FXML
-    public void ChooseAnswerC()
-    {
-        this.ChooseAnswer(ChoiceCode.C);
-
-    }
-
-    @FXML
-    public void ChooseAnswerD()
-    {
-        this.ChooseAnswer(ChoiceCode.D);
-
-    }
+    private void ChooseAnswerD() {this.ChooseAnswer(ChoiceCode.D);}
 
     private void ChooseAnswer(ChoiceCode choiceCode)
     {
@@ -188,6 +186,7 @@ public class GameSceneController implements Initializable
         this.userAnswers[this.currentQuesPos] = choiceCode;
         this.choseAnswer.setSelected(true);
         this.UpdateGridPaneButtonColor();
+        this.SetProgressBar(this.GetNumOfAnsweredQues(), this.maxQues);
 
     }
 
@@ -280,7 +279,6 @@ public class GameSceneController implements Initializable
         }
     }
 
-
     private void UpdateGridPaneButtonColor()
     {
         List<Node> buttons = this.quesGridPane.getChildren();
@@ -290,7 +288,7 @@ public class GameSceneController implements Initializable
             Button button = (Button) node;
             if (this.userAnswers[count] != null)
             {
-                this.SetButtonColorGreen(button);
+                this.SetButtonColorGrey(button);
             }
             count++;
         }
@@ -299,10 +297,134 @@ public class GameSceneController implements Initializable
     private void SetButtonColorGreen(Button button)
     {
         ColorAdjust colorAdjust = (ColorAdjust) button.getEffect();
+        colorAdjust.setBrightness(0);
+        colorAdjust.setContrast(0);
         colorAdjust.setHue(0.5);
         colorAdjust.setSaturation(1);
     }
 
+    private void SetButtonColorGrey(Button button)
+    {
+        ColorAdjust colorAdjust = (ColorAdjust) button.getEffect();
+        colorAdjust.setBrightness(-0.3);
+        colorAdjust.setContrast(0);
+        colorAdjust.setHue(0);
+        colorAdjust.setSaturation(0);
+    }
 
+    private void SetButtonColorRed(Button button)
+    {
+        ColorAdjust colorAdjust = (ColorAdjust) button.getEffect();
+        colorAdjust.setBrightness(0);
+        colorAdjust.setContrast(0);
+        colorAdjust.setHue(0);
+        colorAdjust.setSaturation(1);
+    }
+
+    private void SubTimerEvent()
+    {
+        this.timerManager.getCustomTimer().onStopEvent.AddListener(this::EndGame);
+    }
+
+    public void StartGame()
+    {
+        this.timerManager.getCustomTimer().Start();
+
+        this.LoadQuestions();
+        this.choseAnswer = null;
+
+        this.userAnswers = new ChoiceCode[this.maxQues];
+
+        this.SetQuestion(this.questions.get(0).getQuestion());
+        this.SetAnswers(this.questions.get(0).getAnswers());
+
+        this.AddingButtonsToGridPane();
+
+    }
+
+    @FXML
+    private void EndGameButton()
+    {
+        this.timerManager.getCustomTimer().Stop();
+    }
+
+    private void EndGame()
+    {
+        //show point.
+        //show number of correct and incorrect answers.
+        //set color of correct and incorrect answers button.
+        //show right answer if user's answer is incorrect.
+        this.CheckAnswers();
+        this.endGameButton.setDisable(true);
+        this.answerResultVbox.setVisible(true);
+        this.finalPointText.setVisible(true);
+        this.ShowTimeOutScreen();
+    }
+
+    private void ShowTimeOutScreen()
+    {
+        System.out.println("Time out.");
+    }
+
+    private void CheckAnswers()
+    {
+        double finalPoint;
+        int correctAnswerAmount = 0;
+        int incorrectAnswerAmount = 0;
+
+        List<Node> buttons = this.quesGridPane.getChildren();
+
+        for (int i = 0; i < this.maxQues; i++)
+        {
+            Button button = (Button) buttons.get(i);
+            if (this.AnswerIsCorrect(i))
+            {
+                correctAnswerAmount++;
+                this.SetButtonColorGreen(button);
+            }
+            else
+            {
+                incorrectAnswerAmount++;
+                this.SetButtonColorRed(button);
+            }
+
+        }
+
+        finalPoint = (double) correctAnswerAmount / this.maxQues * 10;
+        this.finalPointText.setText("Point: " + finalPoint);
+
+    }
+
+    private boolean AnswerIsCorrect(int i)
+    {
+        ChoiceCode userAnswer = this.userAnswers[i];
+        return this.questions.get(i).CheckAnswer(userAnswer);
+    }
+
+    private void SetAnswerResultVbox()
+    {
+        String quesState;
+        String message;
+        Paint paint;
+        String colorCode;
+        if (this.AnswerIsCorrect(this.currentQuesPos))
+        {
+            colorCode = "GREEN";
+            quesState = "Correct";
+            message = "";
+        }
+        else
+        {
+            colorCode = "RED";
+            quesState = "Incorrect";
+            message = "Correct answer is " + this.questions.get(this.currentQuesPos).getRightAnswerCode() + ".";
+        }
+
+        paint = Paint.valueOf(colorCode);
+        this.finalQuestionStateText.setFill(paint);
+        this.finalQuestionStateText.setText(quesState);
+        this.rightAnswerIfIncorrectText.setText(message);
+
+    }
 
 }
