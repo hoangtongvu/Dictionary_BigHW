@@ -29,7 +29,7 @@ public class ChoiceGameTimerManager
 
     private void UpdateTimerUI()
     {
-        int tempSec = this.maxTimerTimeSecond - this.customTimer.getCounter();
+        int tempSec = this.customTimer.getMaxTimeSecond() - this.customTimer.getCounter();
         int tempMin = tempSec / 60;
         tempSec -= tempMin * 60;
         int tempHour = tempMin / 60;
