@@ -1,5 +1,6 @@
 package Game.MultiChoiceGame;
 
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.layout.GridPane;
@@ -42,6 +43,9 @@ public class QuesGridPaneManager
                 //add colorAdjust effect.
                 this.AddColorAdjust(newBut);
 
+                //Set Cursor.
+                this.SetHandCursor(newBut);
+
                 //add buttons to gridPane & list.
                 this.gridPane.add(newBut, j, i);
                 this.buttons.add(newBut);
@@ -56,6 +60,11 @@ public class QuesGridPaneManager
     {
         ColorAdjust colorAdjust = new ColorAdjust();
         button.setEffect(colorAdjust);
+    }
+
+    private void SetHandCursor(Button button)
+    {
+        button.setCursor(Cursor.HAND);
     }
 
     private void SetButtonColor(Button button, double brightness, double contrast, double hue, double saturation)
