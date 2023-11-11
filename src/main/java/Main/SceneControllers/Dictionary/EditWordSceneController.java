@@ -3,6 +3,7 @@ package Main.SceneControllers.Dictionary;
 import WordEditing.*;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
@@ -18,13 +19,16 @@ public class EditWordSceneController {
     private double mouseStartY;
     @FXML
     private Rectangle selectionRectangle;
+    //TODO: Get selected attribute to here instead of in wordScene node, this is more of a front end thing
+    //TODO: Remove wordSceneNodeList in wordSceneNode
     protected AnchorPane canvasPane;
-    protected List<WordSceneNode> canvasNodeList = new ArrayList<>();
+    public static List<WordSceneNode> canvasNodeList = new ArrayList<>();
     static int selectedNodeCount = 0;
     static final NodeOptions options = new NodeOptions();
-
+    MenuItem[] optionList = {options.getConnect(),options.getDelete(),options.getAddEx(),options.getAddDes(),options.getAddDef(),options.getAddPhrase()};
     @FXML
     public void initialize() {
+        options.getOptions().getItems().addAll(optionList);
         options.getAddDes().setOnAction(event -> {
             addDescription();
         });
@@ -74,6 +78,7 @@ public class EditWordSceneController {
         canvasNodeList.add(node);
         canvasPane = (AnchorPane) canvas.getContent();
         canvasPane.getChildren().add(node.getNodePane());
+
         node.setNodePanePosition((-1) * canvas.getViewportBounds().getMinX(),
                 (-1) * canvas.getViewportBounds().getMinY());
     }
@@ -146,6 +151,7 @@ public class EditWordSceneController {
             }
         }
     }
+
     @FXML
     public void onKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.DELETE && !canvasNodeList.isEmpty()) {
@@ -161,7 +167,7 @@ public class EditWordSceneController {
         if (event.getButton() == MouseButton.SECONDARY) {
             selectionRectangle.setLayoutX(event.getX());
             selectionRectangle.setLayoutY(event.getY());
-            System.out.println(event.getSource());
+//            System.out.println(event.getSource());
             options.getOptions().show(selectionRectangle, Side.BOTTOM, 0 , 0);
         }
     }

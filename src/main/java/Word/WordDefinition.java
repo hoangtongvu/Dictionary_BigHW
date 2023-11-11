@@ -12,6 +12,14 @@ public class WordDefinition extends DictionaryComponent {
     private String definition;
     private List<WordExample> exampleList;
 
+    public WordDefinition() {
+
+    }
+
+    public WordDefinition(String definition) {
+        this.definition = definition;
+    }
+
     public String getDefinition() {
         return definition;
     }

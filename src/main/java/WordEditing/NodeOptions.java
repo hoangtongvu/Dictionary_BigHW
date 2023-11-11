@@ -15,8 +15,9 @@ public class NodeOptions {
     private final MenuItem addPhrase = new MenuItem("Add Phrase");
     ContextMenu options = new ContextMenu();
     public NodeOptions() {
-        options.getItems().addAll(connect, delete, addDef, addDes, addEx, addPhrase);
+
     }
+
 
     public MenuItem getAddDef() {
         return addDef;

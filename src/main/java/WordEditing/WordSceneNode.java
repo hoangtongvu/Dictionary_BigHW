@@ -1,11 +1,16 @@
 package WordEditing;
 
+import Main.SceneControllers.Dictionary.EditWordSceneController;
 import javafx.css.PseudoClass;
 import javafx.event.EventHandler;
 import javafx.geometry.Side;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 
@@ -15,16 +20,18 @@ import java.util.List;
 public abstract class WordSceneNode {
     protected Label title;
     protected boolean selected = false;
-    protected WordSceneNode parent;
-    protected static List<WordSceneNode> wordSceneNodeList = new ArrayList<>();
-    protected List<WordSceneNode> childrenNode;
-    protected VBox nodePane;
     public static PseudoClass clicked;
     public static WordSceneNode currentlySelected = null;
     protected static boolean bulkSelect = false;
+    protected WordSceneNode parent;
+    protected List<WordSceneNode> childrenNode;
+    protected VBox nodePane;
+    protected abstract void setOptions();
+
     private double startX = 0;
     private double startY = 0;
-    private static NodeOptions options = new NodeOptions();
+    //TODO: make NodeOptions options static
+    protected NodeOptions options = new NodeOptions();
 
     public static WordSceneNode getCurrentlySelected() {
         return currentlySelected;
@@ -82,7 +89,22 @@ public abstract class WordSceneNode {
         WordSceneNode.bulkSelect = bulkSelect;
     }
 
+    public void setStyleSheet(Node object) {
+        try {
+            object.getStyleClass().getClass().getResource("/css/EditWord.css");
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("INVALID TYPE");
+        }
+    }
 
+    public void setStyleClass(Node object, String styleClass) {
+        try {
+            object.getStyleClass().add(styleClass);
+        } catch (Exception e) {
+            System.out.println("INVALID TYPE TO SET STYLE CLASS");
+        }
+    }
     public WordSceneNode(String titleString) {
         nodePane = new VBox();
         title = new Label();
@@ -91,23 +113,25 @@ public abstract class WordSceneNode {
 
         title.getStylesheets().getClass().getResource("/css/EditWord.css");
         nodePane.getStylesheets().getClass().getResource("/css/EditWord.css");
-
-        title.getStyleClass().add("node-title");
-        nodePane.getStyleClass().add("node-pane");
+        setStyleSheet(title);
+        setStyleSheet(nodePane);
+        setStyleClass(title, "node-title");
+        setStyleClass(nodePane, "node-pane");
         clicked = PseudoClass.getPseudoClass("clicked");
 
         title.prefWidthProperty().bind(nodePane.widthProperty());
-        nodePane.setMinWidth(200);
-        nodePane.setMaxWidth(200);
+        nodePane.setMinWidth(150);
+        nodePane.setMaxWidth(150);
         nodePane.getChildren().add(title);
         nodePane.setLayoutX(0);
         nodePane.setLayoutY(0);
         nodePane.addEventHandler(MouseEvent.MOUSE_PRESSED, pressHandler);
         nodePane.addEventHandler(MouseEvent.MOUSE_DRAGGED, dragHandler);
         nodePane.addEventHandler(MouseEvent.MOUSE_CLICKED, clickHandler);
-        nodePane.setPrefHeight(100);
-        wordSceneNodeList.add(this);
 
+        options.getDelete().setOnAction(event -> {
+            selfDelete();
+        });
     }
 
     EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
@@ -115,7 +139,7 @@ public abstract class WordSceneNode {
         public void handle(MouseEvent event) {
             if (event.getButton() == MouseButton.SECONDARY) {
                 event.consume();
-                System.out.println(event.getSource());
+//                System.out.println(event.getSource());
                 options.getOptions().show(nodePane, Side.BOTTOM, 0, 0);
                 deselectAll();
                 select(WordSceneNode.this);
@@ -144,7 +168,7 @@ public abstract class WordSceneNode {
                     currentlySelected = WordSceneNode.this;
                     WordSceneNode.select(currentlySelected);
                 } else {
-                    for (WordSceneNode wordSceneNode : wordSceneNodeList) {
+                    for (WordSceneNode wordSceneNode : EditWordSceneController.canvasNodeList) {
                         wordSceneNode.setStartX(event.getSceneX() - wordSceneNode.getNodePane().getLayoutX());
                         wordSceneNode.setStartY(event.getSceneY() - wordSceneNode.getNodePane().getLayoutY());
                     }
@@ -153,7 +177,6 @@ public abstract class WordSceneNode {
 //            System.out.println(selectedCount);
         }
     };
-
     EventHandler<MouseEvent> dragHandler = new EventHandler<MouseEvent>() {
 
         @Override
@@ -168,7 +191,7 @@ public abstract class WordSceneNode {
 //                    System.out.println("B" + event.getSceneX() + " " + offSetX);
                 } else {
                     event.consume();
-                    for (WordSceneNode wordSceneNode : wordSceneNodeList) {
+                    for (WordSceneNode wordSceneNode : EditWordSceneController.canvasNodeList) {
                         if (selected) {
                             if (wordSceneNode.isSelected()) {
                                 double currentX = wordSceneNode.getStartX();
@@ -183,10 +206,9 @@ public abstract class WordSceneNode {
         }
     };
 
-
     public static void deselectAll() {
-        if (!wordSceneNodeList.isEmpty()) {
-            for (WordSceneNode node : wordSceneNodeList) {
+        if (!EditWordSceneController.canvasNodeList.isEmpty()) {
+            for (WordSceneNode node : EditWordSceneController.canvasNodeList) {
                 deselect(node);
             }
             bulkSelect = false;
@@ -202,6 +224,7 @@ public abstract class WordSceneNode {
         node.setSelected(false);
         node.getNodePane().pseudoClassStateChanged(clicked, false);
     }
+
     public void compareWithMouse(Rectangle rectangle) {
         //Collision detection
         double rectLeft     = rectangle.getLayoutX();
@@ -224,6 +247,18 @@ public abstract class WordSceneNode {
         if (collisionDetected) {
             getNodePane().pseudoClassStateChanged(clicked,true);
             setSelected(true);
+        }
+
+    }
+
+    public void selfDelete() {
+        try {
+            ((AnchorPane) nodePane.getParent()).getChildren().remove(nodePane);
+            EditWordSceneController.canvasNodeList.remove(this);
+//            System.out.println("Removed" + this.getNodePane().toString());
+        } catch (Exception e) {
+            System.out.println("Oi dick'ead we got a problem here");
+            System.out.println(nodePane.toString());
         }
 
     }
