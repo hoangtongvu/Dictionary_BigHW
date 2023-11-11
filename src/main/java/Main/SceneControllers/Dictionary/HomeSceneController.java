@@ -46,8 +46,7 @@ public class HomeSceneController {
     }
 
     @FXML
-    public void onGameButton(ActionEvent event) throws IOException
-    {
+    public void onGameButton(ActionEvent event) throws IOException {
         this.SwitchScene(FxmlFileManager.getInstance().multiChoiceWordGameScene);
     }
 

@@ -7,8 +7,10 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
+import javax.xml.stream.EventFilter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,14 +23,23 @@ public class EditWordSceneController {
     private Rectangle selectionRectangle;
     //TODO: Get selected attribute to here instead of in wordScene node, this is more of a front end thing
     //TODO: Remove wordSceneNodeList in wordSceneNode
+
     protected AnchorPane canvasPane;
     public static List<WordSceneNode> canvasNodeList = new ArrayList<>();
     static int selectedNodeCount = 0;
     static final NodeOptions options = new NodeOptions();
-    MenuItem[] optionList = {options.getConnect(),options.getDelete(),options.getAddEx(),options.getAddDes(),options.getAddDef(),options.getAddPhrase()};
+
     @FXML
     public void initialize() {
-        options.getOptions().getItems().addAll(optionList);
+        options.getOptions().getItems().addAll(
+                options.getConnect(),
+                options.getDelete(),
+                options.getAddEx(),
+                options.getAddDes(),
+                options.getAddDef(),
+                options.getAddPhrase()
+        );
+
         options.getAddDes().setOnAction(event -> {
             addDescription();
         });
@@ -52,6 +63,25 @@ public class EditWordSceneController {
         options.getAddEx().setOnAction(event -> {
             addExample();
         });
+
+
+//        ((AnchorPane) canvas.getContent()).addEventFilter(ScrollEvent.ANY, scrollEvent -> {
+//            double zoomFactor = 1.05;
+//            double delta = scrollEvent.getDeltaY();
+//            if (delta < 0) {
+//                zoomFactor = 2.0 - zoomFactor;
+//            }
+//            double newScaleX = canvas.getContent().getScaleX() * zoomFactor;
+//            double newScaleY = canvas.getContent().getScaleY() * zoomFactor;
+//            if (newScaleX < 0.3) newScaleX = 0.3;
+//            if (newScaleY < 0.3) newScaleY = 0.3;
+//            canvas.getContent().setScaleX(canvas.getContent().getScaleX() * zoomFactor);
+//            canvas.getContent().setScaleY(canvas.getContent().getScaleY() * zoomFactor);
+//            // Consume the event
+//            scrollEvent.consume();
+//        });
+
+
     }
 
     @FXML
@@ -137,7 +167,6 @@ public class EditWordSceneController {
         }
 //        System.out.println(WordSceneNode.isBulkSelect());
         resetSelectionRectangle();
-        canvas.setPannable(false);
     }
 
     public void deleteNode() {
@@ -168,8 +197,17 @@ public class EditWordSceneController {
             selectionRectangle.setLayoutX(event.getX());
             selectionRectangle.setLayoutY(event.getY());
 //            System.out.println(event.getSource());
-            options.getOptions().show(selectionRectangle, Side.BOTTOM, 0 , 0);
+            if (!canvas.isPannable()) {
+                options.getOptions().show(selectionRectangle, Side.BOTTOM, 0 , 0);
+            }
+            canvas.setPannable(false);
+
         }
+    }
+
+    @FXML
+    public void mouseMoved(MouseEvent event) {
+
     }
     // This method resets the selection rectangle to its initial state
     private void resetSelectionRectangle() {
@@ -179,4 +217,5 @@ public class EditWordSceneController {
         selectionRectangle.setLayoutX(-5);
         selectionRectangle.setLayoutY(-5);
     }
+
 }

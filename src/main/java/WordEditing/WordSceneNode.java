@@ -19,6 +19,7 @@ import java.util.List;
 
 public abstract class WordSceneNode {
     protected Label title;
+    protected static boolean inConnectMode = false;
     protected boolean selected = false;
     public static PseudoClass clicked;
     public static WordSceneNode currentlySelected = null;
@@ -28,6 +29,7 @@ public abstract class WordSceneNode {
     protected VBox nodePane;
     protected abstract void setOptions();
 
+    protected abstract void labelProperty(Label label, String styleClass);
     private double startX = 0;
     private double startY = 0;
     //TODO: make NodeOptions options static
@@ -41,6 +43,13 @@ public abstract class WordSceneNode {
         WordSceneNode.currentlySelected = currentlySelected;
     }
 
+    public static boolean isInConnectMode() {
+        return inConnectMode;
+    }
+
+    public static void setInConnectMode(boolean inConnectMode) {
+        WordSceneNode.inConnectMode = inConnectMode;
+    }
 
     public abstract void addChild(WordSceneNode wordSceneNode);
 

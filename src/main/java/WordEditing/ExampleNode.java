@@ -1,26 +1,43 @@
 package WordEditing;
 
 import Word.WordExample;
+import javafx.scene.control.Label;
 
 public class ExampleNode extends WordSceneNode {
-    private WordExample content;
+    private WordExample example;
+    private Label exampleLabel;
+    private Label translationLabel;
 
-    public WordExample getContent() {
-        return content;
+    public WordExample getExample() {
+        return example;
     }
 
-    public void setContent(WordExample content) {
-        this.content = content;
+    public void setExample(WordExample example) {
+        this.example = example;
     }
 
     public ExampleNode() {
         super("Example");
         setOptions();
+        example = new WordExample("<EMPTY>","<EMPTY>");
+        exampleLabel = new Label("Example:\n"  + example.getExample());
+        translationLabel = new Label("Translation:\n" + example.getTranslation());
+        labelProperty(exampleLabel, "node-content");
+        labelProperty(translationLabel, "node-content");
+        nodePane.getChildren().addAll(exampleLabel, translationLabel);
     }
 
     @Override
     protected void setOptions() {
         options.getOptions().getItems().addAll(options.getConnect(),options.getDelete());
+    }
+
+    @Override
+    protected void labelProperty(Label label, String styleClass) {
+        label.setWrapText(true);
+        setStyleSheet(label);
+        setStyleClass(label, styleClass);
+        label.prefWidthProperty().bind(nodePane.prefWidthProperty());
     }
 
     @Override
