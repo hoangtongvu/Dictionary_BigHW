@@ -1,6 +1,8 @@
 package Main.SceneControllers.Game.MultiChoiceGame;
 
 import Game.MultiChoiceGame.*;
+import Main.FxmlFileManager;
+import Main.SceneControllers.Dictionary.HomeSceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,6 +40,9 @@ public class GameSceneController implements Initializable
 
     @FXML
     private Button endGameButton;
+
+    @FXML
+    private Button endReviewButton;
 
     @FXML
     private Text question;
@@ -110,6 +115,7 @@ public class GameSceneController implements Initializable
 
         this.quesGridPaneManager.AddingButtonsToGridPane(this.maxQues);
         this.AddEventToGridPaneButton();
+        this.MoveToQuestionAt(0);
 
     }
 
@@ -121,11 +127,12 @@ public class GameSceneController implements Initializable
         //show right answer if user's answer is incorrect.
         this.MoveToQuestionAt(0);
         this.CheckAnswers();
-        this.endGameButton.setDisable(true);
-        this.answerResultVbox.setVisible(true);
-        this.finalPointText.setVisible(true);
+        this.ToggleAnswerResultVbox();
+        this.ToggleFinalPointText();
         this.ShowTimeOutScreen();
-        this.DisableCheckBoxes();
+        this.ToggleCheckBoxes();
+        this.ToggleEndGameButton();
+        this.ToggleEndReviewButton();
     }
 
     @FXML
@@ -300,7 +307,10 @@ public class GameSceneController implements Initializable
             this.quesGridPaneManager.SetButIncorrect(i);
         }
 
+
         finalPoint = (double) correctAnswerAmount / this.maxQues * 10;
+        finalPoint = Math.round(finalPoint * 100.0) / 100.0;
+
         this.finalPointText.setText("Point: " + finalPoint);
 
     }
@@ -337,12 +347,55 @@ public class GameSceneController implements Initializable
 
     }
 
-    private void DisableCheckBoxes()
+    private void ToggleCheckBoxes()
     {
-        this.answerA.setDisable(true);
-        this.answerB.setDisable(true);
-        this.answerC.setDisable(true);
-        this.answerD.setDisable(true);
+        this.answerA.setDisable(!this.answerA.isDisable());
+        this.answerB.setDisable(!this.answerB.isDisable());
+        this.answerC.setDisable(!this.answerC.isDisable());
+        this.answerD.setDisable(!this.answerD.isDisable());
     }
+
+    private void ToggleEndGameButton()
+    {
+        this.endGameButton.setDisable(!this.endGameButton.isDisable());
+        this.endGameButton.setVisible(!this.endGameButton.isVisible());
+    }
+
+    private void ToggleEndReviewButton()
+    {
+        this.endReviewButton.setDisable(!this.endGameButton.isDisable());
+        this.endReviewButton.setVisible(!this.endGameButton.isVisible());
+    }
+
+    private void ToggleFinalPointText()
+    {
+        this.finalPointText.setVisible(!this.finalPointText.isVisible());
+    }
+
+    private void ToggleAnswerResultVbox()
+    {
+        this.answerResultVbox.setVisible(!this.answerResultVbox.isVisible());
+    }
+
+    @FXML
+    private void EndReview()
+    {
+
+        this.SwitchBackToStartScreen();
+    }
+
+    private void SwitchBackToStartScreen()
+    {
+        this.ToggleEndGameButton();
+        this.ToggleEndReviewButton();
+        this.ToggleFinalPointText();
+        this.ToggleAnswerResultVbox();
+        this.ToggleCheckBoxes();
+        this.ClearChoseAnswer();
+        this.SetProgressBar(0, this.maxQues);
+        HomeSceneController.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameStartScene);
+
+    }
+    
 
 }
