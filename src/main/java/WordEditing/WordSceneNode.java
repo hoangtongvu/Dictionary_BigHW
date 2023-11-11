@@ -117,6 +117,15 @@ public abstract class WordSceneNode {
                 event.consume();
                 System.out.println(event.getSource());
                 options.getOptions().show(nodePane, Side.BOTTOM, 0, 0);
+                deselectAll();
+                select(WordSceneNode.this);
+                currentlySelected = WordSceneNode.this;
+            }
+            if (event.getButton() == MouseButton.PRIMARY) {
+                event.consume();
+                deselectAll();
+                select(WordSceneNode.this);
+                currentlySelected = WordSceneNode.this;
             }
         }
     };
@@ -125,6 +134,7 @@ public abstract class WordSceneNode {
         @Override
         public void handle(MouseEvent event) {
             if (event.getButton() == MouseButton.PRIMARY) {
+                event.consume();
                 if (!bulkSelect) {
                     startX = event.getSceneX() - nodePane.getLayoutX();
                     startY = event.getSceneY() - nodePane.getLayoutY();
@@ -148,6 +158,7 @@ public abstract class WordSceneNode {
 
         @Override
         public void handle(MouseEvent event) {
+            options.getOptions().hide();
             if (event.getButton() == MouseButton.PRIMARY) {
                 if (!bulkSelect) {
                     event.consume();

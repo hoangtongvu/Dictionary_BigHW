@@ -80,11 +80,8 @@ public class EditWordSceneController {
 
     @FXML
     public void canvasMousePressed (MouseEvent event) {
-        if (event.getClickCount() > 1) {
-            WordSceneNode.deselectAll();
-        }
-
         if (event.getButton() == MouseButton.PRIMARY) {
+            WordSceneNode.deselectAll();
             mouseStartX = event.getX();
             mouseStartY = event.getY();
             selectionRectangle.setLayoutX(mouseStartX);
