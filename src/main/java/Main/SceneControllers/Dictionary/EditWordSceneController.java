@@ -1,14 +1,10 @@
 package Main.SceneControllers.Dictionary;
 
-import AddWordGraph.DefinitionNode;
-import AddWordGraph.DescriptionNode;
-import AddWordGraph.WordSceneNode;
+import WordEditing.*;
 import javafx.fxml.FXML;
+import javafx.geometry.Side;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 
@@ -17,33 +13,68 @@ import java.util.List;
 
 public class EditWordSceneController {
     @FXML
-    private ScrollPane canvas;
+    protected ScrollPane canvas;
     private double mouseStartX;
     private double mouseStartY;
     @FXML
     private Rectangle selectionRectangle;
-    AnchorPane canvasPane;
-    List<WordSceneNode> canvasNodeList = new ArrayList<>();
+    protected AnchorPane canvasPane;
+    protected List<WordSceneNode> canvasNodeList = new ArrayList<>();
     static int selectedNodeCount = 0;
+    static final NodeOptions options = new NodeOptions();
+
+    @FXML
+    public void initialize() {
+        options.getAddDes().setOnAction(event -> {
+            addDescription();
+        });
+
+        options.getConnect().setOnAction(event -> {
+
+        });
+
+        options.getAddDef().setOnAction(event -> {
+            addDefinition();
+        });
+
+        options.getDelete().setOnAction(event -> {
+            deleteNode();
+        });
+
+        options.getAddPhrase().setOnAction(event -> {
+            addPhrase();
+        });
+
+        options.getAddEx().setOnAction(event -> {
+            addExample();
+        });
+    }
 
     @FXML
     public void addDescription() {
-        WordSceneNode tmp = new DescriptionNode();
-        canvasNodeList.add(tmp);
-        canvasPane = (AnchorPane) canvas.getContent();
-        canvasPane.getChildren().add(tmp.getNodePane());
-        tmp.setNodePanePosition((-1) * canvas.getViewportBounds().getMinX(),
-                (-1) * canvas.getViewportBounds().getMinY());
-
+        addNode(new DescriptionNode());
     }
 
     @FXML
     public void addDefinition() {
-        WordSceneNode tmp = new DefinitionNode();
-        canvasNodeList.add(tmp);
+        addNode(new DefinitionNode());
+    }
+
+    @FXML
+    public void addExample() {
+        addNode(new ExampleNode());
+    }
+
+    @FXML
+    public void addPhrase() {
+        addNode(new PhraseNode());
+    }
+
+    public void addNode(WordSceneNode node) {
+        canvasNodeList.add(node);
         canvasPane = (AnchorPane) canvas.getContent();
-        canvasPane.getChildren().add(tmp.getNodePane());
-        tmp.setNodePanePosition((-1) * canvas.getViewportBounds().getMinX(),
+        canvasPane.getChildren().add(node.getNodePane());
+        node.setNodePanePosition((-1) * canvas.getViewportBounds().getMinX(),
                 (-1) * canvas.getViewportBounds().getMinY());
     }
 
@@ -52,6 +83,7 @@ public class EditWordSceneController {
         if (event.getClickCount() > 1) {
             WordSceneNode.deselectAll();
         }
+
         if (event.getButton() == MouseButton.PRIMARY) {
             mouseStartX = event.getX();
             mouseStartY = event.getY();
@@ -90,7 +122,7 @@ public class EditWordSceneController {
         }
     }
     @FXML
-    public void canvasMouseReleased(MouseEvent event) {
+    public void mouseRelease(MouseEvent event) {
         int cnt = 0;
         for (WordSceneNode node : canvasNodeList) {
             if (node.isSelected()) {
@@ -106,21 +138,34 @@ public class EditWordSceneController {
         canvas.setPannable(false);
     }
 
-    @FXML
-    public void deleteNode(KeyEvent event) {
-        if (event.getCode() == KeyCode.DELETE && !canvasNodeList.isEmpty()) {
-            for (int i = 0; i < canvasNodeList.size(); i++) {
-                if (canvasNodeList.get(i).isSelected()) {
-                    canvasPane = (AnchorPane) canvas.getContent();
-                    canvasPane.getChildren().remove(canvasNodeList.get(i).getNodePane());
-                    canvasNodeList.remove(i);
-                    i--;
-                    WordSceneNode.setBulkSelect(false);
-                }
+    public void deleteNode() {
+        for (int i = 0; i < canvasNodeList.size(); i++) {
+            if (canvasNodeList.get(i).isSelected()) {
+                canvasPane = (AnchorPane) canvas.getContent();
+                canvasPane.getChildren().remove(canvasNodeList.get(i).getNodePane());
+                canvasNodeList.remove(i);
+                i--;
+                WordSceneNode.setBulkSelect(false);
             }
+        }
+    }
+    @FXML
+    public void onKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.DELETE && !canvasNodeList.isEmpty()) {
+            deleteNode();
         }
         if (event.getCode() == KeyCode.ESCAPE) {
             WordSceneNode.deselectAll();
+        }
+    }
+
+    @FXML
+    public void mouseClick(MouseEvent event) {
+        if (event.getButton() == MouseButton.SECONDARY) {
+            selectionRectangle.setLayoutX(event.getX());
+            selectionRectangle.setLayoutY(event.getY());
+            System.out.println(event.getSource());
+            options.getOptions().show(selectionRectangle, Side.BOTTOM, 0 , 0);
         }
     }
     // This method resets the selection rectangle to its initial state

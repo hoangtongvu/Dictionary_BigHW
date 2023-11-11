@@ -1,4 +1,4 @@
-package AddWordGraph;
+package WordEditing;
 
 public class DescriptionNode extends WordSceneNode {
     public DescriptionNode() {

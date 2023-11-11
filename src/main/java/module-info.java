@@ -13,7 +13,7 @@ module MainGroup.application {
     opens Main.SceneControllers.Dictionary to javafx.fxml;
     exports Main.SceneControllers;
     opens Main.SceneControllers to javafx.fxml;
-    exports AddWordGraph;
-    opens AddWordGraph to javafx.fxml;
+    exports WordEditing;
+    opens WordEditing to javafx.fxml;
 
 }

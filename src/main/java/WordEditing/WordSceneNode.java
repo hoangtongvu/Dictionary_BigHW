@@ -1,16 +1,13 @@
-package AddWordGraph;
+package WordEditing;
 
 import javafx.css.PseudoClass;
 import javafx.event.EventHandler;
 import javafx.geometry.Side;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +20,20 @@ public abstract class WordSceneNode {
     protected List<WordSceneNode> childrenNode;
     protected VBox nodePane;
     public static PseudoClass clicked;
-    public static WordSceneNode selector = null;
+    public static WordSceneNode currentlySelected = null;
     protected static boolean bulkSelect = false;
     private double startX = 0;
     private double startY = 0;
-    static final NodeOptions options = new NodeOptions();
+    private static NodeOptions options = new NodeOptions();
+
+    public static WordSceneNode getCurrentlySelected() {
+        return currentlySelected;
+    }
+
+    public static void setCurrentlySelected(WordSceneNode currentlySelected) {
+        WordSceneNode.currentlySelected = currentlySelected;
+    }
+
 
     public abstract void addChild(WordSceneNode wordSceneNode);
 
@@ -108,6 +114,8 @@ public abstract class WordSceneNode {
         @Override
         public void handle(MouseEvent event) {
             if (event.getButton() == MouseButton.SECONDARY) {
+                event.consume();
+                System.out.println(event.getSource());
                 options.getOptions().show(nodePane, Side.BOTTOM, 0, 0);
             }
         }
@@ -120,13 +128,11 @@ public abstract class WordSceneNode {
                 if (!bulkSelect) {
                     startX = event.getSceneX() - nodePane.getLayoutX();
                     startY = event.getSceneY() - nodePane.getLayoutY();
-                    if (selector != null) {
-                        selector.getNodePane().pseudoClassStateChanged(clicked, false);
-                        selector.setSelected(false);
+                    if (currentlySelected != null) {
+                        WordSceneNode.deselect(currentlySelected);
                     }
-                    selector = WordSceneNode.this;
-                    selector.getNodePane().pseudoClassStateChanged(clicked,true);
-                    selector.setSelected(true);
+                    currentlySelected = WordSceneNode.this;
+                    WordSceneNode.select(currentlySelected);
                 } else {
                     for (WordSceneNode wordSceneNode : wordSceneNodeList) {
                         wordSceneNode.setStartX(event.getSceneX() - wordSceneNode.getNodePane().getLayoutX());
@@ -143,7 +149,6 @@ public abstract class WordSceneNode {
         @Override
         public void handle(MouseEvent event) {
             if (event.getButton() == MouseButton.PRIMARY) {
-                options.getOptions().hide();
                 if (!bulkSelect) {
                     event.consume();
                     nodePane.setLayoutX(event.getSceneX() - startX); //MouseX - offSet
@@ -161,7 +166,6 @@ public abstract class WordSceneNode {
                                 wordSceneNode.getNodePane().setLayoutY(event.getSceneY() - currentY);
                             }
                         }
-
                     }
                 }
             }
@@ -172,13 +176,21 @@ public abstract class WordSceneNode {
     public static void deselectAll() {
         if (!wordSceneNodeList.isEmpty()) {
             for (WordSceneNode node : wordSceneNodeList) {
-                node.setSelected(false);
-                node.getNodePane().pseudoClassStateChanged(clicked, false);
+                deselect(node);
             }
             bulkSelect = false;
         }
     }
 
+    public static void select(WordSceneNode node) {
+        node.setSelected(true);
+        node.getNodePane().pseudoClassStateChanged(clicked, true);
+    }
+
+    public static void deselect(WordSceneNode node) {
+        node.setSelected(false);
+        node.getNodePane().pseudoClassStateChanged(clicked, false);
+    }
     public void compareWithMouse(Rectangle rectangle) {
         //Collision detection
         double rectLeft     = rectangle.getLayoutX();

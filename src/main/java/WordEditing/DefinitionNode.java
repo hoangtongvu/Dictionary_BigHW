@@ -1,6 +1,4 @@
-package AddWordGraph;
-
-import AddWordGraph.WordSceneNode;
+package WordEditing;
 
 public class DefinitionNode extends WordSceneNode {
     public DefinitionNode() {
