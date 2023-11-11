@@ -11,7 +11,8 @@ module MainGroup.application {
 
     exports Main.SceneControllers.Dictionary;
     opens Main.SceneControllers.Dictionary to javafx.fxml;
-    exports Main.SceneControllers;
-    opens Main.SceneControllers to javafx.fxml;
+    exports Main.SceneControllers.Game.MultiChoiceGame;
+    opens Main.SceneControllers.Game.MultiChoiceGame to javafx.fxml;
+
 
 }

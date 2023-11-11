@@ -35,7 +35,7 @@ public class ChoiceGameTimerManager
         int tempHour = tempMin / 60;
         tempMin -= tempHour * 60;
         this.timerText.setText(tempHour + ":" + tempMin + ":" + tempSec);
-        System.out.println("Update on ticking " + this.customTimer.getCounter());
+        //System.out.println("Update on ticking " + this.customTimer.getCounter());
 
     }
 

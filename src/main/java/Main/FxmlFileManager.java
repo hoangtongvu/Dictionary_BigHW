@@ -1,9 +1,8 @@
 package Main;
 
-import Main.SceneControllers.GameSceneController;
+import Main.SceneControllers.Game.MultiChoiceGame.GameSceneController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
@@ -37,11 +36,11 @@ public class FxmlFileManager
             this.homeScene = FXMLLoader.load(getClass().getResource("/fxml/application/HomeScene.fxml"));
 
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/application/GameScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Game/MultiChoiceGame/GameScene.fxml"));
             this.multiChoiceWordGameScene = loader.load();
             this.multiChoiceGameSceneController = loader.getController();
 
-            loader = new FXMLLoader(getClass().getResource("/fxml/application/StartGameScreenScene.fxml"));
+            loader = new FXMLLoader(getClass().getResource("/fxml/Game/MultiChoiceGame/StartGameScreenScene.fxml"));
             this.multiChoiceGameStartScene = loader.load();
         }
         catch (IOException e)

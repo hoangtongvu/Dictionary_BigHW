@@ -1,9 +1,8 @@
-package Main.SceneControllers;
+package Main.SceneControllers.Game.MultiChoiceGame;
 
 import Main.FxmlFileManager;
 import Main.SceneControllers.Dictionary.HomeSceneController;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
