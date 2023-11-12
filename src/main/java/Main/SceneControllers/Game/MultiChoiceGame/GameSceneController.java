@@ -9,15 +9,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+import scenebuilderextended.components.choicegameextendedcomponents.ChoiceGameButton;
+import scenebuilderextended.components.choicegameextendedcomponents.ChoiceGameGridPane;
 
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+
 
 public class GameSceneController implements Initializable
 {
@@ -54,7 +56,7 @@ public class GameSceneController implements Initializable
     private ProgressBar answeredProgress;
 
     @FXML
-    private GridPane quesGridPane;
+    private ChoiceGameGridPane quesGridPane;
 
     @FXML
     private VBox answerResultVbox;
@@ -77,7 +79,6 @@ public class GameSceneController implements Initializable
     private int currentQuesPos = 0;
     private ChoiceCode[] userAnswers;
     private ChoiceGameTimerManager timerManager;
-    private QuesGridPaneManager quesGridPaneManager;
 
 
     public void setMaxQues(int maxQues) { this.maxQues = maxQues; }
@@ -89,7 +90,6 @@ public class GameSceneController implements Initializable
     {
         this.choiceGameCtrl = ChoiceGameCtrl.getInstance();
         this.timerManager = new ChoiceGameTimerManager(this.timerText);
-        this.quesGridPaneManager = new QuesGridPaneManager(this.quesGridPane);
 
         try {
             this.choiceGameCtrl.getChoiceQuesLoader().LoadDefault();
@@ -113,7 +113,8 @@ public class GameSceneController implements Initializable
         this.SetQuestion(this.questions.get(0).getQuestion());
         this.SetAnswers(this.questions.get(0).getAnswers());
 
-        this.quesGridPaneManager.AddingButtonsToGridPane(this.maxQues);
+        this.quesGridPane.AddingButtonsToGridPane(this.maxQues);
+
         this.AddEventToGridPaneButton();
         this.MoveToQuestionAt(0);
 
@@ -197,7 +198,7 @@ public class GameSceneController implements Initializable
         this.userAnswers[this.currentQuesPos] = choiceCode;
         this.choseAnswer.setSelected(true);
 
-        this.quesGridPaneManager.SetButDone(this.currentQuesPos);
+        this.quesGridPane.getChoiceGameButtons().get(this.currentQuesPos).SetDone();
 
 
         this.SetProgressBar(this.GetNumOfAnsweredQues(), this.maxQues);
@@ -261,9 +262,9 @@ public class GameSceneController implements Initializable
 
     private void AddEventToGridPaneButton()
     {
-        List<Button> buttons = this.quesGridPaneManager.getButtons();
+        List<ChoiceGameButton> buttons = this.quesGridPane.getChoiceGameButtons();
         int quesCount = 1;
-        for (Button button : buttons)
+        for (ChoiceGameButton button : buttons)
         {
             if (quesCount > this.maxQues) return;
             int finalQuesCount = quesCount;
@@ -294,17 +295,19 @@ public class GameSceneController implements Initializable
         int correctAnswerAmount = 0;
         int incorrectAnswerAmount = 0;
 
+
+        List<ChoiceGameButton> buttons = this.quesGridPane.getChoiceGameButtons();
         for (int i = 0; i < this.maxQues; i++)
         {
             if (this.AnswerIsCorrect(i))
             {
                 correctAnswerAmount++;
-                this.quesGridPaneManager.SetButCorrect(i);
+                buttons.get(i).SetCorrect();
                 continue;
             }
 
             incorrectAnswerAmount++;
-            this.quesGridPaneManager.SetButIncorrect(i);
+            buttons.get(i).SetIncorrect();
         }
 
 
