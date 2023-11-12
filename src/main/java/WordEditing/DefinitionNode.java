@@ -3,7 +3,7 @@ package WordEditing;
 import Word.WordDefinition;
 import javafx.scene.control.Label;
 
-public class DefinitionNode extends WordSceneNode {
+public class DefinitionNode extends DicNode {
     private WordDefinition content;
     private Label contentLabel;
 
@@ -39,7 +39,7 @@ public class DefinitionNode extends WordSceneNode {
     }
 
     @Override
-    public void addChild(WordSceneNode wordSceneNode) {
+    public void addChild(DicNode dicNode) {
 
     }
 }

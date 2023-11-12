@@ -1,32 +1,46 @@
 package WordEditing;
 
-import Main.SceneControllers.Dictionary.EditWordSceneController;
+import Word.WordDefinition;
 import javafx.css.PseudoClass;
 import javafx.event.EventHandler;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import org.w3c.dom.NodeList;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class WordSceneNode {
+public abstract class DicNode {
+    public static List<DicNode> nodeList = new ArrayList<>();
+
+    public static List<DicNode> getNodeList() {
+        return nodeList;
+    }
+
+    public static void setNodeList(List<DicNode> nodeList) {
+        DicNode.nodeList = nodeList;
+    }
+
     protected Label title;
     protected static boolean inConnectMode = false;
     protected boolean selected = false;
     public static PseudoClass clicked;
-    public static WordSceneNode currentlySelected = null;
+    public static DicNode currentlySelected = null;
     protected static boolean bulkSelect = false;
-    protected WordSceneNode parent;
-    protected List<WordSceneNode> childrenNode;
+    protected DicNode parent;
+    protected List<DicNode> childrenNode;
     protected VBox nodePane;
+
+    protected static DicNode endNode;
     protected abstract void setOptions();
 
     protected abstract void labelProperty(Label label, String styleClass);
@@ -35,12 +49,12 @@ public abstract class WordSceneNode {
     //TODO: make NodeOptions options static
     protected NodeOptions options = new NodeOptions();
 
-    public static WordSceneNode getCurrentlySelected() {
+    public static DicNode getCurrentlySelected() {
         return currentlySelected;
     }
 
-    public static void setCurrentlySelected(WordSceneNode currentlySelected) {
-        WordSceneNode.currentlySelected = currentlySelected;
+    public static void setCurrentlySelected(DicNode currentlySelected) {
+        DicNode.currentlySelected = currentlySelected;
     }
 
     public static boolean isInConnectMode() {
@@ -48,10 +62,10 @@ public abstract class WordSceneNode {
     }
 
     public static void setInConnectMode(boolean inConnectMode) {
-        WordSceneNode.inConnectMode = inConnectMode;
+        DicNode.inConnectMode = inConnectMode;
     }
 
-    public abstract void addChild(WordSceneNode wordSceneNode);
+    public abstract void addChild(DicNode dicNode);
 
     public void setSelected(boolean selected) {
         this.selected = selected;
@@ -65,7 +79,7 @@ public abstract class WordSceneNode {
         return bulkSelect;
     }
 
-    public WordSceneNode() {
+    public DicNode() {
 
     }
 
@@ -95,7 +109,7 @@ public abstract class WordSceneNode {
 
 
     public static void setBulkSelect(boolean bulkSelect) {
-        WordSceneNode.bulkSelect = bulkSelect;
+        DicNode.bulkSelect = bulkSelect;
     }
 
     public void setStyleSheet(Node object) {
@@ -114,7 +128,7 @@ public abstract class WordSceneNode {
             System.out.println("INVALID TYPE TO SET STYLE CLASS");
         }
     }
-    public WordSceneNode(String titleString) {
+    public DicNode(String titleString) {
         nodePane = new VBox();
         title = new Label();
         title.setText(titleString);
@@ -134,79 +148,89 @@ public abstract class WordSceneNode {
         nodePane.getChildren().add(title);
         nodePane.setLayoutX(0);
         nodePane.setLayoutY(0);
+        nodePane.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseEnterHandler);
         nodePane.addEventHandler(MouseEvent.MOUSE_PRESSED, pressHandler);
         nodePane.addEventHandler(MouseEvent.MOUSE_DRAGGED, dragHandler);
-        nodePane.addEventHandler(MouseEvent.MOUSE_CLICKED, clickHandler);
-
+        nodePane.addEventHandler(MouseEvent.MOUSE_RELEASED, mouseReleaseHandler);
         options.getDelete().setOnAction(event -> {
             selfDelete();
         });
     }
 
-    EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent event) {
-            if (event.getButton() == MouseButton.SECONDARY) {
-                event.consume();
-//                System.out.println(event.getSource());
-                options.getOptions().show(nodePane, Side.BOTTOM, 0, 0);
-                deselectAll();
-                select(WordSceneNode.this);
-                currentlySelected = WordSceneNode.this;
-            }
-            if (event.getButton() == MouseButton.PRIMARY) {
-                event.consume();
-                deselectAll();
-                select(WordSceneNode.this);
-                currentlySelected = WordSceneNode.this;
-            }
-        }
-    };
 
     EventHandler<MouseEvent> pressHandler = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
-            if (event.getButton() == MouseButton.PRIMARY) {
+            //Handling connect mode
+            if (inConnectMode && event.getButton() == MouseButton.PRIMARY) {
+                deselectAll();
+                select(DicNode.this);
+                DicNode.currentlySelected = DicNode.this;
+                System.out.println(nodePane.toString());
+            } else if (event.getButton() == MouseButton.PRIMARY) {
+                //Handling dragging obbject mode
                 event.consume();
                 if (!bulkSelect) {
                     startX = event.getSceneX() - nodePane.getLayoutX();
                     startY = event.getSceneY() - nodePane.getLayoutY();
                     if (currentlySelected != null) {
-                        WordSceneNode.deselect(currentlySelected);
+                        DicNode.deselect(currentlySelected);
                     }
-                    currentlySelected = WordSceneNode.this;
-                    WordSceneNode.select(currentlySelected);
-                } else {
-                    for (WordSceneNode wordSceneNode : EditWordSceneController.canvasNodeList) {
-                        wordSceneNode.setStartX(event.getSceneX() - wordSceneNode.getNodePane().getLayoutX());
-                        wordSceneNode.setStartY(event.getSceneY() - wordSceneNode.getNodePane().getLayoutY());
+                    currentlySelected = DicNode.this;
+                    DicNode.select(currentlySelected);
+                } else if (bulkSelect) {
+                    for (DicNode dicNode : nodeList) {
+                        dicNode.setStartX(event.getSceneX() - dicNode.getNodePane().getLayoutX());
+                        dicNode.setStartY(event.getSceneY() - dicNode.getNodePane().getLayoutY());
                     }
                 }
             }
 //            System.out.println(selectedCount);
         }
     };
+
+    EventHandler<MouseEvent> mouseReleaseHandler = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+            if (inConnectMode) {
+                System.out.println(nodePane.toString());
+            } else if (event.getButton() == MouseButton.SECONDARY) {
+                event.consume();
+                options.getOptions().show(nodePane, Side.BOTTOM, 0, 0);
+                deselectAll();
+                select(DicNode.this);
+                currentlySelected = DicNode.this;
+            } else if (event.getButton() == MouseButton.PRIMARY) {
+                event.consume();
+                deselectAll();
+                select(DicNode.this);
+                currentlySelected = DicNode.this;
+            }
+        }
+    };
+
     EventHandler<MouseEvent> dragHandler = new EventHandler<MouseEvent>() {
 
         @Override
         public void handle(MouseEvent event) {
             options.getOptions().hide();
-            if (event.getButton() == MouseButton.PRIMARY) {
+            if (inConnectMode) {
+
+            } else if (event.getButton() == MouseButton.PRIMARY) {
                 if (!bulkSelect) {
                     event.consume();
                     nodePane.setLayoutX(event.getSceneX() - startX); //MouseX - offSet
                     nodePane.setLayoutY(event.getSceneY() - startY);
 
-//                    System.out.println("B" + event.getSceneX() + " " + offSetX);
-                } else {
+                } else if (bulkSelect) {
                     event.consume();
-                    for (WordSceneNode wordSceneNode : EditWordSceneController.canvasNodeList) {
+                    for (DicNode dicNode : nodeList) {
                         if (selected) {
-                            if (wordSceneNode.isSelected()) {
-                                double currentX = wordSceneNode.getStartX();
-                                double currentY = wordSceneNode.getStartY();
-                                wordSceneNode.getNodePane().setLayoutX(event.getSceneX() - currentX);
-                                wordSceneNode.getNodePane().setLayoutY(event.getSceneY() - currentY);
+                            if (dicNode.isSelected()) {
+                                double currentX = dicNode.getStartX();
+                                double currentY = dicNode.getStartY();
+                                dicNode.getNodePane().setLayoutX(event.getSceneX() - currentX);
+                                dicNode.getNodePane().setLayoutY(event.getSceneY() - currentY);
                             }
                         }
                     }
@@ -215,23 +239,52 @@ public abstract class WordSceneNode {
         }
     };
 
+    EventHandler<MouseEvent> mouseEnterHandler = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+            if (inConnectMode) {
+                if (DicNode.this != currentlySelected) {
+                    if (endNode != null) {
+                        deselect(endNode);
+                    }
+                    endNode = DicNode.this;
+                    select(endNode);
+                }
+            }
+        }
+    };
+
+
+
     public static void deselectAll() {
-        if (!EditWordSceneController.canvasNodeList.isEmpty()) {
-            for (WordSceneNode node : EditWordSceneController.canvasNodeList) {
+        if (!nodeList.isEmpty()) {
+            for (DicNode node : nodeList) {
                 deselect(node);
             }
             bulkSelect = false;
         }
     }
 
-    public static void select(WordSceneNode node) {
+    public static void select(DicNode node) {
         node.setSelected(true);
         node.getNodePane().pseudoClassStateChanged(clicked, true);
     }
 
-    public static void deselect(WordSceneNode node) {
+    public static void deselect(DicNode node) {
         node.setSelected(false);
         node.getNodePane().pseudoClassStateChanged(clicked, false);
+    }
+
+    public void selfDelete() {
+        try {
+            ((AnchorPane) nodePane.getParent()).getChildren().remove(nodePane);
+            nodeList.remove(this);
+//            System.out.println("Removed" + this.getNodePane().toString());
+        } catch (Exception e) {
+            System.out.println("Oi dick'ead we got a problem here");
+            System.out.println(nodePane.toString());
+        }
+
     }
 
     public void compareWithMouse(Rectangle rectangle) {
@@ -259,16 +312,6 @@ public abstract class WordSceneNode {
         }
 
     }
-
-    public void selfDelete() {
-        try {
-            ((AnchorPane) nodePane.getParent()).getChildren().remove(nodePane);
-            EditWordSceneController.canvasNodeList.remove(this);
-//            System.out.println("Removed" + this.getNodePane().toString());
-        } catch (Exception e) {
-            System.out.println("Oi dick'ead we got a problem here");
-            System.out.println(nodePane.toString());
-        }
-
-    }
 }
+
+

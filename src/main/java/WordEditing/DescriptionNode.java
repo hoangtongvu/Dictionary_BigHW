@@ -1,15 +1,12 @@
 package WordEditing;
 
 import Word.WordDefinition;
-import javafx.event.EventHandler;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 
 import java.util.List;
 
-public class DescriptionNode extends WordSceneNode {
+public class DescriptionNode extends DicNode {
     private WordDefinition definition;
     private Label definitionLabel;
     private List<Edge> edgeList;
@@ -55,7 +52,7 @@ public class DescriptionNode extends WordSceneNode {
     }
 
     @Override
-    public void addChild(WordSceneNode wordSceneNode) {
+    public void addChild(DicNode dicNode) {
 
     }
 }

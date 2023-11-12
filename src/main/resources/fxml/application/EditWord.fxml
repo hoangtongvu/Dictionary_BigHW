@@ -41,12 +41,12 @@
                               <Button mnemonicParsing="false" text="Clear" />
                               <Button mnemonicParsing="false" text="Undo" />
                               <Button mnemonicParsing="false" text="Redo" />
-                              <Button mnemonicParsing="false" text="Connect" />
+                              <Button mnemonicParsing="false" onAction="#toggleConnectMode" text="Connect" />
                            </children>
                         </FlowPane>
-                        <ScrollPane fx:id="canvas" layoutY="41.0" onKeyPressed="#onKeyPressed" prefHeight="450.0" prefWidth="759.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="41.0">
+                        <ScrollPane fx:id="canvas" layoutY="41.0" prefHeight="450.0" prefWidth="759.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="41.0">
                           <content>
-                            <AnchorPane maxHeight="4000.0" maxWidth="4000.0" minHeight="4000.0" minWidth="4000.0" onMouseClicked="#mouseClick" onMouseDragged="#canvasDrag" onMouseMoved="#mouseMoved" onMousePressed="#canvasMousePressed" onMouseReleased="#mouseRelease" prefHeight="4000.0" prefWidth="4000.0" styleClass="anchor-pane" stylesheets="@../../css/EditWord.css">
+                            <AnchorPane maxHeight="4000.0" maxWidth="4000.0" minHeight="4000.0" minWidth="4000.0" prefHeight="4000.0" prefWidth="4000.0" styleClass="anchor-pane" stylesheets="@../../css/EditWord.css">
                                  <children>
                                     <Rectangle fx:id="selectionRectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" layoutX="-5.0" layoutY="-5.0" stroke="BLACK" strokeType="INSIDE" styleClass="selectionRectangle" />
                                  </children></AnchorPane>

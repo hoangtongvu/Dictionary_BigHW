@@ -3,7 +3,7 @@ package WordEditing;
 import Word.WordExample;
 import javafx.scene.control.Label;
 
-public class ExampleNode extends WordSceneNode {
+public class ExampleNode extends DicNode {
     private WordExample example;
     private Label exampleLabel;
     private Label translationLabel;
@@ -41,7 +41,7 @@ public class ExampleNode extends WordSceneNode {
     }
 
     @Override
-    public void addChild(WordSceneNode wordSceneNode) {
+    public void addChild(DicNode dicNode) {
 
     }
 }

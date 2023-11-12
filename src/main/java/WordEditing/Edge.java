@@ -4,14 +4,14 @@ import javafx.scene.shape.Line;
 
 public class Edge {
     private Line line;
-    WordSceneNode nodeA;
-    WordSceneNode nodeB;
+    DicNode nodeA;
+    DicNode nodeB;
 
     public Edge() {
         line = new Line();
     }
 
-    public Edge(WordSceneNode nodeA, WordSceneNode nodeB) {
+    public Edge(DicNode nodeA, DicNode nodeB) {
         this.nodeA = nodeA;
         this.nodeB = nodeB;
         line = new Line();
@@ -25,19 +25,19 @@ public class Edge {
         this.line = line;
     }
 
-    public void setNodeA(WordSceneNode nodeA) {
+    public void setNodeA(DicNode nodeA) {
         this.nodeA = nodeA;
     }
 
-    public void setNodeB(WordSceneNode nodeB) {
+    public void setNodeB(DicNode nodeB) {
         this.nodeB = nodeB;
     }
 
-    public WordSceneNode getNodeA() {
+    public DicNode getNodeA() {
         return nodeA;
     }
 
-    public WordSceneNode getNodeB() {
+    public DicNode getNodeB() {
         return nodeB;
     }
 }
