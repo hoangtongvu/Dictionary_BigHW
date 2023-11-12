@@ -48,7 +48,7 @@ public class HomeSceneController {
     @FXML
     public void onGameButton(ActionEvent event) throws IOException
     {
-        this.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameStartScene);
+        this.SwitchScene(FxmlFileManager.getInstance().chooseGameScene);
     }
 
     /**Activate drawer menu translateTransition for drawer menu, fadeTransition for blurPane.*/

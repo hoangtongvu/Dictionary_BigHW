@@ -1,5 +1,6 @@
 package Main.SceneControllers.Game.MultiChoiceGame;
 
+import Game.GamesCtrl;
 import Game.MultiChoiceGame.*;
 import Main.FxmlFileManager;
 import Main.SceneControllers.Dictionary.HomeSceneController;
@@ -87,7 +88,7 @@ public class GameSceneController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        this.choiceGameCtrl = ChoiceGameCtrl.getInstance();
+        this.choiceGameCtrl = GamesCtrl.getInstance().getChoiceGameCtrl();
         this.timerManager = new ChoiceGameTimerManager(this.timerText);
         this.quesGridPaneManager = new QuesGridPaneManager(this.quesGridPane);
 
