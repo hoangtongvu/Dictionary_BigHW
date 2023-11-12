@@ -5,6 +5,7 @@ module MainGroup.application {
     requires org.controlsfx.controls;
     requires javafx.web;
     requires java.sql;
+    requires scenebuilderextended.components.choicegameextendedcomponents;
 
     opens Main.application to javafx.fxml;
     exports Main.application;
@@ -15,6 +16,7 @@ module MainGroup.application {
     opens Main.SceneControllers.Game.MultiChoiceGame to javafx.fxml;
     exports Main.SceneControllers.Game;
     opens Main.SceneControllers.Game to javafx.fxml;
+
 
 
 }
