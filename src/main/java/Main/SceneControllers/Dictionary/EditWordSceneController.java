@@ -103,6 +103,7 @@ public class EditWordSceneController {
         canvasPane = (AnchorPane) canvas.getContent();
         canvasPane.getChildren().add(node.getNodePane());
         canvasPane.getChildren().add(node.getLineToParent());
+        node.getLineToParent().toBack();
         node.setNodePanePosition((-1) * canvas.getViewportBounds().getMinX(),
                 (-1) * canvas.getViewportBounds().getMinY());
     }

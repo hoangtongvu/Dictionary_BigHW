@@ -41,8 +41,8 @@ public class PhraseNode extends DicNode {
     protected void establishLink() {
         if (endNode instanceof DefinitionNode) {
             System.out.println("Phr - Ex");
-            endNode.addChild(this);
-            this.addParent(endNode);
+            addChild(endNode);
+            endNode.addParent(this);
         } else if (endNode instanceof DescriptionNode) {
             System.out.println("Phr - Des");
             endNode.addChild(this);
@@ -59,10 +59,5 @@ public class PhraseNode extends DicNode {
         } else {
             return false;
         }
-    }
-
-    @Override
-    public void addChild(DicNode dicNode) {
-
     }
 }

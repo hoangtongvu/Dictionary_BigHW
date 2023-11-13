@@ -37,10 +37,16 @@ import javafx.scene.control.Label;
     protected void establishLink() {
         if (endNode instanceof DescriptionNode) {
             System.out.println("Des - Def");
+            endNode.addChild(this);
+            addParent(endNode);
         } else if (endNode instanceof ExampleNode) {
             System.out.println("Des - Ex");
+            endNode.addParent(this);
+            addChild(endNode);
         } else if (endNode instanceof PhraseNode) {
             System.out.println("Def - Phr");
+            endNode.addChild(this);
+            addParent(endNode);
         }
     }
 
@@ -60,10 +66,5 @@ import javafx.scene.control.Label;
     @Override
     protected void setOptions() {
         options.getOptions().getItems().addAll(options.getConnect(),options.getDelete(),options.getAddEx());
-    }
-
-    @Override
-    public void addChild(DicNode dicNode) {
-
     }
 }

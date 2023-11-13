@@ -44,6 +44,8 @@ public class ExampleNode extends DicNode {
     protected void establishLink() {
         if (endNode instanceof DefinitionNode) {
             System.out.println("Dex - Def");
+            endNode.addChild(this);
+            addParent(endNode);
         }
     }
 
