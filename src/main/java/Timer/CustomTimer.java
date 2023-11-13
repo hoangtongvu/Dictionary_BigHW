@@ -1,6 +1,6 @@
 package Timer;
 
-import Event.CustomEvent;
+import Event.ZeroParameter.CustomEvent;
 
 import java.util.*;
 
