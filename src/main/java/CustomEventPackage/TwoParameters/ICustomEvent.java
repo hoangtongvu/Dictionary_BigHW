@@ -1,4 +1,4 @@
-package Event.TwoParameters;
+package CustomEventPackage.TwoParameters;
 
 public interface ICustomEvent<T, U>
 {

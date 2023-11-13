@@ -1,4 +1,4 @@
-package Event.OneParameters;
+package CustomEventPackage.OneParameters;
 
 import java.util.ArrayList;
 import java.util.List;

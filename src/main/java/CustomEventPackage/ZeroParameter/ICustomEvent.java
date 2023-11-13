@@ -1,4 +1,4 @@
-package Event.ZeroParameter;
+package CustomEventPackage.ZeroParameter;
 
 public interface ICustomEvent
 {

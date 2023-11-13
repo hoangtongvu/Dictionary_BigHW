@@ -1,4 +1,4 @@
-package Event.ZeroParameter;
+package CustomEventPackage.ZeroParameter;
 
 import java.util.ArrayList;
 import java.util.List;
