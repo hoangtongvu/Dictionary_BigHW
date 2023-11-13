@@ -1,6 +1,5 @@
 package CustomEventPackage;
 
-import CustomEventPackage.ZeroParameter.ICustomEvent;
 
 public abstract class CustomEventAbstract
 {
