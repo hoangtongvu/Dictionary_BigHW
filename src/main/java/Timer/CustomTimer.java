@@ -30,16 +30,16 @@ public class CustomTimer
     {
         this.maxTimeSecond = 0;
 
-        this.onTickEvent = new CustomEventPackage.OneParameters.CustomEvent<>();
-        this.onStopEvent = new CustomEvent();
+        this.onTickEvent = new CustomEventPackage.OneParameters.CustomEvent<>(this);
+        this.onStopEvent = new CustomEvent(this);
     }
 
     public CustomTimer(int maxTimeSecond)
     {
         this.maxTimeSecond = maxTimeSecond;
 
-        this.onTickEvent = new CustomEventPackage.OneParameters.CustomEvent<>();
-        this.onStopEvent = new CustomEvent();
+        this.onTickEvent = new CustomEventPackage.OneParameters.CustomEvent<>(this);
+        this.onStopEvent = new CustomEvent(this);
 
     }
 
@@ -58,7 +58,7 @@ public class CustomTimer
         if (!this.isRunning) return;
         this.isRunning = false;
         this.timer.cancel();
-        this.onStopEvent.Invoke();
+        this.onStopEvent.Invoke(this);
         this.timer.purge();
 
     }
@@ -66,7 +66,7 @@ public class CustomTimer
     private void Tick()
     {
         counter++;
-        this.onTickEvent.Invoke(this.counter);
+        this.onTickEvent.Invoke(this, this.counter);
     }
 
     private void AssignNewTimer()

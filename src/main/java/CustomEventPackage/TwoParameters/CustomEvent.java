@@ -1,18 +1,31 @@
 package CustomEventPackage.TwoParameters;
 
+import CustomEventPackage.CustomEventAbstract;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomEvent<T, U>
+public class CustomEvent<T, U> extends CustomEventAbstract
 {
     private final List<ICustomEvent<T, U>> listeners;
 
-    public CustomEvent()
+    public CustomEvent(Object invoker)
     {
+        super(invoker);
         this.listeners = new ArrayList<>();
     }
 
-    public void Invoke(T para1, U para2) { this.listeners.forEach(lis -> lis.Invoke(para1, para2)); }
+    /**
+     * @param invoker must be the Object that call Invoke().
+     */
+    public void Invoke(Object invoker, T para1, U para2)
+    {
+        if (this.IsWrongInvoker(invoker))
+        {
+            this.PrintErrorMessage(invoker);
+            return;
+        }
+        this.listeners.forEach(lis -> lis.Invoke(para1, para2));
+    }
 
     public void AddListener(ICustomEvent<T, U> listener)
     {

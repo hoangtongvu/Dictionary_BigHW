@@ -1,18 +1,31 @@
 package CustomEventPackage.ZeroParameter;
 
+import CustomEventPackage.CustomEventAbstract;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomEvent
+public class CustomEvent extends CustomEventAbstract
 {
     private final List<ICustomEvent> listeners;
 
-    public CustomEvent()
+    public CustomEvent(Object invoker)
     {
+        super(invoker);
         this.listeners = new ArrayList<>();
     }
 
-    public void Invoke() { this.listeners.forEach(ICustomEvent::Invoke); }
+    /**
+     * @param invoker must be the Object that call Invoke().
+     */
+    public void Invoke(Object invoker)
+    {
+        if (this.IsWrongInvoker(invoker))
+        {
+            this.PrintErrorMessage(invoker);
+            return;
+        }
+        this.listeners.forEach(ICustomEvent::Invoke);
+    }
 
     public void AddListener(ICustomEvent listener)
     {
