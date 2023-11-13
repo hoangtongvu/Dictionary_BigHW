@@ -237,6 +237,7 @@ public class EditWordSceneController {
             if (DicNode.getNodeList().get(i).isSelected()) {
                 canvasPane = (AnchorPane) canvas.getContent();
                 canvasPane.getChildren().remove(DicNode.getNodeList().get(i).getNodePane());
+                canvasPane.getChildren().remove(DicNode.getNodeList().get(i).getLineToParent());
                 DicNode.getNodeList().remove(i);
                 i--;
                 DicNode.setBulkSelect(false);

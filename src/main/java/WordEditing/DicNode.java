@@ -356,17 +356,18 @@ public abstract class DicNode {
                     updateLine();
                 } else if (bulkSelect) {
                     event.consume();
-                    for (DicNode dicNode : nodeList) {
+                    for (DicNode node : nodeList) {
                         if (selected) {
-                            if (dicNode.isSelected()) {
-                                double currentX = dicNode.getStartX();
-                                double currentY = dicNode.getStartY();
-                                dicNode.getNodePane().setLayoutX(event.getSceneX() - currentX);
-                                dicNode.getNodePane().setLayoutY(event.getSceneY() - currentY);
+                            if (node.isSelected()) {
+                                double currentX = node.getStartX();
+                                double currentY = node.getStartY();
+                                node.getNodePane().setLayoutX(event.getSceneX() - currentX);
+                                node.getNodePane().setLayoutY(event.getSceneY() - currentY);
+                                node.updateLine(node);
                             }
                         }
                     }
-                    updateLine(DicNode.this);
+
                 }
             }
         }
@@ -410,9 +411,11 @@ public abstract class DicNode {
     public void selfDelete() {
         try {
             ((AnchorPane) nodePane.getParent()).getChildren().remove(nodePane);
+            ((AnchorPane) lineToParent.getParent()).getChildren().remove(lineToParent);
             nodeList.remove(this);
 //            System.out.println("Removed" + this.getNodePane().toString());
         } catch (Exception e) {
+            System.out.println(e.toString());
             System.out.println("Oi dick'ead we got a problem here");
             System.out.println(nodePane.toString());
         }
