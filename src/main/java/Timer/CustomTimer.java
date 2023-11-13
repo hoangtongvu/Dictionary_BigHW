@@ -1,13 +1,12 @@
 package Timer;
 
-import Event.CustomEvent;
-
 import java.util.*;
+import CustomEventPackage.ZeroParameter.CustomEvent;
 
 public class CustomTimer
 {
 
-    public final CustomEvent onTickEvent;
+    public final CustomEventPackage.OneParameter.CustomEvent<Integer> onTickEvent;
     public final CustomEvent onStopEvent;
 
     private Timer timer;
@@ -31,16 +30,16 @@ public class CustomTimer
     {
         this.maxTimeSecond = 0;
 
-        this.onTickEvent = new CustomEvent();
-        this.onStopEvent = new CustomEvent();
+        this.onTickEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
+        this.onStopEvent = new CustomEvent(this);
     }
 
     public CustomTimer(int maxTimeSecond)
     {
         this.maxTimeSecond = maxTimeSecond;
 
-        this.onTickEvent = new CustomEvent();
-        this.onStopEvent = new CustomEvent();
+        this.onTickEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
+        this.onStopEvent = new CustomEvent(this);
 
     }
 
@@ -59,7 +58,7 @@ public class CustomTimer
         if (!this.isRunning) return;
         this.isRunning = false;
         this.timer.cancel();
-        this.onStopEvent.Invoke();
+        this.onStopEvent.Invoke(this);
         this.timer.purge();
 
     }
@@ -67,7 +66,7 @@ public class CustomTimer
     private void Tick()
     {
         counter++;
-        this.onTickEvent.Invoke();
+        this.onTickEvent.Invoke(this, this.counter);
     }
 
     private void AssignNewTimer()
