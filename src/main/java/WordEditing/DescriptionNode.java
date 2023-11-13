@@ -4,12 +4,9 @@ import Word.WordDefinition;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Line;
 
-import java.util.List;
-
 public class DescriptionNode extends DicNode {
     private WordDefinition definition;
     private Label definitionLabel;
-    private List<Edge> edgeList;
     private Line temporaryLine;
     public DescriptionNode() {
         super("Description");
@@ -58,8 +55,18 @@ public class DescriptionNode extends DicNode {
         //If is child node
         if (endNode instanceof PhraseNode) {
             System.out.println("Des - Phr");
+            addChild(endNode);
+            endNode.addParent(this);
+//            for (DicNode node : this.childrenNodeList) {
+//                System.out.println(node.toString());
+//            }
         } else if (endNode instanceof DefinitionNode) {
             System.out.println("Des - Def");
+            addChild(endNode);
+            endNode.addParent(this);
+//            for (DicNode node : this.childrenNodeList) {
+//                System.out.println(node.toString());
+//            }
         }
     }
 
@@ -77,8 +84,4 @@ public class DescriptionNode extends DicNode {
         }
     }
 
-    @Override
-    public void addChild(DicNode dicNode) {
-
-    }
 }

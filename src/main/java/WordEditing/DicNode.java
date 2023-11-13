@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
@@ -18,14 +19,17 @@ import java.util.List;
 
 public abstract class DicNode {
     public static List<DicNode> nodeList = new ArrayList<>();
-    public static List<Edge> edgeList = new ArrayList<>();
-    protected Edge edge;
+
     public static List<DicNode> getNodeList() {
         return nodeList;
     }
 
     public static void setNodeList(List<DicNode> nodeList) {
         DicNode.nodeList = nodeList;
+    }
+
+    public Line getLineToParent() {
+        return lineToParent;
     }
 
     protected Label title;
@@ -36,8 +40,10 @@ public abstract class DicNode {
     protected static DicNode endNode = null;
     protected static boolean bulkSelect = false;
     protected DicNode parent;
-    protected List<DicNode> childrenNode;
+    protected List<DicNode> childrenNodeList = new ArrayList<>();
     protected VBox nodePane;
+    protected Line lineToParent = new Line();
+
 
 
     protected abstract void setOptions();
@@ -66,8 +72,6 @@ public abstract class DicNode {
         DicNode.inConnectMode = inConnectMode;
     }
 
-    public abstract void addChild(DicNode dicNode);
-
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
@@ -78,6 +82,74 @@ public abstract class DicNode {
 
     public static boolean isBulkSelect() {
         return bulkSelect;
+    }
+
+    protected void addChild(DicNode childNode) {
+        boolean flag = false;
+        if (!childrenNodeList.isEmpty()) {
+            for (DicNode node : childrenNodeList) {
+                if (node == childNode) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) childrenNodeList.add(childNode);
+        } else {
+            childrenNodeList.add(childNode);
+        }
+
+    }
+
+    protected void addParent(DicNode parent) {
+        this.parent = parent;
+        System.out.println(this.toString());
+        updateFromChild();
+    }
+
+    protected void updateFromChild() {//child node is 'this' and update to parent
+        if (parent != null) {
+            lineToParent.setStartX(nodePane.getLayoutX() + nodePane.getWidth()/2);
+            lineToParent.setStartY(nodePane.getLayoutY() + nodePane.getHeight()/2);
+            lineToParent.setEndX(parent.getNodePane().getLayoutX() + parent.getNodePane().getWidth()/2);
+            lineToParent.setEndY(parent.getNodePane().getLayoutY() + parent.getNodePane().getHeight()/2);
+        }
+    }
+
+    protected void updateFromParent() {//From parent node parent (parent is 'this')
+        for (DicNode node : childrenNodeList) {
+            node.updateFromChild();
+        }
+    }
+
+    protected void updateLine() {
+        updateFromChild();
+        updateFromParent();
+    }
+
+    protected void traverseDownward(DicNode root) {
+        for (DicNode node : root.childrenNodeList) {
+            updateFromParent();
+            root.traverseDownward(node);
+        }
+    }
+
+    protected void updateLine(DicNode excluded) { //For bulk selection mode
+        if (parent != null) {
+            for (DicNode node : parent.childrenNodeList) {
+                if (node != excluded) {
+                    //Traverse all children nodes
+                    traverseDownward(parent);
+                }
+            }
+            parent.updateLine(this);
+        } else {
+            //Traverse all children nodes
+            traverseDownward(this);
+        }
+    }
+
+    protected void updateALlConnected() {
+
     }
 
     public DicNode() {
@@ -110,7 +182,6 @@ public abstract class DicNode {
         nodePane.setLayoutX(x);
         nodePane.setLayoutY(y);
     }
-
 
 
     public static void setBulkSelect(boolean bulkSelect) {
@@ -282,7 +353,7 @@ public abstract class DicNode {
                     event.consume();
                     nodePane.setLayoutX(event.getSceneX() - startX); //MouseX - offSet
                     nodePane.setLayoutY(event.getSceneY() - startY);
-
+                    updateLine();
                 } else if (bulkSelect) {
                     event.consume();
                     for (DicNode dicNode : nodeList) {
@@ -295,6 +366,7 @@ public abstract class DicNode {
                             }
                         }
                     }
+                    updateLine(DicNode.this);
                 }
             }
         }

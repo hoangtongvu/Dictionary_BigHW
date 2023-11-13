@@ -102,7 +102,7 @@ public class EditWordSceneController {
         DicNode.getNodeList().add(node);
         canvasPane = (AnchorPane) canvas.getContent();
         canvasPane.getChildren().add(node.getNodePane());
-
+        canvasPane.getChildren().add(node.getLineToParent());
         node.setNodePanePosition((-1) * canvas.getViewportBounds().getMinX(),
                 (-1) * canvas.getViewportBounds().getMinY());
     }
@@ -182,9 +182,6 @@ public class EditWordSceneController {
         public void handle(MouseEvent event) {
             if (DicNode.isInConnectMode()) {
                 temporaryLine.setVisible(false);
-                for (Edge edge : DicNode.edgeList) {
-                    ((AnchorPane) canvas.getContent()).getChildren().add(edge.getLine());
-                }
             } else if (event.getButton() == MouseButton.SECONDARY) {
                 selectionRectangle.setLayoutX(event.getX());
                 selectionRectangle.setLayoutY(event.getY());
