@@ -15,6 +15,17 @@ public class Edge {
         this.nodeA = nodeA;
         this.nodeB = nodeB;
         line = new Line();
+        line.setStartX(nodeA.getNodePane().getLayoutX() + nodeA.getNodePane().getWidth()/2);
+        line.setStartY(nodeA.getNodePane().getLayoutY() + nodeA.getNodePane().getHeight()/2);
+        line.setEndX(nodeB.getNodePane().getLayoutX() + nodeB.getNodePane().getWidth()/2);
+        line.setEndY(nodeB.getNodePane().getLayoutY() + nodeB.getNodePane().getHeight()/2);
+    }
+
+    public void updateEdge() {
+        line.setStartX(nodeA.getNodePane().getLayoutX() + nodeA.getNodePane().getWidth()/2);
+        line.setStartY(nodeA.getNodePane().getLayoutY() + nodeA.getNodePane().getHeight()/2);
+        line.setEndX(nodeB.getNodePane().getLayoutX() + nodeB.getNodePane().getWidth()/2);
+        line.setEndY(nodeB.getNodePane().getLayoutY() + nodeB.getNodePane().getHeight()/2);
     }
 
     public Line getLine() {

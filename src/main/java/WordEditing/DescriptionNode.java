@@ -52,6 +52,32 @@ public class DescriptionNode extends DicNode {
     }
 
     @Override
+    protected void establishLink() {
+        //If is parent node
+
+        //If is child node
+        if (endNode instanceof PhraseNode) {
+            System.out.println("Des - Phr");
+        } else if (endNode instanceof DefinitionNode) {
+            System.out.println("Des - Def");
+        }
+    }
+
+    @Override
+    public boolean checkLink() {
+        //Parent nodes
+
+        //Children nodes
+        if (endNode instanceof PhraseNode) {
+            return true;
+        } else if (endNode instanceof DefinitionNode) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public void addChild(DicNode dicNode) {
 
     }

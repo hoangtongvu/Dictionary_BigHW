@@ -41,6 +41,22 @@ public class ExampleNode extends DicNode {
     }
 
     @Override
+    protected void establishLink() {
+        if (endNode instanceof DefinitionNode) {
+            System.out.println("Dex - Def");
+        }
+    }
+
+    @Override
+    public boolean checkLink() {
+        if (endNode instanceof DefinitionNode) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public void addChild(DicNode dicNode) {
 
     }

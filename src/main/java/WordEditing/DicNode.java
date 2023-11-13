@@ -1,27 +1,25 @@
 package WordEditing;
 
-import Word.WordDefinition;
+import Main.SceneControllers.Dictionary.EditWordSceneController;
 import javafx.css.PseudoClass;
 import javafx.event.EventHandler;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import org.w3c.dom.NodeList;
 
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class DicNode {
     public static List<DicNode> nodeList = new ArrayList<>();
-
+    public static List<Edge> edgeList = new ArrayList<>();
+    protected Edge edge;
     public static List<DicNode> getNodeList() {
         return nodeList;
     }
@@ -34,16 +32,18 @@ public abstract class DicNode {
     protected static boolean inConnectMode = false;
     protected boolean selected = false;
     public static PseudoClass clicked;
-    public static DicNode currentlySelected = null;
+    protected static DicNode currentlySelected = null;
+    protected static DicNode endNode = null;
     protected static boolean bulkSelect = false;
     protected DicNode parent;
     protected List<DicNode> childrenNode;
     protected VBox nodePane;
 
-    protected static DicNode endNode;
+
     protected abstract void setOptions();
 
     protected abstract void labelProperty(Label label, String styleClass);
+    protected abstract void establishLink();
     private double startX = 0;
     private double startY = 0;
     //TODO: make NodeOptions options static
@@ -52,6 +52,7 @@ public abstract class DicNode {
     public static DicNode getCurrentlySelected() {
         return currentlySelected;
     }
+    public abstract boolean checkLink();
 
     public static void setCurrentlySelected(DicNode currentlySelected) {
         DicNode.currentlySelected = currentlySelected;
@@ -92,6 +93,10 @@ public abstract class DicNode {
     }
     public VBox getNodePane() {
         return nodePane;
+    }
+
+    public static DicNode getEndNode() {
+        return endNode;
     }
 
     public void setStartX(double startX) {
@@ -152,8 +157,33 @@ public abstract class DicNode {
         nodePane.addEventHandler(MouseEvent.MOUSE_PRESSED, pressHandler);
         nodePane.addEventHandler(MouseEvent.MOUSE_DRAGGED, dragHandler);
         nodePane.addEventHandler(MouseEvent.MOUSE_RELEASED, mouseReleaseHandler);
+        nodePane.addEventHandler(MouseEvent.DRAG_DETECTED, dragDetected);
         options.getDelete().setOnAction(event -> {
             selfDelete();
+        });
+
+        nodePane.setOnMouseDragEntered(event -> {
+                if (this != currentlySelected) {
+                    if (endNode != null) {
+                        deselect(endNode);
+                    }
+                    endNode = this;
+                    select(endNode);
+                    if (currentlySelected.checkLink()) {
+                        EditWordSceneController.temporaryLine.setStroke(Color.GREEN);
+                        System.out.println("VALID");
+                    } else {
+                        System.out.println("INVALID");
+                        EditWordSceneController.temporaryLine.setStroke(Color.RED);
+                    }
+//                    System.out.println("Mouse drag entered: " + nodePane.toString());
+//                    System.out.println(currentlySelected.getNodePane().toString());
+                }
+        });
+
+        nodePane.setOnMouseDragExited(dragEvent -> {
+            EditWordSceneController.temporaryLine.setStroke(Color.BLACK);
+            endNode = null;
         });
     }
 
@@ -166,7 +196,8 @@ public abstract class DicNode {
                 deselectAll();
                 select(DicNode.this);
                 DicNode.currentlySelected = DicNode.this;
-                System.out.println(nodePane.toString());
+//                System.out.println("Mouse pressed on" + nodePane.toString());
+//                System.out.println(currentlySelected.getNodePane().toString());
             } else if (event.getButton() == MouseButton.PRIMARY) {
                 //Handling dragging obbject mode
                 event.consume();
@@ -193,7 +224,13 @@ public abstract class DicNode {
         @Override
         public void handle(MouseEvent event) {
             if (inConnectMode) {
-                System.out.println(nodePane.toString());
+//                select(endNode);
+//                System.out.println("Mouse released "  + nodePane.toString());
+//                System.out.println(currentlySelected.getNodePane().toString());
+                if (checkLink()) {
+                    System.out.println("ESTABLISHED LINK");
+                    establishLink();
+                }
             } else if (event.getButton() == MouseButton.SECONDARY) {
                 event.consume();
                 options.getOptions().show(nodePane, Side.BOTTOM, 0, 0);
@@ -209,6 +246,30 @@ public abstract class DicNode {
         }
     };
 
+    EventHandler<MouseEvent> mouseEnterHandler = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+//            if (inConnectMode) {
+//                if (DicNode.this != currentlySelected) {
+//                    if (endNode != null) {
+//                        deselect(endNode);
+//                    }
+//                    endNode = DicNode.this;
+//
+////                    System.out.println(DicNode.this.getNodePane().toString());
+//                }
+//            }
+        }
+    };
+
+    EventHandler<MouseEvent> dragDetected = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+            if (inConnectMode) {
+                nodePane.startFullDrag();
+            }
+        }
+    };
     EventHandler<MouseEvent> dragHandler = new EventHandler<MouseEvent>() {
 
         @Override
@@ -239,20 +300,8 @@ public abstract class DicNode {
         }
     };
 
-    EventHandler<MouseEvent> mouseEnterHandler = new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent event) {
-            if (inConnectMode) {
-                if (DicNode.this != currentlySelected) {
-                    if (endNode != null) {
-                        deselect(endNode);
-                    }
-                    endNode = DicNode.this;
-                    select(endNode);
-                }
-            }
-        }
-    };
+//    protected abstract void linkingRule();
+
 
 
 
@@ -260,6 +309,17 @@ public abstract class DicNode {
         if (!nodeList.isEmpty()) {
             for (DicNode node : nodeList) {
                 deselect(node);
+            }
+            bulkSelect = false;
+        }
+    }
+
+    public static void deselectAllExcept(DicNode excludeNode) {
+        if (!nodeList.isEmpty()) {
+            for (DicNode node : nodeList) {
+                if (node != excludeNode) {
+                    deselect(node);
+                }
             }
             bulkSelect = false;
         }

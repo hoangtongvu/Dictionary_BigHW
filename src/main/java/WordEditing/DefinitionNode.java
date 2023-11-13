@@ -3,7 +3,7 @@ package WordEditing;
 import Word.WordDefinition;
 import javafx.scene.control.Label;
 
-public class DefinitionNode extends DicNode {
+        public class DefinitionNode extends DicNode {
     private WordDefinition content;
     private Label contentLabel;
 
@@ -31,6 +31,30 @@ public class DefinitionNode extends DicNode {
         setStyleSheet(label);
         setStyleClass(label, styleClass);
         contentLabel.prefWidthProperty().bind(nodePane.prefWidthProperty());
+    }
+
+    @Override
+    protected void establishLink() {
+        if (endNode instanceof DescriptionNode) {
+            System.out.println("Des - Def");
+        } else if (endNode instanceof ExampleNode) {
+            System.out.println("Des - Ex");
+        } else if (endNode instanceof PhraseNode) {
+            System.out.println("Def - Phr");
+        }
+    }
+
+    @Override
+    public boolean checkLink() {
+        if (endNode instanceof ExampleNode) {
+            return true;
+        } else if (endNode instanceof DescriptionNode){
+            return true;
+        } else if (endNode instanceof PhraseNode) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

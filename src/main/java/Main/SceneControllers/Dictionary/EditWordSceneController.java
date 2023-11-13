@@ -7,6 +7,7 @@ import javafx.geometry.Side;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
@@ -24,7 +25,7 @@ public class EditWordSceneController {
     //TODO: Remove wordSceneNodeList in wordSceneNode
 
     protected AnchorPane canvasPane;
-    protected static Line temporaryLine;
+    public static Line temporaryLine;
     static int selectedNodeCount = 0;
     static final NodeOptions options = new NodeOptions();
 
@@ -68,6 +69,7 @@ public class EditWordSceneController {
         canvas.getContent().addEventHandler(MouseEvent.MOUSE_PRESSED, mousePressHandler);
         canvas.getContent().addEventHandler(MouseEvent.MOUSE_DRAGGED, mouseDragHandler);
         canvas.getContent().addEventHandler(MouseEvent.MOUSE_RELEASED, mouseReleaseHandler);
+        canvas.getContent().addEventHandler(MouseEvent.DRAG_DETECTED, dragDetected);
         canvas.addEventHandler(KeyEvent.KEY_PRESSED, keyPressHandler);
         ((AnchorPane) canvas.getContent()).getChildren().add(temporaryLine);
     }
@@ -111,10 +113,12 @@ public class EditWordSceneController {
         public void handle(MouseEvent event) {
             if (DicNode.isInConnectMode()) {
 //                temporaryLine.toFront();
-                temporaryLine.setStartX(DicNode.getCurrentlySelected().getNodePane().getLayoutX());
-                temporaryLine.setStartY(DicNode.getCurrentlySelected().getNodePane().getLayoutY());
-                temporaryLine.setEndX(DicNode.getCurrentlySelected().getNodePane().getLayoutX());
-                temporaryLine.setEndY(DicNode.getCurrentlySelected().getNodePane().getLayoutY());
+                DicNode.deselectAllExcept(DicNode.getCurrentlySelected());
+                VBox tmp = DicNode.getCurrentlySelected().getNodePane();
+                temporaryLine.setStartX(tmp.getLayoutX() + tmp.getWidth()/2);
+                temporaryLine.setStartY(tmp.getLayoutY() + tmp.getHeight()/2);
+                temporaryLine.setEndX(tmp.getLayoutX());
+                temporaryLine.setEndY(tmp.getLayoutY());
                 temporaryLine.setVisible(true);
             } else if (event.getButton() == MouseButton.PRIMARY) {
                 DicNode.deselectAll();
@@ -128,12 +132,24 @@ public class EditWordSceneController {
         }
     };
 
+    EventHandler<MouseEvent> dragDetected = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+
+        }
+    };
+
     EventHandler<MouseEvent> mouseDragHandler = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
             if (DicNode.isInConnectMode()) {
-                temporaryLine.setEndX(event.getX());
-                temporaryLine.setEndY(event.getY());
+                if (DicNode.getEndNode() != null) {
+                    temporaryLine.setEndX(DicNode.getEndNode().getNodePane().getLayoutX() + DicNode.getEndNode().getNodePane().getWidth()/2);
+                    temporaryLine.setEndY(DicNode.getEndNode().getNodePane().getLayoutY() + DicNode.getEndNode().getNodePane().getHeight()/2);
+                } else {
+                    temporaryLine.setEndX(event.getX());
+                    temporaryLine.setEndY(event.getY());
+                }
             } else if (event.getButton() == MouseButton.PRIMARY) {
                 double currentX = event.getX();
                 double currentY = event.getY();
@@ -166,6 +182,9 @@ public class EditWordSceneController {
         public void handle(MouseEvent event) {
             if (DicNode.isInConnectMode()) {
                 temporaryLine.setVisible(false);
+                for (Edge edge : DicNode.edgeList) {
+                    ((AnchorPane) canvas.getContent()).getChildren().add(edge.getLine());
+                }
             } else if (event.getButton() == MouseButton.SECONDARY) {
                 selectionRectangle.setLayoutX(event.getX());
                 selectionRectangle.setLayoutY(event.getY());
