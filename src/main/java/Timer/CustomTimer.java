@@ -6,7 +6,7 @@ import CustomEventPackage.ZeroParameter.CustomEvent;
 public class CustomTimer
 {
 
-    public final CustomEventPackage.OneParameters.CustomEvent<Integer> onTickEvent;
+    public final CustomEventPackage.OneParameter.CustomEvent<Integer> onTickEvent;
     public final CustomEvent onStopEvent;
 
     private Timer timer;
@@ -30,7 +30,7 @@ public class CustomTimer
     {
         this.maxTimeSecond = 0;
 
-        this.onTickEvent = new CustomEventPackage.OneParameters.CustomEvent<>(this);
+        this.onTickEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
         this.onStopEvent = new CustomEvent(this);
     }
 
@@ -38,7 +38,7 @@ public class CustomTimer
     {
         this.maxTimeSecond = maxTimeSecond;
 
-        this.onTickEvent = new CustomEventPackage.OneParameters.CustomEvent<>(this);
+        this.onTickEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
         this.onStopEvent = new CustomEvent(this);
 
     }

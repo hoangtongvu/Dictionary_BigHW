@@ -1,4 +1,4 @@
-package CustomEventPackage.OneParameters;
+package CustomEventPackage.OneParameter;
 
 import CustomEventPackage.CustomEventAbstract;
 import java.util.ArrayList;
