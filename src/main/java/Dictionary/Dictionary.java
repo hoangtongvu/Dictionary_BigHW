@@ -53,8 +53,4 @@ public class Dictionary
         int lastPos = this.wordBlockList.size();
         return this.wordBlockList.get(lastPos - 1);
     }
-    
-
-    
-
 }

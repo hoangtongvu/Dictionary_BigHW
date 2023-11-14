@@ -7,11 +7,18 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WordDefinition 
-{
+public class WordDefinition {
     private String prefixSymbol = "▶ ";
     private String definition;
     private List<WordExample> exampleList;
+
+    public WordDefinition() {
+
+    }
+
+    public WordDefinition(String definition) {
+        this.definition = definition;
+    }
 
     public String getDefinition() {
         return definition;

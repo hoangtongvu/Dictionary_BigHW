@@ -30,7 +30,4 @@ module MainGroup.application {
     exports CustomEventPackage.TwoParameters;
     opens CustomEventPackage.TwoParameters to javafx.fxml;
 
-
-
-
 }

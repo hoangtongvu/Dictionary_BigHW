@@ -19,7 +19,7 @@ public class App extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         Parent root;
-        //root = FXMLLoader.load(getClass().getResource("/fxml/application/MainScene.fxml"));
+        //root = FXMLLoader.load(getClass().getResource("/fxml/application/DictionaryScene.fxml"));
         root = FxmlFileManager.getInstance().homeScene;
         Scene scene = new Scene(root);
 

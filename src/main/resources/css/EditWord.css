@@ -1,0 +1,40 @@
+.option-bar {
+    -fx-background-color: grey;
+}
+
+.anchor-pane {
+    -fx-background-color: #2f2f2f;
+}
+
+.selectionRectangle {
+    -fx-fill: rgb(126, 255, 255,0.3);
+    -fx-stroke: #2f2f2f;
+    -fx-stroke-width: 1;
+}
+
+.node-pane {
+    -fx-min-width: 200;
+    -fx-background-color: #ffffff;
+    -fx-border-style: solid;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+}
+
+/*noinspection CssInvalidPseudoSelector*/
+.node-pane:clicked {
+    -fx-background-color: #426A70FF;
+    -fx-border-color: #006d79;
+}
+
+.node-title {
+
+    -fx-background-color: #ffee92;
+    -fx-text-fill: #000000;
+    -fx-alignment: center;
+}
+
+.node-content {
+    -fx-alignment: baseline-left;
+}
+
+

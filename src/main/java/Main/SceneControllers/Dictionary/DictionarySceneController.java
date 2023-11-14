@@ -22,7 +22,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 
-public class MainSceneController implements Initializable {
+public class DictionarySceneController implements Initializable {
 
     //private Timer timer;
     //private TimerTask timerTask;
@@ -66,7 +66,6 @@ public class MainSceneController implements Initializable {
     public void setupWebView(String content) {
         String encoding = "<meta charset=\"UTF-8\">";
         webEngine.loadContent("<html><body>" + styleSheet + encoding + content + "</body></html>");
-        System.out.println("<html><body>" + styleSheet + encoding + content + "</body></html>");
     }
 
     @FXML
@@ -82,6 +81,7 @@ public class MainSceneController implements Initializable {
 
         String text = searchBar.getText();
         if (text.isEmpty()) return;
+        text = text.toLowerCase();
         this.possibleSuggestions = DicManager.getInstance().getDicWordSearcher().Search(text);
     }
 
@@ -109,7 +109,8 @@ public class MainSceneController implements Initializable {
         );
         
         auto.setDelay(50);
-        
+
+
         //sync width with textField
         auto.prefWidthProperty().bind(searchBar.widthProperty());
 
