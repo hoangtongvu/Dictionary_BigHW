@@ -51,6 +51,12 @@ public class HomeSceneController {
         this.SwitchScene(FxmlFileManager.getInstance().chooseGameScene);
     }
 
+    @FXML
+    public void onTranslateButton(ActionEvent event) throws IOException {
+        this.SwitchScene(FxmlFileManager.getInstance().translateScene);
+
+    }
+
     /**Activate drawer menu translateTransition for drawer menu, fadeTransition for blurPane.*/
     @FXML
     protected void onMenuButton() {
