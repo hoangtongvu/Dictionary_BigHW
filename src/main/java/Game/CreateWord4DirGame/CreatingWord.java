@@ -36,9 +36,12 @@ public class CreatingWord
 
     public void Reset()
     {
-        this.result = this.GetRandomWordFromDictionary();
+        //todo init hint.
+        //this.result = this.GetRandomWordFromDictionary();
+        WordBlock wordBlock = this.GetRandomWordBlockFromDictionary();
+        this.InitResultWord(wordBlock);
+        this.InitHint(wordBlock);
         this.InitFirstChar4CurrentCreatingWord();
-        this.hint = "";//todo later
         this.ResetCurrentCharPos();
         //this.GenerateChoiceChars();
         this.choiceChars = GetChoiceChars();
@@ -54,18 +57,28 @@ public class CreatingWord
     }
 
 
-    public void ResetCurrentCharPos() { this.currentCharPos = 0; }
+    private void ResetCurrentCharPos() { this.currentCharPos = 0; }
 
-    public void InitFirstChar4CurrentCreatingWord()
+    private void InitFirstChar4CurrentCreatingWord()
     {
         this.word = "" + result.charAt(0);
     }
 
-    public String GetRandomWordFromDictionary()
+    private void InitResultWord(WordBlock wordBlock)
+    {
+        this.result = wordBlock.getWord().toUpperCase().strip();
+    }
+
+    private void InitHint(WordBlock wordBlock)
+    {
+        //this.hint = wordBlock.getDefinition;
+    }
+
+    public WordBlock GetRandomWordBlockFromDictionary()
     {
         Random rand = new Random();
         int randIndex = rand.nextInt(0, this.wordBlocksSize);
-        return this.wordBlocks.get(randIndex).getWord().toUpperCase().strip();
+        return this.wordBlocks.get(randIndex);
     }
 
     public char[] GetChoiceChars()
