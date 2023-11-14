@@ -12,10 +12,16 @@ module MainGroup.application {
 
     exports Main.SceneControllers.Dictionary;
     opens Main.SceneControllers.Dictionary to javafx.fxml;
+
     exports Main.SceneControllers.Game.MultiChoiceGame;
     opens Main.SceneControllers.Game.MultiChoiceGame to javafx.fxml;
+
     exports Main.SceneControllers.Game;
     opens Main.SceneControllers.Game to javafx.fxml;
+
+    exports Main.SceneControllers.Game.CreateWord4DirGame;
+    opens Main.SceneControllers.Game.CreateWord4DirGame to javafx.fxml;
+
 
     exports CustomEventPackage.OneParameter;
     opens CustomEventPackage.OneParameter to javafx.fxml;
