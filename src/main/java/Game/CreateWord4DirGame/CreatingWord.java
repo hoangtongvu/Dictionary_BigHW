@@ -2,7 +2,10 @@ package Game.CreateWord4DirGame;
 
 
 import Word.WordBlock;
+import Word.WordDefinition;
+import Word.WordDescription;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
 
@@ -23,6 +26,10 @@ public class CreatingWord
 
     public String getResult() {
         return this.result;
+    }
+
+    public String getHint() {
+        return hint;
     }
 
     public CreatingWord(CreateWord4DirGameManager gameManager, List<WordBlock> wordBlocks, int wordBlocksSize)
@@ -71,7 +78,14 @@ public class CreatingWord
 
     private void InitHint(WordBlock wordBlock)
     {
-        //this.hint = wordBlock.getDefinition;
+        try {
+            wordBlock.loadData(wordBlock.getWordID());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        List<WordDescription> wordDescriptions = wordBlock.getDescriptionsList();
+        List<WordDefinition> wordDefinitions = wordDescriptions.get(0).getDefinitionList();
+        this.hint = "[" + wordDescriptions.get(0).getWordType() + "] " + wordDefinitions.get(0).getDefinition();
     }
 
     public WordBlock GetRandomWordBlockFromDictionary()
@@ -199,5 +213,6 @@ public class CreatingWord
     {
         return this.Convert_chars_to_Characters(this.choiceChars);
     }
+
 
 }

@@ -14,15 +14,15 @@ public class CreateWord4DirGameManager
 
     private int finalPoint;
 
-    private int defaultAddPoint;
-    private int defaultDeductPoint;
+    private final int defaultAddPoint;
+    private final int defaultDeductPoint;
 
 
     public final CustomEventPackage.OneParameter.CustomEvent<String> onCreatingWordChangeEvent;
+    public final CustomEventPackage.OneParameter.CustomEvent<String> onHintChangeEvent;
     public final CustomEventPackage.OneParameter.CustomEvent<Character[]> onChoiceCharsChangeEvent;
     public final CustomEventPackage.OneParameter.CustomEvent<Integer> onFinalPointChangeEvent;
-    //public final CustomEvent onChoosingCorrectChar;
-    //public final CustomEvent onChoosingIncorrectChar;
+
 
 
     private void setFinalPoint(int finalPoint) {
@@ -43,10 +43,10 @@ public class CreateWord4DirGameManager
 
 
         this.onCreatingWordChangeEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
+        this.onHintChangeEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
         this.onChoiceCharsChangeEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
         this.onFinalPointChangeEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
-        //this.onChoosingCorrectChar = new CustomEvent(this);
-        //this.onChoosingIncorrectChar = new CustomEvent(this);
+
     }
 
     public void Start()
@@ -94,6 +94,7 @@ public class CreateWord4DirGameManager
         System.out.println("[WORD] " + creatingWord.getResult());
 
         this.onCreatingWordChangeEvent.Invoke(this, creatingWord.getCurrentCreatingWord());
+        this.onHintChangeEvent.Invoke(this, creatingWord.getHint());
         this.onChoiceCharsChangeEvent.Invoke(this, creatingWord.GetChoiceCharacters());
     }
 

@@ -82,6 +82,7 @@ public class GameSceneController implements Initializable
         gameManager.onChoiceCharsChangeEvent.AddListener(this::UpdateChoiceTexts);
         gameManager.onCreatingWordChangeEvent.AddListener(this::UpdateWordText);
         gameManager.onFinalPointChangeEvent.AddListener(this::UpdateFinalPointText);
+        gameManager.onHintChangeEvent.AddListener(this::UpdateHintText);
     }
 
     private void SetKeyBoardEvent()
@@ -178,5 +179,10 @@ public class GameSceneController implements Initializable
     private void UpdateFinalPointText(int finalPoint)
     {
         this.finalPointText.setText("Point: " + finalPoint);
+    }
+
+    private void UpdateHintText(String text)
+    {
+        this.hintText.setText(text);
     }
 }
