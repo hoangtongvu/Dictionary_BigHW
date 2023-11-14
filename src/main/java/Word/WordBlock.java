@@ -77,7 +77,6 @@ public class WordBlock implements Comparable<WordBlock> {
             String query = "SELECT * FROM description where word_id =" + wordID;
             ResultSet resultSet = statement.executeQuery(query);
 
-
             while (resultSet.next()) {
                 wordDescription = new WordDescription();
                 wordDescription.loadData(resultSet.getString("description_id"));

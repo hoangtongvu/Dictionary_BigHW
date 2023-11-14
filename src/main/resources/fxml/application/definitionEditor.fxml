@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="240.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="61.0" layoutY="25.0" prefHeight="26.0" prefWidth="197.0" style="-fx-background-color: pink; -fx-alignment: center;" text="DEFINITION" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <TextField layoutX="8.0" layoutY="65.0" prefHeight="144.0" prefWidth="223.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="9.0" />
       <Label layoutX="7.0" layoutY="41.0" prefHeight="17.0" prefWidth="65.0" text="Definition" AnchorPane.leftAnchor="14.0" />
+      <TextArea layoutX="20.0" layoutY="65.0" prefHeight="90.0" prefWidth="212.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
    </children>
 </AnchorPane>
