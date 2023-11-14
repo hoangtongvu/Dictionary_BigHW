@@ -33,7 +33,7 @@ public class FxmlFileManager
     {
         try
         {
-            this.root = FXMLLoader.load(getClass().getResource("/fxml/application/MainScene.fxml"));
+            this.root = FXMLLoader.load(getClass().getResource("/fxml/application/DictionaryScene.fxml"));
             this.homeScene = FXMLLoader.load(getClass().getResource("/fxml/application/HomeScene.fxml"));
 
 
