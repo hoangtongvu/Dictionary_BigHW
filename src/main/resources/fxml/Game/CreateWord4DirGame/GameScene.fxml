@@ -81,7 +81,7 @@
             </Text>
          </children>
       </GridPane>
-      <Text fx:id="wordText" layoutX="50.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WORD" textAlignment="CENTER" wrappingWidth="498.1366882324219" AnchorPane.topAnchor="14.0">
+      <Text fx:id="wordText" layoutX="75.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WORD" textAlignment="CENTER" wrappingWidth="450.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font size="24.0" />
          </font>
