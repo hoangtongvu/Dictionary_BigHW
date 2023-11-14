@@ -129,6 +129,7 @@ public abstract class DicNode {
 
     protected void updateFromChild() {//child node is 'this' and update to parent
         if (parent != null) {
+            lineToParent.setStrokeWidth(1.5);
             lineToParent.setStartX(nodePane.getLayoutX() + nodePane.getWidth()/2);
             lineToParent.setStartY(nodePane.getLayoutY() + nodePane.getHeight()/2);
             lineToParent.setEndX(parent.getNodePane().getLayoutX() + parent.getNodePane().getWidth()/2);

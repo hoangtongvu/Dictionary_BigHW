@@ -3,7 +3,7 @@ package WordEditing;
 import Word.WordDefinition;
 import javafx.scene.control.Label;
 
-        public class DefinitionNode extends DicNode {
+public class DefinitionNode extends DicNode {
     private WordDefinition content;
     private Label contentLabel;
 

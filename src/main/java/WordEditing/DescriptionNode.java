@@ -1,12 +1,13 @@
 package WordEditing;
 
 import Word.WordDefinition;
+import Word.WordDescription;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Line;
 
 public class DescriptionNode extends DicNode {
-    private WordDefinition definition;
+    private WordDescription description;
     private Label definitionLabel;
 
 
@@ -14,8 +15,8 @@ public class DescriptionNode extends DicNode {
         super("Description");
         setOptions();
 
-        definition = new WordDefinition("<EMPTY>");
-        definitionLabel = new Label("Word type: " + definition.getDefinition());
+        description = new WordDescription("<EMPTY>");
+        definitionLabel = new Label("Word type: " + description.getWordType());
         labelProperty(definitionLabel, "node-content");
         nodePane.getChildren().add(definitionLabel);
 
@@ -27,12 +28,12 @@ public class DescriptionNode extends DicNode {
 //        });
     }
 
-    public WordDefinition getDefinition() {
-        return definition;
+    public WordDescription getDescription() {
+        return description;
     }
 
-    public void setDefinition(WordDefinition definition) {
-        this.definition = definition;
+    public void setDefinition(WordDescription description) {
+        this.description = description;
     }
 
 

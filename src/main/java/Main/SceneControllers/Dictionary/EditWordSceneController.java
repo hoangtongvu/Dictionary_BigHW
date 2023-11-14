@@ -24,8 +24,6 @@ public class EditWordSceneController {
     private double mouseStartY;
     @FXML
     private Rectangle selectionRectangle;
-    //TODO: Get selected attribute to here instead of in wordScene node, this is more of a front end thing
-    //TODO: Remove wordSceneNodeList in wordSceneNode
 
     protected AnchorPane canvasPane;
     public static Line temporaryLine;
@@ -39,6 +37,7 @@ public class EditWordSceneController {
     public void initialize() {
         temporaryLine = new Line();
         temporaryLine.setVisible(false);
+        temporaryLine.setStrokeWidth(1.5);
         options.getOptions().getItems().addAll(
                 options.getConnect(),
                 options.getDelete(),
