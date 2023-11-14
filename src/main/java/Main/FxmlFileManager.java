@@ -1,5 +1,6 @@
 package Main;
 
+import Main.SceneControllers.Game.MultiChoiceGame.GameSceneController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
@@ -19,6 +20,11 @@ public class FxmlFileManager
 
     public final Parent root;
     public final Parent homeScene;
+
+
+    public final Parent chooseGameScene;
+    public final GameSceneController multiChoiceGameSceneController;
+    public final Parent multiChoiceGameStartScene;
     public final Parent multiChoiceWordGameScene;
     public final Parent editWordScene;
 
@@ -27,10 +33,22 @@ public class FxmlFileManager
     {
         try
         {
-            this.root                       = FXMLLoader.load(getClass().getResource("/fxml/application/DictionaryScene.fxml"));
-            this.homeScene                  = FXMLLoader.load(getClass().getResource("/fxml/application/HomeScene.fxml"));
-            this.multiChoiceWordGameScene   = FXMLLoader.load(getClass().getResource("/fxml/application/GameScene.fxml"));
-            this.editWordScene              = FXMLLoader.load(getClass().getResource("/fxml/application/EditWord.fxml"));
+            this.root = FXMLLoader.load(getClass().getResource("/fxml/application/MainScene.fxml"));
+            this.homeScene = FXMLLoader.load(getClass().getResource("/fxml/application/HomeScene.fxml"));
+
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Game/MultiChoiceGame/GameScene.fxml"));
+            this.multiChoiceWordGameScene = loader.load();
+            this.multiChoiceGameSceneController = loader.getController();
+
+            loader = new FXMLLoader(getClass().getResource("/fxml/Game/MultiChoiceGame/StartGameScreenScene.fxml"));
+            this.multiChoiceGameStartScene = loader.load();
+
+            loader = new FXMLLoader(getClass().getResource("/fxml/Game/ChooseGameScene.fxml"));
+            this.chooseGameScene = loader.load();
+
+            loader = new FXMLLoader(getClass().getResource("/fxml/application/EditWord.fxml"));
+            this.editWordScene = loader.load();
         }
         catch (IOException e)
         {

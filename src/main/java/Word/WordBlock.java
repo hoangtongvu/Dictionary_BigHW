@@ -13,6 +13,7 @@ public class WordBlock implements Comparable<WordBlock> {
     private List<WordDescription> descriptionsList;
     private static WordDescription wordDescription = null;
     private String wordID = "";
+    private boolean loadStatus = false;
 
     public String getWordID() {
         return wordID;
@@ -71,16 +72,20 @@ public class WordBlock implements Comparable<WordBlock> {
     }
 
     public void loadData(String wordID) throws SQLException {
-        Statement statement = Database.getConnection().createStatement();
-        String query = "SELECT * FROM description where word_id =" + wordID;
-        ResultSet resultSet = statement.executeQuery(query);
+        if (!loadStatus) {
+            Statement statement = Database.getConnection().createStatement();
+            String query = "SELECT * FROM description where word_id =" + wordID;
+            ResultSet resultSet = statement.executeQuery(query);
 
 
-        while (resultSet.next()) {
-            wordDescription = new WordDescription();
-            wordDescription.loadData(resultSet.getString("description_id"));
-            addDescription(wordDescription);
+            while (resultSet.next()) {
+                wordDescription = new WordDescription();
+                wordDescription.loadData(resultSet.getString("description_id"));
+                addDescription(wordDescription);
+            }
         }
+        loadStatus = false;
+
     }
 
 

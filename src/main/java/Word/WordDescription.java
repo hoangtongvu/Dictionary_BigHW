@@ -61,7 +61,7 @@ public class WordDescription {
             }
         }
 
-        return "<div class = \"descripition\"> " + wordTypeFormat + body + " </div>";
+        return "<div class = \"description\"> " + wordTypeFormat + body + " </div>";
     }
 
     public void loadData(String descriptionID) throws SQLException {

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import scenebuilderextended.components.choicegameextendedcomponents.ChoiceGameGridPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Game.MultiChoiceGame.GameSceneController">
+   <children>
+      <Button fx:id="nextButton" layoutX="753.0" layoutY="379.0" mnemonicParsing="false" onAction="#MoveToNextQuestion" prefHeight="34.0" prefWidth="78.0" text="Next" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <StackPane layoutX="725.0" layoutY="354.0" prefHeight="34.0" prefWidth="78.0" AnchorPane.bottomAnchor="100.0" AnchorPane.rightAnchor="50.0">
+         <children>
+            <Button fx:id="endGameButton" mnemonicParsing="false" onAction="#EndGameButton" prefHeight="34.0" prefWidth="77.0" text="End Game">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="endReviewButton" disable="true" mnemonicParsing="false" onAction="#EndReview" prefHeight="53.0" prefWidth="78.0" text="End Review" visible="false" />
+         </children>
+      </StackPane>
+      <ProgressBar fx:id="answeredProgress" layoutX="30.0" layoutY="387.0" prefHeight="18.0" prefWidth="634.0" progress="0.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" />
+      <VBox layoutX="50.0" layoutY="111.0" prefHeight="194.0" prefWidth="319.0" AnchorPane.leftAnchor="50.0">
+         <children>
+            <CheckBox fx:id="answerA" mnemonicParsing="false" onAction="#ChooseAnswerA" prefHeight="34.0" prefWidth="518.0" text="A">
+               <VBox.margin>
+                  <Insets left="15.0" top="7.0" />
+               </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </CheckBox>
+            <CheckBox fx:id="answerB" mnemonicParsing="false" onAction="#ChooseAnswerB" prefHeight="34.0" prefWidth="518.0" text="B">
+               <VBox.margin>
+                  <Insets left="15.0" top="7.0" />
+               </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </CheckBox>
+            <CheckBox fx:id="answerC" mnemonicParsing="false" onAction="#ChooseAnswerC" prefHeight="34.0" prefWidth="518.0" text="C">
+               <VBox.margin>
+                  <Insets left="15.0" top="7.0" />
+               </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </CheckBox>
+            <CheckBox fx:id="answerD" mnemonicParsing="false" onAction="#ChooseAnswerD" prefHeight="34.0" prefWidth="518.0" text="D">
+               <VBox.margin>
+                  <Insets left="15.0" top="7.0" />
+               </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </CheckBox>
+         </children>
+      </VBox>
+      <Text fx:id="question" layoutX="52.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="634.4000000000001" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0">
+         <font>
+            <Font size="17.0" />
+         </font></Text>
+      <ChoiceGameGridPane fx:id="quesGridPane" hgap="5.0" layoutX="620.0" layoutY="114.0" prefHeight="213.0" prefWidth="184.0" vgap="5.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="120.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </ChoiceGameGridPane>
+      <Text fx:id="timerText" layoutX="669.0" layoutY="57.0" strokeType="INSIDE" strokeWidth="0.0" text="0:0" textAlignment="CENTER" wrappingWidth="184.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="80.0">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Text>
+      <VBox fx:id="answerResultVbox" layoutX="30.0" layoutY="291.0" prefHeight="98.0" prefWidth="470.0" spacing="5.0" visible="false" AnchorPane.leftAnchor="30.0">
+         <children>
+            <Text fx:id="finalQuestionStateText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Incorrect" wrappingWidth="478.13670349121094">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Text>
+            <Text fx:id="rightAnswerIfIncorrectText" layoutX="10.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Right answer is B" wrappingWidth="478.13670349121094">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
+      <Text fx:id="finalPointText" layoutX="347.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Point: 8.0" textAlignment="CENTER" visible="false" wrappingWidth="184.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="30.0">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

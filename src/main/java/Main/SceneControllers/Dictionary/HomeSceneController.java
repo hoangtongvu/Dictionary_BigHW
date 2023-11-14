@@ -46,8 +46,9 @@ public class HomeSceneController {
     }
 
     @FXML
-    public void onGameButton(ActionEvent event) throws IOException {
-        this.SwitchScene(FxmlFileManager.getInstance().multiChoiceWordGameScene);
+    public void onGameButton(ActionEvent event) throws IOException
+    {
+        this.SwitchScene(FxmlFileManager.getInstance().chooseGameScene);
     }
 
     /**Activate drawer menu translateTransition for drawer menu, fadeTransition for blurPane.*/
@@ -82,7 +83,7 @@ public class HomeSceneController {
     }
 
 
-    public void SwitchScene(Parent newScene)
+    public static void SwitchScene(Parent newScene)
     {
         Stage primaryStage = App.getPrimaryStage();
         primaryStage.getScene().setRoot(newScene);
