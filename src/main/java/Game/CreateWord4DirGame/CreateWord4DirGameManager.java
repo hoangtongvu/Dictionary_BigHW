@@ -38,7 +38,6 @@ public class CreateWord4DirGameManager
         this.InitCreatingWords(3);
         this.currentWordIndex = 0;
         this.MoveToCreatingWordAt(0);
-        this.onChoiceCharsChangeEvent.Invoke(this, creatingWords.get(this.currentWordIndex).GetChoiceCharacters());
     }
 
     public void MoveToNextCreatingWord()
