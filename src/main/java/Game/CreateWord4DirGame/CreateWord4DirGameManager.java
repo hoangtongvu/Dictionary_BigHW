@@ -12,12 +12,24 @@ public class CreateWord4DirGameManager
     private final int numberOfDicWords;
     private int currentWordIndex;
 
+    private int finalPoint;
+
+    private int defaultAddPoint;
+    private int defaultDeductPoint;
+
 
     public final CustomEventPackage.OneParameter.CustomEvent<String> onCreatingWordChangeEvent;
     public final CustomEventPackage.OneParameter.CustomEvent<Character[]> onChoiceCharsChangeEvent;
+    public final CustomEventPackage.OneParameter.CustomEvent<Integer> onFinalPointChangeEvent;
     //public final CustomEvent onChoosingCorrectChar;
     //public final CustomEvent onChoosingIncorrectChar;
 
+
+    private void setFinalPoint(int finalPoint) {
+        //trigger event.
+        this.finalPoint = finalPoint;
+        this.onFinalPointChangeEvent.Invoke(this, this.finalPoint);
+    }
 
     public CreateWord4DirGameManager()
     {
@@ -25,19 +37,49 @@ public class CreateWord4DirGameManager
 
         List<WordBlock> wordBlocks = DicManager.getInstance().getDictionary().getWordBlocks();
         this.numberOfDicWords = wordBlocks.size();
+        this.finalPoint = 0;
+        this.defaultAddPoint = 7;
+        this.defaultDeductPoint = 10;
 
 
         this.onCreatingWordChangeEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
         this.onChoiceCharsChangeEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
+        this.onFinalPointChangeEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
         //this.onChoosingCorrectChar = new CustomEvent(this);
         //this.onChoosingIncorrectChar = new CustomEvent(this);
     }
 
     public void Start()
     {
-        this.InitCreatingWords(3);
+        this.InitCreatingWords(5);
+        this.ResetPoint();
         this.currentWordIndex = 0;
         this.MoveToCreatingWordAt(0);
+    }
+
+    private void ResetPoint()
+    {
+        this.setFinalPoint(0);
+    }
+
+    public void AddPoint()
+    {
+        this.AddPoint(this.defaultAddPoint);
+    }
+
+    public void DeductPoint()
+    {
+        this.DeductPoint(this.defaultDeductPoint);
+    }
+
+    private void AddPoint(int addAmount)
+    {
+        this.setFinalPoint(this.finalPoint + addAmount);
+    }
+
+    private void DeductPoint(int deductAmount)
+    {
+        this.setFinalPoint(this.finalPoint - deductAmount);
     }
 
     public void MoveToNextCreatingWord()
@@ -49,7 +91,7 @@ public class CreateWord4DirGameManager
     {
         this.currentWordIndex = i;
         CreatingWord creatingWord = this.creatingWords.get(this.currentWordIndex);
-        System.out.println(creatingWord.getResult());
+        System.out.println("[WORD] " + creatingWord.getResult());
 
         this.onCreatingWordChangeEvent.Invoke(this, creatingWord.getCurrentCreatingWord());
         this.onChoiceCharsChangeEvent.Invoke(this, creatingWord.GetChoiceCharacters());
@@ -83,6 +125,7 @@ public class CreateWord4DirGameManager
         CreatingWord creatingWord = this.creatingWords.get(this.currentWordIndex);
         creatingWord.ChooseChar(charIndex);
     }
+
 
 
 }

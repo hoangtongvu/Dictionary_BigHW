@@ -108,7 +108,6 @@ public class CreatingWord
 
     private char GetNextChar()//
     {
-        //System.out.println(this.result.charAt(this.currentCharPos + 1));
         char nextChar = this.result.charAt(this.currentCharPos + 1);
         //if (nextChar == ' ') nextChar = '_';
         return nextChar;
@@ -139,49 +138,52 @@ public class CreatingWord
         char nextChar = this.GetNextChar();
         char choseChar = this.choiceChars[index];
 
-        // == means choose correct char.
+        // == means chose correct char.
         if (nextChar == choseChar)
         {
-            this.word += nextChar;
-            this.currentCharPos++;
+            this.OnChooseCorrectChoice();
 
-            this.gameManager.InvokeOnCreatingWordChangeEvent(this.getCurrentCreatingWord());
-
-            //todo Check if currentCharPos >= result.Length, then invoke moveToNextWordEvent.
-            System.out.println("[POS] " + this.currentCharPos + " of " + this.result.length());
+            //Only need to choose length - 1 times, so limit is length - 1.
+            //System.out.println("[POS] " + this.currentCharPos + " of " + this.result.length());
             if (this.currentCharPos >= this.result.length() - 1)
             {
                 this.gameManager.MoveToNextCreatingWord();
-                System.out.println("[MOVE TO NEXT WORD]");
+                //System.out.println("[MOVE TO NEXT WORD]");
                 return;
             }
 
         }
+        else
+        {
+            this.OnChooseIncorrectChoice();
+        }
 
 
-        // != Regenerate choiceChars.
+        //Regenerate choiceChars.
         this.GenerateChoiceChars();
 
+    }
+
+    private void OnChooseCorrectChoice()
+    {
+        this.word += this.GetNextChar();
+        this.currentCharPos++;
+
+        this.gameManager.InvokeOnCreatingWordChangeEvent(this.getCurrentCreatingWord());
+        this.gameManager.AddPoint();
+    }
+
+    private void OnChooseIncorrectChoice()
+    {
+        this.gameManager.DeductPoint();
     }
 
     private void GenerateChoiceChars()
     {
         this.choiceChars = this.GetChoiceChars();
-        System.out.println("next CHar =" + this.GetNextChar());
-        System.out.print("choice Chars =");
-        for (int i = 0; i < 4; i++) {
-            System.out.print(this.choiceChars[i] + " ");
-        }
-        System.out.println();
+        System.out.println("[NEXT CHAR] " + this.GetNextChar());
 
         Character[] characters = this.Convert_chars_to_Characters(this.choiceChars);
-
-        System.out.print("characters =");
-        for (int i = 0; i < 4; i++) {
-            System.out.print(characters[i] + " ");
-        }
-        System.out.println();
-
         this.gameManager.InvokeOnChoiceCharsChangeEvent(characters);
     }
 

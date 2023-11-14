@@ -91,5 +91,10 @@
             <Font size="18.0" />
          </font>
       </Text>
+      <Text fx:id="finalPointText" layoutX="450.0" layoutY="38.38203125" strokeType="OUTSIDE" strokeWidth="0.0" text="Point: 5" wrappingWidth="137.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="17.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

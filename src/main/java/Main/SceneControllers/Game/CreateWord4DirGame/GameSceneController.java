@@ -51,6 +51,9 @@ public class GameSceneController implements Initializable
     @FXML
     private Text wordText;
 
+    @FXML
+    private Text finalPointText;
+
     private CreateWord4DirGameCtrl gameCtrl;
 
 
@@ -78,6 +81,7 @@ public class GameSceneController implements Initializable
         CreateWord4DirGameManager gameManager = this.gameCtrl.getGameManager();
         gameManager.onChoiceCharsChangeEvent.AddListener(this::UpdateChoiceTexts);
         gameManager.onCreatingWordChangeEvent.AddListener(this::UpdateWordText);
+        gameManager.onFinalPointChangeEvent.AddListener(this::UpdateFinalPointText);
     }
 
     private void SetKeyBoardEvent()
@@ -169,5 +173,10 @@ public class GameSceneController implements Initializable
         this.rightText.setText(characters[1] + "");
         this.downText.setText(characters[2] + "");
         this.leftText.setText(characters[3] + "");
+    }
+
+    private void UpdateFinalPointText(int finalPoint)
+    {
+        this.finalPointText.setText("Point: " + finalPoint);
     }
 }
