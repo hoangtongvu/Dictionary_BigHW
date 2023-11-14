@@ -81,6 +81,7 @@ public class DictionarySceneController implements Initializable {
 
         String text = searchBar.getText();
         if (text.isEmpty()) return;
+        text = text.toLowerCase();
         this.possibleSuggestions = DicManager.getInstance().getDicWordSearcher().Search(text);
     }
 
