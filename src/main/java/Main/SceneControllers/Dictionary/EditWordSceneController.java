@@ -3,6 +3,7 @@ package Main.SceneControllers.Dictionary;
 import WordEditing.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.*;
@@ -11,8 +12,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class EditWordSceneController {
     @FXML
@@ -26,8 +29,11 @@ public class EditWordSceneController {
 
     protected AnchorPane canvasPane;
     public static Line temporaryLine;
-    static int selectedNodeCount = 0;
     static final NodeOptions options = new NodeOptions();
+
+    @FXML
+    protected AnchorPane editorPane;
+
 
     @FXML
     public void initialize() {
@@ -72,7 +78,10 @@ public class EditWordSceneController {
         canvas.getContent().addEventHandler(MouseEvent.DRAG_DETECTED, dragDetected);
         canvas.addEventHandler(KeyEvent.KEY_PRESSED, keyPressHandler);
         ((AnchorPane) canvas.getContent()).getChildren().add(temporaryLine);
+
     }
+
+
 
     @FXML
     public void addDescription() {
@@ -178,6 +187,34 @@ public class EditWordSceneController {
         }
     };
 
+    public void setAnchor(AnchorPane editorPane) {
+        AnchorPane.setBottomAnchor(editorPane, 0d);
+        AnchorPane.setTopAnchor(editorPane, 0d);
+        AnchorPane.setRightAnchor(editorPane, 0d);
+        AnchorPane.setLeftAnchor(editorPane, 0d);
+
+    }
+
+    public void switchScene() {
+        if (DicNode.getCurrentlySelected() instanceof DescriptionNode) {
+            setAnchor(DicNode.getDescriptionEditor());
+            editorPane.getChildren().clear();
+            editorPane.getChildren().add(DicNode.getDescriptionEditor());
+        } else if (DicNode.getCurrentlySelected() instanceof ExampleNode) {
+                setAnchor(DicNode.getExampleEditor());
+                editorPane.getChildren().clear();
+                editorPane.getChildren().add(DicNode.getExampleEditor());
+        } else if (DicNode.getCurrentlySelected() instanceof DefinitionNode) {
+            setAnchor(DicNode.getDefinitionEditor());
+            editorPane.getChildren().clear();
+            editorPane.getChildren().add(DicNode.getDefinitionEditor());
+        } else {
+            setAnchor(DicNode.getPhraseEditor());
+            editorPane.getChildren().clear();
+            editorPane.getChildren().add(DicNode.getPhraseEditor());
+        }
+    }
+
     EventHandler<MouseEvent> mouseReleaseHandler = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
@@ -191,6 +228,8 @@ public class EditWordSceneController {
                     options.getOptions().show(selectionRectangle, Side.BOTTOM, 0 , 0);
                 }
                 canvas.setPannable(false);
+            } else if (event.getButton() == MouseButton.PRIMARY) {
+                switchScene();
             }
 
 
@@ -221,7 +260,6 @@ public class EditWordSceneController {
             }
         }
     };
-
 
 
     // This method resets the selection rectangle to its initial state

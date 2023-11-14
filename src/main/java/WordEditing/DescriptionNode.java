@@ -1,13 +1,15 @@
 package WordEditing;
 
 import Word.WordDefinition;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Line;
 
 public class DescriptionNode extends DicNode {
     private WordDefinition definition;
     private Label definitionLabel;
-    private Line temporaryLine;
+
+
     public DescriptionNode() {
         super("Description");
         setOptions();

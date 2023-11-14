@@ -3,6 +3,7 @@ package WordEditing;
 import Main.SceneControllers.Dictionary.EditWordSceneController;
 import javafx.css.PseudoClass;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -14,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +46,26 @@ public abstract class DicNode {
     protected VBox nodePane;
     protected Line lineToParent = new Line();
 
+    protected static AnchorPane descriptionEditor;
+    protected static AnchorPane phraseEditor;
+    protected static AnchorPane definitionEditor;
+    protected static AnchorPane exampleEditor;
 
+    public static AnchorPane getDescriptionEditor() {
+        return descriptionEditor;
+    }
+
+    public static AnchorPane getExampleEditor() {
+        return exampleEditor;
+    }
+
+    public static AnchorPane getPhraseEditor() {
+        return phraseEditor;
+    }
+
+    public static AnchorPane getDefinitionEditor() {
+        return definitionEditor;
+    }
 
     protected abstract void setOptions();
 
@@ -148,10 +169,6 @@ public abstract class DicNode {
         }
     }
 
-    protected void updateALlConnected() {
-
-    }
-
     public DicNode() {
 
     }
@@ -224,7 +241,6 @@ public abstract class DicNode {
         nodePane.getChildren().add(title);
         nodePane.setLayoutX(0);
         nodePane.setLayoutY(0);
-        nodePane.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseEnterHandler);
         nodePane.addEventHandler(MouseEvent.MOUSE_PRESSED, pressHandler);
         nodePane.addEventHandler(MouseEvent.MOUSE_DRAGGED, dragHandler);
         nodePane.addEventHandler(MouseEvent.MOUSE_RELEASED, mouseReleaseHandler);
@@ -256,7 +272,17 @@ public abstract class DicNode {
             EditWordSceneController.temporaryLine.setStroke(Color.BLACK);
             endNode = null;
         });
+
+        try {
+            descriptionEditor = FXMLLoader.load(getClass().getResource("/fxml/application/descriptionEditor.fxml"));
+            exampleEditor = FXMLLoader.load(getClass().getResource("/fxml/application/exampleEditor.fxml"));
+            phraseEditor = FXMLLoader.load(getClass().getResource("/fxml/application/phraseEditor.fxml"));
+            definitionEditor = FXMLLoader.load(getClass().getResource("/fxml/application/definitionEditor.fxml"));
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
+
 
 
     EventHandler<MouseEvent> pressHandler = new EventHandler<MouseEvent>() {
@@ -269,6 +295,7 @@ public abstract class DicNode {
                 DicNode.currentlySelected = DicNode.this;
 //                System.out.println("Mouse pressed on" + nodePane.toString());
 //                System.out.println(currentlySelected.getNodePane().toString());
+
             } else if (event.getButton() == MouseButton.PRIMARY) {
                 //Handling dragging obbject mode
                 event.consume();
@@ -281,6 +308,7 @@ public abstract class DicNode {
                     currentlySelected = DicNode.this;
                     DicNode.select(currentlySelected);
                 } else if (bulkSelect) {
+                    event.consume();
                     for (DicNode dicNode : nodeList) {
                         dicNode.setStartX(event.getSceneX() - dicNode.getNodePane().getLayoutX());
                         dicNode.setStartY(event.getSceneY() - dicNode.getNodePane().getLayoutY());
@@ -309,27 +337,11 @@ public abstract class DicNode {
                 select(DicNode.this);
                 currentlySelected = DicNode.this;
             } else if (event.getButton() == MouseButton.PRIMARY) {
-                event.consume();
+//                event.consume();
                 deselectAll();
                 select(DicNode.this);
                 currentlySelected = DicNode.this;
             }
-        }
-    };
-
-    EventHandler<MouseEvent> mouseEnterHandler = new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent event) {
-//            if (inConnectMode) {
-//                if (DicNode.this != currentlySelected) {
-//                    if (endNode != null) {
-//                        deselect(endNode);
-//                    }
-//                    endNode = DicNode.this;
-//
-////                    System.out.println(DicNode.this.getNodePane().toString());
-//                }
-//            }
         }
     };
 
@@ -372,6 +384,7 @@ public abstract class DicNode {
             }
         }
     };
+
 
 //    protected abstract void linkingRule();
 
