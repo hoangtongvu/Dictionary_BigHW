@@ -27,9 +27,9 @@ public class ChoiceGameTimerManager
         this.customTimer.onTickEvent.AddListener(this::UpdateTimerUI);
     }
 
-    private void UpdateTimerUI()
+    private void UpdateTimerUI(int counter)
     {
-        int tempSec = this.customTimer.getMaxTimeSecond() - this.customTimer.getCounter();
+        int tempSec = this.customTimer.getMaxTimeSecond() - counter;
         int tempMin = tempSec / 60;
         tempSec -= tempMin * 60;
         int tempHour = tempMin / 60;

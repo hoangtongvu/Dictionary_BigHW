@@ -17,6 +17,14 @@ module MainGroup.application {
     exports Main.SceneControllers.Game;
     opens Main.SceneControllers.Game to javafx.fxml;
 
+    exports CustomEventPackage.OneParameter;
+    opens CustomEventPackage.OneParameter to javafx.fxml;
+    exports CustomEventPackage.ZeroParameter;
+    opens CustomEventPackage.ZeroParameter to javafx.fxml;
+    exports CustomEventPackage.TwoParameters;
+    opens CustomEventPackage.TwoParameters to javafx.fxml;
+
+
 
 
 }
