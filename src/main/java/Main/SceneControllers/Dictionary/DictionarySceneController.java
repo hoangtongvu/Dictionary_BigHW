@@ -22,7 +22,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 
-public class MainSceneController implements Initializable {
+public class DictionarySceneController implements Initializable {
 
     //private Timer timer;
     //private TimerTask timerTask;
