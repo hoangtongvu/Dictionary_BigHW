@@ -3,13 +3,20 @@ package Main.SceneControllers.Game.CreateWord4DirGame;
 import Game.CreateWord4DirGame.CreateWord4DirGameCtrl;
 import Game.CreateWord4DirGame.CreateWord4DirGameManager;
 import Game.GamesCtrl;
+import Main.application.App;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameSceneController implements Initializable
 {
@@ -58,6 +65,7 @@ public class GameSceneController implements Initializable
     public void StartGame()
     {
         this.gameCtrl.getGameManager().Start();
+        this.SetKeyBoardEvent();
     }
 
     private void EndGame()
@@ -70,6 +78,54 @@ public class GameSceneController implements Initializable
         CreateWord4DirGameManager gameManager = this.gameCtrl.getGameManager();
         gameManager.onChoiceCharsChangeEvent.AddListener(this::UpdateChoiceTexts);
         gameManager.onCreatingWordChangeEvent.AddListener(this::UpdateWordText);
+    }
+
+    private void SetKeyBoardEvent()
+    {
+        Scene scene = App.getPrimaryStage().getScene();
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, keyEvent ->
+        {
+            KeyCode keyCode = keyEvent.getCode();
+            switch (keyCode)
+            {
+                case UP -> FireButton(upButton);
+                case RIGHT -> FireButton(rightButton);
+                case DOWN -> FireButton(downButton);
+                case LEFT -> FireButton(leftButton);
+            }
+        });
+    }
+
+    private void FireButton(Button button)
+    {
+        button.fire();
+        this.SetButtonChose(button);
+    }
+
+    private void SetButtonChose(Button button)
+    {
+        this.SetButtonColorGreen(button);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                SetButtonColorDefault(button);
+            }
+        }, 200);
+    }
+
+    private void SetButtonColor(Button button, double brightness, double contrast, double hue, double saturation) {
+        ColorAdjust colorAdjust = (ColorAdjust) button.getEffect();
+        colorAdjust.setBrightness(brightness);
+        colorAdjust.setContrast(contrast);
+        colorAdjust.setHue(hue);
+        colorAdjust.setSaturation(saturation);
+    }
+
+    private void SetButtonColorGreen(Button button) {
+        this.SetButtonColor(button, 0, 0, 0.5, 1);
+    }
+    private void SetButtonColorDefault(Button button) {
+        this.SetButtonColor(button, 0, 0, 0, 0);
     }
 
     @FXML

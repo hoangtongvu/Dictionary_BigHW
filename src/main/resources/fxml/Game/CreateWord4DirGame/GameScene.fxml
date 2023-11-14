@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -26,40 +27,52 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="upButton" mnemonicParsing="false" onAction="#ChooseUpChar" prefHeight="50.0" prefWidth="50.0" text="↑" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button fx:id="upButton" focusTraversable="false" mnemonicParsing="false" onAction="#ChooseUpChar" prefHeight="50.0" prefWidth="50.0" text="↑" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
                   <Font size="22.0" />
                </font>
+               <effect>
+                  <ColorAdjust />
+               </effect>
             </Button>
             <Text fx:id="upText" strokeType="OUTSIDE" strokeWidth="0.0" text="U" textAlignment="CENTER" wrappingWidth="50.0" GridPane.columnIndex="2">
                <font>
                   <Font size="40.0" />
                </font>
             </Text>
-            <Button fx:id="downButton" layoutX="60.0" layoutY="10.0" mnemonicParsing="false" onAction="#ChooseDownChar" prefHeight="50.0" prefWidth="50.0" text="↓" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <Button fx:id="downButton" focusTraversable="false" layoutX="60.0" layoutY="10.0" mnemonicParsing="false" onAction="#ChooseDownChar" prefHeight="50.0" prefWidth="50.0" text="↓" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <font>
                   <Font size="22.0" />
                </font>
+               <effect>
+                  <ColorAdjust />
+               </effect>
             </Button>
             <Text fx:id="downText" layoutX="10.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D" textAlignment="CENTER" wrappingWidth="50.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <font>
                   <Font size="40.0" />
                </font>
             </Text>
-            <Button fx:id="rightButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#ChooseRightChar" prefHeight="50.0" prefWidth="50.0" text="→" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <Button fx:id="rightButton" focusTraversable="false" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#ChooseRightChar" prefHeight="50.0" prefWidth="50.0" text="→" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <font>
                   <Font size="22.0" />
                </font>
+               <effect>
+                  <ColorAdjust />
+               </effect>
             </Button>
             <Text fx:id="rightText" strokeType="OUTSIDE" strokeWidth="0.0" text="R" textAlignment="CENTER" wrappingWidth="50.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
                <font>
                   <Font size="40.0" />
                </font>
             </Text>
-            <Button fx:id="leftButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#ChooseLeftChar" prefHeight="50.0" prefWidth="50.0" text="←" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Button fx:id="leftButton" focusTraversable="false" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#ChooseLeftChar" prefHeight="50.0" prefWidth="50.0" text="←" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="22.0" />
                </font>
+               <effect>
+                  <ColorAdjust />
+               </effect>
             </Button>
             <Text fx:id="leftText" layoutX="110.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="L" textAlignment="CENTER" wrappingWidth="50.0" GridPane.rowIndex="2">
                <font>
