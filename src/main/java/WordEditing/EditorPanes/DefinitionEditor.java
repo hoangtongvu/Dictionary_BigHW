@@ -20,6 +20,7 @@ public class DefinitionEditor {
 
     public DefinitionEditor(DefinitionNode node) {
         this.node = node;
+        definitionTextArea.setWrapText(true);
         editorPane.setPrefSize(240.0, 400.0);
         editorPane.setStyle("-fx-background-color: white;");
 

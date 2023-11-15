@@ -26,6 +26,8 @@ public class ExampleEditor {
     ExampleNode node;
 
     public ExampleEditor(ExampleNode node) {
+        translationTextArea.setWrapText(true);
+        exampleTextArea.setWrapText(true);
         this.node = node;
         editorPane.setPrefSize(240.0, 400.0);
         editorPane.setStyle("-fx-background-color: white;");

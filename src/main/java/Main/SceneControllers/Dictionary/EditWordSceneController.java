@@ -12,11 +12,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
-
 public class EditWordSceneController {
     @FXML
     protected ScrollPane canvas;
@@ -121,17 +116,18 @@ public class EditWordSceneController {
         @Override
         public void handle(MouseEvent event) {
             if (DicNode.isInConnectMode()) {
-//                temporaryLine.toFront();
                 if (event.getButton() == MouseButton.PRIMARY) {
                     canvas.setPannable(false);
+                    DicNode.deselectAllExcept(DicNode.getCurrentlySelected());
+                    VBox tmp = DicNode.getCurrentlySelected().getNodePane();
+                    temporaryLine.setStartX(tmp.getLayoutX() + tmp.getWidth()/2);
+                    temporaryLine.setStartY(tmp.getLayoutY() + tmp.getHeight()/2);
+                    temporaryLine.setEndX(tmp.getLayoutX());
+                    temporaryLine.setEndY(tmp.getLayoutY());
+                    temporaryLine.setVisible(true);
+                } else {
+                    canvas.setPannable(true);
                 }
-                DicNode.deselectAllExcept(DicNode.getCurrentlySelected());
-                VBox tmp = DicNode.getCurrentlySelected().getNodePane();
-                temporaryLine.setStartX(tmp.getLayoutX() + tmp.getWidth()/2);
-                temporaryLine.setStartY(tmp.getLayoutY() + tmp.getHeight()/2);
-                temporaryLine.setEndX(tmp.getLayoutX());
-                temporaryLine.setEndY(tmp.getLayoutY());
-                temporaryLine.setVisible(true);
             } else if (event.getButton() == MouseButton.PRIMARY) {
                 DicNode.deselectAll();
                 mouseStartX = event.getX();
@@ -196,7 +192,7 @@ public class EditWordSceneController {
         public void handle(MouseEvent event) {
             if (DicNode.isInConnectMode()) {
                 temporaryLine.setVisible(false);
-
+                canvas.setPannable(false);
             } else if (event.getButton() == MouseButton.SECONDARY) {
                 selectionRectangle.setLayoutX(event.getX());
                 selectionRectangle.setLayoutY(event.getY());
