@@ -51,6 +51,7 @@ public class DescriptionNode extends DicNode {
                 description.addDefinition(((DefinitionNode) node).getDefinition());
             }
         }
+
     }
 
     @Override

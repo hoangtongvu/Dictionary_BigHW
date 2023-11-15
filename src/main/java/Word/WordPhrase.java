@@ -78,7 +78,7 @@ public class WordPhrase {
         statement.execute();
 
         Statement getID = Database.getConnection().createStatement();
-        ResultSet rs = getID.executeQuery("SELECT last_insert_id()");
+        ResultSet rs = getID.executeQuery("SELECT last_insert_rowid()");
         int id = rs.getInt(1);
 
         if (definitionList != null) {

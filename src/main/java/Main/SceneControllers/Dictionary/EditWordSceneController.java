@@ -2,6 +2,7 @@ package Main.SceneControllers.Dictionary;
 
 import Word.WordBlock;
 import WordEditing.*;
+import javafx.css.Size;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;

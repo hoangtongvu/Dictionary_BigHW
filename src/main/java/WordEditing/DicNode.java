@@ -56,7 +56,7 @@ public abstract class DicNode {
     public abstract void save();
     public static void saveAll() {
         for (DicNode node : nodeList) {
-            if (node.parent != null) {
+            if ( node instanceof WordNode || node.parent != null) {
                 node.save();
             }
         }

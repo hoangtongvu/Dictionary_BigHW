@@ -11,7 +11,6 @@ public class Dictionary
 
 
     public List<WordBlock> getWordBlocks() {
-
         return wordBlockList;
     }
 
@@ -47,10 +46,7 @@ public class Dictionary
     }
 
 
-    public WordBlock AddWordBlock(WordBlock wordBlock)
-    {
+    public void AddWordBlock(WordBlock wordBlock) {
         this.wordBlockList.add(wordBlock);
-        int lastPos = this.wordBlockList.size();
-        return this.wordBlockList.get(lastPos - 1);
     }
 }
