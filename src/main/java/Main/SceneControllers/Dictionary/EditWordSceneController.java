@@ -44,6 +44,8 @@ public class EditWordSceneController {
     @FXML
     protected Button deleteButton;
 
+
+
     @FXML
     public void addNewWord() {
         if (isEditing) {
@@ -56,6 +58,14 @@ public class EditWordSceneController {
             isEditing = true;
             addNode(new WordNode());
         }
+    }
+
+    public void save() {
+
+    }
+
+    public void delete() {
+
     }
 
     public void reset(){

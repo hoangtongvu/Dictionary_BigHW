@@ -1,6 +1,11 @@
 package Word;
 
 
+import Main.Database;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class WordExample {
     private String prefixSymbol = "➥ ";
     private String example = "";
@@ -37,6 +42,15 @@ public class WordExample {
         String exampleText= "<span class = \"exampleText\"> " + prefixSpace + prefixSymbol + example + " </span> <br>";
         exampleText += "<span class=\"translation\">" + translation  + "</span> <br>";
         return exampleText;
+    }
+
+    public void saveData(int definitionID) throws SQLException {
+        String update = "INSERT INTO example (example, translation, definition_id) VALUES (?,?,?)";
+        PreparedStatement statement = Database.getConnection().prepareStatement(update);
+        statement.setString(1,example);
+        statement.setString(2,translation);
+        statement.setString(3,String.valueOf(definitionID));
+        statement.execute();
     }
 
 }

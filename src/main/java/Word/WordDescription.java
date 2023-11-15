@@ -1,6 +1,7 @@
 package Word;
 import Main.Database;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -84,6 +85,29 @@ public class WordDescription {
             wordDefinition = new WordDefinition();
             wordDefinition.loadData(resultSet.getString("definition_id"));
             addDefinition(wordDefinition);
+        }
+    }
+
+    public void saveData(int wordID) throws SQLException {
+        String update = "INSERT INTO description (word_type, word_id) VALUES (?,?)";
+        PreparedStatement statement = Database.getConnection().prepareStatement(update);
+        statement.setString(1, wordType);
+        statement.setString(2, String.valueOf(wordID));
+        statement.execute();
+
+        Statement getID = Database.getConnection().createStatement();
+        ResultSet rs = getID.executeQuery("SELECT last_insert_id()");
+        int id = rs.getInt(1);
+
+        if (phraseList != null) {
+            for (WordPhrase phrase : phraseList) {
+                phrase.saveData(id);
+            }
+        }
+        if (definitionList != null) {
+            for (WordDefinition definition : definitionList) {
+                definition.saveData(id, 1);
+            }
         }
     }
 }

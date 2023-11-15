@@ -1,6 +1,7 @@
 package Word;
 import Main.Database;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -84,6 +85,32 @@ public class WordBlock implements Comparable<WordBlock> {
             }
         }
         loadStatus = true;
+    }
+
+    public void saveData() throws SQLException {
+        //Insert word into table
+        String update = "INSERT INTO word (word, sound) VALUES (?,?)";
+        PreparedStatement statement = Database.getConnection().prepareStatement(update);
+        statement.setString(1, word);
+        if (spelling != null) {
+            statement.setString(2, spelling);
+        }
+        statement.execute();
+
+        //Get last inserted ID
+        Statement getID = Database.getConnection().createStatement();
+        ResultSet rs = getID.executeQuery("SELECT LAST_INSERT_ID()");
+        int id = rs.getInt(1);
+
+        if (descriptionsList != null) {
+            for (int i = 0; i < descriptionsList.size(); i++) {
+                descriptionsList.get(i).saveData(id);
+            }
+        }
+
+    }
+
+    public void updateData() {
 
     }
 
