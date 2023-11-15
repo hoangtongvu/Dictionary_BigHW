@@ -26,7 +26,11 @@ public class FxmlFileManager
 
     public final Parent multiChoiceGameStartScene;
     public final Parent multiChoiceWordGameScene;
+
   
+
+    public final Parent translateScene;
+
     public final Parent editWordScene;
 
     public final Main.SceneControllers.Game.MultiChoiceGame.GameSceneController multiChoiceGameSceneController;
@@ -66,6 +70,9 @@ public class FxmlFileManager
 
             loader = new FXMLLoader(getClass().getResource("/fxml/Game/ChooseGameScene.fxml"));
             this.chooseGameScene = loader.load();
+
+            loader = new FXMLLoader(getClass().getResource("/fxml/Translate/translateScene.fxml"));
+            this.translateScene = loader.load();
 
             loader = new FXMLLoader(getClass().getResource("/fxml/application/EditWord.fxml"));
             this.editWordScene = loader.load();
