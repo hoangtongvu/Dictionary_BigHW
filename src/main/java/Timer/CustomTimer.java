@@ -2,6 +2,7 @@ package Timer;
 
 import java.util.*;
 import CustomEventPackage.ZeroParameter.CustomEvent;
+import javafx.application.Platform;
 
 public class CustomTimer
 {
@@ -85,6 +86,7 @@ public class CustomTimer
             public void run()
             {
                 Tick();
+                OnApplicationExitChecking();
                 if (counter >= maxTimeSecond) Stop();
             }
         };
@@ -93,7 +95,11 @@ public class CustomTimer
         this.timer.scheduleAtFixedRate(timerTask, 0, delayTime);
     }
 
-
+    private void OnApplicationExitChecking()
+    {
+        boolean isClose = Platform.isImplicitExit();
+        if (isClose) this.Stop();
+    }
 
 
 }
