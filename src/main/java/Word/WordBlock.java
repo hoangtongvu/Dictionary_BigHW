@@ -89,17 +89,18 @@ public class WordBlock implements Comparable<WordBlock> {
 
     public void saveData() throws SQLException {
         //Insert word into table
-        String update = "INSERT INTO word (word, sound) VALUES (?,?)";
+        String update = "INSERT INTO word (word, sound, is_editable) VALUES (?,?, ?)";
         PreparedStatement statement = Database.getConnection().prepareStatement(update);
         statement.setString(1, word);
         if (spelling != null) {
             statement.setString(2, spelling);
         }
+        statement.setString(3, "1");
         statement.execute();
 
         //Get last inserted ID
         Statement getID = Database.getConnection().createStatement();
-        ResultSet rs = getID.executeQuery("SELECT LAST_INSERT_ID()");
+        ResultSet rs = getID.executeQuery("SELECT last_insert_rowid()");
         int id = rs.getInt(1);
 
         if (descriptionsList != null) {
