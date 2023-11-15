@@ -4,6 +4,7 @@ import Game.CreateWord4DirGame.CreateWord4DirGameCtrl;
 import Game.CreateWord4DirGame.CreateWord4DirGameManager;
 import Game.GamesCtrl;
 import Main.application.App;
+import UnsortedScript.NodeAligner;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -11,7 +12,10 @@ import javafx.scene.control.Button;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.util.Pair;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,6 +24,12 @@ import java.util.TimerTask;
 
 public class GameSceneController implements Initializable
 {
+
+    @FXML
+    private AnchorPane rootAnchorPane;
+
+    @FXML
+    private GridPane gameGridPane;
 
     @FXML
     private Button downButton;
@@ -69,11 +79,31 @@ public class GameSceneController implements Initializable
     {
         this.gameCtrl.getGameManager().Start();
         this.SetKeyBoardEvent();
+        this.AlignCenterNodes();
     }
 
     private void EndGame()
     {
 
+    }
+
+    private void AlignCenterNodes()
+    {
+        NodeAligner.AlignCenterWidth(this.rootAnchorPane, this.gameGridPane);
+        NodeAligner.AlignCenterWidth(this.rootAnchorPane, this.wordText);
+        NodeAligner.AlignCenterWidth(this.rootAnchorPane, this.hintText);
+        this.AlignCenterGridPane();
+
+
+    }
+
+    private void AlignCenterGridPane()
+    {
+        Pair<Double, Double> rootSize = NodeAligner.GetSizeOfNode(this.rootAnchorPane);
+        double width = this.gameGridPane.getPrefWidth();
+        double height = this.gameGridPane.getPrefHeight();
+        this.gameGridPane.setLayoutX((rootSize.getKey() - width) / 2);
+        this.gameGridPane.setLayoutY((rootSize.getValue() - height) / 2);
     }
 
     private void SubEvent()
