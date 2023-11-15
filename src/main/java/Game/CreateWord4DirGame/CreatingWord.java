@@ -1,6 +1,7 @@
 package Game.CreateWord4DirGame;
 
 
+import Logger.LoggersCtrl;
 import Word.WordBlock;
 import Word.WordDefinition;
 import Word.WordDescription;
@@ -82,6 +83,7 @@ public class CreatingWord
             wordBlock.loadData(wordBlock.getWordID());
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            LoggersCtrl.systemLogger.Log("Error loading data.");
         }
         List<WordDescription> wordDescriptions = wordBlock.getDescriptionsList();
         List<WordDefinition> wordDefinitions = wordDescriptions.get(0).getDefinitionList();
@@ -195,7 +197,7 @@ public class CreatingWord
     private void GenerateChoiceChars()
     {
         this.choiceChars = this.GetChoiceChars();
-        System.out.println("[NEXT CHAR] " + this.GetNextChar());
+        LoggersCtrl.gameLogger.Log("NEXT CHAR", this.GetNextChar() + "");
 
         Character[] characters = this.Convert_chars_to_Characters(this.choiceChars);
         this.gameManager.InvokeOnChoiceCharsChangeEvent(characters);

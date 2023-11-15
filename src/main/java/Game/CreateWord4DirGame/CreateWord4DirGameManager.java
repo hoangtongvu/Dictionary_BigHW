@@ -1,6 +1,7 @@
 package Game.CreateWord4DirGame;
 
 import Dictionary.DicManager;
+import Logger.LoggersCtrl;
 import Word.WordBlock;
 
 import java.util.ArrayList;
@@ -91,7 +92,7 @@ public class CreateWord4DirGameManager
     {
         this.currentWordIndex = i;
         CreatingWord creatingWord = this.creatingWords.get(this.currentWordIndex);
-        System.out.println("[WORD] " + creatingWord.getResult());
+        LoggersCtrl.gameLogger.Log("WORD", creatingWord.getResult());
 
         this.onCreatingWordChangeEvent.Invoke(this, creatingWord.getCurrentCreatingWord());
         this.onHintChangeEvent.Invoke(this, creatingWord.getHint());
