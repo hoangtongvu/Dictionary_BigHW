@@ -32,14 +32,14 @@ public class Logger
     public void Log(String log)
     {
         System.out.print(this.prefixColor + prefix + " ");
-        System.out.print(this.logColor + log + ANSI_RESET);
+        System.out.println(this.logColor + log + ANSI_RESET);
     }
 
     public void Log(String raw2ndPrefix, String log)
     {
         String secondPrefix = this.getPrefix(raw2ndPrefix);
         System.out.print(this.prefixColor + prefix + secondPrefix + " ");
-        System.out.print(this.logColor + log + ANSI_RESET);
+        System.out.println(this.logColor + log + ANSI_RESET);
     }
 
 
