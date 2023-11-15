@@ -46,6 +46,16 @@ public class ExampleNode extends DicNode {
     }
 
     @Override
+    public void save() {
+
+    }
+
+    @Override
+    public void delete() {
+
+    }
+
+    @Override
     protected void setOptions() {
         options.getOptions().getItems().addAll(options.getConnect(),options.getDelete());
     }
@@ -63,7 +73,7 @@ public class ExampleNode extends DicNode {
         if (endNode instanceof DefinitionNode) {
             System.out.println("Dex - Def");
             endNode.addChild(this);
-            addParent(endNode);
+            setParents(endNode);
         }
     }
 

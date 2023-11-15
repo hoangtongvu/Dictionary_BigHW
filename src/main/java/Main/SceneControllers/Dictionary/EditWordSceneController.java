@@ -50,13 +50,16 @@ public class EditWordSceneController {
     public void addNewWord() {
         if (isEditing) {
             if (Warnings.getInstance().addWordWarning()) {
+                DicNode.saveAll();
+                DicNode.setCurrentlySelected(new WordNode());
                 reset();
-                addNode(new WordNode());
+                addNode(DicNode.getCurrentlySelected());
             }
         } else {
             setDefault(true);
+            DicNode.setCurrentlySelected(new WordNode());
             isEditing = true;
-            addNode(new WordNode());
+            addNode(DicNode.getCurrentlySelected());
         }
     }
 
@@ -302,10 +305,7 @@ public class EditWordSceneController {
     public void deleteNode() {
         for (int i = 0; i < DicNode.getNodeList().size(); i++) {
             if (DicNode.getNodeList().get(i).isSelected()) {
-                canvasPane = (AnchorPane) canvas.getContent();
-                canvasPane.getChildren().remove(DicNode.getNodeList().get(i).getNodePane());
-                canvasPane.getChildren().remove(DicNode.getNodeList().get(i).getLineToParent());
-                DicNode.getNodeList().remove(i);
+                DicNode.nodeList.get(i).selfDelete();
                 i--;
                 DicNode.setBulkSelect(false);
             }

@@ -39,6 +39,20 @@ public class WordNode extends DicNode {
     }
 
     @Override
+    public void save() {
+        for (DicNode node : childrenNodeList) {
+            if (node instanceof DescriptionNode) {
+                wordBlock.addDescription(((DescriptionNode) node).getDescription());
+            }
+        }
+    }
+
+    @Override
+    public void delete() {
+
+    }
+
+    @Override
     protected void setOptions() {
 
     }
@@ -56,7 +70,7 @@ public class WordNode extends DicNode {
         if (endNode instanceof DescriptionNode) {
             System.out.println("Word - Des");
             addChild(endNode);
-            endNode.addParent(this);
+            endNode.setParents(this);
         }
     }
 

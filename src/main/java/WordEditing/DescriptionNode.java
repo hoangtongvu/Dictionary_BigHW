@@ -2,11 +2,7 @@ package WordEditing;
 
 import Word.WordDescription;
 import WordEditing.EditorPanes.DescriptionEditor;
-import javafx.event.EventHandler;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 
 public class DescriptionNode extends DicNode {
     private WordDescription description;
@@ -46,6 +42,21 @@ public class DescriptionNode extends DicNode {
     }
 
 
+    @Override
+    public void save() {
+        for (DicNode node : childrenNodeList) {
+            if (node instanceof PhraseNode) {
+                description.addPhrase(((PhraseNode) node).getPhrase());
+            } else if (node instanceof DefinitionNode) {
+                description.addDefinition(((DefinitionNode) node).getDefinition());
+            }
+        }
+    }
+
+    @Override
+    public void delete() {
+
+    }
 
     @Override
     protected void setOptions() {
@@ -68,21 +79,21 @@ public class DescriptionNode extends DicNode {
         if (endNode instanceof PhraseNode) {
             System.out.println("Des - Phr");
             addChild(endNode);
-            endNode.addParent(this);
+            endNode.setParents(this);
 //            for (DicNode node : this.childrenNodeList) {
 //                System.out.println(node.toString());
 //            }
         } else if (endNode instanceof DefinitionNode) {
             System.out.println("Des - Def");
             addChild(endNode);
-            endNode.addParent(this);
+            endNode.setParents(this);
 //            for (DicNode node : this.childrenNodeList) {
 //                System.out.println(node.toString());
 //            }
         } else if (endNode instanceof WordNode) {
             System.out.println("Des - Word");
             endNode.addChild(this);
-            addParent(endNode);
+            setParents(endNode);
         }
     }
 

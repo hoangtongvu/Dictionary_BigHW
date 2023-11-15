@@ -49,15 +49,15 @@ public class DefinitionNode extends DicNode {
         if (endNode instanceof DescriptionNode) {
             System.out.println("Des - Def");
             endNode.addChild(this);
-            addParent(endNode);
+            setParents(endNode);
         } else if (endNode instanceof ExampleNode) {
             System.out.println("Des - Ex");
-            endNode.addParent(this);
+            endNode.setParents(this);
             addChild(endNode);
         } else if (endNode instanceof PhraseNode) {
             System.out.println("Def - Phr");
             endNode.addChild(this);
-            addParent(endNode);
+            setParents(endNode);
         }
     }
 
@@ -72,6 +72,21 @@ public class DefinitionNode extends DicNode {
         } else {
             return false;
         }
+    }
+
+
+    @Override
+    public void save() {
+        for (DicNode node : childrenNodeList) {
+            if (node instanceof ExampleNode) {
+                definition.addExample(((ExampleNode) node).getExample());
+            }
+        }
+    }
+
+    @Override
+    public void delete() {
+
     }
 
     @Override

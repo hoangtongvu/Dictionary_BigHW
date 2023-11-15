@@ -36,6 +36,20 @@ public class PhraseNode extends DicNode {
     }
 
     @Override
+    public void save() {
+        for (DicNode node : childrenNodeList) {
+            if (node instanceof DefinitionNode) {
+                phrase.addDefinition(((DefinitionNode) node).getDefinition());
+            }
+        }
+    }
+
+    @Override
+    public void delete() {
+
+    }
+
+    @Override
     protected void setOptions() {
         options.getOptions().getItems().addAll(options.getConnect(),options.getDelete(),options.getAddDef());
     }
@@ -53,11 +67,11 @@ public class PhraseNode extends DicNode {
         if (endNode instanceof DefinitionNode) {
             System.out.println("Phr - Ex");
             addChild(endNode);
-            endNode.addParent(this);
+            endNode.setParents(this);
         } else if (endNode instanceof DescriptionNode) {
             System.out.println("Phr - Des");
             endNode.addChild(this);
-            addParent(endNode);
+            setParents(endNode);
         }
     }
 

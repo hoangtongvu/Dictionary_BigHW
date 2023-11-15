@@ -3,7 +3,6 @@ package WordEditing;
 import Main.SceneControllers.Dictionary.EditWordSceneController;
 import javafx.css.PseudoClass;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -15,7 +14,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +43,25 @@ public abstract class DicNode {
     protected List<DicNode> childrenNodeList = new ArrayList<>();
     protected VBox nodePane;
     protected Line lineToParent = new Line();
+    protected static WordNode currentlyEditedWord;
 
+    public WordNode getCurrentlyEditedWord() {
+        return currentlyEditedWord;
+    }
+
+    public void setCurrentlyEditedWord(WordNode currentlyEditedWord) {
+        this.currentlyEditedWord = currentlyEditedWord;
+    }
+
+    public abstract void save();
+    public static void saveAll() {
+        for (DicNode node : nodeList) {
+            if (node.parent != null) {
+                node.save();
+            }
+        }
+    }
+    public abstract void delete();
     protected abstract void setOptions();
 
     protected abstract void labelProperty(Label label, String styleClass);
@@ -107,7 +123,7 @@ public abstract class DicNode {
 
     }
 
-    protected void addParent(DicNode parent) {
+    protected void setParents(DicNode parent) {
         this.parent = parent;
         System.out.println(this.toString());
         updateFromChild();
@@ -403,6 +419,10 @@ public abstract class DicNode {
         try {
             ((AnchorPane) nodePane.getParent()).getChildren().remove(nodePane);
             ((AnchorPane) lineToParent.getParent()).getChildren().remove(lineToParent);
+            for (DicNode node : childrenNodeList) {
+                node.setParents(null);
+                node.lineToParent.setVisible(false);
+            }
             nodeList.remove(this);
 //            System.out.println("Removed" + this.getNodePane().toString());
         } catch (Exception e) {
