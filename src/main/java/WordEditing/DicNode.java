@@ -45,12 +45,12 @@ public abstract class DicNode {
     protected Line lineToParent = new Line();
     protected static WordNode currentlyEditedWord;
 
-    public WordNode getCurrentlyEditedWord() {
+    public static WordNode getCurrentlyEditedWord() {
         return currentlyEditedWord;
     }
 
-    public void setCurrentlyEditedWord(WordNode currentlyEditedWord) {
-        this.currentlyEditedWord = currentlyEditedWord;
+    public static void setCurrentlyEditedWord(WordNode newNode) {
+        currentlyEditedWord = newNode;
     }
 
     public abstract void save();

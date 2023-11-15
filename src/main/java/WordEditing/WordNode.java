@@ -43,6 +43,7 @@ public class WordNode extends DicNode {
         for (DicNode node : childrenNodeList) {
             if (node instanceof DescriptionNode) {
                 wordBlock.addDescription(((DescriptionNode) node).getDescription());
+                System.out.println("SAVED WORD");
             }
         }
     }

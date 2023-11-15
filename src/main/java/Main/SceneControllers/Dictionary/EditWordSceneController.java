@@ -12,6 +12,8 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import org.controlsfx.control.spreadsheet.Grid;
 
+import java.sql.SQLException;
+
 public class EditWordSceneController {
 
     private double mouseStartX;
@@ -47,19 +49,20 @@ public class EditWordSceneController {
 
 
     @FXML
-    public void addNewWord() {
+    public void addNewWord() throws SQLException {
         if (isEditing) {
             if (Warnings.getInstance().addWordWarning()) {
                 DicNode.saveAll();
-                DicNode.setCurrentlySelected(new WordNode());
+                DicNode.getCurrentlyEditedWord().getWordBlock().saveData();
+                DicNode.setCurrentlyEditedWord(new WordNode());
                 reset();
-                addNode(DicNode.getCurrentlySelected());
+                addNode(DicNode.getCurrentlyEditedWord());
             }
         } else {
             setDefault(true);
-            DicNode.setCurrentlySelected(new WordNode());
+            DicNode.setCurrentlyEditedWord(new WordNode());
             isEditing = true;
-            addNode(DicNode.getCurrentlySelected());
+            addNode(DicNode.getCurrentlyEditedWord());
         }
     }
 
