@@ -61,7 +61,7 @@ public class ExampleEditor {
         translationTextArea.setLayoutY(200.0);
         translationTextArea.setPrefSize(212.0, 93);
         AnchorPane.setTopAnchor(translationTextArea, 200.0);
-        AnchorPane.setBottomAnchor(translationTextArea, 20.0);
+//        AnchorPane.setBottomAnchor(translationTextArea, 20.0);
         AnchorPane.setLeftAnchor(translationTextArea, 14.0);
         AnchorPane.setRightAnchor(translationTextArea, 14.0);
 

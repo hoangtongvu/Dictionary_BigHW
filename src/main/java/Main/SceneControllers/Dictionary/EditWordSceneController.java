@@ -1,5 +1,6 @@
 package Main.SceneControllers.Dictionary;
 
+import Word.WordBlock;
 import WordEditing.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -42,20 +43,18 @@ public class EditWordSceneController {
     protected Button connectButton;
     @FXML
     protected Button deleteButton;
-    @FXML
-    protected TextField wordEditor;
-    @FXML
-    protected TextField soundEditor;
 
     @FXML
     public void addNewWord() {
         if (isEditing) {
             if (Warnings.getInstance().addWordWarning()) {
                 reset();
+                addNode(new WordNode());
             }
         } else {
             setDefault(true);
             isEditing = true;
+            addNode(new WordNode());
         }
     }
 
@@ -75,8 +74,6 @@ public class EditWordSceneController {
         saveButton.setVisible(flag);
         deleteButton.setVisible(flag);
         connectButton.setVisible(flag);
-        wordEditor.setEditable(flag);
-        soundEditor.setEditable(flag);
     }
 
     @FXML
@@ -330,6 +327,10 @@ public class EditWordSceneController {
             setAnchor(((PhraseNode) DicNode.getCurrentlySelected()).getEditor().getEditorPane());
             editorPane.getChildren().clear();
             editorPane.getChildren().add(((PhraseNode) DicNode.getCurrentlySelected()).getEditor().getEditorPane());
+        } else if (DicNode.getCurrentlySelected() instanceof WordNode) {
+            setAnchor(((WordNode) DicNode.getCurrentlySelected()).getEditor().getEditorPane());
+            editorPane.getChildren().clear();
+            editorPane.getChildren().add(((WordNode) DicNode.getCurrentlySelected()).getEditor().getEditorPane());
         }
     }
 

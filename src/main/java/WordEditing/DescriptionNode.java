@@ -79,6 +79,10 @@ public class DescriptionNode extends DicNode {
 //            for (DicNode node : this.childrenNodeList) {
 //                System.out.println(node.toString());
 //            }
+        } else if (endNode instanceof WordNode) {
+            System.out.println("Des - Word");
+            endNode.addChild(this);
+            addParent(endNode);
         }
     }
 
@@ -90,6 +94,8 @@ public class DescriptionNode extends DicNode {
         if (endNode instanceof PhraseNode) {
             return true;
         } else if (endNode instanceof DefinitionNode) {
+            return true;
+        } else if (endNode instanceof WordNode) {
             return true;
         } else {
             return false;

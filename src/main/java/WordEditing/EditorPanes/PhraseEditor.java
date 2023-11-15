@@ -40,10 +40,10 @@ public class PhraseEditor {
 
         phraseTextArea.setLayoutX(14.0);
         phraseTextArea.setLayoutY(58.0);
-        phraseTextArea.setPrefSize(214.0, 25.0);
+        phraseTextArea.setPrefSize(214.0, 60);
         AnchorPane.setLeftAnchor(phraseTextArea, 14.0);
         AnchorPane.setRightAnchor(phraseTextArea, 12.0);
-        AnchorPane.setBottomAnchor(phraseTextArea, 20.0);
+//        AnchorPane.setBottomAnchor(phraseTextArea, 20.0);
         AnchorPane.setTopAnchor(phraseTextArea,58.0);
 
         editorPane.getChildren().addAll(phraseLabel, phraseTextLabel, phraseTextArea);
