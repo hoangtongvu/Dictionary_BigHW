@@ -20,7 +20,7 @@ public class WordDescription {
     }
 
     public WordDescription(String wordType) {
-
+        this.wordType = wordType;
     }
     public void setWordType(String wordType) {
         this.wordType = wordType;

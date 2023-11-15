@@ -3,33 +3,92 @@ package Main.SceneControllers.Dictionary;
 import WordEditing.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.input.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import org.controlsfx.control.spreadsheet.Grid;
 
 public class EditWordSceneController {
-    @FXML
-    protected ScrollPane canvas;
+
     private double mouseStartX;
     private double mouseStartY;
-    @FXML
-    private Rectangle selectionRectangle;
-
     protected AnchorPane canvasPane;
     public static Line temporaryLine;
     static final NodeOptions options = new NodeOptions();
+    protected boolean isEditing = false;
+
+    GridPane grid = new GridPane();
 
     @FXML
+    private Rectangle selectionRectangle;
+    @FXML
+    protected ScrollPane canvas;
+    @FXML
     protected AnchorPane editorPane;
+    @FXML
+    protected Button descriptionButton;
+    @FXML
+    protected Button definitionButton;
+    @FXML
+    protected Button phraseButton;
+    @FXML
+    protected Button exampleButton;
+    @FXML
+    protected Button saveButton;
+    @FXML
+    protected Button connectButton;
+    @FXML
+    protected Button deleteButton;
+    @FXML
+    protected TextField wordEditor;
+    @FXML
+    protected TextField soundEditor;
+
+    @FXML
+    public void addNewWord() {
+        if (isEditing) {
+            if (Warnings.getInstance().addWordWarning()) {
+                reset();
+            }
+        } else {
+            setDefault(true);
+            isEditing = true;
+        }
+    }
+
+    public void reset(){
+        //Save the word
+        canvasPane.getChildren().clear();
+        DicNode.reset();
+        canvasPane.getChildren().add(selectionRectangle);
+        canvasPane.getChildren().add(temporaryLine);
+    }
+
+    public void setDefault(boolean flag) {
+        exampleButton.setVisible(flag);
+        descriptionButton.setVisible(flag);
+        definitionButton.setVisible(flag);
+        phraseButton.setVisible(flag);
+        saveButton.setVisible(flag);
+        deleteButton.setVisible(flag);
+        connectButton.setVisible(flag);
+        wordEditor.setEditable(flag);
+        soundEditor.setEditable(flag);
+    }
+
+    @FXML
+    public void deleteWord() {
+
+    }
+
 
 
     @FXML
     public void initialize() {
+        canvasPane = ((AnchorPane) canvas.getContent());
         temporaryLine = new Line();
         temporaryLine.setVisible(false);
         temporaryLine.setStrokeWidth(1.5);
@@ -71,11 +130,9 @@ public class EditWordSceneController {
         canvas.getContent().addEventHandler(MouseEvent.MOUSE_RELEASED, mouseReleaseHandler);
         canvas.getContent().addEventHandler(MouseEvent.DRAG_DETECTED, dragDetected);
         canvas.addEventHandler(KeyEvent.KEY_PRESSED, keyPressHandler);
-        ((AnchorPane) canvas.getContent()).getChildren().add(temporaryLine);
-
+        canvasPane.getChildren().add(temporaryLine);
+        setDefault(false);
     }
-
-
 
     @FXML
     public void addDescription() {
@@ -101,15 +158,6 @@ public class EditWordSceneController {
     public void toggleConnectMode() {
         DicNode.setInConnectMode(!DicNode.isInConnectMode());
     }
-    public void addNode(DicNode node) {
-        DicNode.getNodeList().add(node);
-        canvasPane = (AnchorPane) canvas.getContent();
-        canvasPane.getChildren().add(node.getNodePane());
-        canvasPane.getChildren().add(node.getLineToParent());
-        node.getLineToParent().toBack();
-        node.setNodePanePosition((-1) * canvas.getViewportBounds().getMinX(),
-                (-1) * canvas.getViewportBounds().getMinY());
-    }
 
 
     EventHandler<MouseEvent> mousePressHandler = new EventHandler<MouseEvent>() {
@@ -119,12 +167,14 @@ public class EditWordSceneController {
                 if (event.getButton() == MouseButton.PRIMARY) {
                     canvas.setPannable(false);
                     DicNode.deselectAllExcept(DicNode.getCurrentlySelected());
-                    VBox tmp = DicNode.getCurrentlySelected().getNodePane();
-                    temporaryLine.setStartX(tmp.getLayoutX() + tmp.getWidth()/2);
-                    temporaryLine.setStartY(tmp.getLayoutY() + tmp.getHeight()/2);
-                    temporaryLine.setEndX(tmp.getLayoutX());
-                    temporaryLine.setEndY(tmp.getLayoutY());
-                    temporaryLine.setVisible(true);
+                    if (DicNode.getCurrentlySelected() != null) {
+                        VBox tmp = DicNode.getCurrentlySelected().getNodePane();
+                        temporaryLine.setStartX(tmp.getLayoutX() + tmp.getWidth()/2);
+                        temporaryLine.setStartY(tmp.getLayoutY() + tmp.getHeight()/2);
+                        temporaryLine.setEndX(tmp.getLayoutX());
+                        temporaryLine.setEndY(tmp.getLayoutY());
+                        temporaryLine.setVisible(true);
+                    }
                 } else {
                     canvas.setPannable(true);
                 }
@@ -151,6 +201,9 @@ public class EditWordSceneController {
         @Override
         public void handle(MouseEvent event) {
             if (DicNode.isInConnectMode()) {
+                if (DicNode.getNodeList().isEmpty()) {
+                    temporaryLine.setVisible(false);
+                }
                 if (DicNode.getEndNode() != null) {
                     temporaryLine.setEndX(DicNode.getEndNode().getNodePane().getLayoutX() + DicNode.getEndNode().getNodePane().getWidth()/2);
                     temporaryLine.setEndY(DicNode.getEndNode().getNodePane().getLayoutY() + DicNode.getEndNode().getNodePane().getHeight()/2);
@@ -185,8 +238,6 @@ public class EditWordSceneController {
         }
     };
 
-
-
     EventHandler<MouseEvent> mouseReleaseHandler = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
@@ -220,8 +271,6 @@ public class EditWordSceneController {
         }
     };
 
-
-
     EventHandler<KeyEvent> keyPressHandler = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
@@ -233,7 +282,6 @@ public class EditWordSceneController {
             }
         }
     };
-
 
     // This method resets the selection rectangle to its initial state
     private void resetSelectionRectangle() {
@@ -278,11 +326,21 @@ public class EditWordSceneController {
             setAnchor(((DefinitionNode) DicNode.getCurrentlySelected()).getEditor().getEditorPane());
             editorPane.getChildren().clear();
             editorPane.getChildren().add(((DefinitionNode) DicNode.getCurrentlySelected()).getEditor().getEditorPane());
-        } else {
+        } else if (DicNode.getCurrentlySelected() instanceof PhraseNode) {
             setAnchor(((PhraseNode) DicNode.getCurrentlySelected()).getEditor().getEditorPane());
             editorPane.getChildren().clear();
             editorPane.getChildren().add(((PhraseNode) DicNode.getCurrentlySelected()).getEditor().getEditorPane());
         }
+    }
+
+    public void addNode(DicNode node) {
+        DicNode.getNodeList().add(node);
+        canvasPane = (AnchorPane) canvas.getContent();
+        canvasPane.getChildren().add(node.getNodePane());
+        canvasPane.getChildren().add(node.getLineToParent());
+        node.getLineToParent().toBack();
+        node.setNodePanePosition((-1) * canvas.getViewportBounds().getMinX(),
+                (-1) * canvas.getViewportBounds().getMinY());
     }
 
 }

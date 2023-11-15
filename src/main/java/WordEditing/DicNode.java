@@ -46,27 +46,6 @@ public abstract class DicNode {
     protected VBox nodePane;
     protected Line lineToParent = new Line();
 
-    protected static AnchorPane descriptionEditor;
-    protected static AnchorPane phraseEditor;
-    protected static AnchorPane definitionEditor;
-    protected static AnchorPane exampleEditor;
-
-    public static AnchorPane getDescriptionEditor() {
-        return descriptionEditor;
-    }
-
-    public static AnchorPane getExampleEditor() {
-        return exampleEditor;
-    }
-
-    public static AnchorPane getPhraseEditor() {
-        return phraseEditor;
-    }
-
-    public static AnchorPane getDefinitionEditor() {
-        return definitionEditor;
-    }
-
     protected abstract void setOptions();
 
     protected abstract void labelProperty(Label label, String styleClass);
@@ -85,6 +64,13 @@ public abstract class DicNode {
         DicNode.currentlySelected = currentlySelected;
     }
 
+    public static void reset() {
+        currentlySelected = null;
+        nodeList.clear();
+        inConnectMode = false;
+        bulkSelect = false;
+        endNode = null;
+    }
     public static boolean isInConnectMode() {
         return inConnectMode;
     }
@@ -273,13 +259,6 @@ public abstract class DicNode {
             EditWordSceneController.temporaryLine.setStroke(Color.BLACK);
             endNode = null;
         });
-
-        try {
-            phraseEditor = FXMLLoader.load(getClass().getResource("/fxml/application/phraseEditor.fxml"));
-            definitionEditor = FXMLLoader.load(getClass().getResource("/fxml/application/definitionEditor.fxml"));
-        } catch (IOException e) {
-            System.out.println(e);
-        }
     }
 
 
