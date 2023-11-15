@@ -9,9 +9,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Game.CreateWord4DirGame.GameSceneController">
+<AnchorPane fx:id="rootAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Game.CreateWord4DirGame.GameSceneController">
    <children>
-      <GridPane fx:id="gameGridPane" layoutX="175.0" layoutY="75.0" maxHeight="250.0" maxWidth="250.0" minHeight="250.0" minWidth="250.0" prefHeight="250.0" prefWidth="250.0">
+      <GridPane fx:id="gameGridPane" layoutX="475.0" layoutY="175.0" maxHeight="250.0" maxWidth="250.0" minHeight="250.0" minWidth="250.0" prefHeight="250.0" prefWidth="250.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -81,12 +81,12 @@
             </Text>
          </children>
       </GridPane>
-      <Text fx:id="wordText" layoutX="166.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WORD" textAlignment="CENTER" wrappingWidth="268.0" AnchorPane.topAnchor="13.0">
+      <Text fx:id="wordText" layoutX="465.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WORD" textAlignment="CENTER" wrappingWidth="268.0" AnchorPane.topAnchor="17.0">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="hintText" layoutX="26.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hint" textAlignment="CENTER" wrappingWidth="550.0" AnchorPane.topAnchor="50.0">
+      <Text fx:id="hintText" layoutX="325.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hint" textAlignment="CENTER" wrappingWidth="550.0" AnchorPane.topAnchor="50.0">
          <font>
             <Font size="18.0" />
          </font>
