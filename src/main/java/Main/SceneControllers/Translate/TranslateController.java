@@ -22,14 +22,16 @@ public class TranslateController {
     @FXML
     public void onViToEnButton(ActionEvent event) {
         String text = VietArea.getText();
-        EngArea.setText(TranslatorAPI.translateViToEn(text));
-
+        if (!VietArea.getText().isEmpty()) {
+            VietArea.setText(TranslatorAPI.translateViToEn(text));
+        }
     }
 
     @FXML
     public void onEnToViButton(ActionEvent event) {
         String text = EngArea.getText();
-        VietArea.setText(TranslatorAPI.translateEnToVi(text));
-
+        if (!EngArea.getText().isEmpty()) {
+            EngArea.setText(TranslatorAPI.translateEnToVi(text));
+        }
     }
 }
