@@ -1,6 +1,7 @@
 package WordEditing;
 
 import Word.WordPhrase;
+import WordEditing.EditorPanes.PhraseEditor;
 import javafx.scene.control.Label;
 
 public class PhraseNode extends DicNode {
@@ -9,9 +10,17 @@ public class PhraseNode extends DicNode {
     public WordPhrase getPhrase() {
         return phrase;
     }
-
+    private PhraseEditor editor;
     public void setPhrase(WordPhrase phrase) {
         this.phrase = phrase;
+    }
+
+    public PhraseEditor getEditor() {
+        return editor;
+    }
+
+    public Label getPhraseLabel() {
+        return phraseLabel;
     }
 
     public PhraseNode() {
@@ -22,6 +31,8 @@ public class PhraseNode extends DicNode {
         phraseLabel = new Label(phrase.getPhrase());
         labelProperty(phraseLabel, "node-content");
         nodePane.getChildren().add(phraseLabel);
+
+        editor = new PhraseEditor(this);
     }
 
     @Override

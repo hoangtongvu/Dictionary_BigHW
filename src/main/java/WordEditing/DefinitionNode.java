@@ -1,28 +1,39 @@
 package WordEditing;
 
 import Word.WordDefinition;
+import WordEditing.EditorPanes.DefinitionEditor;
 import javafx.scene.control.Label;
 
 public class DefinitionNode extends DicNode {
-    private WordDefinition content;
-    private Label contentLabel;
+    private WordDefinition definition;
+    private Label definitionLabel;
+    DefinitionEditor editor;
 
-    public WordDefinition getContent() {
-        return content;
+    public DefinitionEditor getEditor() {
+        return editor;
     }
 
-    public void setContent(WordDefinition content) {
-        this.content = content;
+    public WordDefinition getDefinition() {
+        return definition;
+    }
+
+    public Label getDefinitionLabel() {
+        return definitionLabel;
+    }
+
+    public void setDefinition(WordDefinition definition) {
+        this.definition = definition;
     }
 
     public DefinitionNode() {
         super("Definition");
-        content = new WordDefinition("<Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...>");
+        definition = new WordDefinition("<EMPTY>");
         setOptions();
 
-        contentLabel = new Label(content.getDefinition());
-        labelProperty(contentLabel, "node-content");
-        nodePane.getChildren().add(contentLabel);
+        definitionLabel = new Label(definition.getDefinition());
+        labelProperty(definitionLabel, "node-content");
+        nodePane.getChildren().add(definitionLabel);
+        editor = new DefinitionEditor(this);
     }
 
     @Override
@@ -30,7 +41,7 @@ public class DefinitionNode extends DicNode {
         label.setWrapText(true);
         setStyleSheet(label);
         setStyleClass(label, styleClass);
-        contentLabel.prefWidthProperty().bind(nodePane.prefWidthProperty());
+        definitionLabel.prefWidthProperty().bind(nodePane.prefWidthProperty());
     }
 
     @Override

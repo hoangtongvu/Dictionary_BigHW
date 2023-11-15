@@ -122,6 +122,9 @@ public class EditWordSceneController {
         public void handle(MouseEvent event) {
             if (DicNode.isInConnectMode()) {
 //                temporaryLine.toFront();
+                if (event.getButton() == MouseButton.PRIMARY) {
+                    canvas.setPannable(false);
+                }
                 DicNode.deselectAllExcept(DicNode.getCurrentlySelected());
                 VBox tmp = DicNode.getCurrentlySelected().getNodePane();
                 temporaryLine.setStartX(tmp.getLayoutX() + tmp.getWidth()/2);
@@ -186,39 +189,14 @@ public class EditWordSceneController {
         }
     };
 
-    public void setAnchor(AnchorPane editorPane) {
-        AnchorPane.setBottomAnchor(editorPane, 0d);
-        AnchorPane.setTopAnchor(editorPane, 0d);
-        AnchorPane.setRightAnchor(editorPane, 0d);
-        AnchorPane.setLeftAnchor(editorPane, 0d);
 
-    }
-
-    public void switchScene() {
-        if (DicNode.getCurrentlySelected() instanceof DescriptionNode) {
-            setAnchor(DicNode.getDescriptionEditor());
-            editorPane.getChildren().clear();
-            editorPane.getChildren().add(DicNode.getDescriptionEditor());
-        } else if (DicNode.getCurrentlySelected() instanceof ExampleNode) {
-                setAnchor(DicNode.getExampleEditor());
-                editorPane.getChildren().clear();
-                editorPane.getChildren().add(DicNode.getExampleEditor());
-        } else if (DicNode.getCurrentlySelected() instanceof DefinitionNode) {
-            setAnchor(DicNode.getDefinitionEditor());
-            editorPane.getChildren().clear();
-            editorPane.getChildren().add(DicNode.getDefinitionEditor());
-        } else {
-            setAnchor(DicNode.getPhraseEditor());
-            editorPane.getChildren().clear();
-            editorPane.getChildren().add(DicNode.getPhraseEditor());
-        }
-    }
 
     EventHandler<MouseEvent> mouseReleaseHandler = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
             if (DicNode.isInConnectMode()) {
                 temporaryLine.setVisible(false);
+
             } else if (event.getButton() == MouseButton.SECONDARY) {
                 selectionRectangle.setLayoutX(event.getX());
                 selectionRectangle.setLayoutY(event.getY());
@@ -280,6 +258,34 @@ public class EditWordSceneController {
                 i--;
                 DicNode.setBulkSelect(false);
             }
+        }
+    }
+
+    public void setAnchor(AnchorPane editorPane) {
+        AnchorPane.setBottomAnchor(editorPane, 0d);
+        AnchorPane.setTopAnchor(editorPane, 0d);
+        AnchorPane.setRightAnchor(editorPane, 0d);
+        AnchorPane.setLeftAnchor(editorPane, 0d);
+
+    }
+
+    public void switchScene() {
+        if (DicNode.getCurrentlySelected() instanceof DescriptionNode) {
+            setAnchor(((DescriptionNode) DicNode.getCurrentlySelected()).getEditor().getEditorPane());
+            editorPane.getChildren().clear();
+            editorPane.getChildren().add(((DescriptionNode) DicNode.getCurrentlySelected()).getEditor().getEditorPane());
+        } else if (DicNode.getCurrentlySelected() instanceof ExampleNode) {
+            setAnchor(((ExampleNode) DicNode.getCurrentlySelected()).getEditor().getEditorPane());
+            editorPane.getChildren().clear();
+            editorPane.getChildren().add(((ExampleNode) DicNode.getCurrentlySelected()).getEditor().getEditorPane());
+        } else if (DicNode.getCurrentlySelected() instanceof DefinitionNode) {
+            setAnchor(((DefinitionNode) DicNode.getCurrentlySelected()).getEditor().getEditorPane());
+            editorPane.getChildren().clear();
+            editorPane.getChildren().add(((DefinitionNode) DicNode.getCurrentlySelected()).getEditor().getEditorPane());
+        } else {
+            setAnchor(((PhraseNode) DicNode.getCurrentlySelected()).getEditor().getEditorPane());
+            editorPane.getChildren().clear();
+            editorPane.getChildren().add(((PhraseNode) DicNode.getCurrentlySelected()).getEditor().getEditorPane());
         }
     }
 

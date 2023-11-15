@@ -8,8 +8,8 @@
    <children>
       <Label layoutX="61.0" layoutY="25.0" prefHeight="26.0" prefWidth="197.0" style="-fx-background-color: pink; -fx-alignment: center;" text="EXAMPLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Label layoutX="7.0" layoutY="41.0" prefHeight="17.0" prefWidth="65.0" text="Example" AnchorPane.leftAnchor="14.0" />
-      <Label layoutX="13.0" layoutY="172.0" prefHeight="17.0" prefWidth="65.0" text="Translation" />
-      <TextArea layoutX="13.0" layoutY="66.0" prefHeight="82.0" prefWidth="214.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-      <TextArea layoutX="15.0" layoutY="189.0" prefHeight="82.0" prefWidth="214.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <Label layoutX="14.0" layoutY="175.0" prefHeight="17.0" prefWidth="65.0" text="Translation" />
+      <TextArea layoutX="14.0" layoutY="67.0" prefHeight="93.0" prefWidth="212.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="67.0" />
+      <TextArea layoutX="14.0" layoutY="200.0" prefHeight="93.0" prefWidth="212.0" AnchorPane.bottomAnchor="107.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="200.0" />
    </children>
 </AnchorPane>

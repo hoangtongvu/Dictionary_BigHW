@@ -1,12 +1,29 @@
 package WordEditing;
 
 import Word.WordExample;
+import WordEditing.EditorPanes.ExampleEditor;
 import javafx.scene.control.Label;
 
 public class ExampleNode extends DicNode {
     private WordExample example;
     private Label exampleLabel;
     private Label translationLabel;
+
+    private ExampleEditor editor;
+
+    public ExampleEditor getEditor() {
+        return editor;
+    }
+
+    public Label getExampleLabel() {
+        return exampleLabel;
+    }
+
+    public Label getTranslationLabel() {
+        return translationLabel;
+    }
+
+
 
     public WordExample getExample() {
         return example;
@@ -25,6 +42,7 @@ public class ExampleNode extends DicNode {
         labelProperty(exampleLabel, "node-content");
         labelProperty(translationLabel, "node-content");
         nodePane.getChildren().addAll(exampleLabel, translationLabel);
+        editor = new ExampleEditor(this);
     }
 
     @Override

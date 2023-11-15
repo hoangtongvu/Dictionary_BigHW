@@ -275,8 +275,6 @@ public abstract class DicNode {
         });
 
         try {
-            descriptionEditor = FXMLLoader.load(getClass().getResource("/fxml/application/descriptionEditor.fxml"));
-            exampleEditor = FXMLLoader.load(getClass().getResource("/fxml/application/exampleEditor.fxml"));
             phraseEditor = FXMLLoader.load(getClass().getResource("/fxml/application/phraseEditor.fxml"));
             definitionEditor = FXMLLoader.load(getClass().getResource("/fxml/application/definitionEditor.fxml"));
         } catch (IOException e) {

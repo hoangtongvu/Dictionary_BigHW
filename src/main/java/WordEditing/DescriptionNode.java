@@ -1,24 +1,33 @@
 package WordEditing;
 
-import Word.WordDefinition;
 import Word.WordDescription;
-import javafx.scene.control.Control;
+import WordEditing.EditorPanes.DescriptionEditor;
+import javafx.event.EventHandler;
 import javafx.scene.control.Label;
-import javafx.scene.shape.Line;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 
 public class DescriptionNode extends DicNode {
     private WordDescription description;
-    private Label definitionLabel;
+    private Label descriptionLabel;
+    private DescriptionEditor editor = new DescriptionEditor(this);
+    public Label getDescriptionLabel() {
+        return descriptionLabel;
+    }
 
+    public DescriptionEditor getEditor() {
+        return editor;
+    }
 
     public DescriptionNode() {
         super("Description");
         setOptions();
 
         description = new WordDescription("<EMPTY>");
-        definitionLabel = new Label("Word type: " + description.getWordType());
-        labelProperty(definitionLabel, "node-content");
-        nodePane.getChildren().add(definitionLabel);
+        descriptionLabel = new Label("Word type: " + description.getWordType());
+        labelProperty(descriptionLabel, "node-content");
+        nodePane.getChildren().add(descriptionLabel);
 
 //        options.getConnect().setOnAction(event -> {
 //            temporaryLine = new Line();
@@ -86,5 +95,8 @@ public class DescriptionNode extends DicNode {
             return false;
         }
     }
+
+
+
 
 }
