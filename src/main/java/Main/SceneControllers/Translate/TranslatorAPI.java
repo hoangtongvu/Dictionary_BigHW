@@ -12,8 +12,7 @@ public class TranslatorAPI {
 
     private static String translate(String langFrom, String langTo, String text)
             throws IOException {
-        String urlStr =
-                "https://script.google.com/macros/s/AKfycby3AOWmhe32TgV9nW-Q0TyGOEyCHQeFiIn7hRgy5m8jHPaXDl2GdToyW_3Ys5MTbK6wjg/exec"
+        String urlStr = "https://script.google.com/macros/s/AKfycbxCGEhfh5YDvEtCZjbRrUr7oFgj7hkfvNME5iH5_DZ9KEz1__h6yFKeUXgip4friFtr/exec"
                         + "?q=" + URLEncoder.encode(text, StandardCharsets.UTF_8)
                         + "&target=" + langTo
                         + "&source=" + langFrom;
@@ -24,7 +23,7 @@ public class TranslatorAPI {
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8));
         String inputLine;
         while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
+            response.append(inputLine + "\n");
         }
         in.close();
         return response.toString();
