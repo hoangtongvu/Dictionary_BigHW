@@ -1,6 +1,5 @@
 package Main;
 
-import Main.SceneControllers.Game.MultiChoiceGame.GameSceneController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
@@ -23,11 +22,27 @@ public class FxmlFileManager
 
 
     public final Parent chooseGameScene;
-    public final GameSceneController multiChoiceGameSceneController;
+
+
     public final Parent multiChoiceGameStartScene;
     public final Parent multiChoiceWordGameScene;
+
+  
+
     public final Parent translateScene;
+
     public final Parent editWordScene;
+
+    public final Main.SceneControllers.Game.MultiChoiceGame.GameSceneController multiChoiceGameSceneController;
+
+
+
+
+    public final Parent createWord4DirGameStartScene;
+    public final Parent createWord4DirGameScene;
+    public final Main.SceneControllers.Game.CreateWord4DirGame.GameSceneController createWord4DirGameSceneController;
+
+
 
 
     private FxmlFileManager()
@@ -37,13 +52,21 @@ public class FxmlFileManager
             this.root = FXMLLoader.load(getClass().getResource("/fxml/application/DictionaryScene.fxml"));
             this.homeScene = FXMLLoader.load(getClass().getResource("/fxml/application/HomeScene.fxml"));
 
+            FXMLLoader loader = null;
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Game/MultiChoiceGame/GameScene.fxml"));
+            loader = new FXMLLoader(getClass().getResource("/fxml/Game/MultiChoiceGame/GameScene.fxml"));
             this.multiChoiceWordGameScene = loader.load();
             this.multiChoiceGameSceneController = loader.getController();
 
             loader = new FXMLLoader(getClass().getResource("/fxml/Game/MultiChoiceGame/StartGameScreenScene.fxml"));
             this.multiChoiceGameStartScene = loader.load();
+
+            loader = new FXMLLoader(getClass().getResource("/fxml/Game/CreateWord4DirGame/GameScene.fxml"));
+            this.createWord4DirGameScene = loader.load();
+            this.createWord4DirGameSceneController = loader.getController();
+
+            loader = new FXMLLoader(getClass().getResource("/fxml/Game/CreateWord4DirGame/StartGameScreenScene.fxml"));
+            this.createWord4DirGameStartScene = loader.load();
 
             loader = new FXMLLoader(getClass().getResource("/fxml/Game/ChooseGameScene.fxml"));
             this.chooseGameScene = loader.load();

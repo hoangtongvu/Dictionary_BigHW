@@ -30,6 +30,10 @@ public class WordDescription {
         return wordType;
     }
 
+    public List<WordDefinition> getDefinitionList() {
+        return this.definitionList;
+    }
+
     public void addDefinition(WordDefinition wordDefinition) {
         if (definitionList == null) {
             definitionList =new ArrayList<>();
