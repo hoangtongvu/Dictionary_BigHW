@@ -88,7 +88,7 @@ public class WordBlock implements Comparable<WordBlock> {
                 addDescription(wordDescription);
             }
         }
-        loadStatus = false;
+        loadStatus = true;
 
     }
 
