@@ -11,8 +11,7 @@ import java.util.List;
 /**
  * 1 phrase has 1 to many definitions, each definition has it own 0 to many example.
  */
-public class WordPhrase
-{
+public class WordPhrase {
     private String prefixSymbol = "➤ ";
     private String phrase;
     private List<WordDefinition> definitionList;

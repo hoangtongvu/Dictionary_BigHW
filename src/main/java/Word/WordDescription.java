@@ -7,8 +7,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.ArrayList;
 
-public class WordDescription 
-{
+public class WordDescription {
     private String prefixSymbol = "\uD83D\uDF93 ";
     private String wordType;
     private List<WordDefinition> definitionList;
@@ -16,6 +15,13 @@ public class WordDescription
     private static WordDefinition wordDefinition;
     private static WordPhrase wordPhrase;
 
+    public WordDescription() {
+
+    }
+
+    public WordDescription(String wordType) {
+
+    }
     public void setWordType(String wordType) {
         this.wordType = wordType;
     }

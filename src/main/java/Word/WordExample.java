@@ -1,10 +1,7 @@
 package Word;
 
 
-import java.sql.SQLException;
-
-public class WordExample
-{
+public class WordExample {
     private String prefixSymbol = "➥ ";
     private String example = "";
     private String translation = "";

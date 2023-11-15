@@ -12,6 +12,7 @@ module MainGroup.application {
 
     exports Main.SceneControllers.Dictionary;
     opens Main.SceneControllers.Dictionary to javafx.fxml;
+
     exports Main.SceneControllers.Game.MultiChoiceGame;
     opens Main.SceneControllers.Game.MultiChoiceGame to javafx.fxml;
     exports Main.SceneControllers.Game;
@@ -25,7 +26,4 @@ module MainGroup.application {
     opens CustomEventPackage.TwoParameters to javafx.fxml;
 
     opens Main.SceneControllers.Translate to javafx.fxml;
-
-
-
 }
