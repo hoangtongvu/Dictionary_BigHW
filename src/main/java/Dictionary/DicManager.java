@@ -58,7 +58,7 @@ public class DicManager
 
         RecentlySearchedWordSaver recentlySearchedWordSaver = this.recentlySearchedWordManager.getRecentlySearchedWordSaver();
         recentlySearchedWordSaver.Save(lookupString);
-        return this.dictionary.GetWordInfoAt(lookupPos);
+        return dictionary.GetWordInfoAt(lookupPos);
     }
 
 

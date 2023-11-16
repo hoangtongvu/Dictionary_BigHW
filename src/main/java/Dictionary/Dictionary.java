@@ -33,11 +33,6 @@ public class Dictionary
 
     }
 
-
-    public void ShowWordAt(int i) throws SQLException {
-        System.out.println(this.GetWordInfoAt(i));
-    }
-
     
     public String GetWordInfoAt(int i) throws SQLException {
         WordBlock wordBlock = this.wordBlockList.get(i);

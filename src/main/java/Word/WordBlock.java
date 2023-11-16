@@ -29,6 +29,11 @@ public class WordBlock implements Comparable<WordBlock> {
         this.spelling = spelling;
     }
 
+    public List<WordDescription> getDescriptionsList() {
+        return descriptionsList;
+    }
+
+
     public String getWord() {
         return word;
     }
