@@ -15,8 +15,13 @@ module MainGroup.application {
 
     exports Main.SceneControllers.Game.MultiChoiceGame;
     opens Main.SceneControllers.Game.MultiChoiceGame to javafx.fxml;
+
     exports Main.SceneControllers.Game;
     opens Main.SceneControllers.Game to javafx.fxml;
+
+    exports Main.SceneControllers.Game.CreateWord4DirGame;
+    opens Main.SceneControllers.Game.CreateWord4DirGame to javafx.fxml;
+
 
     exports CustomEventPackage.OneParameter;
     opens CustomEventPackage.OneParameter to javafx.fxml;
@@ -25,4 +30,5 @@ module MainGroup.application {
     exports CustomEventPackage.TwoParameters;
     opens CustomEventPackage.TwoParameters to javafx.fxml;
 
+    opens Main.SceneControllers.Translate to javafx.fxml;
 }
