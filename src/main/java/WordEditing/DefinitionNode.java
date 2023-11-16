@@ -76,7 +76,7 @@ public class DefinitionNode extends DicNode {
 
 
     @Override
-    public void save() {
+    public void convertToWordBlock() {
         for (DicNode node : childrenNodeList) {
             if (node instanceof ExampleNode) {
                 definition.addExample(((ExampleNode) node).getExample());

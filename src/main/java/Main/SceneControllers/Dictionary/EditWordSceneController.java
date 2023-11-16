@@ -1,8 +1,6 @@
 package Main.SceneControllers.Dictionary;
 
-import Word.WordBlock;
 import WordEditing.*;
-import javafx.css.Size;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
@@ -11,7 +9,6 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import org.controlsfx.control.spreadsheet.Grid;
 
 import java.sql.SQLException;
 
@@ -53,7 +50,7 @@ public class EditWordSceneController {
     public void addNewWord() throws SQLException {
         if (isEditing) {
             if (Warnings.getInstance().addWordWarning()) {
-                DicNode.saveAll();
+                DicNode.save();
                 DicNode.getCurrentlyEditedWord().getWordBlock().saveData();
                 DicNode.setCurrentlyEditedWord(new WordNode());
                 reset();
@@ -77,29 +74,43 @@ public class EditWordSceneController {
 
     public void reset(){
         //Save the word
-        canvasPane.getChildren().clear();
         DicNode.reset();
-        canvasPane.getChildren().add(selectionRectangle);
-        canvasPane.getChildren().add(temporaryLine);
     }
 
-    public void setDefault(boolean flag) {
-        exampleButton.setVisible(flag);
-        descriptionButton.setVisible(flag);
-        definitionButton.setVisible(flag);
-        phraseButton.setVisible(flag);
-        saveButton.setVisible(flag);
-        deleteButton.setVisible(flag);
-        connectButton.setVisible(flag);
-    }
 
     @FXML
     public void deleteWord() {
 
     }
+    @FXML
+    public void saveWord() {
+        DicNode.save();
+    }
 
+    @FXML
+    public void addDescription() {
+        addNode(new DescriptionNode());
+    }
 
+    @FXML
+    public void addDefinition() {
+        addNode(new DefinitionNode());
+    }
 
+    @FXML
+    public void addExample() {
+        addNode(new ExampleNode());
+    }
+
+    @FXML
+    public void addPhrase() {
+        addNode(new PhraseNode());
+    }
+
+    @FXML
+    public void toggleConnectMode() {
+        DicNode.setInConnectMode(!DicNode.isInConnectMode());
+    }
     @FXML
     public void initialize() {
         canvasPane = ((AnchorPane) canvas.getContent());
@@ -148,29 +159,15 @@ public class EditWordSceneController {
         setDefault(false);
     }
 
-    @FXML
-    public void addDescription() {
-        addNode(new DescriptionNode());
-    }
 
-    @FXML
-    public void addDefinition() {
-        addNode(new DefinitionNode());
-    }
-
-    @FXML
-    public void addExample() {
-        addNode(new ExampleNode());
-    }
-
-    @FXML
-    public void addPhrase() {
-        addNode(new PhraseNode());
-    }
-
-    @FXML
-    public void toggleConnectMode() {
-        DicNode.setInConnectMode(!DicNode.isInConnectMode());
+    public void setDefault(boolean flag) {
+        exampleButton.setVisible(flag);
+        descriptionButton.setVisible(flag);
+        definitionButton.setVisible(flag);
+        phraseButton.setVisible(flag);
+        saveButton.setVisible(flag);
+        deleteButton.setVisible(flag);
+        connectButton.setVisible(flag);
     }
 
 
@@ -193,6 +190,7 @@ public class EditWordSceneController {
                     canvas.setPannable(true);
                 }
             } else if (event.getButton() == MouseButton.PRIMARY) {
+                editorPane.getChildren().clear();
                 DicNode.deselectAll();
                 mouseStartX = event.getX();
                 mouseStartY = event.getY();
@@ -267,7 +265,9 @@ public class EditWordSceneController {
                 }
                 canvas.setPannable(false);
             } else if (event.getButton() == MouseButton.PRIMARY) {
-                switchScene();
+                if (DicNode.getCurrentlySelected() != null) {
+                    switchScene();
+                }
             }
 
 
@@ -278,6 +278,7 @@ public class EditWordSceneController {
                 }
                 if (cnt > 1) {
                     DicNode.setBulkSelect(true);
+                    editorPane.getChildren().clear();
                     break;
                 }
             }

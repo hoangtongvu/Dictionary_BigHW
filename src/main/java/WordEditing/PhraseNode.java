@@ -36,7 +36,7 @@ public class PhraseNode extends DicNode {
     }
 
     @Override
-    public void save() {
+    public void convertToWordBlock() {
         for (DicNode node : childrenNodeList) {
             if (node instanceof DefinitionNode) {
                 phrase.addDefinition(((DefinitionNode) node).getDefinition());

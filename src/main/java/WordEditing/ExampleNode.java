@@ -46,7 +46,7 @@ public class ExampleNode extends DicNode {
     }
 
     @Override
-    public void save() {
+    public void convertToWordBlock() {
 
     }
 

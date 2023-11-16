@@ -113,6 +113,9 @@ public class WordBlock implements Comparable<WordBlock> {
                 descriptionsList.get(i).saveData(id);
             }
         }
+    }
+
+    public void selfDelete() {
 
     }
 

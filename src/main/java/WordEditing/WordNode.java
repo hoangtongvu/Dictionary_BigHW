@@ -39,7 +39,7 @@ public class WordNode extends DicNode {
     }
 
     @Override
-    public void save() {
+    public void convertToWordBlock() {
         for (DicNode node : childrenNodeList) {
             if (node instanceof DescriptionNode) {
                 wordBlock.addDescription(((DescriptionNode) node).getDescription());

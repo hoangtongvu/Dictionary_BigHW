@@ -7,6 +7,7 @@ import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -18,162 +19,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class DicNode {
+    public abstract void delete();
+    public abstract boolean checkLink();
+    protected abstract void setOptions();
+    protected abstract void labelProperty(Label label, String styleClass);
+    protected abstract void establishLink();
+
+    //Covert all components displayed and saved in nodeList to a cohesive block of word
+    public abstract void convertToWordBlock();
+
+
     public static List<DicNode> nodeList = new ArrayList<>();
+    protected Label title;
+    protected static WordNode currentlyEditedWord;
+    protected static DicNode currentlySelected = null;
+    protected static DicNode endNode = null;
+    protected static boolean bulkSelect = false;
+    protected static boolean inConnectMode = false;
+    protected boolean selected = false;
+    public static PseudoClass clicked;
+    protected DicNode parent;
+    protected List<DicNode> childrenNodeList = new ArrayList<>();
+    protected VBox nodePane;
+    protected Line lineToParent = new Line();
+    protected NodeOptions options = new NodeOptions();
+    private double startX = 0;
+    private double startY = 0;
+
 
     public static List<DicNode> getNodeList() {
         return nodeList;
-    }
-
-    public static void setNodeList(List<DicNode> nodeList) {
-        DicNode.nodeList = nodeList;
     }
 
     public Line getLineToParent() {
         return lineToParent;
     }
 
-    protected Label title;
-    protected static boolean inConnectMode = false;
-    protected boolean selected = false;
-    public static PseudoClass clicked;
-    protected static DicNode currentlySelected = null;
-    protected static DicNode endNode = null;
-    protected static boolean bulkSelect = false;
-    protected DicNode parent;
-    protected List<DicNode> childrenNodeList = new ArrayList<>();
-    protected VBox nodePane;
-    protected Line lineToParent = new Line();
-    protected static WordNode currentlyEditedWord;
-
     public static WordNode getCurrentlyEditedWord() {
         return currentlyEditedWord;
     }
 
-    public static void setCurrentlyEditedWord(WordNode newNode) {
-        currentlyEditedWord = newNode;
-    }
-
-    public abstract void save();
-    public static void saveAll() {
-        for (DicNode node : nodeList) {
-            if ( node instanceof WordNode || node.parent != null) {
-                node.save();
-            }
-        }
-    }
-    public abstract void delete();
-    protected abstract void setOptions();
-
-    protected abstract void labelProperty(Label label, String styleClass);
-    protected abstract void establishLink();
-    private double startX = 0;
-    private double startY = 0;
-    //TODO: make NodeOptions options static
-    protected NodeOptions options = new NodeOptions();
-
     public static DicNode getCurrentlySelected() {
         return currentlySelected;
-    }
-    public abstract boolean checkLink();
-
-    public static void setCurrentlySelected(DicNode currentlySelected) {
-        DicNode.currentlySelected = currentlySelected;
-    }
-
-    public static void reset() {
-        currentlySelected = null;
-        nodeList.clear();
-        inConnectMode = false;
-        bulkSelect = false;
-        endNode = null;
-    }
-    public static boolean isInConnectMode() {
-        return inConnectMode;
-    }
-
-    public static void setInConnectMode(boolean inConnectMode) {
-        DicNode.inConnectMode = inConnectMode;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
-
-    public boolean isSelected() {
-        return selected;
-    }
-
-    public static boolean isBulkSelect() {
-        return bulkSelect;
-    }
-
-    protected void addChild(DicNode childNode) {
-        boolean flag = false;
-        if (!childrenNodeList.isEmpty()) {
-            for (DicNode node : childrenNodeList) {
-                if (node == childNode) {
-                    flag = true;
-                    break;
-                }
-            }
-            if (!flag) childrenNodeList.add(childNode);
-        } else {
-            childrenNodeList.add(childNode);
-        }
-
-    }
-
-    protected void setParents(DicNode parent) {
-        this.parent = parent;
-        System.out.println(this.toString());
-        updateFromChild();
-    }
-
-    protected void updateFromChild() {//child node is 'this' and update to parent
-        if (parent != null) {
-            lineToParent.setStrokeWidth(1.5);
-            lineToParent.setStartX(nodePane.getLayoutX() + nodePane.getWidth()/2);
-            lineToParent.setStartY(nodePane.getLayoutY() + nodePane.getHeight()/2);
-            lineToParent.setEndX(parent.getNodePane().getLayoutX() + parent.getNodePane().getWidth()/2);
-            lineToParent.setEndY(parent.getNodePane().getLayoutY() + parent.getNodePane().getHeight()/2);
-        }
-    }
-
-    protected void updateFromParent() {//From parent node parent (parent is 'this')
-        for (DicNode node : childrenNodeList) {
-            node.updateFromChild();
-        }
-    }
-
-    protected void updateLine() {
-        updateFromChild();
-        updateFromParent();
-    }
-
-    protected void traverseDownward(DicNode root) {
-        for (DicNode node : root.childrenNodeList) {
-            updateFromParent();
-            root.traverseDownward(node);
-        }
-    }
-
-    protected void updateLine(DicNode excluded) { //For bulk selection mode
-        if (parent != null) {
-            for (DicNode node : parent.childrenNodeList) {
-                if (node != excluded) {
-                    //Traverse all children nodes
-                    traverseDownward(parent);
-                }
-            }
-            parent.updateLine(this);
-        } else {
-            //Traverse all children nodes
-            traverseDownward(this);
-        }
-    }
-
-    public DicNode() {
-
     }
 
     public double getStartX() {
@@ -183,12 +70,39 @@ public abstract class DicNode {
     public double getStartY() {
         return startY;
     }
+
     public VBox getNodePane() {
         return nodePane;
     }
 
     public static DicNode getEndNode() {
         return endNode;
+    }
+
+    public static void setInConnectMode(boolean inConnectMode) {
+        DicNode.inConnectMode = inConnectMode;
+    }
+
+    public static boolean isInConnectMode() {
+        return inConnectMode;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    //Set the parent of a node and update the graphical line
+    protected void setParents(DicNode parent) {
+        this.parent = parent;
+        updateFromChild();
+    }
+
+    public static void setCurrentlyEditedWord(WordNode newNode) {
+        currentlyEditedWord = newNode;
     }
 
     public void setStartX(double startX) {
@@ -198,11 +112,11 @@ public abstract class DicNode {
     public void setStartY(double startY) {
         this.startY = startY;
     }
+
     public void setNodePanePosition(double x, double y) {
         nodePane.setLayoutX(x);
         nodePane.setLayoutY(y);
     }
-
 
     public static void setBulkSelect(boolean bulkSelect) {
         DicNode.bulkSelect = bulkSelect;
@@ -224,11 +138,31 @@ public abstract class DicNode {
             System.out.println("INVALID TYPE TO SET STYLE CLASS");
         }
     }
+
+
+    //Add child node the children node list, check for duplicates before adding
+    protected void addChild(DicNode childNode) {
+        boolean flag = false;
+        if (!childrenNodeList.isEmpty()) {
+            for (DicNode node : childrenNodeList) {
+                if (node == childNode) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) childrenNodeList.add(childNode);
+        } else {
+            childrenNodeList.add(childNode);
+        }
+
+    }
+
+
+
     public DicNode(String titleString) {
         nodePane = new VBox();
         title = new Label();
         title.setText(titleString);
-
 
         title.getStylesheets().getClass().getResource("/css/EditWord.css");
         nodePane.getStylesheets().getClass().getResource("/css/EditWord.css");
@@ -244,40 +178,173 @@ public abstract class DicNode {
         nodePane.getChildren().add(title);
         nodePane.setLayoutX(0);
         nodePane.setLayoutY(0);
+
         nodePane.addEventHandler(MouseEvent.MOUSE_PRESSED, pressHandler);
         nodePane.addEventHandler(MouseEvent.MOUSE_DRAGGED, dragHandler);
         nodePane.addEventHandler(MouseEvent.MOUSE_RELEASED, mouseReleaseHandler);
         nodePane.addEventHandler(MouseEvent.DRAG_DETECTED, dragDetected);
+        nodePane.addEventHandler(MouseDragEvent.ANY, mouseDragEventEventHandler);
+
         options.getDelete().setOnAction(event -> {
             selfDelete();
         });
-
-        nodePane.setOnMouseDragEntered(event -> {
-                if (this != currentlySelected) {
-                    if (endNode != null) {
-                        deselect(endNode);
-                    }
-                    endNode = this;
-                    select(endNode);
-                    if (currentlySelected.checkLink()) {
-                        EditWordSceneController.temporaryLine.setStroke(Color.GREEN);
-                        System.out.println("VALID");
-                    } else {
-                        System.out.println("INVALID");
-                        EditWordSceneController.temporaryLine.setStroke(Color.RED);
-                    }
-//                    System.out.println("Mouse drag entered: " + nodePane.toString());
-//                    System.out.println(currentlySelected.getNodePane().toString());
-                }
-        });
-
-        nodePane.setOnMouseDragExited(dragEvent -> {
-            EditWordSceneController.temporaryLine.setStroke(Color.BLACK);
-            endNode = null;
-        });
     }
 
+    //
+    public static void save() {
+        for (DicNode node : nodeList) {
+            if ( node instanceof WordNode || node.parent != null) {
+                node.convertToWordBlock();
+            }
+        }
+    }
 
+    //Reset all static attributes to default value
+    public static void reset() {
+        currentlySelected = null;
+        for (int i = 0; i < nodeList.size(); i++) {
+            nodeList.get(i).selfDelete();
+            i--;
+        }
+        inConnectMode = false;
+        bulkSelect = false;
+        endNode = null;
+
+    }
+
+    //From the current node, which is a child node of another node, this function update the line to it's parent
+    protected void updateFromChild() {
+        if (parent != null) {
+            lineToParent.setStrokeWidth(1.5);
+            lineToParent.setStartX(nodePane.getLayoutX() + nodePane.getWidth()/2);
+            lineToParent.setStartY(nodePane.getLayoutY() + nodePane.getHeight()/2);
+            lineToParent.setEndX(parent.getNodePane().getLayoutX() + parent.getNodePane().getWidth()/2);
+            lineToParent.setEndY(parent.getNodePane().getLayoutY() + parent.getNodePane().getHeight()/2);
+        }
+    }
+
+    protected void updateFromParent() {//From parent node parent (parent is 'this')
+        for (DicNode node : childrenNodeList) {
+            node.updateFromChild();
+        }
+    }
+
+    //
+    protected void updateLine() {
+        updateFromChild();
+        updateFromParent();
+    }
+
+    //Traverse down to all children nodes from root node and update the line from the current node to child node
+    protected void traverseDownward(DicNode root) {
+        for (DicNode node : root.childrenNodeList) {
+            updateFromParent();
+            root.traverseDownward(node);
+        }
+    }
+
+    /**Traverse the whole graph and update connected nodes
+     * when in bulk selection mode. If the current node has height < leaf and height > root,
+     * it will traverse to the root node and traverse down to all children node except for
+     * the excluded node.
+     * @param excluded this node will be excluded
+     */
+    protected void updateLine(DicNode excluded) { //For bulk selection mode
+        if (parent != null) {
+            for (DicNode node : parent.childrenNodeList) {
+                if (node != excluded) {
+                    //Traverse all children nodes
+                    traverseDownward(parent);
+                }
+            }
+            parent.updateLine(this);
+        } else {
+            //Traverse all children nodes
+            traverseDownward(this);
+        }
+    }
+
+    public static void deselectAll() {
+        if (!nodeList.isEmpty()) {
+            for (DicNode node : nodeList) {
+                deselect(node);
+            }
+            bulkSelect = false;
+        }
+        currentlySelected = null;
+    }
+
+    public static void deselectAllExcept(DicNode excludeNode) {
+        if (!nodeList.isEmpty()) {
+            for (DicNode node : nodeList) {
+                if (node != excludeNode) {
+                    deselect(node);
+                }
+            }
+            bulkSelect = false;
+        }
+    }
+
+    public static void select(DicNode node) {
+        node.setSelected(true);
+        node.getNodePane().pseudoClassStateChanged(clicked, true);
+    }
+
+    //SEt
+    public static void deselect(DicNode node) {
+        node.setSelected(false);
+        node.getNodePane().pseudoClassStateChanged(clicked, false);
+    }
+
+    /** Delete the node from the instance where this method was called
+     * + Remove from nodeList
+     * + Remove from nodePane
+     * + Remove the line from parents
+     * + Set all children nodes' parent to null and set the line INVISIBLE NOT DELETE
+     */
+    public void selfDelete() {
+        try {
+            ((AnchorPane) nodePane.getParent()).getChildren().remove(nodePane);
+            ((AnchorPane) lineToParent.getParent()).getChildren().remove(lineToParent);
+            for (DicNode node : childrenNodeList) {
+                node.setParents(null);
+                node.delete();
+                node.lineToParent.setVisible(false);
+            }
+            nodeList.remove(this);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**Checking collision with selection rectangle
+     *
+     * @param rectangle input rectangle which is the selection rectangle from the controller
+     */
+    public void compareWithMouse(Rectangle rectangle) {
+        double rectLeft     = rectangle.getLayoutX();
+        double rectRight    = rectangle.getLayoutX() + rectangle.getWidth();
+        double rectTop      = rectangle.getLayoutY();
+        double rectBot      = rectangle.getLayoutY() + rectangle.getHeight();
+
+        double paneLeft     = nodePane.getLayoutX();
+        double paneRight    = nodePane.getLayoutX() + nodePane.getWidth();
+        double paneTop      = nodePane.getLayoutY();
+        double paneBot      = nodePane.getLayoutY() + nodePane.getHeight();
+
+        boolean collisionDetected = false;
+
+        if (rectLeft < paneRight && rectRight > paneLeft) {
+            if (rectTop < paneBot && rectBot > paneTop) {
+                collisionDetected = true;
+            }
+        }
+
+        if (collisionDetected) {
+            getNodePane().pseudoClassStateChanged(clicked,true);
+            setSelected(true);
+        }
+    }
 
     EventHandler<MouseEvent> pressHandler = new EventHandler<MouseEvent>() {
         @Override
@@ -287,11 +354,8 @@ public abstract class DicNode {
                 deselectAll();
                 select(DicNode.this);
                 DicNode.currentlySelected = DicNode.this;
-//                System.out.println("Mouse pressed on" + nodePane.toString());
-//                System.out.println(currentlySelected.getNodePane().toString());
-
             } else if (event.getButton() == MouseButton.PRIMARY) {
-                //Handling dragging obbject mode
+                //Handling dragging object mode
                 event.consume();
                 if (!bulkSelect) {
                     startX = event.getSceneX() - nodePane.getLayoutX();
@@ -309,7 +373,6 @@ public abstract class DicNode {
                     }
                 }
             }
-//            System.out.println(selectedCount);
         }
     };
 
@@ -317,9 +380,6 @@ public abstract class DicNode {
         @Override
         public void handle(MouseEvent event) {
             if (inConnectMode) {
-//                select(endNode);
-//                System.out.println("Mouse released "  + nodePane.toString());
-//                System.out.println(currentlySelected.getNodePane().toString());
                 if (checkLink()) {
                     System.out.println("ESTABLISHED LINK");
                     establishLink();
@@ -331,7 +391,6 @@ public abstract class DicNode {
                 select(DicNode.this);
                 currentlySelected = DicNode.this;
             } else if (event.getButton() == MouseButton.PRIMARY) {
-//                event.consume();
                 deselectAll();
                 select(DicNode.this);
                 currentlySelected = DicNode.this;
@@ -347,6 +406,7 @@ public abstract class DicNode {
             }
         }
     };
+
     EventHandler<MouseEvent> dragHandler = new EventHandler<MouseEvent>() {
 
         @Override
@@ -379,85 +439,34 @@ public abstract class DicNode {
         }
     };
 
-
-//    protected abstract void linkingRule();
-
-
-
-
-    public static void deselectAll() {
-        if (!nodeList.isEmpty()) {
-            for (DicNode node : nodeList) {
-                deselect(node);
-            }
-            bulkSelect = false;
-        }
-    }
-
-    public static void deselectAllExcept(DicNode excludeNode) {
-        if (!nodeList.isEmpty()) {
-            for (DicNode node : nodeList) {
-                if (node != excludeNode) {
-                    deselect(node);
+    EventHandler<MouseDragEvent> mouseDragEventEventHandler = new EventHandler<MouseDragEvent>() {
+        @Override
+        public void handle(MouseDragEvent event) {
+            if (event.getEventType() == MouseDragEvent.MOUSE_DRAG_ENTERED) {
+                if (DicNode.this != DicNode.currentlySelected) {
+                    if (endNode != null) {
+                        deselect(endNode);
+                    }
+                    DicNode.endNode = DicNode.this;
+                    select(endNode);
+                    if (currentlySelected.checkLink()) {
+                        EditWordSceneController.temporaryLine.setStroke(Color.GREEN);
+//                        System.out.println("VALID");
+                    } else {
+//                        System.out.println("INVALID");
+                        EditWordSceneController.temporaryLine.setStroke(Color.RED);
+                    }
                 }
             }
-            bulkSelect = false;
-        }
-    }
 
-    public static void select(DicNode node) {
-        node.setSelected(true);
-        node.getNodePane().pseudoClassStateChanged(clicked, true);
-    }
-
-    public static void deselect(DicNode node) {
-        node.setSelected(false);
-        node.getNodePane().pseudoClassStateChanged(clicked, false);
-    }
-
-    public void selfDelete() {
-        try {
-            ((AnchorPane) nodePane.getParent()).getChildren().remove(nodePane);
-            ((AnchorPane) lineToParent.getParent()).getChildren().remove(lineToParent);
-            for (DicNode node : childrenNodeList) {
-                node.setParents(null);
-                node.lineToParent.setVisible(false);
-            }
-            nodeList.remove(this);
-//            System.out.println("Removed" + this.getNodePane().toString());
-        } catch (Exception e) {
-            System.out.println(e.toString());
-            System.out.println("Oi dick'ead we got a problem here");
-            System.out.println(nodePane.toString());
-        }
-
-    }
-
-    public void compareWithMouse(Rectangle rectangle) {
-        //Collision detection
-        double rectLeft     = rectangle.getLayoutX();
-        double rectRight    = rectangle.getLayoutX() + rectangle.getWidth();
-        double rectTop      = rectangle.getLayoutY();
-        double rectBot      = rectangle.getLayoutY() + rectangle.getHeight();
-
-        double paneLeft     = nodePane.getLayoutX();
-        double paneRight    = nodePane.getLayoutX() + nodePane.getWidth();
-        double paneTop      = nodePane.getLayoutY();
-        double paneBot      = nodePane.getLayoutY() + nodePane.getHeight();
-
-        boolean collisionDetected = false;
-
-        if (rectLeft < paneRight && rectRight > paneLeft) {
-            if (rectTop < paneBot && rectBot > paneTop) {
-                collisionDetected = true;
+            if (event.getEventType() == MouseDragEvent.MOUSE_DRAG_EXITED) {
+                EditWordSceneController.temporaryLine.setStroke(Color.BLACK);
+                endNode = null;
             }
         }
-        if (collisionDetected) {
-            getNodePane().pseudoClassStateChanged(clicked,true);
-            setSelected(true);
-        }
+    };
 
-    }
+
 }
 
 
