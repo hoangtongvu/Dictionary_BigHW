@@ -1,4 +1,4 @@
-package WordEditing;
+package WordEditing.GraphNode;
 
 import Main.SceneControllers.Dictionary.EditWordSceneController;
 import javafx.css.PseudoClass;

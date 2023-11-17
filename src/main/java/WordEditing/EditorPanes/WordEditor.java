@@ -1,13 +1,11 @@
 package WordEditing.EditorPanes;
 
-import WordEditing.WordNode;
+import WordEditing.GraphNode.WordNode;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-
-import java.security.Key;
 
 public class WordEditor {
     private TextField wordTextField = new TextField();

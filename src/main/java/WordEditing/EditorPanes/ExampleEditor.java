@@ -1,15 +1,11 @@
 package WordEditing.EditorPanes;
 
-import WordEditing.ExampleNode;
-import javafx.event.Event;
+import WordEditing.GraphNode.ExampleNode;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-
-import java.security.Key;
 
 public class ExampleEditor {
     protected TextArea exampleTextArea = new TextArea();

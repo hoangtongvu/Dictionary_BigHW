@@ -93,7 +93,7 @@ public class WordDescription {
         }
     }
 
-    public void saveData(int wordID) throws SQLException {
+    public void saveData(String wordID) throws SQLException {
         String update = "INSERT INTO description (word_type, word_id) VALUES (?,?)";
         PreparedStatement statement = Database.getConnection().prepareStatement(update);
         statement.setString(1, wordType);
@@ -102,17 +102,17 @@ public class WordDescription {
 
         Statement getID = Database.getConnection().createStatement();
         ResultSet rs = getID.executeQuery("SELECT last_insert_rowid()");
-        String id = rs.getString("description_id");
+        String id = rs.getString(1); //descriptionID
         this.descriptionID = id;
 
         if (phraseList != null) {
-            for (WordPhrase phrase : phraseList) {
-                phrase.saveData(id);
+            for (int i = 0; i < phraseList.size(); i++) {
+                phraseList.get(i).saveData(descriptionID);
             }
         }
         if (definitionList != null) {
-            for (WordDefinition definition : definitionList) {
-                definition.saveData(id, false);
+            for (int i = 0; i < definitionList.size(); i++) {
+                definitionList.get(i).saveData(descriptionID, false);
             }
         }
     }

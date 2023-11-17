@@ -84,7 +84,7 @@ public class WordDefinition {
 
         Statement getID = Database.getConnection().createStatement();
         ResultSet rs = getID.executeQuery("SELECT last_insert_rowid()");
-        String id = rs.getString("definition_id");
+        String id = rs.getString(1);
         this.definitionID = id;
 
         //Get examples

@@ -1,14 +1,9 @@
-package WordEditing;
+package WordEditing.GraphNode;
 
-import Main.Database;
 import Word.WordDefinition;
 import WordEditing.EditorPanes.DefinitionEditor;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import org.w3c.dom.events.MouseEvent;
-
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 public class DefinitionNode extends DicNode {
     private WordDefinition definition;

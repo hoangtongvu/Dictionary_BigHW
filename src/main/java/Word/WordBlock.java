@@ -123,8 +123,8 @@ public class WordBlock implements Comparable<WordBlock> {
         //Get last inserted ID
         Statement getID = Database.getConnection().createStatement();
         ResultSet rs = getID.executeQuery("SELECT last_insert_rowid()");
-        int id = rs.getInt(1);
-
+        String id = rs.getString(1);
+        this.wordID = id;
         if (descriptionsList != null) {
             for (int i = 0; i < descriptionsList.size(); i++) {
                 descriptionsList.get(i).saveData(id);

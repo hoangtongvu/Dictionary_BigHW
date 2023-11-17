@@ -2,7 +2,7 @@ package Main.SceneControllers.Dictionary;
 
 import Dictionary.DicManager;
 import Word.WordBlock;
-import WordEditing.*;
+import WordEditing.GraphNode.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
@@ -55,23 +55,7 @@ public class EditWordSceneController {
     //TODO: Add word to favourite list
     //TODO: Add study timer on the side and probably spotify API
 
-    @FXML
-    public void addNewWord() throws SQLException {
-        if (isEditing) {
-//            if (Warnings.getInstance().addWordWarning()) {
-//                DicNode.save();
-//                DicNode.getCurrentlyEditedWord().getWordBlock().saveData();
-//                DicNode.setCurrentlyEditedWord(new WordNode());
-//                reset();
-//                addNode(DicNode.getCurrentlyEditedWord());
-//            }
-        } else {
-            setDefault(true);
-            DicNode.setCurrentlyEditedWord(new WordNode());
-//            isEditing = true;
-            addNode(DicNode.getCurrentlyEditedWord());
-        }
-    }
+
 
     /**
      * Create: Done
@@ -80,25 +64,23 @@ public class EditWordSceneController {
      * Delete: In progress
      */
 
-    public void create() {
+    @FXML
+    public void saveWord() throws SQLException {
+        //TODO: Divide saving into 2 cases, when word doesnt exist and when editing a word
+        //TODO: add repeated word warning
+
         for (DicNode node : DicNode.getNodeList()) {
             if ( node instanceof WordNode || node.getParent() != null) {
                 node.convertToWordBlock();
             }
         }
+        DicNode.getCurrentlyEditedWord().getWordBlock().saveData();
+
+        DicNode.getCurrentlyEditedWord().getWordBlock().updateInDatabase();
     }
 
-    public void save() throws SQLException {
-        if (DicNode.getCurrentlyEditedWord() != null) {
+    public void create() {
 
-            DicNode.getCurrentlyEditedWord().getWordBlock().saveData();
-            DicManager.getInstance().getDictionary().getWordBlocks().sort(new Comparator<WordBlock>() {
-                @Override
-                public int compare(WordBlock o1, WordBlock o2) {
-                    return o1.getWord().compareToIgnoreCase(o2.getWord());
-                }
-            });
-        }
     }
 
     public void update() {
@@ -125,8 +107,22 @@ public class EditWordSceneController {
     }
 
     @FXML
-    public void saveWord() {
-        //TODO: Divide saving into 2 cases, when word doesnt exist and when editing a word
+    public void addNewWord() throws SQLException {
+        if (isEditing) {
+//            if (Warnings.getInstance().addWordWarning()) {
+//                DicNode.save();
+//                DicNode.getCurrentlyEditedWord().getWordBlock().saveData();
+//                DicNode.setCurrentlyEditedWord(new WordNode());
+//                reset();
+//                addNode(DicNode.getCurrentlyEditedWord());
+//            }
+
+        } else {
+            setDefault(true);
+            DicNode.setCurrentlyEditedWord(new WordNode());
+            isEditing = true;
+            addNode(DicNode.getCurrentlyEditedWord());
+        }
     }
 
     @FXML

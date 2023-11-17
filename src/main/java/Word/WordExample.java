@@ -61,7 +61,7 @@ public class WordExample {
 
         Statement getID = Database.getConnection().createStatement();
         ResultSet rs = getID.executeQuery("SELECT last_insert_rowid()");
-        String id = rs.getString("example_id");
+        String id = rs.getString(1);
         this.exampleID = id;
     }
 

@@ -38,7 +38,7 @@
                               <Button fx:id="phraseButton" layoutX="374.0" layoutY="8.0" mnemonicParsing="false" onAction="#addPhrase" text="Add Phrase" />
                               <Button fx:id="exampleButton" layoutX="451.0" layoutY="8.0" mnemonicParsing="false" onAction="#addExample" text="Add Example" />
                               <Button fx:id="deleteButton" layoutX="599.0" layoutY="8.0" mnemonicParsing="false" onAction="#deleteWord" text="Delete this word" />
-                              <Button fx:id="saveButton" layoutX="558.0" layoutY="8.0" mnemonicParsing="false" text="Save" />
+                              <Button fx:id="saveButton" layoutX="558.0" layoutY="8.0" mnemonicParsing="false" onAction="#saveWord" text="Save" />
                               <Button fx:id="connectButton" layoutX="716.0" layoutY="8.0" mnemonicParsing="false" onAction="#toggleConnectMode" text="Toggle Connect Mode" />
                               <Button layoutX="31.0" layoutY="8.0" mnemonicParsing="false" onAction="#addNewWord" text="Add a new word" />
                            </children>

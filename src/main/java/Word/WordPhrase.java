@@ -74,18 +74,18 @@ public class WordPhrase {
     public void saveData(String descriptionID) throws SQLException {
         String update = "INSERT INTO phrase (phrase, description_id) VALUES (?,?)";
         PreparedStatement statement = Database.getConnection().prepareStatement(update);
-        statement.setString(1,phrase);
-        statement.setString(2,String.valueOf(descriptionID));
+        statement.setString(1, phrase);
+        statement.setString(2, descriptionID);
         statement.execute();
 
         Statement getID = Database.getConnection().createStatement();
         ResultSet rs = getID.executeQuery("SELECT last_insert_rowid()");
-        String id = rs.getString("phrase_id");
+        String id = rs.getString(1);
         this.phraseID = id;
 
         if (definitionList != null) {
             for (WordDefinition definition : definitionList) {
-                definition.saveData(id, true);
+                definition.saveData(phraseID, true);
             }
         }
     }

@@ -1,6 +1,6 @@
 package WordEditing.EditorPanes;
 
-import WordEditing.DefinitionNode;
+import WordEditing.GraphNode.DefinitionNode;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;

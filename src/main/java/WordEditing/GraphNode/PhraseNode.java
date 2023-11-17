@@ -1,4 +1,4 @@
-package WordEditing;
+package WordEditing.GraphNode;
 
 import Word.WordPhrase;
 import WordEditing.EditorPanes.PhraseEditor;

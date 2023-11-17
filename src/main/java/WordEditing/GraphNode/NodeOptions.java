@@ -1,9 +1,6 @@
-package WordEditing;
+package WordEditing.GraphNode;
 
-import javafx.event.EventHandler;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 
 public class NodeOptions {
