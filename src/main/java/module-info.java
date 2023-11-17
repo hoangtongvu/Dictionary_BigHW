@@ -6,6 +6,7 @@ module MainGroup.application {
     requires javafx.web;
     requires java.sql;
     requires scenebuilderextended.components.choicegameextendedcomponents;
+    requires com.google.gson;
 
     opens Main.application to javafx.fxml;
     exports Main.application;
@@ -31,4 +32,6 @@ module MainGroup.application {
     opens CustomEventPackage.TwoParameters to javafx.fxml;
 
     opens Main.SceneControllers.Translate to javafx.fxml;
+    opens WordEditing to com.google.gson;
+
 }

@@ -16,6 +16,11 @@ public class WordDescription {
     private static WordDefinition wordDefinition;
     private static WordPhrase wordPhrase;
     private String descriptionID = null;
+
+    public String getDescriptionID() {
+        return descriptionID;
+    }
+
     public WordDescription() {
 
     }

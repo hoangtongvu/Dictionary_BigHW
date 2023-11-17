@@ -15,6 +15,10 @@ public class WordDefinition {
 
     private String definitionID = null;
 
+    public String getDefinitionID() {
+        return definitionID;
+    }
+
     public WordDefinition() {
 
     }

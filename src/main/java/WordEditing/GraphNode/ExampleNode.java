@@ -26,6 +26,7 @@ public class ExampleNode extends DicNode {
 
 
 
+
     public WordExample getExample() {
         return example;
     }
@@ -78,6 +79,11 @@ public class ExampleNode extends DicNode {
             endNode.addChild(this);
             setParents(endNode);
         }
+    }
+
+    @Override
+    protected String getID() {
+        return example.getExampleID();
     }
 
     @Override

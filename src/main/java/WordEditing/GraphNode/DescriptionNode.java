@@ -102,6 +102,11 @@ public class DescriptionNode extends DicNode {
     }
 
     @Override
+    protected String getID() {
+        return description.getDescriptionID();
+    }
+
+    @Override
     public boolean checkLink() {
         //Parent nodes
 

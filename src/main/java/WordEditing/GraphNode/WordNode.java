@@ -36,6 +36,11 @@ public class WordNode extends DicNode {
         return wordLabel;
     }
 
+    @Override
+    protected String getID() {
+        return wordBlock.getWordID();
+    }
+
     public WordNode() {
         super("Word");
         setOptions();

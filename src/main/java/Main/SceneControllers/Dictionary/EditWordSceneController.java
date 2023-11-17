@@ -67,6 +67,7 @@ public class EditWordSceneController {
     public void saveWord() throws SQLException {
 //        //TODO: Divide saving into 2 cases, when word doesnt exist and when editing a word
 //        //TODO: add repeated word warning
+        DicNode.getCurrentlyEditedWord().saveToJSON();
         save();
     }
 

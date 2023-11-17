@@ -63,6 +63,11 @@ public class DefinitionNode extends DicNode {
     }
 
     @Override
+    protected String getID() {
+        return definition.getDefinitionID();
+    }
+
+    @Override
     public boolean checkLink() {
         if (endNode instanceof ExampleNode) {
             return true;

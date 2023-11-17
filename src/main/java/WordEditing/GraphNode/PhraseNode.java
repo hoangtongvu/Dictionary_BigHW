@@ -79,6 +79,11 @@ public class PhraseNode extends DicNode {
     }
 
     @Override
+    protected String getID() {
+        return phrase.getPhraseID();
+    }
+
+    @Override
     public boolean checkLink() {
         if (endNode instanceof DefinitionNode) {
             return true;

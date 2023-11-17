@@ -158,7 +158,7 @@ public class WordBlock implements Comparable<WordBlock> {
     public static void main(String[] args) throws SQLException {
         loadWordBlocks();
 
-        for (int j = 82252; j < 82295; j++ ) {
+        for (int j = 82252; j < 82300; j++ ) {
             String key = String.valueOf(j);
             for (int i = DicManager.getInstance().getDictionary().getWordBlocks().size() - 1; i >= 0; i--) {
                 if (DicManager.getInstance().getDictionary().getWordBlocks().get(i).getWordID().equals(key)) {

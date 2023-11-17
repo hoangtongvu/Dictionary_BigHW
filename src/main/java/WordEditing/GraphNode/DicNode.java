@@ -1,6 +1,10 @@
 package WordEditing.GraphNode;
 
 import Main.SceneControllers.Dictionary.EditWordSceneController;
+import WordEditing.NodeJSON;
+import WordEditing.WordJSON;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import javafx.css.PseudoClass;
 import javafx.event.EventHandler;
 import javafx.geometry.Side;
@@ -15,6 +19,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +33,7 @@ public abstract class DicNode {
     protected abstract void setOptions();
     protected abstract void labelProperty(Label label, String styleClass);
     protected abstract void establishLink();
+    protected abstract String getID();
 
     //Covert all components displayed and saved in nodeList to a cohesive block of word
     public abstract void convertToWordBlock();
@@ -366,6 +375,42 @@ public abstract class DicNode {
         }
     }
 
+    public void saveToJSON() {
+        String path = "E:\\projects\\Dictionary_BigHW\\src\\main\\resources\\data\\positions.json";
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<WordJSON>>(){}.getType();
+        List<WordJSON> list = null;
+        try (FileReader reader = new FileReader(path)) {
+            list = gson.fromJson(reader, listType);
+            System.out.println("Read success");
+        } catch (IOException e) {
+            System.out.println("Failed to read JSON");
+        }
+
+        WordJSON newWord = new WordJSON(currentlyEditedWord.getWordBlock().getWordID());
+        for (DicNode node : nodeList) {
+            if (node instanceof WordNode || node.getParent() != null) {
+                newWord.addNode(new NodeJSON(node.getClass().getSimpleName(),
+                        node.getID(), node.getNodePane().getLayoutX(), node.getNodePane().getLayoutY()));
+            }
+        }
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+        for (WordJSON word : list) {
+            if (word.getWordID().equals(newWord.getWordID())) {
+                list.remove(word);
+                break;
+            }
+        }
+        list.add(newWord);
+
+        try (FileWriter writer = new FileWriter("E:\\projects\\Dictionary_BigHW\\src\\main\\resources\\data\\positions.json")) {
+            gson.toJson(list, writer);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     EventHandler<MouseEvent> pressHandler = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {

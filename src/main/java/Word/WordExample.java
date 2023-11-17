@@ -14,6 +14,10 @@ public class WordExample {
     private String translation = "";
     private String exampleID = null;
 
+    public String getExampleID() {
+        return exampleID;
+    }
+
     public void setExampleID(String exampleID) {
         this.exampleID = exampleID;
     }

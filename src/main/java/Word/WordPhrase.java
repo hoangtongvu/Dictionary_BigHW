@@ -19,6 +19,10 @@ public class WordPhrase {
     private static WordDefinition wordDefinition;
     private String phraseID = null;
 
+    public String getPhraseID() {
+        return phraseID;
+    }
+
     public WordPhrase(String phrase) {
         this.phrase = phrase;
     }
