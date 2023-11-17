@@ -1,5 +1,7 @@
 package Main.SceneControllers.Dictionary;
 
+import Dictionary.DicManager;
+import Word.WordBlock;
 import WordEditing.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -7,10 +9,12 @@ import javafx.geometry.Side;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
 import java.sql.SQLException;
+import java.util.Comparator;
 
 public class EditWordSceneController {
 
@@ -43,28 +47,65 @@ public class EditWordSceneController {
     protected Button connectButton;
     @FXML
     protected Button deleteButton;
+    @FXML
+    protected ListView editableWordList;
 
 
+    //TODO: Save functionality for words
+    //TODO: Add word to favourite list
+    //TODO: Add study timer on the side and probably spotify API
 
     @FXML
     public void addNewWord() throws SQLException {
         if (isEditing) {
-            if (Warnings.getInstance().addWordWarning()) {
-                DicNode.save();
-                DicNode.getCurrentlyEditedWord().getWordBlock().saveData();
-                DicNode.setCurrentlyEditedWord(new WordNode());
-                reset();
-                addNode(DicNode.getCurrentlyEditedWord());
-            }
+//            if (Warnings.getInstance().addWordWarning()) {
+//                DicNode.save();
+//                DicNode.getCurrentlyEditedWord().getWordBlock().saveData();
+//                DicNode.setCurrentlyEditedWord(new WordNode());
+//                reset();
+//                addNode(DicNode.getCurrentlyEditedWord());
+//            }
         } else {
             setDefault(true);
             DicNode.setCurrentlyEditedWord(new WordNode());
-            isEditing = true;
+//            isEditing = true;
             addNode(DicNode.getCurrentlyEditedWord());
         }
     }
 
-    public void save() {
+    /**
+     * Create: Done
+     * Read: In progress
+     * Update: In progress
+     * Delete: In progress
+     */
+
+    public void create() {
+        for (DicNode node : DicNode.getNodeList()) {
+            if ( node instanceof WordNode || node.getParent() != null) {
+                node.convertToWordBlock();
+            }
+        }
+    }
+
+    public void save() throws SQLException {
+        if (DicNode.getCurrentlyEditedWord() != null) {
+
+            DicNode.getCurrentlyEditedWord().getWordBlock().saveData();
+            DicManager.getInstance().getDictionary().getWordBlocks().sort(new Comparator<WordBlock>() {
+                @Override
+                public int compare(WordBlock o1, WordBlock o2) {
+                    return o1.getWord().compareToIgnoreCase(o2.getWord());
+                }
+            });
+        }
+    }
+
+    public void update() {
+
+    }
+
+    public void read() {
 
     }
 
@@ -73,18 +114,19 @@ public class EditWordSceneController {
     }
 
     public void reset(){
-        //Save the word
         DicNode.reset();
     }
 
 
+////////////////////////////////////////////////////////////
     @FXML
     public void deleteWord() {
 
     }
+
     @FXML
     public void saveWord() {
-        DicNode.save();
+        //TODO: Divide saving into 2 cases, when word doesnt exist and when editing a word
     }
 
     @FXML
@@ -109,8 +151,14 @@ public class EditWordSceneController {
 
     @FXML
     public void toggleConnectMode() {
-        DicNode.setInConnectMode(!DicNode.isInConnectMode());
+        if (!DicNode.isToggleConnectMode()) {
+            connectButton.setTextFill(Color.GREEN);
+        } else {
+            connectButton.setTextFill(Color.RED);
+        }
+        DicNode.setToggleConnectMode(!DicNode.isToggleConnectMode());
     }
+
     @FXML
     public void initialize() {
         canvasPane = ((AnchorPane) canvas.getContent());
@@ -126,12 +174,10 @@ public class EditWordSceneController {
                 options.getAddPhrase()
         );
 
+        options.getDelete().setText("Delete selected");
+
         options.getAddDes().setOnAction(event -> {
             addDescription();
-        });
-
-        options.getConnect().setOnAction(event -> {
-            DicNode.setInConnectMode(!DicNode.isInConnectMode());
         });
 
         options.getAddDef().setOnAction(event -> {
@@ -139,7 +185,7 @@ public class EditWordSceneController {
         });
 
         options.getDelete().setOnAction(event -> {
-            deleteNode();
+            deleteSelectedNode();
         });
 
         options.getAddPhrase().setOnAction(event -> {
@@ -256,6 +302,9 @@ public class EditWordSceneController {
             if (DicNode.isInConnectMode()) {
                 temporaryLine.setVisible(false);
                 canvas.setPannable(false);
+                if (!DicNode.isToggleConnectMode()) {
+                    DicNode.setInConnectMode(false);
+                }
             } else if (event.getButton() == MouseButton.SECONDARY) {
                 selectionRectangle.setLayoutX(event.getX());
                 selectionRectangle.setLayoutY(event.getY());
@@ -290,7 +339,7 @@ public class EditWordSceneController {
         @Override
         public void handle(KeyEvent event) {
             if (event.getCode() == KeyCode.DELETE && !DicNode.getNodeList().isEmpty()) {
-                deleteNode();
+                deleteSelectedNode();
             }
             if (event.getCode() == KeyCode.ESCAPE) {
                 DicNode.deselectAll();
@@ -307,7 +356,7 @@ public class EditWordSceneController {
         selectionRectangle.setLayoutY(-5);
     }
 
-    public void deleteNode() {
+    public void deleteSelectedNode() {
         for (int i = 0; i < DicNode.getNodeList().size(); i++) {
             if (DicNode.getNodeList().get(i).isSelected()) {
                 DicNode.nodeList.get(i).selfDelete();

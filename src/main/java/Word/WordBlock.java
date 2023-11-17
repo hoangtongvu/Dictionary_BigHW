@@ -16,6 +16,17 @@ public class WordBlock implements Comparable<WordBlock> {
     private String wordID = "";
     private boolean loadStatus = false;
 
+    boolean editable;
+
+    public boolean isEditable() {
+        return editable;
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
+    }
+
+
     public String getWordID() {
         return wordID;
     }

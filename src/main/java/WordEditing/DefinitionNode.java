@@ -3,6 +3,8 @@ package WordEditing;
 import Word.WordDefinition;
 import WordEditing.EditorPanes.DefinitionEditor;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import org.w3c.dom.events.MouseEvent;
 
 public class DefinitionNode extends DicNode {
     private WordDefinition definition;
@@ -85,12 +87,15 @@ public class DefinitionNode extends DicNode {
     }
 
     @Override
-    public void delete() {
-
+    public void removeEditor() {
+        if (editor.getEditorPane().getParent() != null) {
+            ((AnchorPane) editor.getEditorPane().getParent()).getChildren().remove(editor.getEditorPane());
+        }
     }
 
     @Override
     protected void setOptions() {
         options.getOptions().getItems().addAll(options.getConnect(),options.getDelete(),options.getAddEx());
+
     }
 }

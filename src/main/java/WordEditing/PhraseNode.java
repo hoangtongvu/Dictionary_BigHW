@@ -3,6 +3,7 @@ package WordEditing;
 import Word.WordPhrase;
 import WordEditing.EditorPanes.PhraseEditor;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 
 public class PhraseNode extends DicNode {
     private WordPhrase phrase;
@@ -45,8 +46,10 @@ public class PhraseNode extends DicNode {
     }
 
     @Override
-    public void delete() {
-
+    public void removeEditor() {
+        if (editor.getEditorPane().getParent() != null) {
+            ((AnchorPane) editor.getEditorPane().getParent()).getChildren().remove(editor.getEditorPane());
+        }
     }
 
     @Override

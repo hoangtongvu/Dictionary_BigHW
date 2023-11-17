@@ -31,6 +31,9 @@ public class DicWordLoader {
         while (resultSet.next()) {
             wordBlock = new WordBlock(resultSet.getString("word"),resultSet.getString("sound"));
             wordBlock.setWordID(resultSet.getString("word_id"));
+            if (resultSet.getString("is_editable").equals("1")) {
+                wordBlock.setEditable(true);
+            }
 //            System.out.println(wordBlock.getWord());
             DicManager.getInstance().addWordBlock(wordBlock);
         }

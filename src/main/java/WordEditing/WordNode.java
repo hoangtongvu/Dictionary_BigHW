@@ -3,6 +3,7 @@ package WordEditing;
 import Word.WordBlock;
 import WordEditing.EditorPanes.WordEditor;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 
 public class WordNode extends DicNode {
     private WordBlock wordBlock;
@@ -49,8 +50,10 @@ public class WordNode extends DicNode {
     }
 
     @Override
-    public void delete() {
-
+    public void removeEditor() {
+        if (editor.getEditorPane().getParent() != null) {
+            ((AnchorPane) editor.getEditorPane().getParent()).getChildren().remove(editor.getEditorPane());
+        }
     }
 
     @Override

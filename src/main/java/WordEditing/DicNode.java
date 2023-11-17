@@ -19,7 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class DicNode {
-    public abstract void delete();
+    public abstract void removeEditor();
+
     public abstract boolean checkLink();
     protected abstract void setOptions();
     protected abstract void labelProperty(Label label, String styleClass);
@@ -27,14 +28,13 @@ public abstract class DicNode {
 
     //Covert all components displayed and saved in nodeList to a cohesive block of word
     public abstract void convertToWordBlock();
-
-
     public static List<DicNode> nodeList = new ArrayList<>();
     protected Label title;
     protected static WordNode currentlyEditedWord;
     protected static DicNode currentlySelected = null;
     protected static DicNode endNode = null;
     protected static boolean bulkSelect = false;
+    protected static boolean toggleConnectMode = false;
     protected static boolean inConnectMode = false;
     protected boolean selected = false;
     public static PseudoClass clicked;
@@ -99,6 +99,20 @@ public abstract class DicNode {
     protected void setParents(DicNode parent) {
         this.parent = parent;
         updateFromChild();
+    }
+
+    public DicNode getParent() {
+        return parent;
+    }
+
+    public static boolean isToggleConnectMode() {
+        return toggleConnectMode;
+    }
+
+    public static void setToggleConnectMode(boolean toggleConnectMode) {
+        if (toggleConnectMode) inConnectMode = true;
+        if (!toggleConnectMode) inConnectMode = false;
+        DicNode.toggleConnectMode = toggleConnectMode;
     }
 
     public static void setCurrentlyEditedWord(WordNode newNode) {
@@ -190,15 +204,6 @@ public abstract class DicNode {
         });
     }
 
-    //
-    public static void save() {
-        for (DicNode node : nodeList) {
-            if ( node instanceof WordNode || node.parent != null) {
-                node.convertToWordBlock();
-            }
-        }
-    }
-
     //Reset all static attributes to default value
     public static void reset() {
         currentlySelected = null;
@@ -209,7 +214,6 @@ public abstract class DicNode {
         inConnectMode = false;
         bulkSelect = false;
         endNode = null;
-
     }
 
     //From the current node, which is a child node of another node, this function update the line to it's parent
@@ -306,9 +310,9 @@ public abstract class DicNode {
         try {
             ((AnchorPane) nodePane.getParent()).getChildren().remove(nodePane);
             ((AnchorPane) lineToParent.getParent()).getChildren().remove(lineToParent);
+            this.removeEditor();
             for (DicNode node : childrenNodeList) {
                 node.setParents(null);
-                node.delete();
                 node.lineToParent.setVisible(false);
             }
             nodeList.remove(this);
@@ -383,6 +387,9 @@ public abstract class DicNode {
                 if (checkLink()) {
                     System.out.println("ESTABLISHED LINK");
                     establishLink();
+                    deselectAllExcept(DicNode.this);
+
+
                 }
             } else if (event.getButton() == MouseButton.SECONDARY) {
                 event.consume();

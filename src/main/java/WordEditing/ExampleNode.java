@@ -3,6 +3,7 @@ package WordEditing;
 import Word.WordExample;
 import WordEditing.EditorPanes.ExampleEditor;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 
 public class ExampleNode extends DicNode {
     private WordExample example;
@@ -51,8 +52,10 @@ public class ExampleNode extends DicNode {
     }
 
     @Override
-    public void delete() {
-
+    public void removeEditor() {
+        if (editor.getEditorPane().getParent() != null) {
+            ((AnchorPane) editor.getEditorPane().getParent()).getChildren().remove(editor.getEditorPane());
+        }
     }
 
     @Override

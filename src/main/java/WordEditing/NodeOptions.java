@@ -15,7 +15,9 @@ public class NodeOptions {
     private final MenuItem addPhrase = new MenuItem("Add Phrase");
     ContextMenu options = new ContextMenu();
     public NodeOptions() {
-
+        connect.setOnAction(event -> {
+            DicNode.setInConnectMode(true);
+        });
     }
 
 

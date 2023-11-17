@@ -3,6 +3,7 @@ package WordEditing;
 import Word.WordDescription;
 import WordEditing.EditorPanes.DescriptionEditor;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 
 public class DescriptionNode extends DicNode {
     private WordDescription description;
@@ -55,8 +56,10 @@ public class DescriptionNode extends DicNode {
     }
 
     @Override
-    public void delete() {
-
+    public void removeEditor() {
+        if (editor.getEditorPane().getParent() != null) {
+            ((AnchorPane) editor.getEditorPane().getParent()).getChildren().remove(editor.getEditorPane());
+        }
     }
 
     @Override
