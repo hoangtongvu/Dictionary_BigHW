@@ -17,7 +17,7 @@ public class WordPhrase {
     private String phrase;
     private List<WordDefinition> definitionList;
     private static WordDefinition wordDefinition;
-    private String descriptionID = null;
+    private String phraseID = null;
 
     public WordPhrase(String phrase) {
         this.phrase = phrase;
@@ -55,6 +55,7 @@ public class WordPhrase {
     }
 
     public void loadData(String phraseID) throws SQLException {
+        this.phraseID = phraseID;
         Statement statement = Database.getConnection().createStatement();
         String query = "SELECT * FROM phrase where phrase_id =" + phraseID;
         ResultSet resultSet = statement.executeQuery(query);
@@ -71,7 +72,6 @@ public class WordPhrase {
     }
 
     public void saveData(String descriptionID) throws SQLException {
-        this.descriptionID = descriptionID;
         String update = "INSERT INTO phrase (phrase, description_id) VALUES (?,?)";
         PreparedStatement statement = Database.getConnection().prepareStatement(update);
         statement.setString(1,phrase);
@@ -80,13 +80,28 @@ public class WordPhrase {
 
         Statement getID = Database.getConnection().createStatement();
         ResultSet rs = getID.executeQuery("SELECT last_insert_rowid()");
-        String id = rs.getString(1);
+        String id = rs.getString("phrase_id");
+        this.phraseID = id;
 
         if (definitionList != null) {
             for (WordDefinition definition : definitionList) {
-                definition.saveData(id, 0);
+                definition.saveData(id, true);
             }
         }
+    }
+
+    public void deleteFromDatabase(String descriptionID) throws SQLException {
+        if (definitionList != null) {
+            for (WordDefinition definition : definitionList) {
+                definition.deleteFromDatabase(phraseID, true);
+            }
+        }
+
+
+        String query = "DELETE FROM phrase WHERE description_id = ?";
+        PreparedStatement statement = Database.getConnection().prepareStatement(query);
+        statement.setString(1, descriptionID);
+        statement.execute();
     }
 
 }

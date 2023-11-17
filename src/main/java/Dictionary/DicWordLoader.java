@@ -25,18 +25,6 @@ public class DicWordLoader {
 //    }
 
     public void LoadFromDatabase() throws SQLException {
-        Statement statement =  Database.getConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM word ORDER BY word ASC");
-
-        while (resultSet.next()) {
-            wordBlock = new WordBlock(resultSet.getString("word"),resultSet.getString("sound"));
-            wordBlock.setWordID(resultSet.getString("word_id"));
-            if (resultSet.getString("is_editable").equals("1")) {
-                wordBlock.setEditable(true);
-            }
-//            System.out.println(wordBlock.getWord());
-            DicManager.getInstance().addWordBlock(wordBlock);
-        }
-
+        WordBlock.loadWordBlocks();
     }
 }

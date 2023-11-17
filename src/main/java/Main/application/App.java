@@ -20,7 +20,7 @@ public class App extends Application {
         this.primaryStage = primaryStage;
         Parent root;
         //root = FXMLLoader.load(getClass().getResource("/fxml/application/DictionaryScene.fxml"));
-        root = FxmlFileManager.getInstance().editWordScene;
+        root = FxmlFileManager.getInstance().homeScene;
         Scene scene = new Scene(root);
 
         //InputManager inputManager = new InputManager(scene);

@@ -61,16 +61,16 @@ public class WordDefinition {
         query = "SELECT * FROM example where definition_id=" + definitionID;
         resultSet = statement.executeQuery(query);
         while (resultSet.next()) {
-            WordExample temp = new WordExample(resultSet.getString("example"), resultSet.getString("translation"))
+            WordExample temp = new WordExample(resultSet.getString("example"), resultSet.getString("translation"));
             temp.setExampleID(resultSet.getString("example_id"));
             addExample(temp);
         }
     }
 
-    public void saveData(String baseID, int flag) throws SQLException {
+    public void saveData(String baseID, boolean isPhrase) throws SQLException {
         String update = "";
 
-        if (flag == 0) {
+        if (isPhrase) {
             //Flag = 0 for phrase
             update = "INSERT INTO definition (definition, phrase_id) VALUES (?,?)";
         } else {
@@ -84,7 +84,8 @@ public class WordDefinition {
 
         Statement getID = Database.getConnection().createStatement();
         ResultSet rs = getID.executeQuery("SELECT last_insert_rowid()");
-        int id = rs.getInt(1);
+        String id = rs.getString("definition_id");
+        this.definitionID = id;
 
         //Get examples
         if (exampleList != null) {
@@ -92,5 +93,23 @@ public class WordDefinition {
                 example.saveData(id);
             }
         }
+    }
+
+    public void deleteFromDatabase(String id, boolean isPhrase) throws SQLException {
+        if (exampleList != null) {
+            for (WordExample example : exampleList) {
+                example.deleteFromDatabase(definitionID);
+            }
+        }
+
+        String query = "DELETE FROM definition WHERE ? = ?";
+        PreparedStatement statement = Database.getConnection().prepareStatement(query);
+        if (isPhrase) {
+            statement.setString(1, "phrase_id");
+        } else {
+            statement.setString(1, "description_id");
+        }
+        statement.setString(2, id);
+        statement.execute();
     }
 }

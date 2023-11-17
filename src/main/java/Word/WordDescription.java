@@ -102,7 +102,8 @@ public class WordDescription {
 
         Statement getID = Database.getConnection().createStatement();
         ResultSet rs = getID.executeQuery("SELECT last_insert_rowid()");
-        String id = rs.getString(1);
+        String id = rs.getString("description_id");
+        this.descriptionID = id;
 
         if (phraseList != null) {
             for (WordPhrase phrase : phraseList) {
@@ -111,8 +112,27 @@ public class WordDescription {
         }
         if (definitionList != null) {
             for (WordDefinition definition : definitionList) {
-                definition.saveData(id, 1);
+                definition.saveData(id, false);
             }
         }
+    }
+
+    public void deleteFromDatabase(String word_id) throws SQLException {
+        //Delete definition first
+        if (definitionList != null) {
+            for (WordDefinition definition : definitionList) {
+                definition.deleteFromDatabase(descriptionID, false);
+            }
+        }
+        if (phraseList != null) {
+            for (WordPhrase phrase : phraseList) {
+                phrase.deleteFromDatabase(descriptionID);
+            }
+        }
+
+        String query = "DELETE FROM description WHERE word_id = ?";
+        PreparedStatement statement = Database.getConnection().prepareStatement(query);
+        statement.setString(1, word_id);
+        statement.execute();
     }
 }

@@ -1,4 +1,5 @@
 package Word;
+import Dictionary.DicManager;
 import Main.Database;
 
 import java.sql.PreparedStatement;
@@ -18,6 +19,7 @@ public class WordBlock implements Comparable<WordBlock> {
 
     boolean editable;
 
+
     public boolean isEditable() {
         return editable;
     }
@@ -26,6 +28,10 @@ public class WordBlock implements Comparable<WordBlock> {
         this.editable = editable;
     }
 
+
+    public WordBlock() {
+
+    }
 
     public String getWordID() {
         return wordID;
@@ -105,7 +111,7 @@ public class WordBlock implements Comparable<WordBlock> {
 
     public void saveData() throws SQLException {
         //Insert word into table
-        String update = "INSERT INTO word (word, sound, is_editable) VALUES (?,?, ?)";
+        String update = "INSERT INTO word (word, sound, is_editable) VALUES (?, ?, ?)";
         PreparedStatement statement = Database.getConnection().prepareStatement(update);
         statement.setString(1, word);
         if (spelling != null) {
@@ -126,8 +132,52 @@ public class WordBlock implements Comparable<WordBlock> {
         }
     }
 
-    public void selfDelete() {
+    //TODO: instead of actually updating the database we delete everything from the old word
+    //Pseudo-update
+    //Perform delete all child of WordBlock first then save them again
+    //The only actual database update is on WordBlock
+    public void updateInDatabase() throws SQLException {
+        deleteFromDatabase();
+        saveData();
+    }
 
+    public void deleteFromDatabase() throws SQLException {
+        if (descriptionsList != null) {
+            for (WordDescription description : descriptionsList) {
+                description.deleteFromDatabase(wordID);
+            }
+        }
+
+        String query = "DELETE FROM word WHERE word_id = ?";
+        PreparedStatement statement = Database.getConnection().prepareStatement(query);
+        statement.setString(1, wordID);
+        statement.execute();
+    }
+
+//    public static void main(String[] args) throws SQLException {
+//        loadWordBlocks();
+//        for (int i = DicManager.getInstance().getDictionary().getWordBlocks().size() - 1; i >= 0; i--) {
+//            if (DicManager.getInstance().getDictionary().getWordBlocks().get(i).getWordID().equals("82259")) {
+//                DicManager.getInstance().getDictionary().getWordBlocks().get(i).loadData("82259");
+//                DicManager.getInstance().getDictionary().getWordBlocks().get(i).deleteFromDatabase();
+//                System.out.println(DicManager.getInstance().getDictionary().getWordBlocks().get(i).getWord());
+//            }
+//        }
+//    }
+
+    public static void loadWordBlocks() throws SQLException {
+        Statement statement =  Database.getConnection().createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM word ORDER BY word ASC");
+
+        while (resultSet.next()) {
+            WordBlock wordBlock = new WordBlock(resultSet.getString("word"), resultSet.getString("sound"));
+            wordBlock.setWordID(resultSet.getString("word_id"));
+            if (resultSet.getString("is_editable").equals("1")) {
+                wordBlock.setEditable(true);
+            }
+//            System.out.println(wordBlock.getWord());
+            DicManager.getInstance().addWordBlock(wordBlock);
+        }
     }
 
 }
