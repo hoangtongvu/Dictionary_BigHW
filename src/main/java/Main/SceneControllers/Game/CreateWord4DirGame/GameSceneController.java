@@ -67,6 +67,10 @@ public class GameSceneController implements Initializable
     private CreateWord4DirGameCtrl gameCtrl;
 
 
+    public GameSceneController()
+    {
+        System.out.println("HI");
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -79,7 +83,7 @@ public class GameSceneController implements Initializable
     {
         this.gameCtrl.getGameManager().Start();
         this.SetKeyBoardEvent();
-        this.AlignCenterNodes();
+        //this.AlignCenterNodes();
     }
 
     private void EndGame()
@@ -87,15 +91,15 @@ public class GameSceneController implements Initializable
 
     }
 
-    private void AlignCenterNodes()
-    {
-        NodeAligner.AlignCenterWidth(this.rootAnchorPane, this.gameGridPane);
-        NodeAligner.AlignCenterWidth(this.rootAnchorPane, this.wordText);
-        NodeAligner.AlignCenterWidth(this.rootAnchorPane, this.hintText);
-        this.AlignCenterGridPane();
-
-
-    }
+//    private void AlignCenterNodes()
+//    {
+//        NodeAligner.AlignCenterWidth(this.rootAnchorPane, this.gameGridPane);
+//        NodeAligner.AlignCenterWidth(this.rootAnchorPane, this.wordText);
+//        NodeAligner.AlignCenterWidth(this.rootAnchorPane, this.hintText);
+//        this.AlignCenterGridPane();
+//
+//
+//    }
 
     private void AlignCenterGridPane()
     {
