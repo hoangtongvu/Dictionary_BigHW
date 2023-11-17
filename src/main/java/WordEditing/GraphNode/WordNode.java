@@ -10,6 +10,15 @@ public class WordNode extends DicNode {
     private Label wordLabel;
     private Label soundLabel;
     private WordEditor editor;
+    private boolean isNewWord = true;
+
+    public boolean isNewWord() {
+        return isNewWord;
+    }
+
+    public void setNewWord(boolean isNewWord) {
+        this.isNewWord = isNewWord;
+    }
 
     public WordBlock getWordBlock() {
         return wordBlock;

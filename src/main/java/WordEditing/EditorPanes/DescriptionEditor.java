@@ -1,6 +1,7 @@
 package WordEditing.EditorPanes;
 
 import WordEditing.GraphNode.DescriptionNode;
+import WordEditing.GraphNode.DicNode;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -54,6 +55,7 @@ public class DescriptionEditor {
             if (event.getEventType() == KeyEvent.KEY_RELEASED) {
                 node.getDescriptionLabel().setText("WordType: " + wordTypeTextField.getText());
                 node.getDescription().setWordType(wordTypeTextField.getText());
+                DicNode.setChangesSaved(false);
             }
         }
     };

@@ -155,16 +155,21 @@ public class WordBlock implements Comparable<WordBlock> {
         statement.execute();
     }
 
-//    public static void main(String[] args) throws SQLException {
-//        loadWordBlocks();
-//        for (int i = DicManager.getInstance().getDictionary().getWordBlocks().size() - 1; i >= 0; i--) {
-//            if (DicManager.getInstance().getDictionary().getWordBlocks().get(i).getWordID().equals("82259")) {
-//                DicManager.getInstance().getDictionary().getWordBlocks().get(i).loadData("82259");
-//                DicManager.getInstance().getDictionary().getWordBlocks().get(i).deleteFromDatabase();
-//                System.out.println(DicManager.getInstance().getDictionary().getWordBlocks().get(i).getWord());
-//            }
-//        }
-//    }
+    public static void main(String[] args) throws SQLException {
+        loadWordBlocks();
+
+        for (int j = 82252; j < 82295; j++ ) {
+            String key = String.valueOf(j);
+            for (int i = DicManager.getInstance().getDictionary().getWordBlocks().size() - 1; i >= 0; i--) {
+                if (DicManager.getInstance().getDictionary().getWordBlocks().get(i).getWordID().equals(key)) {
+                    DicManager.getInstance().getDictionary().getWordBlocks().get(i).loadData(key);
+                    DicManager.getInstance().getDictionary().getWordBlocks().get(i).deleteFromDatabase();
+                    System.out.println(DicManager.getInstance().getDictionary().getWordBlocks().get(i).getWord());
+                }
+            }
+        }
+
+    }
 
     public static void loadWordBlocks() throws SQLException {
         Statement statement =  Database.getConnection().createStatement();

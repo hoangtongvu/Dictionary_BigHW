@@ -1,5 +1,6 @@
 package WordEditing.EditorPanes;
 
+import WordEditing.GraphNode.DicNode;
 import WordEditing.GraphNode.PhraseNode;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
@@ -56,6 +57,7 @@ public class PhraseEditor {
             if (event.getEventType() == KeyEvent.KEY_RELEASED) {
                 node.getPhrase().setPhrase(phraseTextArea.getText());
                 node.getPhraseLabel().setText(phraseTextArea.getText());
+                DicNode.setChangesSaved(false);
             }
         }
     };

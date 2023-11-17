@@ -36,8 +36,9 @@ public abstract class DicNode {
     protected static boolean bulkSelect = false;
     protected static boolean toggleConnectMode = false;
     protected static boolean inConnectMode = false;
-    protected boolean selected = false;
     public static PseudoClass clicked;
+    protected boolean selected = false;
+
     protected DicNode parent;
     protected List<DicNode> childrenNodeList = new ArrayList<>();
     protected VBox nodePane;
@@ -45,7 +46,7 @@ public abstract class DicNode {
     protected NodeOptions options = new NodeOptions();
     private double startX = 0;
     private double startY = 0;
-    private static boolean changesSaved = false;
+    private static boolean changesSaved = true;
 
     public static boolean isChangesSaved() {
         return changesSaved;
@@ -165,6 +166,7 @@ public abstract class DicNode {
     //Add child node the children node list, check for duplicates before adding
     protected void addChild(DicNode childNode) {
         boolean flag = false;
+        changesSaved = false;
         if (!childrenNodeList.isEmpty()) {
             for (DicNode node : childrenNodeList) {
                 if (node == childNode) {
@@ -210,18 +212,22 @@ public abstract class DicNode {
         options.getDelete().setOnAction(event -> {
             selfDelete();
         });
+        changesSaved = false;
     }
 
     //Reset all static attributes to default value
     public static void reset() {
-        currentlySelected = null;
+        currentlySelected   = null;
+        currentlyEditedWord = null;
+        inConnectMode       = false;
+        bulkSelect          = false;
+        endNode             = null;
+        changesSaved        = true;
         for (int i = 0; i < nodeList.size(); i++) {
             nodeList.get(i).selfDelete();
             i--;
         }
-        inConnectMode = false;
-        bulkSelect = false;
-        endNode = null;
+
     }
 
     //From the current node, which is a child node of another node, this function update the line to it's parent
@@ -262,6 +268,7 @@ public abstract class DicNode {
      * @param excluded this node will be excluded
      */
     protected void updateLine(DicNode excluded) { //For bulk selection mode
+        changesSaved = false;
         if (parent != null) {
             for (DicNode node : parent.childrenNodeList) {
                 if (node != excluded) {
@@ -315,6 +322,7 @@ public abstract class DicNode {
      * + Set all children nodes' parent to null and set the line INVISIBLE NOT DELETE
      */
     public void selfDelete() {
+        changesSaved = false;
         try {
             ((AnchorPane) nodePane.getParent()).getChildren().remove(nodePane);
             ((AnchorPane) lineToParent.getParent()).getChildren().remove(lineToParent);
@@ -395,9 +403,8 @@ public abstract class DicNode {
                 if (checkLink()) {
                     System.out.println("ESTABLISHED LINK");
                     establishLink();
+                    changesSaved = false;
                     deselectAllExcept(DicNode.this);
-
-
                 }
             } else if (event.getButton() == MouseButton.SECONDARY) {
                 event.consume();
@@ -431,6 +438,7 @@ public abstract class DicNode {
 
             } else if (event.getButton() == MouseButton.PRIMARY) {
                 if (!bulkSelect) {
+                    changesSaved = false;
                     event.consume();
                     nodePane.setLayoutX(event.getSceneX() - startX); //MouseX - offSet
                     nodePane.setLayoutY(event.getSceneY() - startY);
@@ -445,6 +453,7 @@ public abstract class DicNode {
                                 node.getNodePane().setLayoutX(event.getSceneX() - currentX);
                                 node.getNodePane().setLayoutY(event.getSceneY() - currentY);
                                 node.updateLine(node);
+                                changesSaved = false;
                             }
                         }
                     }

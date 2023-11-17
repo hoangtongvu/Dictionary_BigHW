@@ -1,8 +1,8 @@
 package Main.SceneControllers.Dictionary;
 
 import Dictionary.DicManager;
-import Word.WordBlock;
 import WordEditing.GraphNode.*;
+import WordEditing.Warnings;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
@@ -14,7 +14,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
 import java.sql.SQLException;
-import java.util.Comparator;
+import java.util.Collections;
 
 public class EditWordSceneController {
 
@@ -23,7 +23,6 @@ public class EditWordSceneController {
     protected AnchorPane canvasPane;
     public static Line temporaryLine;
     static final NodeOptions options = new NodeOptions();
-    protected boolean isEditing = false;
 
     GridPane grid = new GridPane();
 
@@ -68,48 +67,86 @@ public class EditWordSceneController {
     public void saveWord() throws SQLException {
 //        //TODO: Divide saving into 2 cases, when word doesnt exist and when editing a word
 //        //TODO: add repeated word warning
-//
-//        for (DicNode node : DicNode.getNodeList()) {
-//            if ( node instanceof WordNode || node.getParent() != null) {
-//                node.convertToWordBlock();
-//            }
-//        }
-//        DicNode.getCurrentlyEditedWord().getWordBlock().saveData();
-//
-//        DicNode.getCurrentlyEditedWord().getWordBlock().updateInDatabase();
-    }
-
-    public void create() {
-
-    }
-
-    public void update() {
-
-    }
-
-    public void read() {
-
-    }
-
-    public void delete() {
-
-    }
-
-    public void reset(){
-        DicNode.reset();
-    }
-
-
-////////////////////////////////////////////////////////////
-    @FXML
-    public void deleteWord() {
-
+        save();
     }
 
     @FXML
     public void addNewWord() throws SQLException {
+        if (DicNode.getCurrentlyEditedWord() == null) {
+            DicNode.setCurrentlyEditedWord(new WordNode());
+            addNode(DicNode.getCurrentlyEditedWord());
+
+            showEditingTools(true);
+        } else if (DicNode.getCurrentlyEditedWord() != null) {
+            if (DicNode.isChangesSaved()) {
+                //Reset and create new word
+                DicNode.reset();
+                DicNode.setCurrentlyEditedWord(new WordNode());
+                addNode(DicNode.getCurrentlyEditedWord());
+            } else {
+                //Show warning - save and continue/ continue without save/ cancel
+                int flag = Warnings.getInstance().newWordWarning();
+                if (flag > 0) {
+                    //Save -> Reset -> New
+                    if (save() > 1) {
+                        DicNode.reset();
+                        DicNode.setCurrentlyEditedWord(new WordNode());
+                        addNode(DicNode.getCurrentlyEditedWord());
+                    }
+                } else if (flag < 0) {
+                    //Reset -> New
+                    DicNode.reset();
+                    DicNode.setCurrentlyEditedWord(new WordNode());
+                    addNode(DicNode.getCurrentlyEditedWord());
+                }
+            }
+        }
+    }
+
+    public int save() throws SQLException {
+        if (DicNode.getCurrentlyEditedWord().getWordBlock().getWord().equals("<EMPTY>")
+            || DicNode.getCurrentlyEditedWord().getWordBlock().getWord() == null) {
+            Warnings.getInstance().showEmptyWordWarning();
+            return 0;
+        } else if (Collections.binarySearch(DicManager.getInstance().getDictionary().getWordBlocks()
+                , DicNode.getCurrentlyEditedWord().getWordBlock()) >= 0) {
+
+            Warnings.getInstance().showWordExistWarning();
+            return -1;
+        } else {
+            DicNode.setChangesSaved(true);
+            for (DicNode node : DicNode.getNodeList()) {
+                if ( node instanceof WordNode || node.getParent() != null) {
+                    node.convertToWordBlock();
+                }
+            }
+
+            DicNode.getCurrentlyEditedWord().setNewWord(false);
+            if (DicNode.getCurrentlyEditedWord().isNewWord()) {
+                DicNode.getCurrentlyEditedWord().getWordBlock().saveData();
+            } else {
+                DicNode.getCurrentlyEditedWord().getWordBlock().updateInDatabase();
+                //isNewWord set to false when we load a word in to edit
+            }
+            Warnings.getInstance().showSavedNotice();
+            return 1;
+        }
 
     }
+
+    @FXML
+    public void deleteWord() throws SQLException {
+        //Delete -> Reset -> Empty
+        if (Warnings.getInstance().showDeleteWordWarning()) {
+            DicNode.getCurrentlyEditedWord().getWordBlock().deleteFromDatabase();
+            DicNode.setCurrentlyEditedWord(null);
+            DicNode.reset();
+            showEditingTools(false);
+        }
+    }
+
+////////////////////////////////////////////////////////////
+
 
     @FXML
     public void addDescription() {
@@ -184,11 +221,11 @@ public class EditWordSceneController {
         canvas.getContent().addEventHandler(MouseEvent.DRAG_DETECTED, dragDetected);
         canvas.addEventHandler(KeyEvent.KEY_PRESSED, keyPressHandler);
         canvasPane.getChildren().add(temporaryLine);
-        setDefault(false);
+        showEditingTools(false);
     }
 
 
-    public void setDefault(boolean flag) {
+    public void showEditingTools(boolean flag) {
         exampleButton.setVisible(flag);
         descriptionButton.setVisible(flag);
         definitionButton.setVisible(flag);
@@ -291,10 +328,11 @@ public class EditWordSceneController {
                 selectionRectangle.setLayoutX(event.getX());
                 selectionRectangle.setLayoutY(event.getY());
 //            System.out.println(event.getSource());
-                if (!canvas.isPannable()) {
+                canvas.setPannable(false);
+                if (!canvas.isPannable() && DicNode.getCurrentlyEditedWord() != null) {
                     options.getOptions().show(selectionRectangle, Side.BOTTOM, 0 , 0);
                 }
-                canvas.setPannable(false);
+
             } else if (event.getButton() == MouseButton.PRIMARY) {
                 if (DicNode.getCurrentlySelected() != null) {
                     switchScene();
@@ -340,7 +378,8 @@ public class EditWordSceneController {
 
     public void deleteSelectedNode() {
         for (int i = 0; i < DicNode.getNodeList().size(); i++) {
-            if (DicNode.getNodeList().get(i).isSelected()) {
+            if (DicNode.getNodeList().get(i).isSelected()
+                && DicNode.getNodeList().get(i) != DicNode.getCurrentlyEditedWord()) {
                 DicNode.nodeList.get(i).selfDelete();
                 i--;
                 DicNode.setBulkSelect(false);

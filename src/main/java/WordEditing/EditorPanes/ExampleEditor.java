@@ -1,5 +1,6 @@
 package WordEditing.EditorPanes;
 
+import WordEditing.GraphNode.DicNode;
 import WordEditing.GraphNode.ExampleNode;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
@@ -72,6 +73,7 @@ public class ExampleEditor {
             if (event.getEventType() == KeyEvent.KEY_RELEASED) {
                 node.getExampleLabel().setText("Example:\n" + exampleTextArea.getText() + "\n");
                 node.getExample().setExample(exampleTextArea.getText());
+                DicNode.setChangesSaved(false);
             }
         }
     };
@@ -82,6 +84,7 @@ public class ExampleEditor {
             if (event.getEventType() == KeyEvent.KEY_RELEASED) {
                 node.getTranslationLabel().setText("Translation:\n" + translationTextArea.getText() + "\n");
                 node.getExample().setTranslation(translationTextArea.getText());
+                DicNode.setChangesSaved(false);
             }
         }
     };

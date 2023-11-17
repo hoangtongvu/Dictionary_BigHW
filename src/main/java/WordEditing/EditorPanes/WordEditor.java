@@ -1,5 +1,6 @@
 package WordEditing.EditorPanes;
 
+import WordEditing.GraphNode.DicNode;
 import WordEditing.GraphNode.WordNode;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
@@ -60,6 +61,7 @@ public class WordEditor {
             if (event.getEventType() == KeyEvent.KEY_RELEASED) {
                 node.getWordLabel().setText("Word: " + wordTextField.getText() + "\n");
                 node.getWordBlock().setWord(wordTextField.getText());
+                DicNode.setChangesSaved(false);
             }
         }
     };
@@ -70,6 +72,7 @@ public class WordEditor {
             if (event.getEventType() == KeyEvent.KEY_RELEASED) {
                 node.getSoundLabel().setText("Sound: " + soundTextField.getText());
                 node.getWordBlock().setSpelling(soundTextField.getText());
+                DicNode.setChangesSaved(false);
             }
         }
     };

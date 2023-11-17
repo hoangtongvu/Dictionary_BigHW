@@ -1,6 +1,7 @@
 package WordEditing.EditorPanes;
 
 import WordEditing.GraphNode.DefinitionNode;
+import WordEditing.GraphNode.DicNode;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -54,6 +55,7 @@ public class DefinitionEditor {
             if (event.getEventType() == KeyEvent.KEY_RELEASED) {
                 node.getDefinitionLabel().setText(definitionTextArea.getText());
                 node.getDefinition().setDefinition(definitionTextArea.getText());
+                DicNode.setChangesSaved(false);
             }
         }
     };
