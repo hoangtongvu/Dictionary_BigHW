@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="899.0" styleClass="anchorPane" stylesheets="@../../css/ApplicationStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Dictionary.DictionarySceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="899.0" styleClass="anchorPane" stylesheets="@../../css/ApplicationStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Dictionary.DictionarySceneController">
    <children>
       <AnchorPane layoutY="157.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="157.0">
          <children>
@@ -38,7 +38,7 @@
             </ImageView>
             <Button id="learning_button" fx:id="dictionary_button" layoutX="205.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Dictionary" />
             <Button id="statistics_button" layoutX="136.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Games" />
-            <Button id="dictionary_button" layoutX="54.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Learning" />
+            <Button id="dictionary_button" layoutX="54.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Translate" />
          </children>
       </Pane>
       <Pane id="main_search_bar" layoutX="-1.0" layoutY="41.0" prefHeight="116.0" prefWidth="899.0" styleClass="secondaryTopBar" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">

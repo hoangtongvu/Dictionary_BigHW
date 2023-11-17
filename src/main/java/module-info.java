@@ -6,6 +6,7 @@ module MainGroup.application {
     requires javafx.web;
     requires java.sql;
     requires scenebuilderextended.components.choicegameextendedcomponents;
+    requires jlayer;
 
     opens Main.application to javafx.fxml;
     exports Main.application;

@@ -1,5 +1,6 @@
 package Main.SceneControllers.Translate;
 
+import TextToSpeech.TextToSpeech;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,16 +23,26 @@ public class TranslateController {
     @FXML
     public void onViToEnButton(ActionEvent event) {
         String text = VietArea.getText();
-        if (!VietArea.getText().isEmpty()) {
-            VietArea.setText(TranslatorAPI.translateViToEn(text));
+        if (!text.isEmpty()) {
+            EngArea.setText(TranslatorAPI.translateViToEn(text));
         }
     }
 
     @FXML
     public void onEnToViButton(ActionEvent event) {
         String text = EngArea.getText();
-        if (!EngArea.getText().isEmpty()) {
-            EngArea.setText(TranslatorAPI.translateEnToVi(text));
+        if (!text.isEmpty()) {
+            VietArea.setText(TranslatorAPI.translateEnToVi(text));
         }
+    }
+
+    @FXML
+    public void onViSoundButton(ActionEvent event) {
+        TextToSpeech.ViTextToSpeech(VietArea.getText());
+    }
+
+    @FXML
+    public void onEnSoundButton(ActionEvent event) {
+        TextToSpeech.EnTextToSpeech(EngArea.getText());
     }
 }
