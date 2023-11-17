@@ -109,6 +109,7 @@ public class WordBlock implements Comparable<WordBlock> {
         loadStatus = true;
     }
 
+    //For saving newly added word
     public void saveData() throws SQLException {
         //Insert word into table
         String update = "INSERT INTO word (word, sound, is_editable) VALUES (?, ?, ?)";
@@ -132,7 +133,7 @@ public class WordBlock implements Comparable<WordBlock> {
         }
     }
 
-    //TODO: instead of actually updating the database we delete everything from the old word
+     //TODO: instead of actually updating the database we delete everything from the old word
     //Pseudo-update
     //Perform delete all child of WordBlock first then save them again
     //The only actual database update is on WordBlock

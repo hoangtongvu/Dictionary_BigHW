@@ -45,7 +45,15 @@ public abstract class DicNode {
     protected NodeOptions options = new NodeOptions();
     private double startX = 0;
     private double startY = 0;
+    private static boolean changesSaved = false;
 
+    public static boolean isChangesSaved() {
+        return changesSaved;
+    }
+
+    public static void setChangesSaved(boolean changesSaved) {
+        DicNode.changesSaved = changesSaved;
+    }
 
     public static List<DicNode> getNodeList() {
         return nodeList;

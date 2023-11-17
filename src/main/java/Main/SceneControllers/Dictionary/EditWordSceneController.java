@@ -66,17 +66,17 @@ public class EditWordSceneController {
 
     @FXML
     public void saveWord() throws SQLException {
-        //TODO: Divide saving into 2 cases, when word doesnt exist and when editing a word
-        //TODO: add repeated word warning
-
-        for (DicNode node : DicNode.getNodeList()) {
-            if ( node instanceof WordNode || node.getParent() != null) {
-                node.convertToWordBlock();
-            }
-        }
-        DicNode.getCurrentlyEditedWord().getWordBlock().saveData();
-
-        DicNode.getCurrentlyEditedWord().getWordBlock().updateInDatabase();
+//        //TODO: Divide saving into 2 cases, when word doesnt exist and when editing a word
+//        //TODO: add repeated word warning
+//
+//        for (DicNode node : DicNode.getNodeList()) {
+//            if ( node instanceof WordNode || node.getParent() != null) {
+//                node.convertToWordBlock();
+//            }
+//        }
+//        DicNode.getCurrentlyEditedWord().getWordBlock().saveData();
+//
+//        DicNode.getCurrentlyEditedWord().getWordBlock().updateInDatabase();
     }
 
     public void create() {
@@ -108,21 +108,7 @@ public class EditWordSceneController {
 
     @FXML
     public void addNewWord() throws SQLException {
-        if (isEditing) {
-//            if (Warnings.getInstance().addWordWarning()) {
-//                DicNode.save();
-//                DicNode.getCurrentlyEditedWord().getWordBlock().saveData();
-//                DicNode.setCurrentlyEditedWord(new WordNode());
-//                reset();
-//                addNode(DicNode.getCurrentlyEditedWord());
-//            }
 
-        } else {
-            setDefault(true);
-            DicNode.setCurrentlyEditedWord(new WordNode());
-            isEditing = true;
-            addNode(DicNode.getCurrentlyEditedWord());
-        }
     }
 
     @FXML
