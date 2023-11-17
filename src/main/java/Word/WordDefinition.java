@@ -13,6 +13,8 @@ public class WordDefinition {
     private String definition;
     private List<WordExample> exampleList;
 
+    private String definitionID = null;
+
     public WordDefinition() {
 
     }
@@ -51,6 +53,7 @@ public class WordDefinition {
 
     public void loadData(String definitionID) throws SQLException {
         Statement statement = Database.getConnection().createStatement();
+        this.definitionID = definitionID;
         String query = "SELECT * FROM definition where definition_id =" + definitionID;
         ResultSet resultSet = statement.executeQuery(query);
         definition =  resultSet.getString("definition");
@@ -58,11 +61,13 @@ public class WordDefinition {
         query = "SELECT * FROM example where definition_id=" + definitionID;
         resultSet = statement.executeQuery(query);
         while (resultSet.next()) {
-            addExample(new WordExample(resultSet.getString("example"), resultSet.getString("translation")));
+            WordExample temp = new WordExample(resultSet.getString("example"), resultSet.getString("translation"))
+            temp.setExampleID(resultSet.getString("example_id"));
+            addExample(temp);
         }
     }
 
-    public void saveData(int baseID, int flag) throws SQLException {
+    public void saveData(String baseID, int flag) throws SQLException {
         String update = "";
 
         if (flag == 0) {

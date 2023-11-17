@@ -15,7 +15,7 @@ public class WordDescription {
     private List<WordPhrase> phraseList;
     private static WordDefinition wordDefinition;
     private static WordPhrase wordPhrase;
-
+    private String descriptionID = null;
     public WordDescription() {
 
     }
@@ -70,6 +70,7 @@ public class WordDescription {
     }
 
     public void loadData(String descriptionID) throws SQLException {
+        this.descriptionID = descriptionID;
         Statement statement = Database.getConnection().createStatement();
         String query = "SELECT * FROM description where description_id=" + descriptionID;
         ResultSet resultSet = statement.executeQuery(query);
@@ -101,7 +102,7 @@ public class WordDescription {
 
         Statement getID = Database.getConnection().createStatement();
         ResultSet rs = getID.executeQuery("SELECT last_insert_rowid()");
-        int id = rs.getInt(1);
+        String id = rs.getString(1);
 
         if (phraseList != null) {
             for (WordPhrase phrase : phraseList) {

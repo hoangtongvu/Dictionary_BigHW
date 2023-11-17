@@ -10,6 +10,11 @@ public class WordExample {
     private String prefixSymbol = "➥ ";
     private String example = "";
     private String translation = "";
+    private String exampleID = null;
+
+    public void setExampleID(String exampleID) {
+        this.exampleID = exampleID;
+    }
 
     public WordExample(){}
     public WordExample(String example, String translation) {

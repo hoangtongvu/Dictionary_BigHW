@@ -17,6 +17,7 @@ public class WordPhrase {
     private String phrase;
     private List<WordDefinition> definitionList;
     private static WordDefinition wordDefinition;
+    private String descriptionID = null;
 
     public WordPhrase(String phrase) {
         this.phrase = phrase;
@@ -69,9 +70,9 @@ public class WordPhrase {
         }
     }
 
-    public void saveData(int descriptionID) throws SQLException {
+    public void saveData(String descriptionID) throws SQLException {
+        this.descriptionID = descriptionID;
         String update = "INSERT INTO phrase (phrase, description_id) VALUES (?,?)";
-
         PreparedStatement statement = Database.getConnection().prepareStatement(update);
         statement.setString(1,phrase);
         statement.setString(2,String.valueOf(descriptionID));
@@ -79,7 +80,7 @@ public class WordPhrase {
 
         Statement getID = Database.getConnection().createStatement();
         ResultSet rs = getID.executeQuery("SELECT last_insert_rowid()");
-        int id = rs.getInt(1);
+        String id = rs.getString(1);
 
         if (definitionList != null) {
             for (WordDefinition definition : definitionList) {
