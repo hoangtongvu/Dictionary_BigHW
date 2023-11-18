@@ -7,8 +7,11 @@ import Word.WordBlock;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class CreateWord4DirGameManager
 {
+    private final CreateWord4DirGameCtrl gameCtrl;
+
     private final List<CreatingWord> creatingWords;
     private final int numberOfDicWords;
     private int currentWordIndex;
@@ -18,11 +21,15 @@ public class CreateWord4DirGameManager
     private final int defaultAddPoint;
     private final int defaultDeductPoint;
 
+    private boolean gameIsEnd;
+
 
     public final CustomEventPackage.OneParameter.CustomEvent<String> onCreatingWordChangeEvent;
     public final CustomEventPackage.OneParameter.CustomEvent<String> onHintChangeEvent;
     public final CustomEventPackage.OneParameter.CustomEvent<Character[]> onChoiceCharsChangeEvent;
     public final CustomEventPackage.OneParameter.CustomEvent<Integer> onFinalPointChangeEvent;
+    public final CustomEventPackage.OneParameter.CustomEvent<Integer> onGameEndEvent;
+    public final CustomEventPackage.TwoParameters.CustomEvent<Boolean, Integer> onChooseCharEvent;
 
 
 
@@ -32,8 +39,19 @@ public class CreateWord4DirGameManager
         this.onFinalPointChangeEvent.Invoke(this, this.finalPoint);
     }
 
-    public CreateWord4DirGameManager()
+    public List<CreatingWord> getCreatingWords()
     {
+        return this.creatingWords;
+    }
+
+    public int getCurrentWordIndex()
+    {
+        return this.currentWordIndex;
+    }
+
+    public CreateWord4DirGameManager(CreateWord4DirGameCtrl gameCtrl)
+    {
+        this.gameCtrl = gameCtrl;
         this.creatingWords = new ArrayList<>();
 
         List<WordBlock> wordBlocks = DicManager.getInstance().getDictionary().getWordBlocks();
@@ -47,15 +65,25 @@ public class CreateWord4DirGameManager
         this.onHintChangeEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
         this.onChoiceCharsChangeEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
         this.onFinalPointChangeEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
+        this.onGameEndEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
+        this.onChooseCharEvent = new CustomEventPackage.TwoParameters.CustomEvent<>(this);
 
     }
 
     public void Start()
     {
-        this.InitCreatingWords(5);
+        this.InitCreatingWords(3);
         this.ResetPoint();
         this.currentWordIndex = 0;
         this.MoveToCreatingWordAt(0);
+        this.gameIsEnd = false;
+        //this.gameCtrl.getGameAutoCompletion().AutoCompletion();
+    }
+
+    public void End()
+    {
+        this.onGameEndEvent.Invoke(this, this.finalPoint);
+        this.gameIsEnd = true;
     }
 
     private void ResetPoint()
@@ -90,6 +118,11 @@ public class CreateWord4DirGameManager
 
     private void MoveToCreatingWordAt(int i)
     {
+        if (i >= this.creatingWords.size())
+        {
+            this.End();
+            return;
+        }
         this.currentWordIndex = i;
         CreatingWord creatingWord = this.creatingWords.get(this.currentWordIndex);
         LoggersCtrl.gameLogger.Log("WORD", creatingWord.getResult());
@@ -109,6 +142,11 @@ public class CreateWord4DirGameManager
         this.onChoiceCharsChangeEvent.Invoke(this, characters);
     }
 
+    public void InvokeOnChooseCharEvent(boolean isCorrect, int index)
+    {
+        this.onChooseCharEvent.Invoke(this, isCorrect, index);
+    }
+
     private void InitCreatingWords(int amount)
     {
         List<WordBlock> wordBlocks = DicManager.getInstance().getDictionary().getWordBlocks();
@@ -124,6 +162,7 @@ public class CreateWord4DirGameManager
 
     public void ChooseChar(int charIndex)
     {
+        if (this.gameIsEnd) return;
         CreatingWord creatingWord = this.creatingWords.get(this.currentWordIndex);
         creatingWord.ChooseChar(charIndex);
     }

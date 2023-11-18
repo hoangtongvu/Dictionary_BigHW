@@ -3,24 +3,30 @@ package Main.SceneControllers.Game.CreateWord4DirGame;
 import Game.CreateWord4DirGame.CreateWord4DirGameCtrl;
 import Game.CreateWord4DirGame.CreateWord4DirGameManager;
 import Game.GamesCtrl;
+import Main.FxmlFileManager;
+import Main.SceneControllers.Dictionary.HomeSceneController;
 import Main.application.App;
 import UnsortedScript.NodeAligner;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import javafx.util.Pair;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class GameSceneController implements Initializable
 {
@@ -84,6 +90,7 @@ public class GameSceneController implements Initializable
         this.gameCtrl.getGameManager().Start();
         this.SetKeyBoardEvent();
         //this.AlignCenterNodes();
+
     }
 
     private void EndGame()
@@ -101,14 +108,14 @@ public class GameSceneController implements Initializable
 //
 //    }
 
-    private void AlignCenterGridPane()
-    {
-        Pair<Double, Double> rootSize = NodeAligner.GetSizeOfNode(this.rootAnchorPane);
-        double width = this.gameGridPane.getPrefWidth();
-        double height = this.gameGridPane.getPrefHeight();
-        this.gameGridPane.setLayoutX((rootSize.getKey() - width) / 2);
-        this.gameGridPane.setLayoutY((rootSize.getValue() - height) / 2);
-    }
+//    private void AlignCenterGridPane()
+//    {
+//        Pair<Double, Double> rootSize = NodeAligner.GetSizeOfNode(this.rootAnchorPane);
+//        double width = this.gameGridPane.getPrefWidth();
+//        double height = this.gameGridPane.getPrefHeight();
+//        this.gameGridPane.setLayoutX((rootSize.getKey() - width) / 2);
+//        this.gameGridPane.setLayoutY((rootSize.getValue() - height) / 2);
+//    }
 
     private void SubEvent()
     {
@@ -117,6 +124,11 @@ public class GameSceneController implements Initializable
         gameManager.onCreatingWordChangeEvent.AddListener(this::UpdateWordText);
         gameManager.onFinalPointChangeEvent.AddListener(this::UpdateFinalPointText);
         gameManager.onHintChangeEvent.AddListener(this::UpdateHintText);
+        gameManager.onGameEndEvent.AddListener(this::ShowEndGameDialog);
+        gameManager.onChooseCharEvent.AddListener((isCorrect, index) -> {
+            Button button = GetButtonIndex(index);
+            SetButtonChose(button, isCorrect);
+        });
     }
 
     private void SetKeyBoardEvent()
@@ -138,18 +150,19 @@ public class GameSceneController implements Initializable
     private void FireButton(Button button)
     {
         button.fire();
-        this.SetButtonChose(button);
     }
 
-    private void SetButtonChose(Button button)
+    private void SetButtonChose(Button button, boolean isCorrect)
     {
-        this.SetButtonColorGreen(button);
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                SetButtonColorDefault(button);
-            }
-        }, 200);
+
+        KeyFrame startKeyFrame = new KeyFrame(Duration.seconds(0), ev -> {
+            if (isCorrect) SetButtonColorGreen(button);
+            else SetButtonColorRed(button);
+        });
+        KeyFrame endKeyFrame = new KeyFrame(Duration.seconds(0.1), ev -> SetButtonColorDefault(button));
+        Timeline timeline = new Timeline(startKeyFrame, endKeyFrame);
+        timeline.setCycleCount(1);
+        timeline.play();
     }
 
     private void SetButtonColor(Button button, double brightness, double contrast, double hue, double saturation) {
@@ -163,6 +176,11 @@ public class GameSceneController implements Initializable
     private void SetButtonColorGreen(Button button) {
         this.SetButtonColor(button, 0, 0, 0.5, 1);
     }
+
+    private void SetButtonColorRed(Button button) {
+        this.SetButtonColor(button, 0, 0, 0, 1);
+    }
+
     private void SetButtonColorDefault(Button button) {
         this.SetButtonColor(button, 0, 0, 0, 0);
     }
@@ -219,4 +237,40 @@ public class GameSceneController implements Initializable
     {
         this.hintText.setText(text);
     }
+
+    private Button GetButtonIndex(int index)
+    {
+        Button button = null;
+        switch (index)
+        {
+            case 0 -> button = this.upButton;
+            case 1 -> button = this.rightButton;
+            case 2 -> button = this.downButton;
+            case 3 -> button = this.leftButton;
+        }
+        return button;
+    }
+
+    private void ShowEndGameDialog(int finalPoint)
+    {
+        System.out.println("show dialog");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Game End");
+        //alert.setHeaderText("header");
+        alert.setContentText("Your point is: " + finalPoint);
+
+        ButtonType buttonTypeYes = new ButtonType("YES", ButtonBar.ButtonData.YES);
+        ButtonType buttonTypeNo = new ButtonType("NO", ButtonBar.ButtonData.NO);
+
+        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+        alert.setOnHidden(e -> MoveBackToStartScreen());
+        alert.show();
+
+    }
+
+    private void MoveBackToStartScreen()
+    {
+        HomeSceneController.SwitchScene(FxmlFileManager.getInstance().createWord4DirGameStartScene);
+    }
+
 }
