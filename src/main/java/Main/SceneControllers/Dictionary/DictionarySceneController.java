@@ -14,6 +14,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import netscape.javascript.JSObject;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -61,9 +62,11 @@ public class DictionarySceneController implements Initializable {
 
         //this.timer.scheduleAtFixedRate(timerTask, 0, 500);
     }
+
     private final String cssPath = getClass().getResource("/css/htmlStyle.css").toExternalForm();
     private final String  styleSheet = "<link rel=\"stylesheet\" href=\"" + cssPath + "\">";
     public void setupWebView(String content) {
+
         String encoding = "<meta charset=\"UTF-8\">";
         webEngine.loadContent("<html><body>" + styleSheet + encoding + content + "</body></html>");
     }

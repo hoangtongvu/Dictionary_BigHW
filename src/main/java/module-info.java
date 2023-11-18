@@ -34,4 +34,6 @@ module MainGroup.application {
     opens Main.SceneControllers.Translate to javafx.fxml;
     opens WordEditing to com.google.gson;
 
+    requires jdk.jsobject;
+
 }

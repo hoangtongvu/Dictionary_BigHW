@@ -16,6 +16,10 @@ public class WordJSON {
 
     }
 
+    public List<NodeJSON> getNode_list() {
+        return node_list;
+    }
+
     public WordJSON(String wordID) {
         this.wordID = wordID;
     }

@@ -15,7 +15,7 @@
    <children>
       <Pane layoutX="10.0" layoutY="10.0" prefHeight="41.0" prefWidth="854.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button id="learning_button" fx:id="dictionary_button" layoutX="205.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Dictionary" />
+            <Button id="learning_button" fx:id="dictionary_button" layoutX="205.0" layoutY="5.0" mnemonicParsing="false" onAction="#toDictionary" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Dictionary" />
             <Button id="statistics_button" layoutX="136.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Games" />
             <Button id="dictionary_button" layoutX="54.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Learning" />
             <ImageView fx:id="menuButton" fitHeight="30.0" fitWidth="427.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" styleClass="menuButton">
@@ -56,10 +56,10 @@
                 <AnchorPane maxWidth="400.0" minHeight="0.0" minWidth="200.0" prefHeight="388.0" prefWidth="237.0" style="-fx-background-color: black;">
                      <children>
                         <AnchorPane fx:id="editorPane" layoutY="240.0" prefHeight="318.0" prefWidth="258.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="240.0" />
-                        <AnchorPane prefHeight="240.0" prefWidth="258.0" style="-fx-background-color: blue;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane prefHeight="240.0" prefWidth="258.0" style="-fx-background-color: pink;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <ListView fx:id="editableWordList" editable="true" layoutX="14.0" layoutY="50.0" prefHeight="160.0" prefWidth="230.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="65.0" />
-                              <TextField layoutX="13.0" layoutY="25.0" prefHeight="25.0" prefWidth="236.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+                              <ListView fx:id="wordListView" editable="true" layoutX="14.0" layoutY="50.0" onMouseClicked="#listViewMouseClicked" prefHeight="160.0" prefWidth="230.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="65.0" />
+                              <TextField fx:id="editWordSearchBar" layoutX="13.0" layoutY="25.0" onKeyTyped="#searchEditable" prefHeight="25.0" prefWidth="236.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
                            </children>
                         </AnchorPane>
                      </children>

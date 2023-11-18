@@ -1,6 +1,7 @@
 package Word;
 import Dictionary.DicManager;
 import Main.Database;
+import Main.SceneControllers.Dictionary.EditWordSceneController;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -109,6 +110,16 @@ public class WordBlock implements Comparable<WordBlock> {
         loadStatus = true;
     }
 
+    public void insertInOrder() {
+        List<WordBlock> list = DicManager.getInstance().getDictionary().getWordBlocks();
+        int index = 0;
+        while (index < list.size() && this.compareTo(list.get(index)) > 0) {
+            index++;
+        }
+        System.out.println(index);
+        list.add(index, this);
+    }
+
     //For saving newly added word
     public void saveData() throws SQLException {
         //Insert word into table
@@ -158,7 +169,7 @@ public class WordBlock implements Comparable<WordBlock> {
     public static void main(String[] args) throws SQLException {
         loadWordBlocks();
 
-        for (int j = 82252; j < 82300; j++ ) {
+        for (int j = 82252; j < 82305; j++ ) {
             String key = String.valueOf(j);
             for (int i = DicManager.getInstance().getDictionary().getWordBlocks().size() - 1; i >= 0; i--) {
                 if (DicManager.getInstance().getDictionary().getWordBlocks().get(i).getWordID().equals(key)) {
@@ -183,6 +194,9 @@ public class WordBlock implements Comparable<WordBlock> {
             }
 //            System.out.println(wordBlock.getWord());
             DicManager.getInstance().addWordBlock(wordBlock);
+            if (wordBlock.isEditable()) {
+                EditWordSceneController.getEditableWordList().add(wordBlock);
+            }
         }
     }
 

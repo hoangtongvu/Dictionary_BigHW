@@ -1,6 +1,8 @@
 package WordEditing.GraphNode;
 
 import Main.SceneControllers.Dictionary.EditWordSceneController;
+import Word.WordBlock;
+import Word.WordDescription;
 import WordEditing.NodeJSON;
 import WordEditing.WordJSON;
 import com.google.gson.Gson;
@@ -410,6 +412,24 @@ public abstract class DicNode {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void loadFromJSON() {
+        String path = "E:\\projects\\Dictionary_BigHW\\src\\main\\resources\\data\\positions.json";
+        Gson gson = new Gson();
+
+        try {
+            FileReader reader = new FileReader(path);
+
+            // Change this line to read a list of WordJSON objects
+            Type wordListType = new TypeToken<List<WordJSON>>(){}.getType();
+            List<WordJSON> words = gson.fromJson(reader, wordListType);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
     EventHandler<MouseEvent> pressHandler = new EventHandler<MouseEvent>() {
         @Override

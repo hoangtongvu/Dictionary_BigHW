@@ -11,6 +11,15 @@ public class WordNode extends DicNode {
     private Label soundLabel;
     private WordEditor editor;
     private boolean isNewWord = true;
+    private boolean isEditing = false;
+
+    public boolean isEditing() {
+        return isEditing;
+    }
+
+    public void setEditing(boolean editing) {
+        isEditing = editing;
+    }
 
     public boolean isNewWord() {
         return isNewWord;

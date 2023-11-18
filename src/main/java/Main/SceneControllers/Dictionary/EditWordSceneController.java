@@ -1,11 +1,15 @@
 package Main.SceneControllers.Dictionary;
 
 import Dictionary.DicManager;
+import Main.FxmlFileManager;
+import Main.application.App;
+import Word.WordBlock;
 import WordEditing.GraphNode.*;
 import WordEditing.Warnings;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
@@ -14,7 +18,9 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class EditWordSceneController {
 
@@ -47,14 +53,16 @@ public class EditWordSceneController {
     @FXML
     protected Button deleteButton;
     @FXML
-    protected ListView editableWordList;
+    protected ListView wordListView;
+    private static List<WordBlock> editableWordList = new ArrayList<>();
 
+    public static List<WordBlock> getEditableWordList() {
+        return editableWordList;
+    }
 
     //TODO: Save functionality for words
     //TODO: Add word to favourite list
     //TODO: Add study timer on the side and probably spotify API
-
-
 
     /**
      * Create: Done
@@ -68,6 +76,7 @@ public class EditWordSceneController {
 //        //TODO: Divide saving into 2 cases, when word doesnt exist and when editing a word
 //        //TODO: add repeated word warning
         DicNode.getCurrentlyEditedWord().saveToJSON();
+        updateListView();
         save();
     }
 
@@ -84,7 +93,7 @@ public class EditWordSceneController {
                 DicNode.reset();
                 DicNode.setCurrentlyEditedWord(new WordNode());
                 addNode(DicNode.getCurrentlyEditedWord());
-            } else {
+            } else { //Changes not saved
                 //Show warning - save and continue/ continue without save/ cancel
                 int flag = Warnings.getInstance().newWordWarning();
                 if (flag > 0) {
@@ -101,6 +110,25 @@ public class EditWordSceneController {
                     addNode(DicNode.getCurrentlyEditedWord());
                 }
             }
+            updateListView();
+        }
+    }
+
+    @FXML
+    public void toDictionary() {
+        Scene temp = new Scene(FxmlFileManager.getInstance().root);
+        App.getPrimaryStage().setScene(temp);
+    }
+
+    @FXML
+    protected TextField editWordSearchBar;
+    @FXML
+    public void searchEditable() {
+        wordListView.getItems().clear();
+        for (WordBlock wordBlock : editableWordList) {
+            if (wordBlock.getWord().contains(editWordSearchBar.getText())) {
+                wordListView.getItems().add(wordBlock.getWord());
+            }
         }
     }
 
@@ -110,7 +138,7 @@ public class EditWordSceneController {
             Warnings.getInstance().showEmptyWordWarning();
             return 0;
         } else if (Collections.binarySearch(DicManager.getInstance().getDictionary().getWordBlocks()
-                , DicNode.getCurrentlyEditedWord().getWordBlock()) >= 0) {
+                , DicNode.getCurrentlyEditedWord().getWordBlock()) >= 0 && !DicNode.getCurrentlyEditedWord().isEditing()) {
 
             Warnings.getInstance().showWordExistWarning();
             return -1;
@@ -122,16 +150,28 @@ public class EditWordSceneController {
                 }
             }
 
-            DicNode.getCurrentlyEditedWord().setNewWord(false);
-            if (DicNode.getCurrentlyEditedWord().isNewWord()) {
+
+            if (DicNode.getCurrentlyEditedWord().isNewWord() && !DicNode.getCurrentlyEditedWord().isEditing()) {
+                DicNode.getCurrentlyEditedWord().getWordBlock().insertInOrder();
                 DicNode.getCurrentlyEditedWord().getWordBlock().saveData();
+                System.out.println("B");
+                DicNode.getCurrentlyEditedWord().setEditing(true);
+                editableWordList.add(DicNode.getCurrentlyEditedWord().getWordBlock());
             } else {
+                //DicNode.getCurrentlyEditedWord().setNewWord(false);
                 DicNode.getCurrentlyEditedWord().getWordBlock().updateInDatabase();
+                System.out.println("A");
                 //isNewWord set to false when we load a word in to edit
             }
+            updateListView();
             Warnings.getInstance().showSavedNotice();
             return 1;
         }
+
+    }
+
+    public void loadWordOnPane(String word) {
+        System.out.println(word);
 
     }
 
@@ -180,6 +220,14 @@ public class EditWordSceneController {
     }
 
     @FXML
+    public void listViewMouseClicked(MouseEvent event) {
+        if (event.getClickCount() > 1) {
+            String currentlySelectedItem = wordListView.getSelectionModel().getSelectedItem().toString();
+            loadWordOnPane(currentlySelectedItem);
+        }
+    }
+
+    @FXML
     public void initialize() {
         canvasPane = ((AnchorPane) canvas.getContent());
         temporaryLine = new Line();
@@ -193,6 +241,36 @@ public class EditWordSceneController {
                 options.getAddDef(),
                 options.getAddPhrase()
         );
+
+        for (WordBlock wordBlock : editableWordList) {
+            wordListView.getItems().add(wordBlock.getWord());
+        }
+
+//        editableWordList.setCellFactory(lv -> {
+//            ListCell<String> cell = new ListCell<>();
+//            cell.setOnMouseClicked(event -> {
+//                if (event.getClickCount() > 1) {
+//                    System.out.println(cell.getText());
+//                    //Read from JSON file
+////                    for (WordBlock wordBlock : editableWords) {
+////                        if (wordBlock.getWord().equals(cell.getText())) {
+////
+////                        }
+////                    }
+//
+//                }
+//            });
+//            cell.setOnKeyPressed(event -> {
+//                if (event.getCode() == KeyCode.ENTER) {
+//                    for (WordBlock wordBlock : editableWords) {
+//                        if (wordBlock.getWord().equals(cell.getText())) {
+//
+//                        }
+//                    }
+//                }
+//            });
+//            return cell;
+//        });
 
         options.getDelete().setText("Delete selected");
 
@@ -236,6 +314,13 @@ public class EditWordSceneController {
         connectButton.setVisible(flag);
     }
 
+    public void updateListView() {
+        wordListView.getItems().clear();
+        for (WordBlock wordBlock : editableWordList) {
+            wordListView.getItems().add(wordBlock.getWord());
+        }
+
+    }
 
     EventHandler<MouseEvent> mousePressHandler = new EventHandler<MouseEvent>() {
         @Override
