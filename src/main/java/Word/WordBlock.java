@@ -61,7 +61,7 @@ public class WordBlock implements Comparable<WordBlock> {
     public String GetInfo() {
         String wordBlock = "<div class = \"wordBox\"> " +
                 "<h1>" + word + "</h1>" +
-                "<h2>" + spelling + "</h2> " +
+                "<h2>" + "/" + spelling + "/" + " </h2> " +
                 "</div>";
         if (descriptionsList != null) {
             for (WordDescription wordDescription : descriptionsList) {
