@@ -6,8 +6,8 @@ import Game.GamesCtrl;
 import Main.FxmlFileManager;
 import Main.SceneControllers.Dictionary.HomeSceneController;
 import Main.application.App;
-import UnsortedScript.NodeAligner;
 import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,7 +23,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import javafx.util.Pair;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -71,6 +70,7 @@ public class GameSceneController implements Initializable
     private Text finalPointText;
 
     private CreateWord4DirGameCtrl gameCtrl;
+
 
 
     public GameSceneController()
@@ -154,14 +154,26 @@ public class GameSceneController implements Initializable
 
     private void SetButtonChose(Button button, boolean isCorrect)
     {
+        ColorAdjust colorAdjust = (ColorAdjust) button.getEffect();
+        ButtonColorTransition(colorAdjust, isCorrect);
+    }
 
-        KeyFrame startKeyFrame = new KeyFrame(Duration.seconds(0), ev -> {
-            if (isCorrect) SetButtonColorGreen(button);
-            else SetButtonColorRed(button);
-        });
-        KeyFrame endKeyFrame = new KeyFrame(Duration.seconds(0.1), ev -> SetButtonColorDefault(button));
+    private void ButtonColorTransition(ColorAdjust colorAdjust, boolean isCorrect)
+    {
+
+        KeyValue startSaturationValue = new KeyValue(colorAdjust.saturationProperty(), 0);
+        KeyValue endSaturationValue = new KeyValue(colorAdjust.saturationProperty(), 1);
+
+        KeyValue startHueValue = new KeyValue(colorAdjust.hueProperty(), 0);
+        KeyValue endHueValue = new KeyValue(colorAdjust.hueProperty(), isCorrect? 0.5 : 0);
+
+        KeyFrame startKeyFrame = new KeyFrame(Duration.seconds(0), startSaturationValue, startHueValue);
+        KeyFrame endKeyFrame = new KeyFrame(Duration.seconds(0.3), endSaturationValue, endHueValue);
+
+
         Timeline timeline = new Timeline(startKeyFrame, endKeyFrame);
-        timeline.setCycleCount(1);
+        timeline.setAutoReverse(true);
+        timeline.setCycleCount(2);
         timeline.play();
     }
 
