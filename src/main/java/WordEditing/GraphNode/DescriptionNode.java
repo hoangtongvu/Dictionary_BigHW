@@ -21,7 +21,7 @@ public class DescriptionNode extends DicNode {
 
     public DescriptionNode() {
         super("Description");
-        setOptions();
+//        setOptions();
 
         description = new WordDescription("<EMPTY>");
         descriptionLabel = new Label("Word type: " + description.getWordType());

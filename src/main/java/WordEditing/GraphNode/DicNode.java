@@ -54,7 +54,7 @@ public abstract class DicNode {
     protected DicNode parent;
     protected List<DicNode> childrenNodeList = new ArrayList<>();
     protected VBox nodePane;
-    protected Line lineToParent;
+    protected Line lineToParent = new Line();
     protected NodeOptions options = new NodeOptions();
     private double startX = 0;
     private double startY = 0;
@@ -124,6 +124,10 @@ public abstract class DicNode {
 
     public DicNode getParent() {
         return parent;
+    }
+
+    public List<DicNode> getChildrenNodeList() {
+        return childrenNodeList;
     }
 
     public static boolean isToggleConnectMode() {
@@ -225,8 +229,6 @@ public abstract class DicNode {
             selfDelete();
         });
         changesSaved = false;
-        lineToParent = new Line();
-        lineToParent.setVisible(false);
     }
 
     //Reset all static attributes to default value
@@ -241,7 +243,6 @@ public abstract class DicNode {
             nodeList.get(i).selfDelete();
             i--;
         }
-
     }
 
     //From the current node, which is a child node of another node, this function update the line to it's parent
@@ -340,12 +341,15 @@ public abstract class DicNode {
         ((AnchorPane) lineToParent.getParent()).getChildren().remove(lineToParent);
         ((AnchorPane) nodePane.getParent()).getChildren().remove(nodePane);
         this.removeEditor();
+        if (parent != null) {
+            this.getParent().getChildrenNodeList().remove(this);
+        }
+        this.setParents(null);
         for (DicNode node : childrenNodeList) {
             node.setParents(null);
             node.lineToParent.setVisible(false);
         }
         nodeList.remove(this);
-
     }
 
     /**Checking collision with selection rectangle

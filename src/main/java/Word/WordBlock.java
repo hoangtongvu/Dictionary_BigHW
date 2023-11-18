@@ -29,6 +29,9 @@ public class WordBlock implements Comparable<WordBlock> {
         this.editable = editable;
     }
 
+    public void setLoadStatus(boolean loadStatus) {
+        this.loadStatus = loadStatus;
+    }
 
     public WordBlock() {
 
@@ -140,6 +143,7 @@ public class WordBlock implements Comparable<WordBlock> {
         if (descriptionsList != null) {
             for (int i = 0; i < descriptionsList.size(); i++) {
                 descriptionsList.get(i).saveData(id);
+                System.out.println(descriptionsList.get(i));
             }
         }
     }
@@ -184,7 +188,7 @@ public class WordBlock implements Comparable<WordBlock> {
 
     public static void loadWordBlocks() throws SQLException {
         Statement statement =  Database.getConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM word ORDER BY word ASC");
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM word ORDER BY LOWER(word)");
 
         while (resultSet.next()) {
             WordBlock wordBlock = new WordBlock(resultSet.getString("word"), resultSet.getString("sound"));

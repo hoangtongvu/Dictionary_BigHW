@@ -4,6 +4,7 @@ import Dictionary.DicManager;
 import Main.FxmlFileManager;
 import Main.application.App;
 import Word.WordBlock;
+import Word.WordDescription;
 import WordEditing.GraphNode.*;
 import WordEditing.Warnings;
 import javafx.event.EventHandler;
@@ -98,7 +99,7 @@ public class EditWordSceneController {
                 int flag = Warnings.getInstance().newWordWarning();
                 if (flag > 0) {
                     //Save -> Reset -> New
-                    if (save() > 1) {
+                    if (save() > 0) {
                         DicNode.reset();
                         DicNode.setCurrentlyEditedWord(new WordNode());
                         addNode(DicNode.getCurrentlyEditedWord());
@@ -133,6 +134,7 @@ public class EditWordSceneController {
     }
 
     public int save() throws SQLException {
+        //Saving new word
         if (DicNode.getCurrentlyEditedWord().getWordBlock().getWord().equals("<EMPTY>")
             || DicNode.getCurrentlyEditedWord().getWordBlock().getWord() == null) {
             Warnings.getInstance().showEmptyWordWarning();
@@ -142,30 +144,57 @@ public class EditWordSceneController {
 
             Warnings.getInstance().showWordExistWarning();
             return -1;
-        } else {
-            DicNode.setChangesSaved(true);
-            for (DicNode node : DicNode.getNodeList()) {
-                if ( node instanceof WordNode || node.getParent() != null) {
-                    node.convertToWordBlock();
+
+        } else { //Saving saved word
+            if (!DicNode.isChangesSaved()) {
+                //Remove links between wordBlocks - wordDefinition - ...
+                for (DicNode node : DicNode.nodeList) {
+                    if (node instanceof WordNode) {
+                        if (((WordNode) node).getWordBlock().getDescriptionsList() != null)
+                            ((WordNode) node).getWordBlock().getDescriptionsList().clear();
+                    } else if (node instanceof DefinitionNode) {
+                        if (((DefinitionNode) node).getDefinition().getExampleList() != null)
+                            ((DefinitionNode) node).getDefinition().getExampleList().clear();
+                    } else if (node instanceof DescriptionNode) {
+                        if (((DescriptionNode) node).getDescription().getDefinitionList() != null)
+                            ((DescriptionNode) node).getDescription().getDefinitionList().clear();
+                        if (((DescriptionNode) node).getDescription().getPhraseList() != null)
+                            ((DescriptionNode) node).getDescription().getPhraseList().clear();
+                    } else if (node instanceof PhraseNode) {
+                        if (((PhraseNode) node).getPhrase().getDefinitionList() != null)
+                            ((PhraseNode) node).getPhrase().getDefinitionList().clear();
+                    }
                 }
-            }
 
+                for (DicNode node : DicNode.getNodeList()) {
+                    if (node instanceof WordNode || node.getParent() != null) {
+                        node.convertToWordBlock();
+                    }
+                }
 
-            if (DicNode.getCurrentlyEditedWord().isNewWord() && !DicNode.getCurrentlyEditedWord().isEditing()) {
-                DicNode.getCurrentlyEditedWord().getWordBlock().insertInOrder();
-                DicNode.getCurrentlyEditedWord().getWordBlock().saveData();
-                System.out.println("B");
-                DicNode.getCurrentlyEditedWord().setEditing(true);
-                editableWordList.add(DicNode.getCurrentlyEditedWord().getWordBlock());
-            } else {
-                //DicNode.getCurrentlyEditedWord().setNewWord(false);
-                DicNode.getCurrentlyEditedWord().getWordBlock().updateInDatabase();
-                System.out.println("A");
-                //isNewWord set to false when we load a word in to edit
+                if (DicNode.getCurrentlyEditedWord().isNewWord() && !DicNode.getCurrentlyEditedWord().isEditing()) {
+                    DicNode.getCurrentlyEditedWord().getWordBlock().insertInOrder();
+                    DicNode.getCurrentlyEditedWord().getWordBlock().saveData();
+
+                    DicNode.getCurrentlyEditedWord().setEditing(true);
+                    editableWordList.add(DicNode.getCurrentlyEditedWord().getWordBlock());
+                    System.out.println("Save when adding new word");
+
+                    //Set load status, so it won't reload in a same session
+//                    DicNode.getCurrentlyEditedWord().getWordBlock().setLoadStatus(true);
+                } else {
+                    DicNode.getCurrentlyEditedWord().setNewWord(false);
+                    DicNode.getCurrentlyEditedWord().getWordBlock().updateInDatabase();
+                    System.out.println("Saved while editing");
+                    //Set load status, so it won't reload in a same session
+//                    DicNode.getCurrentlyEditedWord().getWordBlock().setLoadStatus(true);
+                }
+                updateListView();
+                Warnings.getInstance().showSavedNotice();
+                DicNode.setChangesSaved(true);
+                return 1;
             }
-            updateListView();
-            Warnings.getInstance().showSavedNotice();
-            return 1;
+            return 0;
         }
 
     }
@@ -175,18 +204,26 @@ public class EditWordSceneController {
 
         //Reset
         DicNode.reset();
+        showEditingTools(true);
         //Loading the word into a new WordNode
         System.out.println(word);
         WordBlock target = new WordBlock(word, "");
         int position = Collections.binarySearch(DicManager.getInstance().getDictionary().getWordBlocks(), target);
-        WordNode newNode = new WordNode();
-        newNode.setWordBlock(DicManager.getInstance().getDictionary().getWordBlocks().get(position));
+        WordNode newNode = new WordNode(DicManager.getInstance().getDictionary().getWordBlocks().get(position));
         newNode.getWordBlock().loadData(newNode.getWordBlock().getWordID());
+
         DicNode.setCurrentlyEditedWord(newNode);
+        DicNode.nodeList.add(newNode);
+        newNode.setNewWord(false);
+        newNode.setEditing(true);
+
         //Start drawing
+        DicNode.getCurrentlyEditedWord().setNewWord(false);
         DicNode.getCurrentlyEditedWord().createNodeGraph();
         for (DicNode node : DicNode.getNodeList()) {
+            canvasPane.getChildren().add(node.getLineToParent());
             canvasPane.getChildren().add(node.getNodePane());
+            node.getLineToParent().toBack();
         }
     }
 
@@ -194,7 +231,10 @@ public class EditWordSceneController {
     public void deleteWord() throws SQLException {
         //Delete -> Reset -> Empty
         if (Warnings.getInstance().showDeleteWordWarning()) {
+            DicManager.getInstance().getDictionary().getWordBlocks().remove(DicNode.getCurrentlyEditedWord().getWordBlock());
+            editableWordList.remove(DicNode.getCurrentlyEditedWord().getWordBlock());
             DicNode.getCurrentlyEditedWord().getWordBlock().deleteFromDatabase();
+            updateListView();
             DicNode.setCurrentlyEditedWord(null);
             DicNode.reset();
             showEditingTools(false);

@@ -34,6 +34,8 @@ public class WordNode extends DicNode {
         return wordBlock;
     }
 
+
+
     public WordEditor getEditor() {
         return editor;
     }
@@ -63,6 +65,18 @@ public class WordNode extends DicNode {
         editor = new WordEditor(this);
     }
 
+    public WordNode(WordBlock wordBlock) {
+        super("Word");
+        setOptions();
+        this.wordBlock = wordBlock;
+        wordLabel = new Label("Word: " + wordBlock.getWord());
+        soundLabel = new Label("Sound: " + wordBlock.getSpelling());
+        labelProperty(wordLabel, "node-content");
+        labelProperty(soundLabel, "node-content");
+        nodePane.getChildren().addAll(wordLabel, soundLabel);
+        editor = new WordEditor(this);
+    }
+
     public void setWordBlock(WordBlock wordBlock) {
         this.wordBlock = wordBlock;
     }
@@ -72,7 +86,6 @@ public class WordNode extends DicNode {
         for (DicNode node : childrenNodeList) {
             if (node instanceof DescriptionNode) {
                 wordBlock.addDescription(((DescriptionNode) node).getDescription());
-                System.out.println("SAVED WORD");
             }
         }
     }
@@ -116,12 +129,33 @@ public class WordNode extends DicNode {
     }
 
     public void createNodeGraph() {
+//        System.out.println("DescList");
+//        for (WordDescription description : wordBlock.getDescriptionsList()) {
+//            System.out.println(description);
+//        }
+        System.out.println("WordBlockList");
         for (WordDescription description : wordBlock.getDescriptionsList()) {
-            DescriptionNode newNode = new DescriptionNode(description);
-            newNode.setParents(this);
-            nodeList.add(newNode);
-            childrenNodeList.add(newNode);
-            newNode.createNodeGraph();
+            System.out.println(description);
         }
+        System.out.println("WordBlockList");
+        if (wordBlock.getDescriptionsList() != null) {
+            for (WordDescription description : wordBlock.getDescriptionsList()) {
+//                System.out.println("Before");
+//                for (DicNode node : nodeList) {
+//                    System.out.println(node);
+//                }
+                DescriptionNode newNode = new DescriptionNode(description);
+                newNode.setParents(this);
+                nodeList.add(newNode);
+                childrenNodeList.add(newNode);
+                newNode.createNodeGraph();
+//                System.out.println("After");
+//                for (DicNode node : nodeList) {
+//                    System.out.println(node);
+//                }
+            }
+
+        }
+
     }
 }
