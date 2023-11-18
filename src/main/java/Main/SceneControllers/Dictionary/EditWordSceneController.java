@@ -170,9 +170,24 @@ public class EditWordSceneController {
 
     }
 
-    public void loadWordOnPane(String word) {
-        System.out.println(word);
+    public void loadWordOnPane(String word) throws SQLException {
+        //Warning
 
+        //Reset
+        DicNode.reset();
+        //Loading the word into a new WordNode
+        System.out.println(word);
+        WordBlock target = new WordBlock(word, "");
+        int position = Collections.binarySearch(DicManager.getInstance().getDictionary().getWordBlocks(), target);
+        WordNode newNode = new WordNode();
+        newNode.setWordBlock(DicManager.getInstance().getDictionary().getWordBlocks().get(position));
+        newNode.getWordBlock().loadData(newNode.getWordBlock().getWordID());
+        DicNode.setCurrentlyEditedWord(newNode);
+        //Start drawing
+        DicNode.getCurrentlyEditedWord().createNodeGraph();
+        for (DicNode node : DicNode.getNodeList()) {
+            canvasPane.getChildren().add(node.getNodePane());
+        }
     }
 
     @FXML
@@ -220,7 +235,7 @@ public class EditWordSceneController {
     }
 
     @FXML
-    public void listViewMouseClicked(MouseEvent event) {
+    public void listViewMouseClicked(MouseEvent event) throws SQLException {
         if (event.getClickCount() > 1) {
             String currentlySelectedItem = wordListView.getSelectionModel().getSelectedItem().toString();
             loadWordOnPane(currentlySelectedItem);
@@ -245,32 +260,6 @@ public class EditWordSceneController {
         for (WordBlock wordBlock : editableWordList) {
             wordListView.getItems().add(wordBlock.getWord());
         }
-
-//        editableWordList.setCellFactory(lv -> {
-//            ListCell<String> cell = new ListCell<>();
-//            cell.setOnMouseClicked(event -> {
-//                if (event.getClickCount() > 1) {
-//                    System.out.println(cell.getText());
-//                    //Read from JSON file
-////                    for (WordBlock wordBlock : editableWords) {
-////                        if (wordBlock.getWord().equals(cell.getText())) {
-////
-////                        }
-////                    }
-//
-//                }
-//            });
-//            cell.setOnKeyPressed(event -> {
-//                if (event.getCode() == KeyCode.ENTER) {
-//                    for (WordBlock wordBlock : editableWords) {
-//                        if (wordBlock.getWord().equals(cell.getText())) {
-//
-//                        }
-//                    }
-//                }
-//            });
-//            return cell;
-//        });
 
         options.getDelete().setText("Delete selected");
 

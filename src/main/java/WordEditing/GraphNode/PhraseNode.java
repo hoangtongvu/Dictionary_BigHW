@@ -1,5 +1,6 @@
 package WordEditing.GraphNode;
 
+import Word.WordDefinition;
 import Word.WordPhrase;
 import WordEditing.EditorPanes.PhraseEditor;
 import javafx.scene.control.Label;
@@ -36,6 +37,16 @@ public class PhraseNode extends DicNode {
         editor = new PhraseEditor(this);
     }
 
+    public PhraseNode(WordPhrase phrase) {
+        super("Phrase");
+        this.phrase = phrase;
+
+        phraseLabel = new Label(phrase.getPhrase());
+        labelProperty(phraseLabel, "node-content");
+        nodePane.getChildren().add(phraseLabel);
+        editor = new PhraseEditor(this);
+
+    }
     @Override
     public void convertToWordBlock() {
         for (DicNode node : childrenNodeList) {
@@ -92,5 +103,18 @@ public class PhraseNode extends DicNode {
         } else {
             return false;
         }
+    }
+
+    public void createNodeGraph() {
+        if (phrase.getDefinitionList() != null) {
+            for (WordDefinition definition : phrase.getDefinitionList()) {
+                DefinitionNode newDefinitionNode = new DefinitionNode(definition);
+                newDefinitionNode.setParents(this);
+                nodeList.add(newDefinitionNode);
+                childrenNodeList.add(newDefinitionNode);
+                newDefinitionNode.createNodeGraph();
+            }
+        }
+
     }
 }

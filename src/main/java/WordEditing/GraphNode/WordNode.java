@@ -1,6 +1,7 @@
 package WordEditing.GraphNode;
 
 import Word.WordBlock;
+import Word.WordDescription;
 import WordEditing.EditorPanes.WordEditor;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -62,6 +63,10 @@ public class WordNode extends DicNode {
         editor = new WordEditor(this);
     }
 
+    public void setWordBlock(WordBlock wordBlock) {
+        this.wordBlock = wordBlock;
+    }
+
     @Override
     public void convertToWordBlock() {
         for (DicNode node : childrenNodeList) {
@@ -107,6 +112,16 @@ public class WordNode extends DicNode {
             return true;
         } else {
             return  false;
+        }
+    }
+
+    public void createNodeGraph() {
+        for (WordDescription description : wordBlock.getDescriptionsList()) {
+            DescriptionNode newNode = new DescriptionNode(description);
+            newNode.setParents(this);
+            nodeList.add(newNode);
+            childrenNodeList.add(newNode);
+            newNode.createNodeGraph();
         }
     }
 }

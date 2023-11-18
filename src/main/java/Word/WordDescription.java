@@ -17,6 +17,10 @@ public class WordDescription {
     private static WordPhrase wordPhrase;
     private String descriptionID = null;
 
+    public List<WordPhrase> getPhraseList() {
+        return phraseList;
+    }
+
     public String getDescriptionID() {
         return descriptionID;
     }

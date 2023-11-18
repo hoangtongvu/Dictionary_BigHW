@@ -23,6 +23,10 @@ public class WordDefinition {
 
     }
 
+    public List<WordExample> getExampleList() {
+        return exampleList;
+    }
+
     public WordDefinition(String definition) {
         this.definition = definition;
     }

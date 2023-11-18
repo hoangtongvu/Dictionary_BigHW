@@ -36,6 +36,7 @@ public abstract class DicNode {
     protected abstract void labelProperty(Label label, String styleClass);
     protected abstract void establishLink();
     protected abstract String getID();
+    public abstract void createNodeGraph();
 
     //Covert all components displayed and saved in nodeList to a cohesive block of word
     public abstract void convertToWordBlock();
@@ -53,7 +54,7 @@ public abstract class DicNode {
     protected DicNode parent;
     protected List<DicNode> childrenNodeList = new ArrayList<>();
     protected VBox nodePane;
-    protected Line lineToParent = new Line();
+    protected Line lineToParent;
     protected NodeOptions options = new NodeOptions();
     private double startX = 0;
     private double startY = 0;
@@ -224,6 +225,8 @@ public abstract class DicNode {
             selfDelete();
         });
         changesSaved = false;
+        lineToParent = new Line();
+        lineToParent.setVisible(false);
     }
 
     //Reset all static attributes to default value
@@ -334,18 +337,15 @@ public abstract class DicNode {
      */
     public void selfDelete() {
         changesSaved = false;
-        try {
-            ((AnchorPane) nodePane.getParent()).getChildren().remove(nodePane);
-            ((AnchorPane) lineToParent.getParent()).getChildren().remove(lineToParent);
-            this.removeEditor();
-            for (DicNode node : childrenNodeList) {
-                node.setParents(null);
-                node.lineToParent.setVisible(false);
-            }
-            nodeList.remove(this);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        ((AnchorPane) lineToParent.getParent()).getChildren().remove(lineToParent);
+        ((AnchorPane) nodePane.getParent()).getChildren().remove(nodePane);
+        this.removeEditor();
+        for (DicNode node : childrenNodeList) {
+            node.setParents(null);
+            node.lineToParent.setVisible(false);
         }
+        nodeList.remove(this);
+
     }
 
     /**Checking collision with selection rectangle

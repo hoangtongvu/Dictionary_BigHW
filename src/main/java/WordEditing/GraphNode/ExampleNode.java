@@ -47,6 +47,18 @@ public class ExampleNode extends DicNode {
         editor = new ExampleEditor(this);
     }
 
+    public ExampleNode(WordExample example) {
+        super("Example");
+        this.example = example;
+        setOptions();
+        exampleLabel = new Label("Example:\n"  + example.getExample());
+        translationLabel = new Label("Translation:\n" + example.getTranslation());
+        labelProperty(exampleLabel, "node-content");
+        labelProperty(translationLabel, "node-content");
+        nodePane.getChildren().addAll(exampleLabel, translationLabel);
+        editor = new ExampleEditor(this);
+    }
+
     @Override
     public void convertToWordBlock() {
 
@@ -84,6 +96,11 @@ public class ExampleNode extends DicNode {
     @Override
     protected String getID() {
         return example.getExampleID();
+    }
+
+    @Override
+    public void createNodeGraph() {
+
     }
 
     @Override

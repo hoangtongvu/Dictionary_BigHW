@@ -1,6 +1,7 @@
 package WordEditing.GraphNode;
 
 import Word.WordDefinition;
+import Word.WordExample;
 import WordEditing.EditorPanes.DefinitionEditor;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -37,6 +38,15 @@ public class DefinitionNode extends DicNode {
         editor = new DefinitionEditor(this);
     }
 
+    public DefinitionNode(WordDefinition definition) {
+        super("Definition");
+        this.definition = definition;
+        setOptions();
+        definitionLabel = new Label(definition.getDefinition());
+        labelProperty(definitionLabel, "node-content");
+        nodePane.getChildren().add(definitionLabel);
+        editor = new DefinitionEditor(this);
+    }
     @Override
     public void labelProperty(Label label, String styleClass) {
         label.setWrapText(true);
@@ -102,5 +112,16 @@ public class DefinitionNode extends DicNode {
         options.getOptions().getItems().addAll(options.getConnect(),options.getDelete(),options.getAddEx());
     }
 
+    public void createNodeGraph() {
+        if (definition.getExampleList() != null) {
+            for (WordExample example : definition.getExampleList()) {
+                ExampleNode newNode = new ExampleNode(example);
+                newNode.setParents(this);
+                nodeList.add(newNode);
+                childrenNodeList.add(newNode);
+                newNode.createNodeGraph();
+            }
+        }
+    }
 
 }

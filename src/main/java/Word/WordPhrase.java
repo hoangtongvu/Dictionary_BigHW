@@ -108,4 +108,7 @@ public class WordPhrase {
         statement.execute();
     }
 
+    public List<WordDefinition> getDefinitionList() {
+        return definitionList;
+    }
 }

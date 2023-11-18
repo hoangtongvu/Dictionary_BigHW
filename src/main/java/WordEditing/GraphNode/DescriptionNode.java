@@ -1,6 +1,8 @@
 package WordEditing.GraphNode;
 
+import Word.WordDefinition;
 import Word.WordDescription;
+import Word.WordPhrase;
 import WordEditing.EditorPanes.DescriptionEditor;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -32,6 +34,14 @@ public class DescriptionNode extends DicNode {
 //            temporaryLine.setStartY(nodePane.getLayoutY() + nodePane.getHeight()/2);
 //            inConnectMode = true;
 //        });
+    }
+
+    public DescriptionNode(WordDescription description) {
+        super("Description");
+        this.description = description;
+        descriptionLabel = new Label("Word type: " + description.getWordType());
+        labelProperty(descriptionLabel, "node-content");
+        nodePane.getChildren().add(descriptionLabel);
     }
 
     public WordDescription getDescription() {
@@ -122,7 +132,26 @@ public class DescriptionNode extends DicNode {
         }
     }
 
+    public void createNodeGraph() {
+        if (description.getPhraseList() != null) {
+            for (WordPhrase phrase : description.getPhraseList()) {
+                PhraseNode newPhraseNode = new PhraseNode(phrase);
+                newPhraseNode.setParents(this);
+                nodeList.add(newPhraseNode);
+                childrenNodeList.add(newPhraseNode);
+                newPhraseNode.createNodeGraph();
+            }
+        }
 
+        if (description.getDefinitionList() != null) {
+            for (WordDefinition definition : description.getDefinitionList()) {
+                DefinitionNode newDefinitionNode = new DefinitionNode(definition);
+                newDefinitionNode.setParents(this);
+                nodeList.add(newDefinitionNode);
+                childrenNodeList.add(newDefinitionNode);
+                newDefinitionNode.createNodeGraph();
+            }
+        }
 
-
+    }
 }
