@@ -94,7 +94,7 @@ public class ExampleNode extends DicNode {
     }
 
     @Override
-    protected String getID() {
+    public String getID() {
         return example.getExampleID();
     }
 

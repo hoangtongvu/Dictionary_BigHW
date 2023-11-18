@@ -73,7 +73,7 @@ public class DefinitionNode extends DicNode {
     }
 
     @Override
-    protected String getID() {
+    public String getID() {
         return definition.getDefinitionID();
     }
 

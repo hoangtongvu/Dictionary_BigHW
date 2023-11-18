@@ -2,11 +2,15 @@ package Main.SceneControllers.Dictionary;
 
 import Dictionary.DicManager;
 import Main.FxmlFileManager;
+import Main.ProjectDirectory;
 import Main.application.App;
 import Word.WordBlock;
-import Word.WordDescription;
 import WordEditing.GraphNode.*;
+import WordEditing.NodeJSON;
 import WordEditing.Warnings;
+import WordEditing.WordJSON;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
@@ -18,10 +22,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static java.util.Collections.sort;
 
 public class EditWordSceneController {
 
@@ -140,7 +149,7 @@ public class EditWordSceneController {
             Warnings.getInstance().showEmptyWordWarning();
             return 0;
         } else if (Collections.binarySearch(DicManager.getInstance().getDictionary().getWordBlocks()
-                , DicNode.getCurrentlyEditedWord().getWordBlock()) >= 0 && !DicNode.getCurrentlyEditedWord().isEditing()) {
+                , DicNode.getCurrentlyEditedWord().getWordBlock()) >= 0 && !DicNode.getCurrentlyEditedWord().isBeingEdited()) {
 
             Warnings.getInstance().showWordExistWarning();
             return -1;
@@ -172,23 +181,25 @@ public class EditWordSceneController {
                     }
                 }
 
-                if (DicNode.getCurrentlyEditedWord().isNewWord() && !DicNode.getCurrentlyEditedWord().isEditing()) {
+                if (DicNode.getCurrentlyEditedWord().isNewWord() && !DicNode.getCurrentlyEditedWord().isBeingEdited()) {
                     DicNode.getCurrentlyEditedWord().getWordBlock().insertInOrder();
                     DicNode.getCurrentlyEditedWord().getWordBlock().saveData();
 
                     DicNode.getCurrentlyEditedWord().setEditing(true);
                     editableWordList.add(DicNode.getCurrentlyEditedWord().getWordBlock());
                     System.out.println("Save when adding new word");
-
+                    DicNode.getCurrentlyEditedWord().saveToJSON();
                     //Set load status, so it won't reload in a same session
-//                    DicNode.getCurrentlyEditedWord().getWordBlock().setLoadStatus(true);
+                    DicNode.getCurrentlyEditedWord().getWordBlock().setLoadStatus(true);
                 } else {
                     DicNode.getCurrentlyEditedWord().setNewWord(false);
                     DicNode.getCurrentlyEditedWord().getWordBlock().updateInDatabase();
                     System.out.println("Saved while editing");
+                    DicNode.getCurrentlyEditedWord().saveToJSON();
                     //Set load status, so it won't reload in a same session
 //                    DicNode.getCurrentlyEditedWord().getWordBlock().setLoadStatus(true);
                 }
+                DicNode.getCurrentlyEditedWord().saveToJSON();
                 updateListView();
                 Warnings.getInstance().showSavedNotice();
                 DicNode.setChangesSaved(true);
@@ -200,11 +211,21 @@ public class EditWordSceneController {
     }
 
     public void loadWordOnPane(String word) throws SQLException {
-        //Warning
-
+        if (DicNode.getCurrentlyEditedWord() != null && !DicNode.getCurrentlyEditedWord().isBeingEdited()) {
+            //Warning
+            int tmp = Warnings.getInstance().showChangeWordWarning();
+            if (tmp == 0) {
+                return;
+            } else if (tmp > 1 && !DicNode.isChangesSaved()) {
+                DicNode.getCurrentlyEditedWord().saveToJSON();
+                updateListView();
+                save();
+            }
+        }
         //Reset
         DicNode.reset();
         showEditingTools(true);
+
         //Loading the word into a new WordNode
         System.out.println(word);
         WordBlock target = new WordBlock(word, "");
@@ -224,6 +245,10 @@ public class EditWordSceneController {
             canvasPane.getChildren().add(node.getLineToParent());
             canvasPane.getChildren().add(node.getNodePane());
             node.getLineToParent().toBack();
+        }
+        loadFromJSON(DicNode.nodeList);
+        for (DicNode node : DicNode.getNodeList()) {
+            node.updateLine();
         }
     }
 
@@ -345,8 +370,37 @@ public class EditWordSceneController {
 
     public void updateListView() {
         wordListView.getItems().clear();
+        sort(editableWordList);
         for (WordBlock wordBlock : editableWordList) {
             wordListView.getItems().add(wordBlock.getWord());
+        }
+    }
+
+    public void loadFromJSON(List<DicNode> nodeList) {
+        String path = ProjectDirectory.resourcesPath + "/data/positions.json";
+        Gson gson = new Gson();
+
+        try {
+            FileReader reader = new FileReader(path);
+
+            // Change this line to read a list of WordJSON objects
+            Type wordListType = new TypeToken<List<WordJSON>>(){}.getType();
+            List<WordJSON> wordJSONList = gson.fromJson(reader, wordListType);
+            for (WordJSON word : wordJSONList) {
+                if (word.getWordID().equals(DicNode.getCurrentlyEditedWord().getWordBlock().getWordID())) {
+                    for (NodeJSON nodeJSON : word.getNode_list()) {
+                        for (DicNode node : nodeList) {
+                            if (node.getClass().getSimpleName().equals(nodeJSON.getType())
+                                && node.getID().equals(nodeJSON.getID())) {
+                                node.getNodePane().setLayoutX(nodeJSON.getLayoutX());
+                                node.getNodePane().setLayoutY(nodeJSON.getLayoutY());
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }

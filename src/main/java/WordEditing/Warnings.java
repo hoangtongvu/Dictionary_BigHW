@@ -19,10 +19,11 @@ public class Warnings {
     Alert emptyWordWarning = new Alert(Alert.AlertType.NONE);
     Alert saveChanges = new Alert(Alert.AlertType.NONE);
     Alert deleteWordWarning = new Alert(Alert.AlertType.NONE);
+    Alert showChangingWord = new Alert(Alert.AlertType.NONE);
     private Warnings() {
         addWordWarning.setTitle("Dictionary");
         addWordWarning.setHeaderText("Make sure all components are linked before continuing");
-        Label content = new Label("Any unlinked components will be deleted. Would you like to save before continuing?");
+        Label content = new Label("Any unlinked components will be deleted. \nWould you like to save before continuing?");
         content.setWrapText(true);
         addWordWarning.getDialogPane().setContent(content);
         addWordWarning.getButtonTypes().setAll(yes, no, cancel);
@@ -48,6 +49,23 @@ public class Warnings {
     }
 
     public int newWordWarning() {
+        Optional<ButtonType> result = addWordWarning.showAndWait();
+        if (result.isPresent()) {
+            if (result.get() == yes) {
+                addWordWarning.close();
+                return 1;
+            } else if (result.get() == no) {
+                addWordWarning.close();
+                return -1;
+            } else {
+                addWordWarning.close();
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    public int showChangeWordWarning() {
         Optional<ButtonType> result = addWordWarning.showAndWait();
         if (result.isPresent()) {
             if (result.get() == yes) {

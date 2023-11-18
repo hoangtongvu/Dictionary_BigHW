@@ -14,7 +14,7 @@ public class WordNode extends DicNode {
     private boolean isNewWord = true;
     private boolean isEditing = false;
 
-    public boolean isEditing() {
+    public boolean isBeingEdited() {
         return isEditing;
     }
 
@@ -49,7 +49,7 @@ public class WordNode extends DicNode {
     }
 
     @Override
-    protected String getID() {
+    public String getID() {
         return wordBlock.getWordID();
     }
 

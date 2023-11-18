@@ -112,7 +112,7 @@ public class DescriptionNode extends DicNode {
     }
 
     @Override
-    protected String getID() {
+    public String getID() {
         return description.getDescriptionID();
     }
 

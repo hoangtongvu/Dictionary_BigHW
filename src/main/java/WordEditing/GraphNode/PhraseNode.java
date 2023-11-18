@@ -90,7 +90,7 @@ public class PhraseNode extends DicNode {
     }
 
     @Override
-    protected String getID() {
+    public String getID() {
         return phrase.getPhraseID();
     }
 

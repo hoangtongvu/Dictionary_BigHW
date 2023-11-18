@@ -1,5 +1,6 @@
 package WordEditing.GraphNode;
 
+import Main.ProjectDirectory;
 import Main.SceneControllers.Dictionary.EditWordSceneController;
 import Word.WordBlock;
 import Word.WordDescription;
@@ -35,7 +36,7 @@ public abstract class DicNode {
     protected abstract void setOptions();
     protected abstract void labelProperty(Label label, String styleClass);
     protected abstract void establishLink();
-    protected abstract String getID();
+    public abstract String getID();
     public abstract void createNodeGraph();
 
     //Covert all components displayed and saved in nodeList to a cohesive block of word
@@ -263,7 +264,7 @@ public abstract class DicNode {
     }
 
     //
-    protected void updateLine() {
+    public void updateLine() {
         updateFromChild();
         updateFromParent();
     }
@@ -382,7 +383,7 @@ public abstract class DicNode {
     }
 
     public void saveToJSON() {
-        String path = "E:\\projects\\Dictionary_BigHW\\src\\main\\resources\\data\\positions.json";
+        String path = ProjectDirectory.resourcesPath + "/data/positions.json";
         Gson gson = new Gson();
         Type listType = new TypeToken<List<WordJSON>>(){}.getType();
         List<WordJSON> list = null;
@@ -411,30 +412,13 @@ public abstract class DicNode {
         }
         list.add(newWord);
 
-        try (FileWriter writer = new FileWriter("E:\\projects\\Dictionary_BigHW\\src\\main\\resources\\data\\positions.json")) {
+        try (FileWriter writer = new FileWriter(ProjectDirectory.resourcesPath + "/data/positions.json")) {
             gson.toJson(list, writer);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void loadFromJSON() {
-        String path = "E:\\projects\\Dictionary_BigHW\\src\\main\\resources\\data\\positions.json";
-        Gson gson = new Gson();
-
-        try {
-            FileReader reader = new FileReader(path);
-
-            // Change this line to read a list of WordJSON objects
-            Type wordListType = new TypeToken<List<WordJSON>>(){}.getType();
-            List<WordJSON> words = gson.fromJson(reader, wordListType);
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
     EventHandler<MouseEvent> pressHandler = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
