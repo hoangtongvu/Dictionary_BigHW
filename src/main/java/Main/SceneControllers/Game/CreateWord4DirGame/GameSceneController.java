@@ -3,12 +3,14 @@ package Main.SceneControllers.Game.CreateWord4DirGame;
 import Game.CreateWord4DirGame.CreateWord4DirGameCtrl;
 import Game.CreateWord4DirGame.CreateWord4DirGameManager;
 import Game.GamesCtrl;
+import Logger.LoggersCtrl;
 import Main.FxmlFileManager;
 import Main.SceneControllers.Dictionary.HomeSceneController;
 import Main.application.App;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -71,6 +73,8 @@ public class GameSceneController implements Initializable
 
     private CreateWord4DirGameCtrl gameCtrl;
 
+    private EventHandler<KeyEvent> keyPressedEventHandler;
+
 
 
     public GameSceneController()
@@ -83,19 +87,31 @@ public class GameSceneController implements Initializable
     {
         this.gameCtrl = GamesCtrl.getInstance().getCreateWord4DirGameCtrl();
         this.SubEvent();
+
+        this.keyPressedEventHandler = keyEvent ->
+        {
+            KeyCode keyCode = keyEvent.getCode();
+            switch (keyCode)
+            {
+                case UP -> FireButton(upButton);
+                case RIGHT -> FireButton(rightButton);
+                case DOWN -> FireButton(downButton);
+                case LEFT -> FireButton(leftButton);
+            }
+        };
     }
 
     public void StartGame()
     {
         this.gameCtrl.getGameManager().Start();
-        this.SetKeyBoardEvent();
+        this.AddKeyBoardEvent();
         //this.AlignCenterNodes();
 
     }
 
     private void EndGame()
     {
-
+        this.RemoveKeyBoardEvent();
     }
 
 //    private void AlignCenterNodes()
@@ -119,32 +135,30 @@ public class GameSceneController implements Initializable
 
     private void SubEvent()
     {
+        LoggersCtrl.systemLogger.Log("Sub Event.");
         CreateWord4DirGameManager gameManager = this.gameCtrl.getGameManager();
         gameManager.onChoiceCharsChangeEvent.AddListener(this::UpdateChoiceTexts);
         gameManager.onCreatingWordChangeEvent.AddListener(this::UpdateWordText);
         gameManager.onFinalPointChangeEvent.AddListener(this::UpdateFinalPointText);
         gameManager.onHintChangeEvent.AddListener(this::UpdateHintText);
         gameManager.onGameEndEvent.AddListener(this::ShowEndGameDialog);
+        gameManager.onGameEndEvent.AddListener(e -> EndGame());
         gameManager.onChooseCharEvent.AddListener((isCorrect, index) -> {
             Button button = GetButtonIndex(index);
             SetButtonChose(button, isCorrect);
         });
     }
 
-    private void SetKeyBoardEvent()
+    private void AddKeyBoardEvent()
     {
         Scene scene = App.getPrimaryStage().getScene();
-        scene.addEventFilter(KeyEvent.KEY_PRESSED, keyEvent ->
-        {
-            KeyCode keyCode = keyEvent.getCode();
-            switch (keyCode)
-            {
-                case UP -> FireButton(upButton);
-                case RIGHT -> FireButton(rightButton);
-                case DOWN -> FireButton(downButton);
-                case LEFT -> FireButton(leftButton);
-            }
-        });
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, this.keyPressedEventHandler);
+    }
+
+    private void RemoveKeyBoardEvent()
+    {
+        Scene scene = App.getPrimaryStage().getScene();
+        scene.removeEventFilter(KeyEvent.KEY_PRESSED, this.keyPressedEventHandler);
     }
 
     private void FireButton(Button button)
