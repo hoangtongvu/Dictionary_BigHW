@@ -177,23 +177,7 @@ public class GameSceneController implements Initializable
     private void ChooseAnswer(ChoiceCode choiceCode)
     {
         if (this.choseAnswer != null) this.choseAnswer.setSelected(false);
-        switch (choiceCode)
-        {
-            case A:
-                this.choseAnswer = this.answerA;
-                break;
-            case B:
-                this.choseAnswer = this.answerB;
-                break;
-            case C:
-                this.choseAnswer = this.answerC;
-                break;
-            case D:
-                this.choseAnswer = this.answerD;
-                break;
-            default:
-                break;
-        }
+        this.choseAnswer = this.GetCheckBoxByChoiceCode(choiceCode);
 
         this.userAnswers[this.currentQuesPos] = choiceCode;
         this.choseAnswer.setSelected(true);
@@ -203,6 +187,19 @@ public class GameSceneController implements Initializable
 
         this.SetProgressBar(this.GetNumOfAnsweredQues(), this.maxQues);
 
+    }
+
+    private CheckBox GetCheckBoxByChoiceCode(ChoiceCode choiceCode)
+    {
+        CheckBox checkBox = null;
+        switch (choiceCode)
+        {
+            case A -> checkBox = this.answerA;
+            case B -> checkBox = this.answerB;
+            case C -> checkBox = this.answerC;
+            case D -> checkBox = this.answerD;
+        }
+        return checkBox;
     }
 
     private void SetProgressBar(int current, int max)
@@ -239,23 +236,7 @@ public class GameSceneController implements Initializable
     {
         ChoiceCode choseAnswerCode = this.userAnswers[this.currentQuesPos];
         if (choseAnswerCode == null) return;
-        switch (choseAnswerCode)
-        {
-            case A:
-                this.choseAnswer = this.answerA;
-                break;
-            case B:
-                this.choseAnswer = this.answerB;
-                break;
-            case C:
-                this.choseAnswer = this.answerC;
-                break;
-            case D:
-                this.choseAnswer = this.answerD;
-                break;
-            default:
-                break;
-        }
+        this.choseAnswer = this.GetCheckBoxByChoiceCode(choseAnswerCode);
         this.choseAnswer.setSelected(true);
 
     }
