@@ -10,19 +10,20 @@ import Main.application.App;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.property.DoubleProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -66,14 +67,17 @@ public class GameSceneController implements Initializable
     private Text upText;
 
     @FXML
-    private Text wordText;
+    private Text finalPointText;
 
     @FXML
-    private Text finalPointText;
+    private HBox wordHbox;
 
     private CreateWord4DirGameCtrl gameCtrl;
 
     private EventHandler<KeyEvent> keyPressedEventHandler;
+
+    private final double fontSize = 30;
+    private final double labelPrefWidth = 30;
 
 
 
@@ -113,25 +117,6 @@ public class GameSceneController implements Initializable
     {
         this.RemoveKeyBoardEvent();
     }
-
-//    private void AlignCenterNodes()
-//    {
-//        NodeAligner.AlignCenterWidth(this.rootAnchorPane, this.gameGridPane);
-//        NodeAligner.AlignCenterWidth(this.rootAnchorPane, this.wordText);
-//        NodeAligner.AlignCenterWidth(this.rootAnchorPane, this.hintText);
-//        this.AlignCenterGridPane();
-//
-//
-//    }
-
-//    private void AlignCenterGridPane()
-//    {
-//        Pair<Double, Double> rootSize = NodeAligner.GetSizeOfNode(this.rootAnchorPane);
-//        double width = this.gameGridPane.getPrefWidth();
-//        double height = this.gameGridPane.getPrefHeight();
-//        this.gameGridPane.setLayoutX((rootSize.getKey() - width) / 2);
-//        this.gameGridPane.setLayoutY((rootSize.getValue() - height) / 2);
-//    }
 
     private void SubEvent()
     {
@@ -243,7 +228,30 @@ public class GameSceneController implements Initializable
 
     private void UpdateWordText(String text)
     {
-        this.wordText.setText(text);
+        this.wordHbox.getChildren().clear();
+        Font font = new Font(this.fontSize);
+        for (int i = 0; i < text.length(); i++)
+        {
+            Label label = new Label(text.charAt(i) + "");
+            label.fontProperty().setValue(font);
+            label.setPrefWidth(this.labelPrefWidth);
+            label.setAlignment(Pos.CENTER);
+            this.wordHbox.getChildren().add(label);
+        }
+
+        int underScorePos = text.indexOf("_");
+        if (underScorePos <= 0) return;
+
+        DoubleProperty opacityProperty = this.wordHbox.getChildren().get(underScorePos - 1).opacityProperty();
+        KeyValue startKeyValue = new KeyValue(opacityProperty, 0);
+        KeyValue endKeyValue = new KeyValue(opacityProperty, 1);
+
+        KeyFrame startKf = new KeyFrame(Duration.seconds(0), startKeyValue);
+        KeyFrame endKf = new KeyFrame(Duration.seconds(0.7), endKeyValue);
+
+        Timeline timeline = new Timeline(startKf, endKf);
+        timeline.setCycleCount(1);
+        timeline.play();
     }
 
     private void UpdateChoiceTexts(Character[] characters)

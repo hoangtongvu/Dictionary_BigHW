@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -15,14 +15,7 @@
    <children>
       <VBox alignment="CENTER" prefHeight="600.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Text fx:id="wordText" strokeType="OUTSIDE" strokeWidth="0.0" text="WORD" textAlignment="CENTER" translateY="-100.0" wrappingWidth="268.0">
-               <font>
-                  <Font size="24.0" />
-               </font>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Text>
+            <HBox fx:id="wordHbox" alignment="CENTER" prefHeight="46.0" prefWidth="200.0" translateY="-100.0" />
             <Text fx:id="hintText" strokeType="OUTSIDE" strokeWidth="0.0" text="hint" textAlignment="CENTER" translateY="-100.0" wrappingWidth="550.0">
                <font>
                   <Font size="18.0" />
