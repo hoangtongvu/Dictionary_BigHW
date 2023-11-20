@@ -23,6 +23,11 @@ module MainGroup.application {
     opens Main.SceneControllers.Game.CreateWord4DirGame to javafx.fxml;
 
 
+
+    exports Main.SceneControllers.NavigationPane;
+    opens Main.SceneControllers.NavigationPane to javafx.fxml;
+
+
     exports CustomEventPackage.OneParameter;
     opens CustomEventPackage.OneParameter to javafx.fxml;
     exports CustomEventPackage.ZeroParameter;
