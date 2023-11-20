@@ -7,3 +7,4 @@ vm configuration: --add-exports javafx.base/com.sun.javafx.event=org.controlsfx.
   + Singleton.
   + Observer.
   + Pool Object.
+  + Fly weight.
