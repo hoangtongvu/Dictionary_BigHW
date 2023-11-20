@@ -11,6 +11,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,9 +21,8 @@ import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -72,6 +72,15 @@ public class GameSceneController implements Initializable
     @FXML
     private HBox wordHbox;
 
+    @FXML
+    private VBox endGameVbox;
+
+    @FXML
+    private Text endGamePointText;
+
+    @FXML
+    private Button continueButton;
+
     private CreateWord4DirGameCtrl gameCtrl;
 
     private EventHandler<KeyEvent> keyPressedEventHandler;
@@ -103,6 +112,11 @@ public class GameSceneController implements Initializable
                 case LEFT -> FireButton(leftButton);
             }
         };
+
+        this.continueButton.addEventHandler(ActionEvent.ACTION, e -> {
+            this.ToggleEndGameVbox();
+            this.MoveBackToStartScreen();
+        });
     }
 
     public void StartGame()
@@ -287,19 +301,15 @@ public class GameSceneController implements Initializable
 
     private void ShowEndGameDialog(int finalPoint)
     {
-        System.out.println("show dialog");
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Game End");
-        //alert.setHeaderText("header");
-        alert.setContentText("Your point is: " + finalPoint);
+        this.endGameVbox.setBackground(Background.fill(Paint.valueOf("GREY")));
+        this.ToggleEndGameVbox();
+        this.endGamePointText.setText("Your point is " + finalPoint + ".");
+    }
 
-        ButtonType buttonTypeYes = new ButtonType("YES", ButtonBar.ButtonData.YES);
-        ButtonType buttonTypeNo = new ButtonType("NO", ButtonBar.ButtonData.NO);
-
-        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
-        alert.setOnHidden(e -> MoveBackToStartScreen());
-        alert.show();
-
+    private void ToggleEndGameVbox()
+    {
+        this.endGameVbox.setDisable(!this.endGameVbox.isDisabled());
+        this.endGameVbox.setVisible(!this.endGameVbox.isVisible());
     }
 
     private void MoveBackToStartScreen()

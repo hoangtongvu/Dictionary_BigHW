@@ -98,5 +98,24 @@
             <Font size="20.0" />
          </font>
       </Text>
+      <VBox fx:id="endGameVbox" alignment="CENTER" disable="true" prefHeight="600.0" prefWidth="1000.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="1000.0" spacing="10.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TIME OUT!" textAlignment="CENTER" wrappingWidth="340.0">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="endGamePointText" layoutX="340.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your point is 5." textAlignment="CENTER" wrappingWidth="340.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="continueButton" mnemonicParsing="false" prefHeight="37.0" prefWidth="69.0" text="Continue" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
