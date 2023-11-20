@@ -1,6 +1,7 @@
 package Main.SceneControllers.NavigationPane;
 
 import Main.FxmlFileManager;
+import Main.ProjectDirectory;
 import Main.SceneControllers.Dictionary.HomeSceneController;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -18,8 +19,6 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -42,11 +41,6 @@ public class NavigationPaneSceneController implements Initializable
     private Button backButton;
 
 
-    private static NavigationPaneSceneController instance;
-
-    private List<Node> nodes;
-    private static List<Node> testNodes = new ArrayList<>(Arrays.asList(new Button("Asdf"), new Button("qwrrqerqr"), new Button("q")));
-
     private TranslateTransition drawerTranslateTransition;
     private FadeTransition blurPaneFadeTransition;
 
@@ -57,29 +51,11 @@ public class NavigationPaneSceneController implements Initializable
     {
         this.drawerTranslateTransition = new TranslateTransition(Duration.seconds(0.5), this.drawerMenu);
         this.blurPaneFadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
-        //this.nodes = this.navPaneRoot.getChildren();
-        this.nodes = new ArrayList<>(this.navPaneRoot.getChildren());
-    }
-
-
-    public static void TestLoad(Pane root)
-    {
-        System.out.println("testList size before adding: " + testNodes.size());
-        root.getChildren().addAll(testNodes);
-        System.out.println("testList size after adding: " + testNodes.size());
-    }
-    public static void LoadNavPane(Pane root) throws IOException
-    {
-        if (instance == null) instance = LoadInstance();
-        System.out.println("size of nodes = " + instance.nodes.size());
-        instance.AddNavPaneComponentsToRoot(root);
-        instance.nodes.addAll(instance.navPaneRoot.getChildren());
-        System.out.println("size of nodes = " + instance.nodes.size());
     }
 
     public static NavigationPaneSceneController LoadInstance() throws IOException
     {
-        String absolutePath = "D:\\Java\\Dictionary_BigHW\\src\\main\\resources\\fxml\\application\\NavigationPaneScene.fxml";
+        String absolutePath = ProjectDirectory.resourcesPath + "\\fxml\\application\\NavigationPaneScene.fxml";
         URL fxmlURL = Paths.get(absolutePath).toUri().toURL();
         FXMLLoader loader = new FXMLLoader(fxmlURL);
         loader.load();
@@ -130,15 +106,33 @@ public class NavigationPaneSceneController implements Initializable
     }
 
     @FXML
+    private void MoveToHomeScene()
+    {
+        //this.MoveToScene(FxmlFileManager.getInstance().root);
+    }
+
+    @FXML
     private void MoveToDictionaryScene()
     {
-        this.MoveToScene(FxmlFileManager.getInstance().root);
+        //this.MoveToScene(FxmlFileManager.getInstance().root);
     }
 
     @FXML
     private void MoveToGamesScene()
     {
         MoveToScene(FxmlFileManager.getInstance().chooseGameScene);
+    }
+
+    @FXML
+    private void MoveToDictionaryEditorScene()
+    {
+        //MoveToScene(FxmlFileManager.getInstance().chooseGameScene);
+    }
+
+    @FXML
+    private void MoveToSettingsScene()
+    {
+        //MoveToScene(FxmlFileManager.getInstance().chooseGameScene);
     }
 
 
