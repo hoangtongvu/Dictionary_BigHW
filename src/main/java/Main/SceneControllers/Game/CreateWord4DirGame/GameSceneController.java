@@ -7,6 +7,7 @@ import Logger.LoggersCtrl;
 import Main.FxmlFileManager;
 import Main.SceneControllers.Dictionary.HomeSceneController;
 import Main.application.App;
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -22,7 +23,6 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -81,12 +81,17 @@ public class GameSceneController implements Initializable
     @FXML
     private Button continueButton;
 
+    @FXML
+    private Pane blurPane;
+
     private CreateWord4DirGameCtrl gameCtrl;
 
     private EventHandler<KeyEvent> keyPressedEventHandler;
 
     private final double fontSize = 30;
     private final double labelPrefWidth = 30;
+
+    private FadeTransition blurPaneFadeTransition;
 
 
 
@@ -117,6 +122,8 @@ public class GameSceneController implements Initializable
             this.ToggleEndGameVbox();
             this.MoveBackToStartScreen();
         });
+
+        this.blurPaneFadeTransition = new FadeTransition(Duration.seconds(1), blurPane);
     }
 
     public void StartGame()
@@ -142,6 +149,7 @@ public class GameSceneController implements Initializable
         gameManager.onHintChangeEvent.AddListener(this::UpdateHintText);
         gameManager.onGameEndEvent.AddListener(this::ShowEndGameDialog);
         gameManager.onGameEndEvent.AddListener(e -> EndGame());
+        gameManager.onGameEndEvent.AddListener(e -> BlurPaneAppear());
         gameManager.onChooseCharEvent.AddListener((isCorrect, index) -> {
             Button button = GetButtonIndex(index);
             SetButtonChose(button, isCorrect);
@@ -301,7 +309,6 @@ public class GameSceneController implements Initializable
 
     private void ShowEndGameDialog(int finalPoint)
     {
-        this.endGameVbox.setBackground(Background.fill(Paint.valueOf("GREY")));
         this.ToggleEndGameVbox();
         this.endGamePointText.setText("Your point is " + finalPoint + ".");
     }
@@ -310,6 +317,31 @@ public class GameSceneController implements Initializable
     {
         this.endGameVbox.setDisable(!this.endGameVbox.isDisabled());
         this.endGameVbox.setVisible(!this.endGameVbox.isVisible());
+    }
+
+    private void ToggleBlurPane(double fromValue, double toValue)
+    {
+        this.blurPaneFadeTransition.setFromValue(fromValue);
+        this.blurPaneFadeTransition.setFromValue(toValue);
+        this.blurPaneFadeTransition.play();
+    }
+
+    private void BlurPaneAppear()
+    {
+        this.blurPane.setVisible(true);
+        //this.ToggleBlurPane(0, 1);
+        this.blurPaneFadeTransition.setFromValue(0);
+        this.blurPaneFadeTransition.setFromValue(1);
+        this.blurPaneFadeTransition.play();
+    }
+
+    private void BlurPaneDisappear()
+    {
+        this.blurPaneFadeTransition.setOnFinished(event -> {
+            this.blurPane.setVisible(false);
+            this.blurPaneFadeTransition.setOnFinished(null);
+        });
+        this.ToggleBlurPane(1, 0);
     }
 
     private void MoveBackToStartScreen()

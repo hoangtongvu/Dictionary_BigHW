@@ -72,7 +72,7 @@ public class CreateWord4DirGameManager
 
     public void Start()
     {
-        this.InitCreatingWords(3);
+        this.InitCreatingWords(1);
         this.ResetPoint();
         this.currentWordIndex = 0;
         this.MoveToCreatingWordAt(0);
