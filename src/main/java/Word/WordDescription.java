@@ -61,7 +61,7 @@ public class WordDescription {
 
 
     public String GetInfo() {
-        String wordTypeFormat = "<div class = \"wordType\"> <h2> " + wordType + "</h2> </div>";
+        String wordTypeFormat = "<summary class = \"wordType\">" + wordType + "</summary>";
         String body = "";
         if (definitionList != null) {
             for (WordDefinition wordDefinition : definitionList) {
@@ -75,7 +75,7 @@ public class WordDescription {
             }
         }
 
-        return "<div class = \"description\"> " + wordTypeFormat + body + " </div>";
+        return "<div class = \"description\"> <details open> " + wordTypeFormat + "<span>" +  body + "</span>" + "</details> </div>";
     }
 
     public void loadData(String descriptionID) throws SQLException {
