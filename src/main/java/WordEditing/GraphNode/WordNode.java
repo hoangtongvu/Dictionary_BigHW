@@ -133,11 +133,6 @@ public class WordNode extends DicNode {
 //        for (WordDescription description : wordBlock.getDescriptionsList()) {
 //            System.out.println(description);
 //        }
-        System.out.println("WordBlockList");
-        for (WordDescription description : wordBlock.getDescriptionsList()) {
-            System.out.println(description);
-        }
-        System.out.println("WordBlockList");
         if (wordBlock.getDescriptionsList() != null) {
             for (WordDescription description : wordBlock.getDescriptionsList()) {
 //                System.out.println("Before");

@@ -8,6 +8,9 @@ import java.io.IOException;
 public class FxmlFileManager
 {
 
+    public static final double stageHeight = 600;
+    public static final double stageWidth = 1200;
+
     private static FxmlFileManager instance;
 
     public static FxmlFileManager getInstance()
@@ -76,6 +79,7 @@ public class FxmlFileManager
 
             loader = new FXMLLoader(getClass().getResource("/fxml/application/EditWord.fxml"));
             this.editWordScene = loader.load();
+
         }
         catch (IOException e)
         {

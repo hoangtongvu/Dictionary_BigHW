@@ -11,6 +11,8 @@ import WordEditing.Warnings;
 import WordEditing.WordJSON;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
@@ -21,6 +23,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -64,6 +67,13 @@ public class EditWordSceneController {
     protected Button deleteButton;
     @FXML
     protected ListView wordListView;
+    @FXML
+    private Pane blurPane;
+    @FXML
+    private AnchorPane drawerMenu;
+    @FXML
+    protected TextField editWordSearchBar;
+
     private static List<WordBlock> editableWordList = new ArrayList<>();
 
     public static List<WordBlock> getEditableWordList() {
@@ -130,8 +140,6 @@ public class EditWordSceneController {
         App.getPrimaryStage().setScene(temp);
     }
 
-    @FXML
-    protected TextField editWordSearchBar;
     @FXML
     public void searchEditable() {
         wordListView.getItems().clear();
@@ -313,6 +321,7 @@ public class EditWordSceneController {
         temporaryLine = new Line();
         temporaryLine.setVisible(false);
         temporaryLine.setStrokeWidth(1.5);
+        blurPane.setVisible(false);
         options.getOptions().getItems().addAll(
                 options.getConnect(),
                 options.getDelete(),
@@ -596,6 +605,35 @@ public class EditWordSceneController {
         node.getLineToParent().toBack();
         node.setNodePanePosition((-1) * canvas.getViewportBounds().getMinX(),
                 (-1) * canvas.getViewportBounds().getMinY());
+    }
+    @FXML
+    protected void onMenuButton() {
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5),drawerMenu);
+        translateTransition.setByX(+235);
+        translateTransition.play();
+
+        blurPane.setVisible(true);
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+        fadeTransition.play();
+    }
+
+    /**setOnFinished(lambdaExpression) to wait for the blur animation to finish before set blurPane invisible,
+     * otherwise, blurPane will disappear immediately.*/
+    @FXML
+    protected void onMenuExit() {
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5),drawerMenu);
+        translateTransition.setByX(-235);
+        translateTransition.play();
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(0);
+        fadeTransition.play();
+
+        fadeTransition.setOnFinished(event -> {blurPane.setVisible(false);});
     }
 
 }

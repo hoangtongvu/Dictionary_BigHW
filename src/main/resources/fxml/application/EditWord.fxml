@@ -18,7 +18,7 @@
             <Button id="learning_button" fx:id="dictionary_button" layoutX="205.0" layoutY="5.0" mnemonicParsing="false" onAction="#toDictionary" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Dictionary" />
             <Button id="statistics_button" layoutX="136.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Games" />
             <Button id="dictionary_button" layoutX="54.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Learning" />
-            <ImageView fx:id="menuButton" fitHeight="30.0" fitWidth="427.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" styleClass="menuButton">
+            <ImageView fx:id="menuButton" fitHeight="30.0" fitWidth="427.0" layoutX="14.0" layoutY="6.0" onMouseClicked="#onMenuButton" pickOnBounds="true" preserveRatio="true" styleClass="menuButton">
                <image>
                   <Image url="@../../png/menuIcon.png" />
                </image>
@@ -66,6 +66,21 @@
                   </AnchorPane>
               </items>
             </SplitPane>
+         </children>
+      </AnchorPane>
+      <Pane fx:id="blurPane" prefHeight="494.0" prefWidth="855.0" styleClass="blur" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="drawerMenu" layoutX="-245.0" layoutY="12.0" prefHeight="494.0" prefWidth="235.0" styleClass="sideMenu" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-237.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="46.0" prefWidth="235.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css">
+               <children>
+                  <Button fx:id="menuExit" layoutX="164.0" layoutY="1.0" mnemonicParsing="false" onAction="#onMenuExit" style="-fx-font-size: 20;" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Back" />
+               </children>
+            </Pane>
+            <Button layoutY="46.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="235.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Home" />
+            <Button layoutY="92.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="235.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Dictionary" />
+            <Button layoutY="138.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="235.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Games" />
+            <Button layoutY="184.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="235.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Edit Dictionary" />
+            <Button layoutY="230.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="235.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Settings" />
          </children>
       </AnchorPane>
    </children>
