@@ -3,6 +3,7 @@ package Main.SceneControllers.Dictionary;
 import Dictionary.DicManager;
 import Main.FxmlFileManager;
 import Main.ProjectDirectory;
+import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import Main.application.App;
 import Word.WordBlock;
 import WordEditing.GraphNode.*;
@@ -46,6 +47,8 @@ public class EditWordSceneController {
 
     GridPane grid = new GridPane();
 
+    @FXML
+    AnchorPane root;
     @FXML
     private Rectangle selectionRectangle;
     @FXML
@@ -414,10 +417,17 @@ public class EditWordSceneController {
             grid.getRowConstraints().add(row);
             grid.getColumnConstraints().add(column);
         }
+
         grid.setGridLinesVisible(true);
         grid.toBack();
         canvasPane.getChildren().add(grid);
         hideToolBar();
+
+        try {
+            NavigationPaneSceneController.LoadInstance().AddNavPaneComponentsToRoot(this.root);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 

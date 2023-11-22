@@ -73,7 +73,7 @@ public class NavigationPaneSceneController implements Initializable
     @FXML
     private void onMenuButton()
     {
-        this.drawerTranslateTransition.setByX(235);
+        this.drawerTranslateTransition.setByX(drawerMenu.getWidth());
         this.drawerTranslateTransition.play();
 
         blurPane.setVisible(true);
@@ -86,7 +86,7 @@ public class NavigationPaneSceneController implements Initializable
     @FXML
     private void onMenuExit()
     {
-        this.drawerTranslateTransition.setByX(-235);
+        this.drawerTranslateTransition.setByX(-drawerMenu.getWidth());
         this.drawerTranslateTransition.play();
 
         this.blurPaneFadeTransition.setFromValue(1);
