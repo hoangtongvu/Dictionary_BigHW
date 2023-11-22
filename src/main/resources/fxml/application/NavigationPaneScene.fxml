@@ -21,11 +21,46 @@
                   <Button fx:id="backButton" layoutX="164.0" layoutY="1.0" mnemonicParsing="false" onAction="#onMenuExit" style="-fx-font-size: 20;" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Back" />
                </children>
             </Pane>
-            <Button layoutY="46.0" mnemonicParsing="false" onAction="#MoveToHomeScene" prefHeight="46.0" prefWidth="235.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Home" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-            <Button layoutY="92.0" mnemonicParsing="false" onAction="#MoveToDictionaryScene" prefHeight="46.0" prefWidth="235.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Dictionary" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-            <Button layoutY="138.0" mnemonicParsing="false" onAction="#MoveToGamesScene" prefHeight="46.0" prefWidth="250.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Games" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-            <Button layoutY="184.0" mnemonicParsing="false" onAction="#MoveToDictionaryEditorScene" prefHeight="46.0" prefWidth="235.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Edit Dictionary" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-            <Button layoutY="230.0" mnemonicParsing="false" onAction="#MoveToSettingsScene" prefHeight="46.0" prefWidth="235.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Settings" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Button layoutY="46.0" mnemonicParsing="false" onAction="#MoveToHomeScene" prefHeight="46.0" prefWidth="235.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Home" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../png/home.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button layoutY="92.0" mnemonicParsing="false" onAction="#MoveToDictionaryScene" prefHeight="46.0" prefWidth="235.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Dictionary" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../png/book.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button layoutY="138.0" mnemonicParsing="false" onAction="#MoveToGamesScene" prefHeight="46.0" prefWidth="250.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Games" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../png/game.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button layoutY="184.0" mnemonicParsing="false" onAction="#MoveToDictionaryEditorScene" prefHeight="46.0" prefWidth="235.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Edit Dictionary" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../png/edit.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button layoutY="230.0" mnemonicParsing="false" onAction="#MoveToSettingsScene" prefHeight="46.0" prefWidth="235.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Settings" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../png/gear.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
          </children>
       </AnchorPane>
    </children>

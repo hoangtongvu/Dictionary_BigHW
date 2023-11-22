@@ -34,11 +34,12 @@
 
 .sideMenuButton {
     -fx-alignment: baseline-left;
-    -fx-padding: 0 0 0 70;
+    -fx-padding: 0 0 0 20;
     -fx-background-color: transparent;
     -fx-font-weight: bold;
     -fx-text-fill: #c2f8ff;
     -fx-font-size: 20;
+    -fx-graphic-text-gap: 30;
 }
 
 .sideMenuButton:hover {
