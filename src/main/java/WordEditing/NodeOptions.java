@@ -1,5 +1,6 @@
-package WordEditing.GraphNode;
+package WordEditing;
 
+import WordEditing.GraphNode.DicNode;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 

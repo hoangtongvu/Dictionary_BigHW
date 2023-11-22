@@ -16,6 +16,14 @@ public class ExampleEditor {
     protected Label translationLabel = new Label("Translation");
     protected AnchorPane editorPane = new AnchorPane();
 
+    public TextArea getExampleTextArea() {
+        return exampleTextArea;
+    }
+
+    public TextArea getTranslationTextArea() {
+        return translationTextArea;
+    }
+
     public AnchorPane getEditorPane() {
         return editorPane;
     }
@@ -27,12 +35,9 @@ public class ExampleEditor {
         exampleTextArea.setWrapText(true);
         this.node = node;
         editorPane.setPrefSize(240.0, 400.0);
-        editorPane.setStyle("-fx-background-color: white;");
-
         exampleLabel.setLayoutX(61.0);
         exampleLabel.setLayoutY(25.0);
         exampleLabel.setPrefSize(197.0, 26.0);
-        exampleLabel.setStyle("-fx-background-color: pink; -fx-alignment: center;");
         AnchorPane.setTopAnchor(exampleLabel, 0.0);
         AnchorPane.setLeftAnchor(exampleLabel, 0.0);
         AnchorPane.setRightAnchor(exampleLabel, 0.0);
@@ -65,6 +70,16 @@ public class ExampleEditor {
         editorPane.getChildren().addAll(exampleLabel, exampleTextLabel, exampleTextArea, translationLabel, translationTextArea);
         exampleTextArea.addEventHandler(KeyEvent.KEY_RELEASED, exampleTypeHandler);
         translationTextArea.addEventHandler(KeyEvent.KEY_RELEASED, translationTypeHandler);
+
+        editorPane.getStylesheets().add(String.valueOf(getClass().getResource("/css/EditWord.css")));
+
+        // Assign style classes
+        editorPane.getStyleClass().add("editor-anchor-pane");
+        exampleTextArea.getStyleClass().add("editor-text-field");
+        translationTextArea.getStyleClass().add("editor-text-field");
+        exampleLabel.getStyleClass().add("editor-name");
+        exampleTextLabel.getStyleClass().add("field-name");
+        translationLabel.getStyleClass().add("field-name");
     }
 
     EventHandler<KeyEvent> exampleTypeHandler = new EventHandler<KeyEvent>() {

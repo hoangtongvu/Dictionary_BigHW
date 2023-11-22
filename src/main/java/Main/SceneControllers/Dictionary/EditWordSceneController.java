@@ -7,12 +7,12 @@ import Main.application.App;
 import Word.WordBlock;
 import WordEditing.GraphNode.*;
 import WordEditing.NodeJSON;
+import WordEditing.NodeOptions;
 import WordEditing.Warnings;
 import WordEditing.WordJSON;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import javafx.animation.FadeTransition;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
@@ -21,6 +21,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -73,6 +74,10 @@ public class EditWordSceneController {
     private AnchorPane drawerMenu;
     @FXML
     protected TextField editWordSearchBar;
+    @FXML
+    protected Pane toolBar;
+    @FXML
+    protected Button addWordButton;
 
     private static List<WordBlock> editableWordList = new ArrayList<>();
 
@@ -105,8 +110,7 @@ public class EditWordSceneController {
         if (DicNode.getCurrentlyEditedWord() == null) {
             DicNode.setCurrentlyEditedWord(new WordNode());
             addNode(DicNode.getCurrentlyEditedWord());
-
-            showEditingTools(true);
+            showToolBar();
         } else if (DicNode.getCurrentlyEditedWord() != null) {
             if (DicNode.isChangesSaved()) {
                 //Reset and create new word
@@ -122,16 +126,49 @@ public class EditWordSceneController {
                         DicNode.reset();
                         DicNode.setCurrentlyEditedWord(new WordNode());
                         addNode(DicNode.getCurrentlyEditedWord());
+                        hideAndShow();
                     }
                 } else if (flag < 0) {
                     //Reset -> New
                     DicNode.reset();
                     DicNode.setCurrentlyEditedWord(new WordNode());
                     addNode(DicNode.getCurrentlyEditedWord());
+                    hideAndShow();
                 }
             }
             updateListView();
         }
+    }
+
+    public void showToolBar() {
+        toolBar.setVisible(true);
+        showEditingTools(true);
+        TranslateTransition transition = new TranslateTransition( Duration.millis(800),toolBar);
+        toolBar.setTranslateX(-toolBar.getWidth());
+        transition.setToX(toolBar.getLayoutX());
+        transition.play();
+    }
+
+    public void hideToolBar() {
+        TranslateTransition transition = new TranslateTransition(Duration.millis(800),toolBar);
+        transition.setToX(-toolBar.getWidth());
+        transition.play();
+    }
+
+    public void hideAndShow() {
+        TranslateTransition hide = new TranslateTransition(Duration.millis(500),toolBar);
+        hide.setToX(-toolBar.getWidth());
+        hide.setOnFinished(event -> {
+            toolBar.setVisible(true);
+            showEditingTools(true);
+            TranslateTransition show = new TranslateTransition( Duration.millis(500),toolBar);
+            toolBar.setTranslateX(-toolBar.getWidth());
+            show.setToX(toolBar.getLayoutX());
+            show.play();
+        });
+        hide.play();
+
+
     }
 
     @FXML
@@ -232,7 +269,7 @@ public class EditWordSceneController {
         }
         //Reset
         DicNode.reset();
-        showEditingTools(true);
+        hideAndShow();
 
         //Loading the word into a new WordNode
         System.out.println(word);
@@ -253,10 +290,16 @@ public class EditWordSceneController {
             canvasPane.getChildren().add(node.getLineToParent());
             canvasPane.getChildren().add(node.getNodePane());
             node.getLineToParent().toBack();
+            grid.toBack();
         }
         loadFromJSON(DicNode.nodeList);
         for (DicNode node : DicNode.getNodeList()) {
-            node.updateLine();
+            for (DicNode childNode : node.getChildrenNodeList()) {
+                childNode.getLineToParent().setStartX(childNode.getNodePane().getLayoutX() + childNode.getNodePane().getMinWidth()/2);
+                childNode.getLineToParent().setStartY(childNode.getNodePane().getLayoutY() + childNode.getNodePane().getMinHeight()/2);
+                childNode.getLineToParent().setEndX(node.getNodePane().getLayoutX() + childNode.getNodePane().getMinWidth()/2);
+                childNode.getLineToParent().setEndY(node.getNodePane().getLayoutY() + childNode.getNodePane().getMinHeight()/2);
+            }
         }
     }
 
@@ -270,7 +313,7 @@ public class EditWordSceneController {
             updateListView();
             DicNode.setCurrentlyEditedWord(null);
             DicNode.reset();
-            showEditingTools(false);
+            hideToolBar();
         }
     }
 
@@ -322,6 +365,7 @@ public class EditWordSceneController {
         temporaryLine.setVisible(false);
         temporaryLine.setStrokeWidth(1.5);
         blurPane.setVisible(false);
+        toolBar.setVisible(false);
         options.getOptions().getItems().addAll(
                 options.getConnect(),
                 options.getDelete(),
@@ -363,7 +407,17 @@ public class EditWordSceneController {
         canvas.getContent().addEventHandler(MouseEvent.DRAG_DETECTED, dragDetected);
         canvas.addEventHandler(KeyEvent.KEY_PRESSED, keyPressHandler);
         canvasPane.getChildren().add(temporaryLine);
-        showEditingTools(false);
+        grid.setPrefSize(4000, 4000);
+        for (int i = 0; i < 250; i++) {
+            RowConstraints row = new RowConstraints(16);
+            ColumnConstraints column = new ColumnConstraints(16);
+            grid.getRowConstraints().add(row);
+            grid.getColumnConstraints().add(column);
+        }
+        grid.setGridLinesVisible(true);
+        grid.toBack();
+        canvasPane.getChildren().add(grid);
+        hideToolBar();
     }
 
 
@@ -433,6 +487,7 @@ public class EditWordSceneController {
                     canvas.setPannable(true);
                 }
             } else if (event.getButton() == MouseButton.PRIMARY) {
+                canvas.setPannable(false);
                 editorPane.getChildren().clear();
                 DicNode.deselectAll();
                 mouseStartX = event.getX();
@@ -506,10 +561,10 @@ public class EditWordSceneController {
                 selectionRectangle.setLayoutX(event.getX());
                 selectionRectangle.setLayoutY(event.getY());
 //            System.out.println(event.getSource());
-                canvas.setPannable(false);
                 if (!canvas.isPannable() && DicNode.getCurrentlyEditedWord() != null) {
                     options.getOptions().show(selectionRectangle, Side.BOTTOM, 0 , 0);
                 }
+                canvas.setPannable(false);
 
             } else if (event.getButton() == MouseButton.PRIMARY) {
                 if (DicNode.getCurrentlySelected() != null) {
@@ -603,6 +658,7 @@ public class EditWordSceneController {
         canvasPane.getChildren().add(node.getNodePane());
         canvasPane.getChildren().add(node.getLineToParent());
         node.getLineToParent().toBack();
+        grid.toBack();
         node.setNodePanePosition((-1) * canvas.getViewportBounds().getMinX(),
                 (-1) * canvas.getViewportBounds().getMinY());
     }
@@ -635,5 +691,7 @@ public class EditWordSceneController {
 
         fadeTransition.setOnFinished(event -> {blurPane.setVisible(false);});
     }
+
+
 
 }

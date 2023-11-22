@@ -14,6 +14,10 @@ public class PhraseEditor {
     protected Label phraseTextLabel = new Label("Phrase");
     protected AnchorPane editorPane = new AnchorPane();
 
+    public TextArea getPhraseTextArea() {
+        return phraseTextArea;
+    }
+
     public AnchorPane getEditorPane() {
         return editorPane;
     }
@@ -49,6 +53,14 @@ public class PhraseEditor {
 
         editorPane.getChildren().addAll(phraseLabel, phraseTextLabel, phraseTextArea);
         phraseTextArea.addEventHandler(KeyEvent.KEY_RELEASED, typeHandler);
+
+        editorPane.getStylesheets().add(String.valueOf(getClass().getResource("/css/EditWord.css")));
+
+        // Assign style classes
+        editorPane.getStyleClass().add("editor-anchor-pane");
+        phraseTextArea.getStyleClass().add("editor-text-field");
+        phraseLabel.getStyleClass().add("editor-name");
+        phraseTextLabel.getStyleClass().add("field-name");
     }
 
     EventHandler<KeyEvent> typeHandler = new EventHandler<KeyEvent>() {

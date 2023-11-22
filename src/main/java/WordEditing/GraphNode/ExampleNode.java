@@ -24,9 +24,6 @@ public class ExampleNode extends DicNode {
         return translationLabel;
     }
 
-
-
-
     public WordExample getExample() {
         return example;
     }
@@ -57,6 +54,14 @@ public class ExampleNode extends DicNode {
         labelProperty(translationLabel, "node-content");
         nodePane.getChildren().addAll(exampleLabel, translationLabel);
         editor = new ExampleEditor(this);
+
+        if (!example.getExample().equals("<EMPTY>")) {
+            editor.getExampleTextArea().setText(example.getExample());
+        }
+
+        if (!example.getTranslation().equals("<EMPTY>")) {
+            editor.getExampleTextArea().setText(example.getTranslation());
+        }
     }
 
     @Override

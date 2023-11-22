@@ -2,9 +2,8 @@ package WordEditing.GraphNode;
 
 import Main.ProjectDirectory;
 import Main.SceneControllers.Dictionary.EditWordSceneController;
-import Word.WordBlock;
-import Word.WordDescription;
 import WordEditing.NodeJSON;
+import WordEditing.NodeOptions;
 import WordEditing.WordJSON;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -226,6 +225,12 @@ public abstract class DicNode {
         nodePane.addEventHandler(MouseEvent.DRAG_DETECTED, dragDetected);
         nodePane.addEventHandler(MouseDragEvent.ANY, mouseDragEventEventHandler);
 
+        lineToParent.setStrokeWidth(1.5);
+        lineToParent.setStartX(nodePane.getLayoutX() + nodePane.getWidth()/2);
+        lineToParent.setStartY(nodePane.getLayoutY() + nodePane.getHeight()/2);
+        lineToParent.setEndX(nodePane.getLayoutX() + nodePane.getWidth()/2);
+        lineToParent.setEndY(nodePane.getLayoutY() + nodePane.getHeight()/2);
+
         options.getDelete().setOnAction(event -> {
             selfDelete();
         });
@@ -247,7 +252,7 @@ public abstract class DicNode {
     }
 
     //From the current node, which is a child node of another node, this function update the line to it's parent
-    protected void updateFromChild() {
+    public void updateFromChild() {
         if (parent != null) {
             lineToParent.setStrokeWidth(1.5);
             lineToParent.setStartX(nodePane.getLayoutX() + nodePane.getWidth()/2);
@@ -257,7 +262,7 @@ public abstract class DicNode {
         }
     }
 
-    protected void updateFromParent() {//From parent node parent (parent is 'this')
+    public void updateFromParent() {//From parent node parent (parent is 'this')
         for (DicNode node : childrenNodeList) {
             node.updateFromChild();
         }
@@ -283,7 +288,7 @@ public abstract class DicNode {
      * the excluded node.
      * @param excluded this node will be excluded
      */
-    protected void updateLine(DicNode excluded) { //For bulk selection mode
+    public void updateLine(DicNode excluded) { //For bulk selection mode
         changesSaved = false;
         if (parent != null) {
             for (DicNode node : parent.childrenNodeList) {

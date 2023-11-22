@@ -36,6 +36,7 @@ public class DefinitionNode extends DicNode {
         labelProperty(definitionLabel, "node-content");
         nodePane.getChildren().add(definitionLabel);
         editor = new DefinitionEditor(this);
+
     }
 
     public DefinitionNode(WordDefinition definition) {
@@ -46,6 +47,10 @@ public class DefinitionNode extends DicNode {
         labelProperty(definitionLabel, "node-content");
         nodePane.getChildren().add(definitionLabel);
         editor = new DefinitionEditor(this);
+
+        if (!definition.getDefinition().equals("<EMPTY>")) {
+            editor.getDefinitionTextArea().setText(definition.getDefinition());
+        }
     }
     @Override
     public void labelProperty(Label label, String styleClass) {

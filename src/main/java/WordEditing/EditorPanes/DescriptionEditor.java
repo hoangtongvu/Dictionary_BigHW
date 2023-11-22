@@ -18,17 +18,19 @@ public class DescriptionEditor {
         return editorPane;
     }
 
+    public TextField getWordTypeTextField() {
+        return wordTypeTextField;
+    }
+
     protected DescriptionNode node;
 
     public DescriptionEditor(DescriptionNode node) {
         this.node = node;
         editorPane.setPrefSize(240.0, 400.0);
-        editorPane.setStyle("-fx-background-color: white;");
 
         descriptionLabel.setLayoutX(61.0);
         descriptionLabel.setLayoutY(25.0);
         descriptionLabel.setPrefSize(197.0, 26.0);
-        descriptionLabel.setStyle("-fx-background-color: pink; -fx-alignment: center;");
         AnchorPane.setTopAnchor(descriptionLabel, 0.0);
         AnchorPane.setLeftAnchor(descriptionLabel, 0.0);
         AnchorPane.setRightAnchor(descriptionLabel, 0.0);
@@ -48,6 +50,14 @@ public class DescriptionEditor {
 
         editorPane.getChildren().addAll(descriptionLabel, wordTypeTextField, wordTypeLabel);
         wordTypeTextField.addEventHandler(KeyEvent.KEY_RELEASED, typeHandler);
+
+        editorPane.getStylesheets().add(String.valueOf(getClass().getResource("/css/EditWord.css")));
+
+        // Assign style classes
+        editorPane.getStyleClass().add("editor-anchor-pane");
+        wordTypeTextField.getStyleClass().add("editor-text-field");
+        descriptionLabel.getStyleClass().add("editor-name");
+        wordTypeLabel.getStyleClass().add("field-name");
     }
     EventHandler<KeyEvent> typeHandler = new EventHandler<KeyEvent>() {
         @Override

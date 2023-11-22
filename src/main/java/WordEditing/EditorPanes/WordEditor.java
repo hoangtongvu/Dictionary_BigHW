@@ -18,15 +18,21 @@ public class WordEditor {
 
     private WordNode node;
 
+    public TextField getSoundTextField() {
+        return soundTextField;
+    }
+
+    public TextField getWordTextField() {
+        return wordTextField;
+    }
+
     public WordEditor(WordNode node) {
         this.node = node;
         editorPane.setPrefSize(240.0, 400.0);
-        editorPane.setStyle("-fx-background-color: white;");
 
         wordBlockLabel.setLayoutX(61.0);
         wordBlockLabel.setLayoutY(25.0);
         wordBlockLabel.setPrefSize(197.0, 26.0);
-        wordBlockLabel.setStyle("-fx-background-color: pink; -fx-alignment: center;");
         AnchorPane.setTopAnchor(wordBlockLabel, 0.0);
         AnchorPane.setLeftAnchor(wordBlockLabel, 0.0);
         AnchorPane.setRightAnchor(wordBlockLabel, 0.0);
@@ -53,6 +59,16 @@ public class WordEditor {
         editorPane.getChildren().addAll(wordBlockLabel, wordLabel, wordTextField, soundLabel, soundTextField);
         wordTextField.addEventHandler(KeyEvent.KEY_RELEASED, wordTypeHandler);
         soundTextField.addEventHandler(KeyEvent.KEY_RELEASED, soundTypeHandler);
+
+        editorPane.getStylesheets().add(String.valueOf(getClass().getResource("/css/EditWord.css")));
+
+        // Assign style classes
+        editorPane.getStyleClass().add("editor-anchor-pane");
+        wordTextField.getStyleClass().add("editor-text-field");
+        wordBlockLabel.getStyleClass().add("editor-name");
+        wordLabel.getStyleClass().add("field-name");
+        soundTextField.getStyleClass().add("editor-text-field");
+        soundLabel.getStyleClass().add("field-name");
     }
 
     EventHandler<KeyEvent> wordTypeHandler = new EventHandler<KeyEvent>() {

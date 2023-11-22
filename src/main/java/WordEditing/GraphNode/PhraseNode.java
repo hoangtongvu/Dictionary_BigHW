@@ -46,6 +46,10 @@ public class PhraseNode extends DicNode {
         nodePane.getChildren().add(phraseLabel);
         editor = new PhraseEditor(this);
 
+        if (!phrase.getPhrase().equals("<EMPTY>")) {
+            editor.getPhraseTextArea().setText(phrase.getPhrase());
+        }
+
     }
     @Override
     public void convertToWordBlock() {

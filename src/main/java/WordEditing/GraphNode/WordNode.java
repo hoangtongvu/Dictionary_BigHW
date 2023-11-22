@@ -75,6 +75,14 @@ public class WordNode extends DicNode {
         labelProperty(soundLabel, "node-content");
         nodePane.getChildren().addAll(wordLabel, soundLabel);
         editor = new WordEditor(this);
+
+        if (!wordBlock.getWord().equals("<EMPTY>")) {
+            editor.getWordTextField().setText(wordBlock.getWord());
+        }
+
+        if (!wordBlock.getSpelling().equals("<EMPTY>")) {
+            editor.getSoundTextField().setText(wordBlock.getSpelling());
+        }
     }
 
     public void setWordBlock(WordBlock wordBlock) {

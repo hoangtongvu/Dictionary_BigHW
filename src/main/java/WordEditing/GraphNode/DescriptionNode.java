@@ -42,6 +42,10 @@ public class DescriptionNode extends DicNode {
         descriptionLabel = new Label("Word type: " + description.getWordType());
         labelProperty(descriptionLabel, "node-content");
         nodePane.getChildren().add(descriptionLabel);
+
+        if (!description.getWordType().equals("<EMPTY>")) {
+            editor.getWordTypeTextField().setText(description.getWordType());
+        }
     }
 
     public WordDescription getDescription() {
