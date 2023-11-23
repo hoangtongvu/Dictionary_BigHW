@@ -14,11 +14,11 @@
          </image>
       </ImageView>
       <Pane fx:id="blurPane" layoutX="95.0" layoutY="-632.0" prefHeight="494.0" prefWidth="855.0" styleClass="blur" stylesheets="@../../css/ApplicationStyle.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <AnchorPane fx:id="drawerMenu" layoutX="-236.0" prefHeight="494.0" prefWidth="235.0" styleClass="sideMenu" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-236.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="drawerMenu" layoutX="-251.0" prefHeight="494.0" prefWidth="250.0" styleClass="sideMenu" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-251.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane prefHeight="46.0" prefWidth="235.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
-                  <Button fx:id="backButton" layoutX="164.0" layoutY="1.0" mnemonicParsing="false" onAction="#onMenuExit" style="-fx-font-size: 20;" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Back" />
+                  <Button fx:id="backButton" layoutX="179.0" layoutY="1.0" mnemonicParsing="false" onAction="#onMenuExit" style="-fx-font-size: 20;" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Back" />
                </children>
             </Pane>
             <Button layoutY="46.0" mnemonicParsing="false" onAction="#MoveToHomeScene" prefHeight="46.0" prefWidth="235.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Home" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -53,7 +53,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button layoutY="230.0" mnemonicParsing="false" onAction="#MoveToSettingsScene" prefHeight="46.0" prefWidth="235.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Settings" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <Button layoutX="22.0" layoutY="230.0" mnemonicParsing="false" onAction="#MoveToSettingsScene" prefHeight="46.0" prefWidth="213.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Settings" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -61,6 +61,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
+            <AnchorPane layoutY="277.0" prefHeight="217.0" prefWidth="200.0" style="-fx-background-color: pink;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="277.0" />
          </children>
       </AnchorPane>
    </children>

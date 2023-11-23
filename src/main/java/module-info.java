@@ -41,4 +41,7 @@ module MainGroup.application {
 
     requires jdk.jsobject;
 
+    exports Main.SceneControllers.Widget;
+    opens Main.SceneControllers.Widget to javafx.fxml;
+
 }
