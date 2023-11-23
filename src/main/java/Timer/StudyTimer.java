@@ -1,21 +1,29 @@
 package Timer;
 
+import Main.ProjectDirectory;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import org.w3c.dom.Text;
+import javafx.scene.media.Media;
+
+import java.net.URL;
 
 public class StudyTimer {
     private static StudyTimer instance;
     private Integer timeSeconds;
     private Timeline timeline;
     private boolean isPlaying = false;
-
     private StringProperty time = new SimpleStringProperty();
+
+    URL resource = getClass().getResource("/Audio/alarm.mp3");
+    private Media media = new Media(resource.toString());
+    private MediaPlayer mediaPlayer = new MediaPlayer(media);
 
     private StudyTimer() {
         timeSeconds = 0;
@@ -31,6 +39,8 @@ public class StudyTimer {
                             System.out.println(toString());
                             if (this.timeSeconds <= 0) {
                                 timeline.stop();
+                                mediaPlayer.setStopTime(Duration.millis(8500));
+                                mediaPlayer.play();
                                 isPlaying = false;
                             }
                         }
@@ -70,6 +80,7 @@ public class StudyTimer {
         timeSeconds = 0;
         isPlaying = false;
         time.set(toString());
+        timeline.stop();
     }
 
     public boolean isPlaying() {
