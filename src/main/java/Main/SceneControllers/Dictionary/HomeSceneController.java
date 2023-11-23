@@ -1,6 +1,7 @@
 package Main.SceneControllers.Dictionary;
 
 import Main.FxmlFileManager;
+import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import Main.SceneControllers.Widget.StudyTimerController;
 import Main.application.App;
 import javafx.animation.FadeTransition;
@@ -31,7 +32,8 @@ public class HomeSceneController {
 
     @FXML
     protected Pane blurPane;
-
+    @FXML
+    protected AnchorPane root;
     @FXML
     protected TextField timerTextField;
 
@@ -47,6 +49,12 @@ public class HomeSceneController {
             StudyTimerController.loadInstance().addToParent(timerPlaceHolder);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+
+        try {
+            NavigationPaneSceneController.LoadInstance().AddNavPaneComponentsToRoot(this.root);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -82,4 +90,6 @@ public class HomeSceneController {
         Parent root = FxmlFileManager.getInstance().root;
         this.SwitchScene(root);
     }
+
+
 }

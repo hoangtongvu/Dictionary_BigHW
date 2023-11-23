@@ -43,12 +43,20 @@ public class StudyTimerController {
     }
 
     public void addToParent(Pane parent) {
-        parent.getChildren().addAll(timerPane.getChildren());
+        AnchorPane.setTopAnchor(timerPane, 0.0);
+        AnchorPane.setBottomAnchor(timerPane, 0.0);
+        AnchorPane.setLeftAnchor(timerPane, 0.0);
+        AnchorPane.setRightAnchor(timerPane, 0.0);
+        parent.getChildren().addAll(timerPane);
     }
 
     @FXML
     public void onTick() {
-
+        if (soundCheckBox.isSelected()) {
+            StudyTimer.getInstance().setPlaySound(true);
+        } else {
+            StudyTimer.getInstance().setPlaySound(false);
+        }
     }
 
     @FXML
@@ -57,13 +65,13 @@ public class StudyTimerController {
     }
 
     @FXML
-    public void filterNumber(KeyEvent event) {
-
-    }
-
-    @FXML
     public void startTimer() {
+        if (StudyTimer.getInstance().getTimeSeconds() == 0) {
+            return;
+        }
         StudyTimer.getInstance().start();
+        timerTextField.setEditable(false);
+        pauseButton.setDisable(false);
     }
 
     @FXML
@@ -82,6 +90,9 @@ public class StudyTimerController {
     @FXML
     public void resetTimer() {
         StudyTimer.getInstance().reset();
+        timerTextField.setEditable(true);
+        pauseButton.setDisable(true);
+        resetButton.setDisable(true);
     }
 
     @FXML
@@ -93,6 +104,7 @@ public class StudyTimerController {
     public void initialize() {
         timerLabel.textProperty().bind(StudyTimer.getInstance().timeProperty());
         resetButton.setDisable(true);
+        pauseButton.setDisable(true);
         timerTextField.addEventHandler(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -102,6 +114,7 @@ public class StudyTimerController {
             }
         });
     }
+
 
 
 

@@ -16,10 +16,15 @@ import java.net.URL;
 
 public class StudyTimer {
     private static StudyTimer instance;
-    private Integer timeSeconds;
+    private Integer timeSeconds = 0;
     private Timeline timeline;
     private boolean isPlaying = false;
     private StringProperty time = new SimpleStringProperty();
+    boolean playSound = false;
+
+    public void setPlaySound(boolean playSound) {
+        this.playSound = playSound;
+    }
 
     URL resource = getClass().getResource("/Audio/alarm.mp3");
     private Media media = new Media(resource.toString());
@@ -39,8 +44,10 @@ public class StudyTimer {
                             System.out.println(toString());
                             if (this.timeSeconds <= 0) {
                                 timeline.stop();
-                                mediaPlayer.setStopTime(Duration.millis(8500));
-                                mediaPlayer.play();
+                                if (playSound) {
+                                    mediaPlayer.setStopTime(Duration.millis(8500));
+                                    mediaPlayer.play();
+                                }
                                 isPlaying = false;
                             }
                         }
@@ -101,5 +108,9 @@ public class StudyTimer {
         int seconds = timeSeconds % 60;
 
         return String.format("%02d:%02d:%02d",hour, minutes, seconds);
+    }
+
+    public Integer getTimeSeconds() {
+        return timeSeconds;
     }
 }
