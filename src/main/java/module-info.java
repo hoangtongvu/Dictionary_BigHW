@@ -39,6 +39,10 @@ module MainGroup.application {
     opens Main.SceneControllers.Translate to javafx.fxml;
     opens WordEditing to com.google.gson;
 
+    exports AIChatBot.gpt4all;
+
     requires jdk.jsobject;
+    requires org.jnrproject.ffi;
+    requires org.slf4j;
 
 }
