@@ -66,11 +66,17 @@ public class AIConversationSceneController implements Initializable
 
         Task<String> task = new Task<>() {
             @Override
-            protected String call()
-            {
+            protected String call() throws InterruptedException {
                 updateMessage("...");
                 ToggleTextField();
                 String response = aiChatBotManager.Chat(input);
+
+                for (int i = 1; i < response.length(); i = i + 2)
+                {
+                    updateMessage(response.substring(0, i));
+                    Thread.sleep(50);
+                }
+
                 updateMessage(response);
                 ToggleTextField();
                 return response;
