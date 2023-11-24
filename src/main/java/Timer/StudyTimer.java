@@ -41,7 +41,6 @@ public class StudyTimer {
                             this.timeSeconds--;
 //                            System.out.println(this.toString());
                             time.set(toString());
-                            System.out.println(toString());
                             if (this.timeSeconds <= 0) {
                                 timeline.stop();
                                 if (playSound) {
