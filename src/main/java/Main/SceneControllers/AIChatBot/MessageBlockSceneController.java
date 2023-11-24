@@ -2,6 +2,7 @@ package Main.SceneControllers.AIChatBot;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
@@ -14,6 +15,9 @@ public class MessageBlockSceneController
 {
 
     @FXML
+    private HBox rootHbox;
+
+    @FXML
     private Circle avatarCircle;
 
     @FXML
@@ -21,6 +25,7 @@ public class MessageBlockSceneController
 
     @FXML
     private HBox messageOnlyHBox;
+
 
     private final String radiusStyle = "-fx-background-radius: 15;";
     private final double maxWrappingWidth = 500;
@@ -56,7 +61,13 @@ public class MessageBlockSceneController
     {
         String backgroundColorStyle = "-fx-background-color: #3d5c95;";
         this.messageOnlyHBox.setStyle(backgroundColorStyle + this.radiusStyle);// #dfe3ee
-        this.messageText.autosize();
+        this.SwapAvatarAndMessagePosition();
+    }
+
+    private void SwapAvatarAndMessagePosition()
+    {
+        this.rootHbox.getChildren().setAll(this.messageOnlyHBox, this.avatarCircle);
+        this.rootHbox.setAlignment(Pos.TOP_RIGHT);
     }
 
 }

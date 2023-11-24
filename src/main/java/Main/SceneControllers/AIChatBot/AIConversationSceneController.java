@@ -127,6 +127,5 @@ public class AIConversationSceneController implements Initializable
     //todo try to word by word generation.
     //todo large language model downloading and choosing.
     //todo loading model in background.
-    //todo swap avatar and text
 
 }
