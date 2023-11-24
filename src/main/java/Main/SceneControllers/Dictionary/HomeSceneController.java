@@ -2,6 +2,7 @@ package Main.SceneControllers.Dictionary;
 
 import Main.FxmlFileManager;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
+import Main.SceneControllers.Widget.SpotifyController;
 import Main.SceneControllers.Widget.StudyTimerController;
 import Main.application.App;
 import javafx.animation.FadeTransition;
@@ -36,7 +37,8 @@ public class HomeSceneController {
     protected AnchorPane root;
     @FXML
     protected TextField timerTextField;
-
+    @FXML
+    protected AnchorPane spotifyPlaceHolder;
     @FXML
     AnchorPane timerPlaceHolder;
 
@@ -50,6 +52,13 @@ public class HomeSceneController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        try {
+            SpotifyController.loadInstance().addToParent(spotifyPlaceHolder);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
         try {
             NavigationPaneSceneController.LoadInstance().AddNavPaneComponentsToRoot(this.root);

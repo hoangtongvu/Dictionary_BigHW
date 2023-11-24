@@ -31,6 +31,6 @@
         </tabs>
       </TabPane>
       <AnchorPane fx:id="timerPlaceHolder" layoutX="486.0" layoutY="293.0" prefHeight="274.0" prefWidth="288.0" styleClass="timer-card" stylesheets="@../../css/Home.css" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="26.0" />
-      <AnchorPane layoutX="30.0" layoutY="293.0" prefHeight="274.0" prefWidth="435.0" style="-fx-background-color: pink;" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="335.0" />
+      <AnchorPane fx:id="spotifyPlaceHolder" layoutX="30.0" layoutY="293.0" prefHeight="274.0" prefWidth="435.0" style="-fx-background-color: pink;" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="335.0" />
     </children>
 </AnchorPane>

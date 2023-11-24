@@ -61,7 +61,10 @@ public class StudyTimerController {
 
     @FXML
     public void onTimerSet() {
-        StudyTimer.getInstance().setTime(Integer.parseInt(timerTextField.getText()));
+        if (!StudyTimer.getInstance().isPlaying()) {
+            StudyTimer.getInstance().setTime(Integer.parseInt(timerTextField.getText()));
+        }
+
     }
 
     @FXML
@@ -97,11 +100,12 @@ public class StudyTimerController {
 
     @FXML
     public void onKeyTyped() {
-        if (timerTextField.getText() != null) {
+        if (timerTextField.getText() != null && !StudyTimer.getInstance().isPlaying()) {
             StudyTimer.getInstance().setTime(Integer.parseInt(timerTextField.getText()));
         }
     }
     public void initialize() {
+
         timerLabel.textProperty().bind(StudyTimer.getInstance().timeProperty());
         resetButton.setDisable(true);
         pauseButton.setDisable(true);
