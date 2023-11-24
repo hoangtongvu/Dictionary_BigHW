@@ -30,6 +30,7 @@ public class MessageBlockSceneController
     }
 
     public void setText(String content) {
+        this.messageText.setWrappingWidth(0);
         this.messageText.setText(content);
         double width = this.messageText.getBoundsInLocal().getWidth();
         if (width >= this.maxWrappingWidth)
