@@ -28,6 +28,9 @@ module MainGroup.application {
     exports Main.SceneControllers.NavigationPane;
     opens Main.SceneControllers.NavigationPane to javafx.fxml;
 
+    exports Main.SceneControllers.AIChatBot;
+    opens Main.SceneControllers.AIChatBot to javafx.fxml;
+
 
     exports CustomEventPackage.OneParameter;
     opens CustomEventPackage.OneParameter to javafx.fxml;
@@ -40,6 +43,7 @@ module MainGroup.application {
     opens WordEditing to com.google.gson;
 
     exports AIChatBot.gpt4all;
+    exports AIChatBot;
 
     requires jdk.jsobject;
     requires org.jnrproject.ffi;
