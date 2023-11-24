@@ -40,5 +40,9 @@ module MainGroup.application {
     opens WordEditing to com.google.gson;
 
     requires jdk.jsobject;
+    requires javafx.media;
+
+    exports Main.SceneControllers.Widget;
+    opens Main.SceneControllers.Widget to javafx.fxml;
 
 }
