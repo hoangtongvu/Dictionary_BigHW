@@ -2,30 +2,17 @@ package Main.SceneControllers.Dictionary;
 
 import Main.FxmlFileManager;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
-import Main.SceneControllers.Widget.SpotifyController;
 import Main.SceneControllers.Widget.StudyTimerController;
 import Main.application.App;
-import javafx.animation.FadeTransition;
-import javafx.animation.TranslateTransition;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import org.controlsfx.control.action.Action;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class HomeSceneController {
     @FXML
@@ -52,13 +39,6 @@ public class HomeSceneController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        try {
-            SpotifyController.loadInstance().addToParent(spotifyPlaceHolder);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
 
         try {
             NavigationPaneSceneController.LoadInstance().AddNavPaneComponentsToRoot(this.root);
