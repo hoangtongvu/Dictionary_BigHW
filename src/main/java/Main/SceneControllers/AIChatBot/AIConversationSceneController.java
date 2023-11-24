@@ -2,12 +2,16 @@ package Main.SceneControllers.AIChatBot;
 
 import AIChatBot.AIChatBotCtrl;
 import AIChatBot.AIChatBotManager;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import javafx.util.Pair;
 
 import java.net.URL;
@@ -67,9 +71,25 @@ public class AIConversationSceneController implements Initializable
         Task<String> task = new Task<>() {
             @Override
             protected String call() throws InterruptedException {
-                updateMessage("...");
+
+                //block textField from being used while waiting for response.
                 ToggleTextField();
+
+                //play waiting animation.
+                double delaySecond = 0.2;
+                KeyFrame oneDotFrame = new KeyFrame(Duration.seconds(1 * delaySecond), e -> updateMessage("."));
+
+                KeyFrame twoDotFrame = new KeyFrame(Duration.seconds(2 * delaySecond), e -> updateMessage(".."));
+
+                KeyFrame threeDotFrame = new KeyFrame(Duration.seconds(3 * delaySecond), e -> updateMessage("..."));
+                Timeline timeline = new Timeline(oneDotFrame, twoDotFrame, threeDotFrame);
+                timeline.setCycleCount(Animation.INDEFINITE);
+                timeline.play();
+
                 String response = aiChatBotManager.Chat(input);
+
+                //stop animation on get response.
+                timeline.stop();
 
                 for (int i = 1; i < response.length(); i = i + 2)
                 {
@@ -96,6 +116,8 @@ public class AIConversationSceneController implements Initializable
 
     }
 
+
+
     private void ToggleTextField()
     {
         this.isUserTextFieldDisabled = !this.isUserTextFieldDisabled;
@@ -103,5 +125,8 @@ public class AIConversationSceneController implements Initializable
 
     //todo using spelling API to spell Bot's responses.
     //todo try to word by word generation.
+    //todo large language model downloading and choosing.
+    //todo loading model in background.
+    //todo swap avatar and text
 
 }
