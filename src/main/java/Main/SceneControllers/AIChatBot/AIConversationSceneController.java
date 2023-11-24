@@ -2,6 +2,7 @@ package Main.SceneControllers.AIChatBot;
 
 import AIChatBot.AIChatBotCtrl;
 import AIChatBot.AIChatBotManager;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -27,6 +28,8 @@ public class AIConversationSceneController implements Initializable
 
     private List<MessageBlockSceneController> messageBlocks;
 
+    private boolean isUserTextFieldDisabled = false;
+
 
 
     @Override
@@ -48,6 +51,7 @@ public class AIConversationSceneController implements Initializable
     @FXML
     private void OnUserConfirmInstruction()
     {
+        if (this.isUserTextFieldDisabled) return;
         String input = this.userTextField.getText();
         if (input.isEmpty()) return;
         this.userTextField.clear();
@@ -58,12 +62,40 @@ public class AIConversationSceneController implements Initializable
         userMessageBlock.SetUserRole();
 
         AIChatBotManager aiChatBotManager = this.aiChatBotCtrl.getAiChatBotManager();
-        String response = aiChatBotManager.Chat(input);
+
+
+        Task<String> task = new Task<>() {
+            @Override
+            protected String call()
+            {
+                updateMessage("...");
+                ToggleTextField();
+                String response = aiChatBotManager.Chat(input);
+                updateMessage(response);
+                ToggleTextField();
+                return response;
+            }
+        };
 
 
         MessageBlockSceneController botMessageBlock = this.CreateMessageBlock();
-        botMessageBlock.setText(response);
+        botMessageBlock.setText("...");
+
+        task.messageProperty().addListener((observableValue, s, t1) -> botMessageBlock.setText(t1));
+
+        Thread processingResponseThread = new Thread(task);
+
+        processingResponseThread.setDaemon(true);
+        processingResponseThread.start();
 
     }
+
+    private void ToggleTextField()
+    {
+        this.isUserTextFieldDisabled = !this.isUserTextFieldDisabled;
+    }
+
+    //todo using spelling API to spell Bot's responses.
+    //todo try to word by word generation.
 
 }

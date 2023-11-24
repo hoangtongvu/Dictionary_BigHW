@@ -14,6 +14,8 @@ public class AIChatBotManager
 
     private String prompt;
 
+
+
     public AIChatBotManager()
     {
         this.Initialize();
@@ -62,6 +64,14 @@ public class AIChatBotManager
         return fullGeneration;
     }
 
+    public void ChatTestThread(String input)
+    {
+        prompt += "### Instruction:\n" + input + "\n### Response:";
+        prompt += "\n";
+        String fullGeneration = model.generate(prompt, this.config, false);
+        prompt += fullGeneration + "\n";
+    }
+
 
     public static void main(String[] args)
     {
@@ -70,5 +80,4 @@ public class AIChatBotManager
         System.out.println(aiChatBotManager.Chat("where am i from? and tell me my name"));
         System.out.println("[" + aiChatBotManager.prompt + "]");
     }
-
 }
