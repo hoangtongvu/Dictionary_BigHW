@@ -1,6 +1,7 @@
 package Main.SceneControllers.Dictionary;
 
 import Dictionary.DicManager;
+import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -43,28 +44,11 @@ public class DictionarySceneController implements Initializable {
     private WebEngine webEngine;
 
     @FXML
-    void btnOKClicked(ActionEvent event) {
-        //Stage mainWindow = (Stage) this.ttTitle.getScene().getWindow(); 
-        //String title = this.ttTitle.getText();
-        //mainWindow.setTitle(title);
-
-        // this.timer = new Timer();
-        // this.timerTask = new TimerTask() 
-        // {
-            
-        //     @Override
-        //     public void run()
-        //     {
-        //         String text = ttTitle.getText();
-        //         System.out.println(text);
-        //     }
-        // };
-
-        //this.timer.scheduleAtFixedRate(timerTask, 0, 500);
-    }
+    protected AnchorPane root;
 
     private final String cssPath = getClass().getResource("/css/htmlStyle.css").toExternalForm();
     private final String  styleSheet = "<link rel=\"stylesheet\" href=\"" + cssPath + "\">";
+
     public void setupWebView(String content) {
 
         String encoding = "<meta charset=\"UTF-8\">";
@@ -74,8 +58,14 @@ public class DictionarySceneController implements Initializable {
     @FXML
     public void LookupWord() throws SQLException {
         //System.out.println("null");
-        String lookUpRes = DicManager.getInstance().LookUpWord(searchBar.getText());//Cant find cause dic load default on button click
-        setupWebView(lookUpRes);
+
+        String lookUpRes = DicManager.getInstance().LookUpWord(searchBar.getText());
+        if (lookUpRes == null) {
+            //Do nothing
+        } else {
+            setupWebView(lookUpRes);
+        }
+
     }
 
 
@@ -100,6 +90,12 @@ public class DictionarySceneController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        try {
+            NavigationPaneSceneController.LoadInstance().AddNavPaneComponentsToRoot(this.root);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         
         AutoCompletionBinding auto = TextFields.bindAutoCompletion(this.searchBar,
                 new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<String>>() {
@@ -116,45 +112,5 @@ public class DictionarySceneController implements Initializable {
 
         //sync width with textField
         auto.prefWidthProperty().bind(searchBar.widthProperty());
-
-//        TextFields.bindAutoCompletion(this.tfTitle, input ->
-//            {
-//                if (tfTitle.getText().length() <= 1) return Collections.emptyList();
-//                return this.possibleSuggestions;
-//            }
-//        );
-
-    }
-
-    /**This part is for side menu*/
-    /**Activate drawer menu translateTransition for drawer menu, fadeTransition for blurPane.*/
-    @FXML
-    protected void onMenuButton() {
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5),drawerMenu);
-        translateTransition.setByX(+235);
-        translateTransition.play();
-
-        blurPane.setVisible(true);
-
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
-        fadeTransition.setFromValue(0);
-        fadeTransition.setToValue(1);
-        fadeTransition.play();
-    }
-
-    /**setOnFinished(lambdaExpression) to wait for the blur animation to finish before set blurPane invisible,
-     * otherwise, blurPane will disappear immediately.*/
-    @FXML
-    protected void onMenuExit() {
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5),drawerMenu);
-        translateTransition.setByX(-235);
-        translateTransition.play();
-
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
-        fadeTransition.setFromValue(1);
-        fadeTransition.setToValue(0);
-        fadeTransition.play();
-
-        fadeTransition.setOnFinished(event -> {blurPane.setVisible(false);});
     }
 }
