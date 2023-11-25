@@ -1,7 +1,1 @@
 hello
-apple
-good
-nice
-help
-why
-when

@@ -116,13 +116,13 @@ public class NavigationPaneSceneController implements Initializable
     @FXML
     private void MoveToHomeScene()
     {
-        //this.MoveToScene(FxmlFileManager.getInstance().root);
+        this.MoveToScene(FxmlFileManager.getInstance().homeScene);
     }
 
     @FXML
     private void MoveToDictionaryScene()
     {
-        //this.MoveToScene(FxmlFileManager.getInstance().root);
+        this.MoveToScene(FxmlFileManager.getInstance().root);
     }
 
     @FXML
@@ -134,7 +134,7 @@ public class NavigationPaneSceneController implements Initializable
     @FXML
     private void MoveToDictionaryEditorScene()
     {
-        //MoveToScene(FxmlFileManager.getInstance().chooseGameScene);
+        MoveToScene(FxmlFileManager.getInstance().editWordScene);
     }
 
     @FXML

@@ -79,7 +79,11 @@ public class DictionarySceneController implements Initializable {
     public void LookupWord() throws SQLException {
         //System.out.println("null");
 
-        WordBlock lookUpRes = DicManager.getInstance().searchWordBlock(searchBar.getText());
+        WordBlock lookUpRes = null;
+        if (searchBar.getText() != null && !searchBar.getText().equals("")) {
+            lookUpRes = DicManager.getInstance().searchWordBlock(searchBar.getText());
+        }
+
         if (lookUpRes == null) {
             //Do nothing
         } else {
