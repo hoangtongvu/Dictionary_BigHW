@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.WebEngine;
@@ -20,6 +21,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
 
+import static java.util.Collections.binarySearch;
+import static java.util.Collections.sort;
+
 
 public class DictionarySceneController implements Initializable {
 
@@ -27,7 +31,7 @@ public class DictionarySceneController implements Initializable {
     //private TimerTask timerTask;
 
     private static List<WordBlock> starredWordList = new ArrayList<>();
-
+    private static List<String>    starredWordStringList = new ArrayList<>();
     public static List<WordBlock> getStarredWordList() {
         return starredWordList;
     }
@@ -44,7 +48,7 @@ public class DictionarySceneController implements Initializable {
     @FXML
     WebView webView;
     @FXML
-    protected ListView starredWordListView;
+    protected ListView<String> starredWordListView;
 
     private static WordBlock currentWordBlock = null;
 
@@ -80,19 +84,24 @@ public class DictionarySceneController implements Initializable {
     }
 
     @FXML
-    public void addToFavourite() throws SQLException {
+    public void addToStarList() throws SQLException {
         if (currentWordBlock != null) {
             currentWordBlock.setStarred(!currentWordBlock.isStarred());
             currentWordBlock.starInDatabase(currentWordBlock.isStarred());
 
             if (currentWordBlock.isStarred()) {
                 starredWordList.add(currentWordBlock);
-                starredWordListView.getItems().addAll(starredWordList);
             } else {
                 starredWordList.remove(currentWordBlock);
-                starredWordListView.getItems().remove(currentWordBlock);
             }
         }
+        starredWordStringList.clear();
+        starredWordListView.getItems().clear();
+        for (WordBlock wordBlock : starredWordList) {
+            starredWordStringList.add(wordBlock.getWord());
+        }
+        sort(starredWordStringList);
+        starredWordListView.getItems().addAll(starredWordStringList);
     }
 
     @FXML
@@ -133,11 +142,29 @@ public class DictionarySceneController implements Initializable {
                 }
         );
 
-        starredWordListView.getItems().addAll(starredWordList);
+        for (WordBlock wordBlock : starredWordList) {
+            starredWordStringList.add(wordBlock.getWord());
+        }
+        starredWordListView.getItems().addAll(starredWordStringList);
         auto.setDelay(50);
 
 
         //sync width with textField
         auto.prefWidthProperty().bind(searchBar.widthProperty());
+    }
+
+    public WordBlock getStarredWord(String word) {
+        return starredWordList.get(binarySearch(starredWordList, new WordBlock(word,"")));
+    }
+
+    @FXML
+    public void listViewMouseClicked(MouseEvent event) throws SQLException {
+        if (event.getClickCount() > 1) {
+            String currentlySelectedItem = starredWordListView.getSelectionModel().getSelectedItem().toString();
+            WordBlock starredWord = getStarredWord(currentlySelectedItem);
+            currentWordBlock = starredWord;
+            starredWord.loadData(starredWord.getWordID());
+            setupWebView(starredWord.GetInfo());
+        }
     }
 }

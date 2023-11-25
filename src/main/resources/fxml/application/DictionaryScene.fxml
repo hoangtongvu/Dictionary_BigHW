@@ -25,7 +25,7 @@
                      <children>
                         <Pane prefHeight="60.0" prefWidth="331.0" styleClass="pane-title" stylesheets="@../../css/ApplicationStyle.css">
                            <children>
-                              <Button layoutX="14.0" layoutY="18.0" mnemonicParsing="false" onAction="#addToFavourite" text="Star" />
+                              <Button layoutX="14.0" layoutY="18.0" mnemonicParsing="false" onAction="#addToStarList" text="Star" />
                            </children>
                         </Pane>
                      </children></Pane>
@@ -35,14 +35,18 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../../css/ApplicationStyle.css">
                                  <children>
-                                    <ListView fx:id="starredWordListView" layoutY="-10.0" prefHeight="200.0" prefWidth="200.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <ListView fx:id="starredWordListView" layoutY="-10.0" onMouseClicked="#listViewMouseClicked" prefHeight="200.0" prefWidth="200.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                         </content>
                       </Tab>
                       <Tab text="WordHistory">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../../css/ApplicationStyle.css" />
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../../css/ApplicationStyle.css">
+                                 <children>
+                                    <ListView layoutY="42.0" prefHeight="108.0" prefWidth="331.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0" />
+                                    <Button layoutX="236.0" layoutY="8.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Clear History" AnchorPane.bottomAnchor="117.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="8.0" />
+                                 </children></AnchorPane>
                         </content>
                       </Tab>
                     </tabs>

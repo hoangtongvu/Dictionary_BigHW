@@ -70,7 +70,7 @@ public class EditWordSceneController {
     @FXML
     protected Button deleteButton;
     @FXML
-    protected ListView wordListView;
+    protected ListView<String> wordListView;
     @FXML
     private Pane blurPane;
     @FXML

@@ -167,7 +167,7 @@ public class WordBlock implements Comparable<WordBlock> {
     }
 
     public void starInDatabase(Boolean isStarred) throws SQLException {
-        String query ="UPDATE word SET favourite = ? WHERE word_id = ?";
+        String query ="UPDATE word SET star = ? WHERE word_id = ?";
         PreparedStatement statement = Database.getConnection().prepareStatement(query);
         statement.setString(1, isStarred.toString());
         statement.setString(2, wordID);
@@ -210,12 +210,13 @@ public class WordBlock implements Comparable<WordBlock> {
         while (resultSet.next()) {
             WordBlock wordBlock = new WordBlock(resultSet.getString("word"), resultSet.getString("sound"));
             wordBlock.setWordID(resultSet.getString("word_id"));
+
             if (resultSet.getString("is_editable").equals("1")) {
                 wordBlock.setEditable(true);
             }
 
-            if (resultSet.getString("star").equals("false")) {
-                wordBlock.isStarred = false;
+            if (resultSet.getString("star").equals("true")) {
+                wordBlock.isStarred = true;
             }
 //            System.out.println(wordBlock.getWord());
             DicManager.getInstance().addWordBlock(wordBlock);
