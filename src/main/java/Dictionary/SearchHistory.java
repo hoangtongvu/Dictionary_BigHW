@@ -4,12 +4,9 @@ import Main.ProjectDirectory;
 import Word.WordBlock;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.List.*;
 import java.lang.String;
-import java.util.Queue;
 
 import static java.util.Collections.sort;
 
@@ -99,14 +96,12 @@ public class SearchHistory {
         }
     }
 
-//
-//    public static void print(Queue<String> queue) {
-//        for (String element : queue) {
-//            System.out.println(element);
-//        }
-//    }
+
+
 //    public static void main(String[] args) {
-//        Queue<String> queue = new LinkedList<>();
-//        queue.po
+//        HashMap<String, String> map = new LinkedHashMap<>();
+//        map.put("A", "B");
+//        map.put("C", "D");
+//        map.
 //    }
 }

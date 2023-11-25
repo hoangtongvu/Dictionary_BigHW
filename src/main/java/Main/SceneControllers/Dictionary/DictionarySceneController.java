@@ -186,6 +186,17 @@ public class DictionarySceneController implements Initializable {
     }
 
     @FXML
+    public void getWordFromHistory(MouseEvent event) throws SQLException {
+        if (event.getClickCount() > 1) {
+            String selectedItem = historyListView.getSelectionModel().getSelectedItem().toString();
+            WordBlock word = DicManager.getInstance().searchWordBlock(selectedItem);
+            currentWordBlock = word;
+            word.loadData(word.getWordID());
+            setupWebView(word.GetInfo());
+        }
+    }
+
+    @FXML
     public void clearHistory() {
         historyListView.getItems().clear();
         SearchHistory.getInstance().clearHistory();
