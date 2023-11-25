@@ -24,31 +24,40 @@ public class AIChatBotManager
 
     private void Initialize()
     {
-        try {
-            this.model = new LLModel(Path.of(modelFilePath));
-        } catch (Exception e) {
-            // Exceptions generally may happen if the model file fails to load
-            // for a number of reasons such as a file not found.
-            // It is possible that Java may not be able to dynamically load the native shared library or
-            // the llmodel shared library may not be able to dynamically load the backend
-            // implementation for the model file you provided.
-            //
-            // Once the LLModel class is successfully loaded into memory the text generation calls
-            // generally should not throw exceptions.
-            e.printStackTrace(); // Printing here but in a production system you may want to take some action.
+        this.InitModel(Path.of(modelFilePath));
+        this.DestroyModel();
+    }
+
+    public void InitModel(Path path)
+    {
+        this.DestroyModel();
+        try
+        {
+            this.model = new LLModel(path);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
         }
 
         this.config = LLModel.config()
                 .withNPredict(4096).build();
         model.setThreadCount(7);
-
-
-
     }
 
+    private void DestroyModel()
+    {
+        if (this.model == null) return;
+        try {
+            this.model.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        this.model = null;
+    }
 
     public String Chat(String input)
     {
+        if (this.model == null) return "#No model found";
         Scanner scanner = new Scanner(System.in);
         //String prompt = "";
         //String exitCode = "0";
@@ -64,14 +73,10 @@ public class AIChatBotManager
         return fullGeneration;
     }
 
-    public void ChatTestThread(String input)
+    public boolean ModelExist()
     {
-        prompt += "### Instruction:\n" + input + "\n### Response:";
-        prompt += "\n";
-        String fullGeneration = model.generate(prompt, this.config, false);
-        prompt += fullGeneration + "\n";
+        return this.model != null;
     }
-
 
     public static void main(String[] args)
     {

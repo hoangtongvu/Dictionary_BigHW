@@ -2,6 +2,7 @@ package Main.SceneControllers.AIChatBot;
 
 import AIChatBot.AIChatBotCtrl;
 import AIChatBot.AIChatBotManager;
+import AIChatBot.gpt4all.ModelFileChooser;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -34,22 +35,26 @@ public class AIConversationSceneController implements Initializable
     @FXML
     private ScrollPane messageScrollPane;
 
-    private AIChatBotCtrl aiChatBotCtrl;
+    private final AIChatBotCtrl aiChatBotCtrl;
 
-    private List<MessageBlockSceneController> messageBlocks;
+    private final List<MessageBlockSceneController> messageBlocks;
 
     private boolean isUserTextFieldDisabled = false;
+    private final ModelFileChooser modelFileChooser;
 
 
+
+    public AIConversationSceneController()
+    {
+        this.aiChatBotCtrl = AIChatBotCtrl.getInstance();
+        this.messageBlocks = new ArrayList<>();
+        this.modelFileChooser = new ModelFileChooser();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        this.aiChatBotCtrl = AIChatBotCtrl.getInstance();
-        this.messageBlocks = new ArrayList<>();
-
         this.AddTextAreaKeyCombination();
-
     }
 
     private void AddTextAreaKeyCombination()
@@ -87,6 +92,8 @@ public class AIConversationSceneController implements Initializable
         String input = this.userTextArea.getText();
         if (input.isEmpty()) return;
         this.userTextArea.clear();
+
+        if (!this.aiChatBotCtrl.getAiChatBotManager().ModelExist()) return;//todo why intellij suggests safe del this function? why it is not working?
 
 
         MessageBlockSceneController userMessageBlock = this.CreateMessageBlock();
@@ -159,11 +166,17 @@ public class AIConversationSceneController implements Initializable
 
     private void ScrollToLatestMessage()
     {
-        //this.messageScrollPane.setVvalue(this.messageScrollPane.getVmax());
+        //todo smooth scroll.
         this.messageScrollPane.setVvalue(1);
     }
 
-    //todo using spelling API to spell Bot's responses.
+    @FXML
+    private void ChooseModelButton()
+    {
+        this.modelFileChooser.ChooseModel(this.aiChatBotCtrl.getAiChatBotManager());
+    }
+
+    //todo using spelling API to spell AI's responses.
     //todo try to word by word generation.
     //todo large language model downloading and choosing.
     //todo loading model in background.
