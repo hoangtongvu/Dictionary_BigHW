@@ -1,6 +1,7 @@
 package Main.SceneControllers.Dictionary;
 
 import Dictionary.DicManager;
+import Main.ProjectDirectory;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import Word.WordBlock;
 import javafx.fxml.FXML;
@@ -16,7 +17,8 @@ import javafx.scene.web.WebView;
 import javafx.util.Callback;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
-
+import Dictionary.RecentlySearchedWordManager;
+import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
@@ -32,6 +34,8 @@ public class DictionarySceneController implements Initializable {
 
     private static List<WordBlock> starredWordList = new ArrayList<>();
     private static List<String>    starredWordStringList = new ArrayList<>();
+    private static List<String>    wordHistoryList = new ArrayList<>();
+
     public static List<WordBlock> getStarredWordList() {
         return starredWordList;
     }
@@ -44,11 +48,13 @@ public class DictionarySceneController implements Initializable {
     @FXML
     protected Pane blurPane;
     @FXML
-    ImageView menuButton;
+    protected ImageView menuButton;
     @FXML
-    WebView webView;
+    protected WebView webView;
     @FXML
     protected ListView<String> starredWordListView;
+    @FXML
+    protected ListView<String> historyListView;
 
     private static WordBlock currentWordBlock = null;
 
@@ -80,6 +86,10 @@ public class DictionarySceneController implements Initializable {
             currentWordBlock = lookUpRes;
             lookUpRes.loadData(lookUpRes.getWordID());
             setupWebView(lookUpRes.GetInfo());
+
+            historyListView.getItems().clear();
+
+            historyListView.getItems().addAll(DicManager.getInstance().getRecentlySearchedWordManager().getSearchedWords());
         }
     }
 
@@ -146,9 +156,10 @@ public class DictionarySceneController implements Initializable {
             starredWordStringList.add(wordBlock.getWord());
         }
         starredWordListView.getItems().addAll(starredWordStringList);
+
+        historyListView.getItems().addAll(DicManager.getInstance().getRecentlySearchedWordManager().getSearchedWords());
+
         auto.setDelay(50);
-
-
         //sync width with textField
         auto.prefWidthProperty().bind(searchBar.widthProperty());
     }
@@ -166,5 +177,10 @@ public class DictionarySceneController implements Initializable {
             starredWord.loadData(starredWord.getWordID());
             setupWebView(starredWord.GetInfo());
         }
+    }
+
+    @FXML
+    public void clearHistory() {
+        DicManager.getInstance().getRecentlySearchedWordManager().clearHistory();
     }
 }
