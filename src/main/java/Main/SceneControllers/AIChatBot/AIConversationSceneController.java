@@ -9,6 +9,7 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -29,6 +30,9 @@ public class AIConversationSceneController implements Initializable
 
     @FXML
     private TextArea userTextArea;
+
+    @FXML
+    private ScrollPane messageScrollPane;
 
     private AIChatBotCtrl aiChatBotCtrl;
 
@@ -72,7 +76,7 @@ public class AIConversationSceneController implements Initializable
         Pair<Parent, MessageBlockSceneController> pair = MessageBlockSceneController.CreateInstance();
         this.conversationVbox.getChildren().add(pair.getKey());
         this.messageBlocks.add(pair.getValue());
-
+        this.ScrollToLatestMessage();
         return pair.getValue();
     }
 
@@ -96,6 +100,7 @@ public class AIConversationSceneController implements Initializable
         botMessageBlock.setText("...");
 
         task.messageProperty().addListener((observableValue, s, t1) -> botMessageBlock.setText(t1));
+        task.messageProperty().addListener((observableValue, s, t1) -> this.ScrollToLatestMessage());
 
         Thread processingResponseThread = new Thread(task);
 
@@ -150,10 +155,15 @@ public class AIConversationSceneController implements Initializable
         this.isUserTextFieldDisabled = !this.isUserTextFieldDisabled;
     }
 
+    private void ScrollToLatestMessage()
+    {
+        //this.messageScrollPane.setVvalue(this.messageScrollPane.getVmax());
+        this.messageScrollPane.setVvalue(1);
+    }
+
     //todo using spelling API to spell Bot's responses.
     //todo try to word by word generation.
     //todo large language model downloading and choosing.
     //todo loading model in background.
-    //todo scroll to latest message
 
 }
