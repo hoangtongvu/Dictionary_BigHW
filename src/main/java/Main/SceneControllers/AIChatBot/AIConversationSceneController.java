@@ -9,7 +9,9 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import javafx.util.Pair;
@@ -26,7 +28,7 @@ public class AIConversationSceneController implements Initializable
     private VBox conversationVbox;
 
     @FXML
-    private TextField userTextField;
+    private TextArea userTextArea;
 
     private AIChatBotCtrl aiChatBotCtrl;
 
@@ -41,6 +43,28 @@ public class AIConversationSceneController implements Initializable
     {
         this.aiChatBotCtrl = AIChatBotCtrl.getInstance();
         this.messageBlocks = new ArrayList<>();
+
+        this.AddTextAreaKeyCombination();
+
+    }
+
+    private void AddTextAreaKeyCombination()
+    {
+        this.userTextArea.addEventFilter(KeyEvent.KEY_PRESSED, keyEvent ->
+        {
+            KeyCode keyCode = keyEvent.getCode();
+            if(keyEvent.isShiftDown() && keyCode == KeyCode.ENTER)
+            {
+                userTextArea.appendText("\n");
+                return;
+            }
+            if(keyCode == KeyCode.ENTER)
+            {
+                OnUserConfirmInstruction();
+                keyEvent.consume();
+            }
+
+        });
     }
 
     private MessageBlockSceneController CreateMessageBlock()
@@ -56,19 +80,35 @@ public class AIConversationSceneController implements Initializable
     private void OnUserConfirmInstruction()
     {
         if (this.isUserTextFieldDisabled) return;
-        String input = this.userTextField.getText();
+        String input = this.userTextArea.getText();
         if (input.isEmpty()) return;
-        this.userTextField.clear();
+        this.userTextArea.clear();
 
 
         MessageBlockSceneController userMessageBlock = this.CreateMessageBlock();
         userMessageBlock.setText(input);
         userMessageBlock.SetUserRole();
 
+
+        Task<String> task = this.GetResponseProcessingTask(input);
+
+        MessageBlockSceneController botMessageBlock = this.CreateMessageBlock();
+        botMessageBlock.setText("...");
+
+        task.messageProperty().addListener((observableValue, s, t1) -> botMessageBlock.setText(t1));
+
+        Thread processingResponseThread = new Thread(task);
+
+        processingResponseThread.setDaemon(true);
+        processingResponseThread.start();
+
+    }
+
+    private Task<String> GetResponseProcessingTask(String input)
+    {
         AIChatBotManager aiChatBotManager = this.aiChatBotCtrl.getAiChatBotManager();
-
-
-        Task<String> task = new Task<>() {
+        
+        return new Task<>() {
             @Override
             protected String call() throws InterruptedException {
 
@@ -103,20 +143,7 @@ public class AIConversationSceneController implements Initializable
             }
         };
 
-
-        MessageBlockSceneController botMessageBlock = this.CreateMessageBlock();
-        botMessageBlock.setText("...");
-
-        task.messageProperty().addListener((observableValue, s, t1) -> botMessageBlock.setText(t1));
-
-        Thread processingResponseThread = new Thread(task);
-
-        processingResponseThread.setDaemon(true);
-        processingResponseThread.start();
-
     }
-
-
 
     private void ToggleTextField()
     {
@@ -127,5 +154,6 @@ public class AIConversationSceneController implements Initializable
     //todo try to word by word generation.
     //todo large language model downloading and choosing.
     //todo loading model in background.
+    //todo scroll to latest message
 
 }
