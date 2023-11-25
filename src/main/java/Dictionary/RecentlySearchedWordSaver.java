@@ -64,8 +64,16 @@ public class RecentlySearchedWordSaver
         words.add(word);
     }
 
-
-
-
-
+    public void clearHistory() {
+        File file = this.recentlySearchedWordManager.getFile();
+        try
+        {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file,false));
+            writer.close();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
 }

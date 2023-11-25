@@ -26,7 +26,7 @@ public class App extends Application {
         Parent root;
 
         //root = FXMLLoader.load(getClass().getResource("/fxml/application/DictionaryScene.fxml"));
-        root = FxmlFileManager.getInstance().homeScene;
+        root = FxmlFileManager.getInstance().root;
         Scene scene = new Scene(root);
 
         //InputManager inputManager = new InputManager(scene);

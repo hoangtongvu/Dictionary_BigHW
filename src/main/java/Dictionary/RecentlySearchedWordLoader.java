@@ -1,6 +1,7 @@
 package Dictionary;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,10 +31,7 @@ public class RecentlySearchedWordLoader
         {
             line = scanner.nextLine().strip();
             searchedWords.add(line);
-
-
         }
-
     }
 
 

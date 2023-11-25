@@ -9,7 +9,6 @@ public class Dictionary
 {
     private final List<WordBlock> wordBlockList;
 
-
     public List<WordBlock> getWordBlocks() {
         return wordBlockList;
     }

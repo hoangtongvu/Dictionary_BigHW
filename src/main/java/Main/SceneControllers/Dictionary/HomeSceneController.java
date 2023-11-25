@@ -60,12 +60,12 @@ public class HomeSceneController {
     @FXML
     public void onGameButton(ActionEvent event) throws IOException
     {
-        this.SwitchScene(FxmlFileManager.getInstance().chooseGameScene);
+        SwitchScene(FxmlFileManager.getInstance().chooseGameScene);
     }
 
     @FXML
     public void onTranslateButton(ActionEvent event) throws IOException {
-        this.SwitchScene(FxmlFileManager.getInstance().translateScene);
+        SwitchScene(FxmlFileManager.getInstance().translateScene);
 
     }
 
@@ -77,7 +77,7 @@ public class HomeSceneController {
 
     public void SwitchToLookUpScene() {
         Parent root = FxmlFileManager.getInstance().root;
-        this.SwitchScene(root);
+        SwitchScene(root);
     }
 
 

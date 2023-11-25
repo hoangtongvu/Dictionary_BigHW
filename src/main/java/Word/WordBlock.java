@@ -1,6 +1,7 @@
 package Word;
 import Dictionary.DicManager;
 import Main.Database;
+import Main.SceneControllers.Dictionary.DictionarySceneController;
 import Main.SceneControllers.Dictionary.EditWordSceneController;
 
 import java.sql.PreparedStatement;
@@ -17,9 +18,16 @@ public class WordBlock implements Comparable<WordBlock> {
     private static WordDescription wordDescription = null;
     private String wordID = "";
     private boolean loadStatus = false;
-
+    private boolean isStarred = false;
     boolean editable;
 
+    public boolean isStarred() {
+        return isStarred;
+    }
+
+    public void setStarred(boolean starred) {
+        isStarred = starred;
+    }
 
     public boolean isEditable() {
         return editable;
@@ -126,13 +134,14 @@ public class WordBlock implements Comparable<WordBlock> {
     //For saving newly added word
     public void saveData() throws SQLException {
         //Insert word into table
-        String update = "INSERT INTO word (word, sound, is_editable) VALUES (?, ?, ?)";
+        String update = "INSERT INTO word (word, sound, is_editable, favourite) VALUES (?, ?, ?, ?)";
         PreparedStatement statement = Database.getConnection().prepareStatement(update);
         statement.setString(1, word);
         if (spelling != null) {
             statement.setString(2, spelling);
         }
         statement.setString(3, "1");
+        statement.setString(4, String.valueOf(isStarred));
         statement.execute();
 
         //Get last inserted ID
@@ -157,6 +166,14 @@ public class WordBlock implements Comparable<WordBlock> {
         saveData();
     }
 
+    public void starInDatabase(Boolean isStarred) throws SQLException {
+        String query ="UPDATE word SET star = ? WHERE word_id = ?";
+        PreparedStatement statement = Database.getConnection().prepareStatement(query);
+        statement.setString(1, isStarred.toString());
+        statement.setString(2, wordID);
+        statement.executeUpdate();
+    }
+
     public void deleteFromDatabase() throws SQLException {
         if (descriptionsList != null) {
             for (WordDescription description : descriptionsList) {
@@ -170,21 +187,21 @@ public class WordBlock implements Comparable<WordBlock> {
         statement.execute();
     }
 
-    public static void main(String[] args) throws SQLException {
-        loadWordBlocks();
-
-        for (int j = 82252; j < 82305; j++ ) {
-            String key = String.valueOf(j);
-            for (int i = DicManager.getInstance().getDictionary().getWordBlocks().size() - 1; i >= 0; i--) {
-                if (DicManager.getInstance().getDictionary().getWordBlocks().get(i).getWordID().equals(key)) {
-                    DicManager.getInstance().getDictionary().getWordBlocks().get(i).loadData(key);
-                    DicManager.getInstance().getDictionary().getWordBlocks().get(i).deleteFromDatabase();
-                    System.out.println(DicManager.getInstance().getDictionary().getWordBlocks().get(i).getWord());
-                }
-            }
-        }
-
-    }
+//    public static void main(String[] args) throws SQLException {
+//        loadWordBlocks();
+//
+//        for (int j = 82252; j < 82305; j++ ) {
+//            String key = String.valueOf(j);
+//            for (int i = DicManager.getInstance().getDictionary().getWordBlocks().size() - 1; i >= 0; i--) {
+//                if (DicManager.getInstance().getDictionary().getWordBlocks().get(i).getWordID().equals(key)) {
+//                    DicManager.getInstance().getDictionary().getWordBlocks().get(i).loadData(key);
+//                    DicManager.getInstance().getDictionary().getWordBlocks().get(i).deleteFromDatabase();
+//                    System.out.println(DicManager.getInstance().getDictionary().getWordBlocks().get(i).getWord());
+//                }
+//            }
+//        }
+//
+//    }
 
     public static void loadWordBlocks() throws SQLException {
         Statement statement =  Database.getConnection().createStatement();
@@ -193,13 +210,22 @@ public class WordBlock implements Comparable<WordBlock> {
         while (resultSet.next()) {
             WordBlock wordBlock = new WordBlock(resultSet.getString("word"), resultSet.getString("sound"));
             wordBlock.setWordID(resultSet.getString("word_id"));
+
             if (resultSet.getString("is_editable").equals("1")) {
                 wordBlock.setEditable(true);
             }
+
+            if (resultSet.getString("star").equals("true")) {
+                wordBlock.isStarred = true;
+            }
 //            System.out.println(wordBlock.getWord());
             DicManager.getInstance().addWordBlock(wordBlock);
-            if (wordBlock.isEditable()) {
+            if (wordBlock.editable) {
                 EditWordSceneController.getEditableWordList().add(wordBlock);
+            }
+
+            if (wordBlock.isStarred) {
+                DictionarySceneController.getStarredWordList().add(wordBlock);
             }
         }
     }
