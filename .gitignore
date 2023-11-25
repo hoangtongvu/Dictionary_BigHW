@@ -37,6 +37,7 @@ build/
 ### Mac OS ###
 .DS_Store
 src/main/resources/RecentlySearchedWords.txt
-src/main/resources/searchHistory.txt
+src/main/resources/data/searchHistory.txt
+src/main/resources/data/anh_viet
 .idea/dataSources.local.xml
 .idea/sqldialects.xml

@@ -44,7 +44,7 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../../css/ApplicationStyle.css">
                                  <children>
-                                    <ListView fx:id="historyListView" layoutY="42.0" prefHeight="108.0" prefWidth="331.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0" />
+                                    <ListView fx:id="historyListView" layoutY="42.0" onMouseClicked="#getWordFromHistory" prefHeight="108.0" prefWidth="331.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0" />
                                     <Button fx:id="clearHistory" layoutX="236.0" layoutY="8.0" mnemonicParsing="false" onAction="#clearHistory" prefHeight="25.0" prefWidth="94.0" text="Clear History" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="8.0" />
                                  </children></AnchorPane>
                         </content>
