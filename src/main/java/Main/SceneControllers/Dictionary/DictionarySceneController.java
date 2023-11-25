@@ -1,7 +1,6 @@
 package Main.SceneControllers.Dictionary;
 
 import Dictionary.DicManager;
-import Main.ProjectDirectory;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import Word.WordBlock;
 import javafx.fxml.FXML;
@@ -17,8 +16,7 @@ import javafx.scene.web.WebView;
 import javafx.util.Callback;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
-import Dictionary.RecentlySearchedWordManager;
-import java.io.*;
+
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
@@ -146,7 +144,7 @@ public class DictionarySceneController implements Initializable {
             System.out.println(e.getMessage());
         }
         
-        AutoCompletionBinding auto = TextFields.bindAutoCompletion(this.searchBar,
+        AutoCompletionBinding<String> auto = TextFields.bindAutoCompletion(this.searchBar,
                 new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<String>>() {
                     @Override
                     public Collection<String> call(AutoCompletionBinding.ISuggestionRequest iSuggestionRequest) {
