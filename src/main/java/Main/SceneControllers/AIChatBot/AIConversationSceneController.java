@@ -92,12 +92,14 @@ public class AIConversationSceneController implements Initializable
         MessageBlockSceneController userMessageBlock = this.CreateMessageBlock();
         userMessageBlock.setText(input);
         userMessageBlock.SetUserRole();
+        userMessageBlock.PlayOnAppearAnimation();
 
 
         Task<String> task = this.GetResponseProcessingTask(input);
 
         MessageBlockSceneController botMessageBlock = this.CreateMessageBlock();
         botMessageBlock.setText("...");
+        botMessageBlock.PlayOnAppearAnimation();
 
         task.messageProperty().addListener((observableValue, s, t1) -> botMessageBlock.setText(t1));
         task.messageProperty().addListener((observableValue, s, t1) -> this.ScrollToLatestMessage());
