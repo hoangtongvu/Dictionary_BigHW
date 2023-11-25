@@ -3,6 +3,7 @@ package Main.SceneControllers.Dictionary;
 import Dictionary.DicManager;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import Word.WordBlock;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
@@ -119,7 +120,6 @@ public class DictionarySceneController implements Initializable {
 
     @FXML
     public void OnTextChange() {
-
         String text = searchBar.getText();
         if (text.isEmpty()) return;
         text = text.toLowerCase();

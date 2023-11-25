@@ -134,7 +134,7 @@ public class WordBlock implements Comparable<WordBlock> {
     //For saving newly added word
     public void saveData() throws SQLException {
         //Insert word into table
-        String update = "INSERT INTO word (word, sound, is_editable, favourite) VALUES (?, ?, ?, ?)";
+        String update = "INSERT INTO word (word, sound, is_editable, star) VALUES (?, ?, ?, ?)";
         PreparedStatement statement = Database.getConnection().prepareStatement(update);
         statement.setString(1, word);
         if (spelling != null) {
