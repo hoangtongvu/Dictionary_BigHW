@@ -1,8 +1,7 @@
 hello
-<<<<<<< HEAD
-what
-how
-=======
-hi
-hello
->>>>>>> cc1e36517a2f3093fc8bbf211692fecf08243c65
+apple
+good
+nice
+help
+why
+when

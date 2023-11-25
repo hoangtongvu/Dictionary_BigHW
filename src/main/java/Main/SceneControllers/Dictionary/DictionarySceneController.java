@@ -123,6 +123,7 @@ public class DictionarySceneController implements Initializable {
         String text = searchBar.getText();
         if (text.isEmpty()) return;
         text = text.toLowerCase();
+        this.possibleSuggestions = DicManager.getInstance().getDicWordSearcher().Search(text);
     }
 
     @Override
@@ -143,12 +144,14 @@ public class DictionarySceneController implements Initializable {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
-        AutoCompletionBinding<String> auto = TextFields.bindAutoCompletion(this.searchBar,
+
+        AutoCompletionBinding auto = TextFields.bindAutoCompletion(this.searchBar,
                 new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<String>>() {
                     @Override
                     public Collection<String> call(AutoCompletionBinding.ISuggestionRequest iSuggestionRequest) {
-                        if (searchBar.getText().length() <= 1) return Collections.emptyList();
+                        if (searchBar.getText().length() <= 1) {
+                            return Collections.emptyList();
+                        }
                         return possibleSuggestions;
                     }
                 }
