@@ -22,6 +22,7 @@ import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
+import Dictionary.SearchHistory;
 
 import static java.util.Collections.binarySearch;
 import static java.util.Collections.sort;
@@ -86,10 +87,13 @@ public class DictionarySceneController implements Initializable {
             currentWordBlock = lookUpRes;
             lookUpRes.loadData(lookUpRes.getWordID());
             setupWebView(lookUpRes.GetInfo());
+            SearchHistory.getInstance().updateHistory(lookUpRes.getWord());
 
             historyListView.getItems().clear();
+            if (!SearchHistory.getInstance().getWordHistory().isEmpty()) {
+                historyListView.getItems().addAll(SearchHistory.getInstance().getWordHistory());
+            }
 
-            historyListView.getItems().addAll(DicManager.getInstance().getRecentlySearchedWordManager().getSearchedWords());
         }
     }
 
@@ -101,6 +105,7 @@ public class DictionarySceneController implements Initializable {
 
             if (currentWordBlock.isStarred()) {
                 starredWordList.add(currentWordBlock);
+                sort(starredWordList);
             } else {
                 starredWordList.remove(currentWordBlock);
             }
@@ -120,7 +125,6 @@ public class DictionarySceneController implements Initializable {
         String text = searchBar.getText();
         if (text.isEmpty()) return;
         text = text.toLowerCase();
-        this.possibleSuggestions = DicManager.getInstance().getDicWordSearcher().Search(text);
     }
 
     @Override
@@ -157,7 +161,9 @@ public class DictionarySceneController implements Initializable {
         }
         starredWordListView.getItems().addAll(starredWordStringList);
 
-        historyListView.getItems().addAll(DicManager.getInstance().getRecentlySearchedWordManager().getSearchedWords());
+        if (!SearchHistory.getInstance().getWordHistory().isEmpty()) {
+            historyListView.getItems().addAll(SearchHistory.getInstance().getWordHistory());
+        }
 
         auto.setDelay(50);
         //sync width with textField
@@ -181,6 +187,14 @@ public class DictionarySceneController implements Initializable {
 
     @FXML
     public void clearHistory() {
-        DicManager.getInstance().getRecentlySearchedWordManager().clearHistory();
+        historyListView.getItems().clear();
+        SearchHistory.getInstance().clearHistory();
     }
+
+//    public static void main(String[] arg) {
+////        String str = "helloo";
+////        String str2 = str;
+////        str += "h";
+////        System.out.println(str == str2);
+//    }
 }

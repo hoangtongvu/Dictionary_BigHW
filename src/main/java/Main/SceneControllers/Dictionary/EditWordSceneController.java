@@ -1,6 +1,7 @@
 package Main.SceneControllers.Dictionary;
 
 import Dictionary.DicManager;
+import Dictionary.SearchHistory;
 import Main.FxmlFileManager;
 import Main.ProjectDirectory;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
@@ -313,6 +314,7 @@ public class EditWordSceneController {
             DicManager.getInstance().getDictionary().getWordBlocks().remove(DicNode.getCurrentlyEditedWord().getWordBlock());
             editableWordList.remove(DicNode.getCurrentlyEditedWord().getWordBlock());
             DicNode.getCurrentlyEditedWord().getWordBlock().deleteFromDatabase();
+            SearchHistory.getInstance().deleteWord(DicNode.getCurrentlyEditedWord().getWordBlock().getWord());
             updateListView();
             DicNode.setCurrentlyEditedWord(null);
             DicNode.reset();
