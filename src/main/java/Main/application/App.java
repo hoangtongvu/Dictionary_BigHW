@@ -12,7 +12,7 @@ import javafx.util.Duration;
 
 import java.sql.Time;
 
-
+public class App extends Application {
     private static Stage primaryStage;
 
     public static void main(String[] args) {
