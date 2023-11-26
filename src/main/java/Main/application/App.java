@@ -13,7 +13,6 @@ import javafx.util.Duration;
 import java.sql.Time;
 
 
-public class App extends Application {
     private static Stage primaryStage;
 
     public static void main(String[] args) {
@@ -26,7 +25,7 @@ public class App extends Application {
         Parent root;
 
         //root = FXMLLoader.load(getClass().getResource("/fxml/application/DictionaryScene.fxml"));
-        root = FxmlFileManager.getInstance().root;
+        root = FxmlFileManager.getInstance().homeScene;
         Scene scene = new Scene(root);
 
         //InputManager inputManager = new InputManager(scene);

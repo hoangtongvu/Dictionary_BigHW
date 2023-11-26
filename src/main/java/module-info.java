@@ -23,6 +23,9 @@ module MainGroup.application {
     exports Main.SceneControllers.Game.CreateWord4DirGame;
     opens Main.SceneControllers.Game.CreateWord4DirGame to javafx.fxml;
 
+    exports Main.SceneControllers.Game.Wordle;
+    opens Main.SceneControllers.Game.Wordle to javafx.fxml;
+
 
 
     exports Main.SceneControllers.NavigationPane;
@@ -42,6 +45,7 @@ module MainGroup.application {
     requires jdk.jsobject;
     requires javafx.media;
     requires org.json;
+    requires jlayer;
 
     exports Main.SceneControllers.Widget;
     opens Main.SceneControllers.Widget to javafx.fxml;
