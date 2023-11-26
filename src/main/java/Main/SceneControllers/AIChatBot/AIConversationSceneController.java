@@ -2,23 +2,26 @@ package Main.SceneControllers.AIChatBot;
 
 import AIChatBot.AIChatBotCtrl;
 import AIChatBot.AIChatBotManager;
+import AIChatBot.ModelList.ModelListManager;
 import AIChatBot.gpt4all.ModelFileChooser;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import javafx.util.Pair;
 
+import java.io.File;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -35,12 +38,18 @@ public class AIConversationSceneController implements Initializable
     @FXML
     private ScrollPane messageScrollPane;
 
+    @FXML
+    private ComboBox<String> modelComboBox;
+
     private final AIChatBotCtrl aiChatBotCtrl;
 
     private final List<MessageBlockSceneController> messageBlocks;
 
     private boolean isUserTextFieldDisabled = false;
     private final ModelFileChooser modelFileChooser;
+    private static final String chooseModelFileComboBoxItem = "Choose model File...";
+    private static final String naComboBoxItem = "<N/A>";
+    private static final String downloadFromGpt4AllComboBoxItem = "Download model File from Gpt4all...";
 
 
 
@@ -55,6 +64,7 @@ public class AIConversationSceneController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         this.AddTextAreaKeyCombination();
+        this.UpdateModelComboBox();
     }
 
     private void AddTextAreaKeyCombination()
@@ -74,6 +84,65 @@ public class AIConversationSceneController implements Initializable
             }
 
         });
+    }
+
+    private void UpdateModelComboBox()//note only update on initialize().
+    {
+        ObservableList<Pair<String, String>> modelNamePathPairs = this.aiChatBotCtrl.getModelListManager().getModelNameAndPaths();
+        List<String> items = this.modelComboBox.getItems();
+        items.clear();
+
+        items.add(naComboBoxItem);
+        modelNamePathPairs.forEach(pair -> items.add(pair.getKey()));
+        items.add(chooseModelFileComboBoxItem);
+        items.add(downloadFromGpt4AllComboBoxItem);
+    }
+
+    @FXML
+    private void OnModelComboBoxChoose()
+    {
+        if (this.modelComboBox.getValue() == null) return;
+        SelectionModel<String> selectionModel = this.modelComboBox.getSelectionModel();
+
+        String selectedItem = selectionModel.getSelectedItem();
+
+        switch (selectedItem)
+        {
+            case naComboBoxItem:
+                break;
+            case chooseModelFileComboBoxItem:
+                File file = this.modelFileChooser.GetFileFromFileExplorer();
+                if (file == null)
+                {
+                    //todo select previous item instead of NA.
+                    this.modelComboBox.getSelectionModel().select(naComboBoxItem);
+                    return;
+                }
+                System.out.println(file);
+                ModelListManager modelListManager = this.aiChatBotCtrl.getModelListManager();
+
+                //if successful adding into list.
+                if (modelListManager.AddFileIntoList(file))
+                {
+                    String firstItem = modelListManager.getModelNameAndPaths().get(0).getKey();
+                    this.modelComboBox.getItems().add(1, firstItem);
+                    this.modelComboBox.getSelectionModel().select(1);
+                }
+                this.modelComboBox.getSelectionModel().select(ModelListManager.GetFileNameAfterRemoveExtension(file));
+                break;
+            case downloadFromGpt4AllComboBoxItem:
+                //todo open link to gpt4all website.
+                break;
+            default:
+                int index = selectionModel.getSelectedIndex();
+                List<Pair<String, String>> modelNamePathPairs = this.aiChatBotCtrl.getModelListManager().getModelNameAndPaths();
+                Pair<String, String> pair = modelNamePathPairs.get(index - 1);
+                this.aiChatBotCtrl.getAiChatBotManager().InitModel(Path.of(pair.getValue()));
+                break;
+        }
+
+
+
     }
 
     private MessageBlockSceneController CreateMessageBlock()
@@ -170,15 +239,12 @@ public class AIConversationSceneController implements Initializable
         this.messageScrollPane.setVvalue(1);
     }
 
-    @FXML
-    private void ChooseModelButton()
-    {
-        this.modelFileChooser.ChooseModel(this.aiChatBotCtrl.getAiChatBotManager());
-    }
 
     //todo using spelling API to spell AI's responses.
     //todo try to word by word generation.
-    //todo large language model downloading and choosing.
+    //todo large language model downloading.
     //todo loading model in background.
+    //todo switch to this scene from another scene.
+    //todo better visualization when no model found.
 
 }

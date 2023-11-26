@@ -44,6 +44,7 @@ module MainGroup.application {
 
     exports AIChatBot.gpt4all;
     exports AIChatBot;
+    exports AIChatBot.ModelList;
 
     requires jdk.jsobject;
     requires org.jnrproject.ffi;

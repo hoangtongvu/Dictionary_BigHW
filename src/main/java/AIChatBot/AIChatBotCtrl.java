@@ -1,5 +1,7 @@
 package AIChatBot;
 
+import AIChatBot.ModelList.ModelListManager;
+
 public class AIChatBotCtrl
 {
     private static AIChatBotCtrl instance;
@@ -10,14 +12,19 @@ public class AIChatBotCtrl
 
 
     private final AIChatBotManager aiChatBotManager;
+    private final ModelListManager modelListManager;
 
     public AIChatBotManager getAiChatBotManager() {
         return aiChatBotManager;
     }
 
+    public ModelListManager getModelListManager() {
+        return modelListManager;
+    }
+
     private AIChatBotCtrl()
     {
         this.aiChatBotManager = new AIChatBotManager();
+        this.modelListManager = new ModelListManager();
     }
-
 }

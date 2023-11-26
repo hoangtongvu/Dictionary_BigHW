@@ -8,17 +8,15 @@ import java.io.File;
 
 public class ModelFileChooser
 {
-
-    public void ChooseModel(AIChatBotManager aiChatBotManager)
+    
+    public File GetFileFromFileExplorer()
     {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Model File");
 
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Model files (*.gguf)", "*.gguf");
         fileChooser.getExtensionFilters().add(extFilter);
-        File file = fileChooser.showOpenDialog(App.getPrimaryStage());
-        if (file == null) return;
-        aiChatBotManager.InitModel(file.toPath());
+        return fileChooser.showOpenDialog(App.getPrimaryStage());
     }
 
 }
