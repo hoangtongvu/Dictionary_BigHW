@@ -3,6 +3,9 @@ package Game.CreateWord4DirGame;
 import Dictionary.DicManager;
 import Logger.LoggersCtrl;
 import Word.WordBlock;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,7 @@ public class CreateWord4DirGameManager
     private final int defaultDeductPoint;
 
     private boolean gameIsEnd;
+    private final double delayOnFinishWordSecond = 1.5;
 
 
     public final CustomEventPackage.OneParameter.CustomEvent<String> onCreatingWordChangeEvent;
@@ -30,11 +34,11 @@ public class CreateWord4DirGameManager
     public final CustomEventPackage.OneParameter.CustomEvent<Integer> onFinalPointChangeEvent;
     public final CustomEventPackage.OneParameter.CustomEvent<Integer> onGameEndEvent;
     public final CustomEventPackage.TwoParameters.CustomEvent<Boolean, Integer> onChooseCharEvent;
+    public final CustomEventPackage.OneParameter.CustomEvent<Double> onFinishWord;
 
 
 
     private void setFinalPoint(int finalPoint) {
-        //trigger event.
         this.finalPoint = finalPoint;
         this.onFinalPointChangeEvent.Invoke(this, this.finalPoint);
     }
@@ -67,6 +71,7 @@ public class CreateWord4DirGameManager
         this.onFinalPointChangeEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
         this.onGameEndEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
         this.onChooseCharEvent = new CustomEventPackage.TwoParameters.CustomEvent<>(this);
+        this.onFinishWord = new CustomEventPackage.OneParameter.CustomEvent<>(this);
 
     }
 
@@ -111,7 +116,17 @@ public class CreateWord4DirGameManager
         this.setFinalPoint(this.finalPoint - deductAmount);
     }
 
-    public void MoveToNextCreatingWord()
+    public void OnFinishWord()
+    {
+        //play some animation.
+        this.onFinishWord.Invoke(this, this.delayOnFinishWordSecond);
+
+        double delaySecond = 1;
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(delaySecond), actionEvent -> this.MoveToNextCreatingWord());
+        new Timeline(keyFrame).play();
+    }
+
+    private void MoveToNextCreatingWord()
     {
         this.MoveToCreatingWordAt(this.currentWordIndex + 1);
     }

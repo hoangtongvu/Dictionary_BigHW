@@ -161,12 +161,11 @@ public class CreatingWord
         {
             this.OnChooseCorrectChoice();
             this.gameManager.InvokeOnChooseCharEvent(true, index);
-
             //Only need to choose length - 1 times, so limit is length - 1.
             //System.out.println("[POS] " + this.currentCharPos + " of " + this.result.length());
             if (this.currentCharPos >= this.result.length() - 1)
             {
-                this.gameManager.MoveToNextCreatingWord();
+                this.gameManager.OnFinishWord();
                 //System.out.println("[MOVE TO NEXT WORD]");
                 return;
             }
