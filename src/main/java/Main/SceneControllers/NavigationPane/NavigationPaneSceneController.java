@@ -42,7 +42,7 @@ public class NavigationPaneSceneController implements Initializable
     private Button backButton;
 
     @FXML
-    protected AnchorPane widgetSpace;
+    protected AnchorPane timerPlaceHolder;
 
     private TranslateTransition drawerTranslateTransition;
     private FadeTransition blurPaneFadeTransition;
@@ -54,8 +54,9 @@ public class NavigationPaneSceneController implements Initializable
     {
         this.drawerTranslateTransition = new TranslateTransition(Duration.seconds(0.5), this.drawerMenu);
         this.blurPaneFadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
+
 //        try {
-//            StudyTimerController.loadInstance().addToParent(widgetSpace);
+//            StudyTimerController.loadInstance().addToParent(timerPlaceHolder);
 //        } catch (IOException e) {
 //            throw new RuntimeException(e);
 //        }

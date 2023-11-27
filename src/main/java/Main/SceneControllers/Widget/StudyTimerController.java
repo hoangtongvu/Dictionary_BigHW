@@ -33,12 +33,12 @@ public class StudyTimerController {
     @FXML
     protected Label timerLabel;
 
+    private static FXMLLoader loader;
     public static StudyTimerController loadInstance() throws IOException {
         String absolutePath = ProjectDirectory.resourcesPath + "\\fxml\\Widget\\StudyTimer.fxml";
         URL fxmlURL = Paths.get(absolutePath).toUri().toURL();
-        FXMLLoader loader = new FXMLLoader(fxmlURL);
+        loader = new FXMLLoader(fxmlURL);
         loader.load();
-
         return loader.getController();
     }
 

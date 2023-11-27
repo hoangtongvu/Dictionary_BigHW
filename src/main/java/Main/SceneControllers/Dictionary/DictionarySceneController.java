@@ -260,8 +260,8 @@ public class DictionarySceneController implements Initializable {
 
     @FXML
     public void onSoundButton(ActionEvent e) {
-        if (searchBar.getText() != null && !searchBar.getText().equals("")) {
-            TextToSpeech.EnTextToSpeech(searchBar.getText());
+        if (currentWordBlock != null) {
+            TextToSpeech.EnTextToSpeech(currentWordBlock.getWord());
         }
     }
 

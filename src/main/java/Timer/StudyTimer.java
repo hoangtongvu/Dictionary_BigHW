@@ -20,7 +20,12 @@ public class StudyTimer {
     private Timeline timeline;
     private boolean isPlaying = false;
     private StringProperty time = new SimpleStringProperty();
+
     boolean playSound = false;
+
+    public boolean isPlaySound() {
+        return playSound;
+    }
 
     public void setPlaySound(boolean playSound) {
         this.playSound = playSound;

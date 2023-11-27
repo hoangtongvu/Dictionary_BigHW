@@ -1,8 +1,5 @@
-good
 nice
-could
+bad
 testingWord
 hello
-good breeding
-hello
-depth
+good
