@@ -18,6 +18,7 @@ public class RecentlySearchedWordManager
     private final List<String> searchedWords;
 
 
+
     public RecentlySearchedWordManager()
     {
         this.recentlySearchedWordLoader = new RecentlySearchedWordLoader(this);
@@ -55,6 +56,9 @@ public class RecentlySearchedWordManager
             System.out.println("FILE NOT FOUND");
             return;
         }
+    }
 
+    public void clearHistory() {
+        recentlySearchedWordSaver.clearHistory();
     }
 }

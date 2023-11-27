@@ -3,6 +3,7 @@ package Main.SceneControllers.NavigationPane;
 import Main.FxmlFileManager;
 import Main.ProjectDirectory;
 import Main.SceneControllers.Dictionary.HomeSceneController;
+import Main.SceneControllers.Widget.StudyTimerController;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
@@ -40,6 +41,8 @@ public class NavigationPaneSceneController implements Initializable
     @FXML
     private Button backButton;
 
+    @FXML
+    protected AnchorPane widgetSpace;
 
     private TranslateTransition drawerTranslateTransition;
     private FadeTransition blurPaneFadeTransition;
@@ -51,6 +54,11 @@ public class NavigationPaneSceneController implements Initializable
     {
         this.drawerTranslateTransition = new TranslateTransition(Duration.seconds(0.5), this.drawerMenu);
         this.blurPaneFadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
+//        try {
+//            StudyTimerController.loadInstance().addToParent(widgetSpace);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     public static NavigationPaneSceneController LoadInstance() throws IOException
@@ -108,13 +116,13 @@ public class NavigationPaneSceneController implements Initializable
     @FXML
     private void MoveToHomeScene()
     {
-        //this.MoveToScene(FxmlFileManager.getInstance().root);
+        this.MoveToScene(FxmlFileManager.getInstance().homeScene);
     }
 
     @FXML
     private void MoveToDictionaryScene()
     {
-        //this.MoveToScene(FxmlFileManager.getInstance().root);
+        this.MoveToScene(FxmlFileManager.getInstance().dictionaryScene);
     }
 
     @FXML
@@ -126,7 +134,7 @@ public class NavigationPaneSceneController implements Initializable
     @FXML
     private void MoveToDictionaryEditorScene()
     {
-        //MoveToScene(FxmlFileManager.getInstance().chooseGameScene);
+        MoveToScene(FxmlFileManager.getInstance().editWordScene);
     }
 
     @FXML

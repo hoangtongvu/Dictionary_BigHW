@@ -16,14 +16,14 @@ public class App extends Application {
         launch(args);
     }
 
-
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         myHostServices = getHostServices();
         Parent root;
+
         //root = FXMLLoader.load(getClass().getResource("/fxml/application/DictionaryScene.fxml"));
-        root = FxmlFileManager.getInstance().editWordScene;
+        root = FxmlFileManager.getInstance().dictionaryScene;
         Scene scene = new Scene(root);
 
         //InputManager inputManager = new InputManager(scene);

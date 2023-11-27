@@ -1,0 +1,40 @@
+.timer-title {
+    -fx-alignment: center;
+    -fx-font-size: 20;
+    -fx-font-family: Roboto;
+    -fx-font-weight: bold;
+    -fx-background-color: #c25c5c;
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+}
+
+.timer-card {
+    -fx-background-color: #bb4a49;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+.timer-label {
+    -fx-font-family: Roboto;
+    -fx-font-weight: bold;
+    -fx-font-size: 40;
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 2px 0;
+    -fx-text-fill: white;
+    -fx-alignment: center;
+    -fx-prompt-text-fill: white;
+}
+
+.check-box {
+    -fx-font-family: Roboto;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-font-size: 15;
+}
+
+.title-label {
+    -fx-text-fill: white;
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+    -fx-font-family: Roboto;
+}

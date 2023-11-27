@@ -1,6 +1,7 @@
 package Main.SceneControllers.Dictionary;
 
 import Dictionary.DicManager;
+import Dictionary.SearchHistory;
 import Main.FxmlFileManager;
 import Main.ProjectDirectory;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
@@ -22,7 +23,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -33,12 +33,14 @@ import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Dictionary;
 import java.util.List;
 
 import static java.util.Collections.sort;
 
 public class EditWordSceneController {
 
+    private static EditWordSceneController sceneController;
     private double mouseStartX;
     private double mouseStartY;
     protected AnchorPane canvasPane;
@@ -46,6 +48,14 @@ public class EditWordSceneController {
     static final NodeOptions options = new NodeOptions();
 
     GridPane grid = new GridPane();
+
+    public static EditWordSceneController getSceneController() {
+        return sceneController;
+    }
+
+    public static void setSceneController(EditWordSceneController sceneController) {
+        EditWordSceneController.sceneController = sceneController;
+    }
 
     @FXML
     AnchorPane root;
@@ -70,7 +80,7 @@ public class EditWordSceneController {
     @FXML
     protected Button deleteButton;
     @FXML
-    protected ListView wordListView;
+    protected ListView<String> wordListView;
     @FXML
     private Pane blurPane;
     @FXML
@@ -176,7 +186,7 @@ public class EditWordSceneController {
 
     @FXML
     public void toDictionary() {
-        Scene temp = new Scene(FxmlFileManager.getInstance().root);
+        Scene temp = new Scene(FxmlFileManager.getInstance().dictionaryScene);
         App.getPrimaryStage().setScene(temp);
     }
 
@@ -313,14 +323,19 @@ public class EditWordSceneController {
             DicManager.getInstance().getDictionary().getWordBlocks().remove(DicNode.getCurrentlyEditedWord().getWordBlock());
             editableWordList.remove(DicNode.getCurrentlyEditedWord().getWordBlock());
             DicNode.getCurrentlyEditedWord().getWordBlock().deleteFromDatabase();
+            SearchHistory.getInstance().deleteWord(DicNode.getCurrentlyEditedWord().getWordBlock().getWord());
+
+            ListView historyListView =  FxmlFileManager.getInstance().dictionarySceneController.getHistoryListView();
+            historyListView.getItems().clear();
+            if (!SearchHistory.getInstance().getWordHistory().isEmpty()) {
+                historyListView.getItems().addAll(SearchHistory.getInstance().getWordHistory());
+            }
             updateListView();
             DicNode.setCurrentlyEditedWord(null);
             DicNode.reset();
             hideToolBar();
         }
     }
-
-////////////////////////////////////////////////////////////
 
 
     @FXML
@@ -429,7 +444,6 @@ public class EditWordSceneController {
             System.out.println(e.getMessage());
         }
     }
-
 
     public void showEditingTools(boolean flag) {
         exampleButton.setVisible(flag);
@@ -672,36 +686,4 @@ public class EditWordSceneController {
         node.setNodePanePosition((-1) * canvas.getViewportBounds().getMinX(),
                 (-1) * canvas.getViewportBounds().getMinY());
     }
-    @FXML
-    protected void onMenuButton() {
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5),drawerMenu);
-        translateTransition.setByX(+235);
-        translateTransition.play();
-
-        blurPane.setVisible(true);
-
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
-        fadeTransition.setFromValue(0);
-        fadeTransition.setToValue(1);
-        fadeTransition.play();
-    }
-
-    /**setOnFinished(lambdaExpression) to wait for the blur animation to finish before set blurPane invisible,
-     * otherwise, blurPane will disappear immediately.*/
-    @FXML
-    protected void onMenuExit() {
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5),drawerMenu);
-        translateTransition.setByX(-235);
-        translateTransition.play();
-
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
-        fadeTransition.setFromValue(1);
-        fadeTransition.setToValue(0);
-        fadeTransition.play();
-
-        fadeTransition.setOnFinished(event -> {blurPane.setVisible(false);});
-    }
-
-
-
 }

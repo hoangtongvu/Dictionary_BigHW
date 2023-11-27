@@ -47,7 +47,15 @@ module MainGroup.application {
     exports AIChatBot.ModelList;
 
     requires jdk.jsobject;
+
     requires org.jnrproject.ffi;
     requires org.slf4j;
+
+    requires javafx.media;
+    requires org.json;
+
+    exports Main.SceneControllers.Widget;
+    opens Main.SceneControllers.Widget to javafx.fxml;
+
 
 }

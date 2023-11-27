@@ -51,14 +51,14 @@ public class DicManager
     }
 
 
-    public String LookUpWord(String lookupString) throws SQLException {
+    public WordBlock searchWordBlock(String lookupString) {
         WordBlock dummy = new WordBlock(lookupString,"");
         int lookupPos = Collections.binarySearch(dictionary.getWordBlocks(), dummy);
-        if (lookupPos < 0) return "Can't find your word.";
+        if (lookupPos < 0) return null;
 
         RecentlySearchedWordSaver recentlySearchedWordSaver = this.recentlySearchedWordManager.getRecentlySearchedWordSaver();
         recentlySearchedWordSaver.Save(lookupString);
-        return dictionary.GetWordInfoAt(lookupPos);
+        return dictionary.getWordBlocks().get(lookupPos);
     }
 
 
