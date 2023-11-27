@@ -1,0 +1,24 @@
+#titleLabel {
+    -fx-font-size: 60;
+    -fx-background-color: none;
+    -fx-text-fill: "white";
+}
+
+#report {
+    -fx-font-size: 40;
+    -fx-background-color: none;
+    -fx-font-weight: 100;
+    -fx-text-fill: "white";
+}
+
+.label {
+    -fx-font-size: 40;
+    -fx-font-family:"Helvetica Neue";
+    -fx-alignment: center;
+    -fx-font-weight: 900;
+    -fx-background-color: "white";
+}
+
+#Pane {
+    -fx-background-color: "#404140";
+}

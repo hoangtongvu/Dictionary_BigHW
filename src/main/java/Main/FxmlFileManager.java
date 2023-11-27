@@ -41,13 +41,12 @@ public class FxmlFileManager
     public final Main.SceneControllers.Game.MultiChoiceGame.GameSceneController multiChoiceGameSceneController;
 
 
-
-
     public final Parent createWord4DirGameStartScene;
     public final Parent createWord4DirGameScene;
     public final Main.SceneControllers.Game.CreateWord4DirGame.GameSceneController createWord4DirGameSceneController;
+    public final Parent wordleScene;
 
-
+    public final Parent aiConversationScene;
 
 
     private FxmlFileManager()
@@ -86,6 +85,12 @@ public class FxmlFileManager
             loader = new FXMLLoader(getClass().getResource("/fxml/application/EditWord.fxml"));
             this.editWordScene = loader.load();
             this.editWordSceneController = loader.getController();
+
+            loader = new FXMLLoader(getClass().getResource("/fxml/AIChatBot/AIConversationScene.fxml"));
+            this.aiConversationScene = loader.load();
+
+            loader = new FXMLLoader(getClass().getResource("/fxml/Game/Wordle/WordleScene.fxml"));
+            this.wordleScene = loader.load();
 
         }
         catch (IOException e)

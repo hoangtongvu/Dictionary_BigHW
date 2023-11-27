@@ -23,10 +23,16 @@ module MainGroup.application {
     exports Main.SceneControllers.Game.CreateWord4DirGame;
     opens Main.SceneControllers.Game.CreateWord4DirGame to javafx.fxml;
 
+    exports Main.SceneControllers.Game.Wordle;
+    opens Main.SceneControllers.Game.Wordle to javafx.fxml;
+
 
 
     exports Main.SceneControllers.NavigationPane;
     opens Main.SceneControllers.NavigationPane to javafx.fxml;
+
+    exports Main.SceneControllers.AIChatBot;
+    opens Main.SceneControllers.AIChatBot to javafx.fxml;
 
 
     exports CustomEventPackage.OneParameter;
@@ -39,11 +45,21 @@ module MainGroup.application {
     opens Main.SceneControllers.Translate to javafx.fxml;
     opens WordEditing to com.google.gson;
 
+    exports AIChatBot.gpt4all;
+    exports AIChatBot;
+    exports AIChatBot.ModelList;
+
     requires jdk.jsobject;
+
+    requires org.jnrproject.ffi;
+    requires org.slf4j;
+
     requires javafx.media;
     requires org.json;
+    requires jlayer;
 
     exports Main.SceneControllers.Widget;
     opens Main.SceneControllers.Widget to javafx.fxml;
+
 
 }
