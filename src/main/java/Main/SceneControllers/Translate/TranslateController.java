@@ -2,14 +2,8 @@ package Main.SceneControllers.Translate;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.AccessibleAction;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class TranslateController {
     @FXML
@@ -22,16 +16,32 @@ public class TranslateController {
     @FXML
     public void onViToEnButton(ActionEvent event) {
         String text = VietArea.getText();
-        if (!VietArea.getText().isEmpty()) {
-            VietArea.setText(TranslatorAPI.translateViToEn(text));
+        if (!text.isEmpty()) {
+            EngArea.setText(TranslatorAPI.translateViToEn(text));
         }
     }
 
     @FXML
     public void onEnToViButton(ActionEvent event) {
         String text = EngArea.getText();
-        if (!EngArea.getText().isEmpty()) {
-            EngArea.setText(TranslatorAPI.translateEnToVi(text));
+        if (!text.isEmpty()) {
+            VietArea.setText(TranslatorAPI.translateEnToVi(text));
+        }
+    }
+
+    @FXML
+    public void ViSoundButton(ActionEvent event) {
+        String text = VietArea.getText();
+        if (!text.isEmpty()) {
+            TextToSpeech.ViTextToSpeech(text);
+        }
+    }
+
+    @FXML
+    public void EnSoundButton(ActionEvent event) {
+        String text = EngArea.getText();
+        if (!text.isEmpty()) {
+            TextToSpeech.EnTextToSpeech(text);
         }
     }
 }
