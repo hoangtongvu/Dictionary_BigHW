@@ -2,6 +2,7 @@ package Game.CreateWord4DirGame;
 
 import Dictionary.DicManager;
 import Logger.LoggersCtrl;
+import Timer.CustomTimer1;
 import Word.WordBlock;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -11,8 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CreateWord4DirGameManager
-{
+public class CreateWord4DirGameManager {
     private final CreateWord4DirGameCtrl gameCtrl;
 
     private final List<CreatingWord> creatingWords;
@@ -26,6 +26,7 @@ public class CreateWord4DirGameManager
 
     private boolean gameIsEnd;
     private final double delayOnFinishWordSecond = 1.5;
+    public final CustomTimer1 customTimer;
 
 
     public final CustomEventPackage.OneParameter.CustomEvent<String> onCreatingWordChangeEvent;
@@ -35,7 +36,7 @@ public class CreateWord4DirGameManager
     public final CustomEventPackage.OneParameter.CustomEvent<Integer> onGameEndEvent;
     public final CustomEventPackage.TwoParameters.CustomEvent<Boolean, Integer> onChooseCharEvent;
     public final CustomEventPackage.OneParameter.CustomEvent<Double> onFinishWord;
-
+    public final CustomEventPackage.OneParameter.CustomEvent<Boolean> onToggleTimerEvent;
 
 
     private void setFinalPoint(int finalPoint) {
@@ -43,18 +44,15 @@ public class CreateWord4DirGameManager
         this.onFinalPointChangeEvent.Invoke(this, this.finalPoint);
     }
 
-    public List<CreatingWord> getCreatingWords()
-    {
+    public List<CreatingWord> getCreatingWords() {
         return this.creatingWords;
     }
 
-    public int getCurrentWordIndex()
-    {
+    public int getCurrentWordIndex() {
         return this.currentWordIndex;
     }
 
-    public CreateWord4DirGameManager(CreateWord4DirGameCtrl gameCtrl)
-    {
+    public CreateWord4DirGameManager(CreateWord4DirGameCtrl gameCtrl) {
         this.gameCtrl = gameCtrl;
         this.creatingWords = new ArrayList<>();
 
@@ -63,6 +61,8 @@ public class CreateWord4DirGameManager
         this.finalPoint = 0;
         this.defaultAddPoint = 7;
         this.defaultDeductPoint = 10;
+        this.customTimer = new CustomTimer1();
+        this.customTimer.onStopEvent.AddListener(this::End);
 
 
         this.onCreatingWordChangeEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
@@ -72,23 +72,36 @@ public class CreateWord4DirGameManager
         this.onGameEndEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
         this.onChooseCharEvent = new CustomEventPackage.TwoParameters.CustomEvent<>(this);
         this.onFinishWord = new CustomEventPackage.OneParameter.CustomEvent<>(this);
+        this.onToggleTimerEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
 
     }
 
-    public void Start()
-    {
-        this.InitCreatingWords(1);
+    public void Start(int blockCount, int timeLimitSecond) {
+        this.InitCreatingWords(blockCount);
         this.ResetPoint();
         this.currentWordIndex = 0;
         this.MoveToCreatingWordAt(0);
         this.gameIsEnd = false;
         //this.gameCtrl.getGameAutoCompletion().AutoCompletion();
+        this.SetUpTimer(timeLimitSecond);
+
     }
 
-    public void End()
-    {
+    public void End() {
         this.onGameEndEvent.Invoke(this, this.finalPoint);
         this.gameIsEnd = true;
+        this.customTimer.Stop();
+    }
+
+    private void SetUpTimer(int timeLimitSecond)
+    {
+        if (timeLimitSecond < 0) {
+            this.onToggleTimerEvent.Invoke(this, false);
+            return;
+        }
+        this.onToggleTimerEvent.Invoke(this, true);
+        this.customTimer.setMaxTimeSecond(timeLimitSecond);
+        this.customTimer.Start();
     }
 
     private void ResetPoint()

@@ -81,6 +81,9 @@ public class GameSceneController implements Initializable
     private Text endGamePointText;
 
     @FXML
+    private Text timerText;
+
+    @FXML
     private Button continueButton;
 
     @FXML
@@ -126,15 +129,16 @@ public class GameSceneController implements Initializable
 
         this.continueButton.addEventHandler(ActionEvent.ACTION, e -> {
             this.ToggleEndGameVbox();
+            this.BlurPaneDisappear();
             this.MoveBackToStartScreen();
         });
 
         this.blurPaneFadeTransition = new FadeTransition(Duration.seconds(1), blurPane);
     }
 
-    public void StartGame()
+    public void StartGame(int blockCount, int timeLimitSecond)
     {
-        this.gameCtrl.getGameManager().Start();
+        this.gameCtrl.getGameManager().Start(blockCount, timeLimitSecond);
         this.AddKeyBoardEvent();
     }
 
@@ -154,6 +158,8 @@ public class GameSceneController implements Initializable
         gameManager.onGameEndEvent.AddListener(e -> EndGame());
         gameManager.onGameEndEvent.AddListener(e -> BlurPaneAppear());
         gameManager.onFinishWord.AddListener(this.onFinishWordAnimator::PlayAnimation);
+        gameManager.customTimer.onTickEvent.AddListener(this::UpdateTimerUI);
+        gameManager.onToggleTimerEvent.AddListener(this::ToggleTimerText);
         gameManager.onChooseCharEvent.AddListener((isCorrect, index) -> {
             Button button = GetButtonIndex(index);
             SetButtonChose(button, isCorrect);
@@ -333,6 +339,16 @@ public class GameSceneController implements Initializable
     private void MoveBackToStartScreen()
     {
         HomeSceneController.SwitchScene(FxmlFileManager.getInstance().createWord4DirGameStartScene);
+    }
+
+    private void ToggleTimerText(boolean useTimer)
+    {
+        this.timerText.setVisible(useTimer);
+    }
+
+    private void UpdateTimerUI(int second, int maxTimeSecond)
+    {
+        this.timerText.setText("Time left: " + (maxTimeSecond - second));
     }
 
 }
