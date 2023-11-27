@@ -53,6 +53,13 @@
     -fx-background-color: #21252b;
 }
 
+.sideMenuScrollPane {
+    -fx-background-color: transparent;
+}
+
+.sideMenuScrollPane > .viewport {
+    -fx-background-color: transparent;
+}
 
 .textArea {
     -fx-background-color: #21252b;
