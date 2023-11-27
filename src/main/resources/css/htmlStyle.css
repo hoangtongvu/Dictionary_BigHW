@@ -3,7 +3,7 @@
 }
 
 body {
-    background-color: #2f2f2f;
+    background-color: #21252b;
 }
 .wordBox {
     padding-top: 10px;
@@ -73,17 +73,18 @@ body {
 .wordType {
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
+    padding-top: 15px;
+    padding-left: 15px;
+    font-size: 25px;
+    font-weight: bold;
     height: 50px;
     width: 100%;
     box-sizing: border-box;
     background-color: #2b0e4d; /* Very dark indigo */
     color: #CE5E82; /* Neon purple */
+    outline: none;
 }
 
-.wordType h2 {
-    padding-top: 10px;
-    margin-left: 20px;
-}
 .definition h3 {
     color: #006f73;
 }

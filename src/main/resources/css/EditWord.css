@@ -37,4 +37,107 @@
     -fx-alignment: baseline-left;
 }
 
+.editor-name {
+    -fx-text-fill: white;
+    -fx-background-color: linear-gradient(to right, #200D3A, #292651, #2E4770, #CE5E82);
+    -fx-alignment: center;
+}
+
+.editor-text-field {
+
+}
+
+.field-name {
+    -fx-text-fill: white;
+}
+
+.tool-buttons {
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-color: #597f9d;
+    -fx-background-radius: 30;
+}
+
+.scroll-pane {
+    -fx-background-color:transparent;
+    -fx-border-color: black;
+    -fx-border-width: 0.5;
+}
+
+.scroll-bar {
+    -fx-background-color: rgba(0, 0, 0, 0.2);
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+    -fx-background-radius: 10;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+}
+
+.scroll-pane > .corner {
+    -fx-background-color: transparent;
+}
+
+.tool-pane {
+    -fx-background-color: #21252b;
+}
+
+.tool-bar {
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-background-color: linear-gradient(to right, #200D3A, #292651, #2E4770, #CE5E82);
+}
+
+.editor-anchor-pane {
+    -fx-background-color: #21252b;
+}
+
+.split-pane *.split-pane-divider {
+    -fx-background-color: #333;
+    -fx-padding: 0.5em;
+
+}
+
+.split-pane *.split-pane-divider:hover {
+    -fx-background-color: #555;
+}
+
+
+
+.list-view:focused, .text-area:focused, .text-field:focused {
+    -fx-border-color: transparent;
+}
+
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: #555;
+}
+
+.text-area .content {
+    -fx-background-color: #333;
+    -fx-border-radius: 10px;
+}
+
+.list-view, .text-area, .text-field {
+    -fx-background-color: #333;
+    -fx-text-fill: #fff;
+    -fx-border-color: #555;
+    -fx-border-width: 1px;
+}
+
+.text-field .content {
+    -fx-background-color: #333;
+    -fx-border-radius: 10px;
+}
+
 

@@ -9,9 +9,7 @@ public class Dictionary
 {
     private final List<WordBlock> wordBlockList;
 
-
     public List<WordBlock> getWordBlocks() {
-
         return wordBlockList;
     }
 
@@ -34,11 +32,6 @@ public class Dictionary
 
     }
 
-
-    public void ShowWordAt(int i) throws SQLException {
-        System.out.println(this.GetWordInfoAt(i));
-    }
-
     
     public String GetWordInfoAt(int i) throws SQLException {
         WordBlock wordBlock = this.wordBlockList.get(i);
@@ -47,10 +40,7 @@ public class Dictionary
     }
 
 
-    public WordBlock AddWordBlock(WordBlock wordBlock)
-    {
+    public void AddWordBlock(WordBlock wordBlock) {
         this.wordBlockList.add(wordBlock);
-        int lastPos = this.wordBlockList.size();
-        return this.wordBlockList.get(lastPos - 1);
     }
 }

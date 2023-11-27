@@ -1,9 +1,7 @@
 package WordEditing;
 
-import javafx.event.EventHandler;
+import WordEditing.GraphNode.DicNode;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 
 public class NodeOptions {
@@ -15,7 +13,9 @@ public class NodeOptions {
     private final MenuItem addPhrase = new MenuItem("Add Phrase");
     ContextMenu options = new ContextMenu();
     public NodeOptions() {
-
+        connect.setOnAction(event -> {
+            DicNode.setInConnectMode(true);
+        });
     }
 
 

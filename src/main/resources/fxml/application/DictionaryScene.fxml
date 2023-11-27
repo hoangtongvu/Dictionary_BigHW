@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -11,31 +12,62 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="899.0" styleClass="anchorPane" stylesheets="@../../css/ApplicationStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Dictionary.DictionarySceneController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" styleClass="anchorPane" stylesheets="@../../css/ApplicationStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Dictionary.DictionarySceneController">
    <children>
       <AnchorPane layoutY="157.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="157.0">
          <children>
-            <WebView fx:id="webView" prefHeight="443.0" prefWidth="792.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="365.0" AnchorPane.topAnchor="0.0" />
+            <AnchorPane fx:id="contentAnchorPane" prefHeight="443.0" prefWidth="826.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="374.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <WebView fx:id="webView" layoutX="380.0" layoutY="68.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
             <AnchorPane prefHeight="443.0" prefWidth="375.0" styleClass="dictionaryRightNav" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Pane layoutX="21.0" layoutY="23.0" maxHeight="198.0" minHeight="180.0" prefHeight="198.0" prefWidth="333.0" styleClass="right-nav-box" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="22.0" />
-                  <ListView layoutX="21.0" layoutY="222.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="250.0">
-                     <styleClass>
-                        <String fx:value="dictionaryRightNav" />
-                        <String fx:value="right-nav-box" />
-                     </styleClass>
-                  </ListView>
+                  <Pane layoutX="21.0" layoutY="23.0" maxHeight="198.0" minHeight="180.0" prefHeight="198.0" prefWidth="333.0" styleClass="right-nav-box" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="22.0">
+                     <children>
+                        <Pane prefHeight="60.0" prefWidth="331.0" styleClass="pane-title" stylesheets="@../../css/ApplicationStyle.css">
+                           <children>
+                              <Button layoutX="14.0" layoutY="18.0" mnemonicParsing="false" onAction="#addToStarList" text="Star" />
+                              <Button fx:id="editButton" layoutX="61.0" layoutY="18.0" mnemonicParsing="false" onAction="#editCurrentWord" text="Edit" />
+                           </children>
+                        </Pane>
+                        <Button layoutX="14.0" layoutY="74.0" mnemonicParsing="false" onAction="#onSoundButton" prefHeight="29.0" prefWidth="29.0">
+                           <graphic>
+                              <ImageView fitHeight="21.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../png/speaker.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                     </children></Pane>
+                  <TabPane layoutX="21.0" layoutY="243.0" prefHeight="181.0" prefWidth="331.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="241.99999999999997">
+                    <tabs>
+                      <Tab text="Favourite Words">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../../css/ApplicationStyle.css">
+                                 <children>
+                                    <ListView fx:id="starredWordListView" layoutY="-10.0" onMouseClicked="#listViewMouseClicked" prefHeight="200.0" prefWidth="200.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="WordHistory">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../../css/ApplicationStyle.css">
+                                 <children>
+                                    <ListView fx:id="historyListView" layoutY="42.0" onMouseClicked="#getWordFromHistory" prefHeight="108.0" prefWidth="331.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0" />
+                                    <Button fx:id="clearHistory" layoutX="236.0" layoutY="8.0" mnemonicParsing="false" onAction="#clearHistory" prefHeight="25.0" prefWidth="94.0" text="Clear History" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="8.0" />
+                                 </children></AnchorPane>
+                        </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
                </children>
             </AnchorPane>
          </children>
       </AnchorPane>
       <Pane prefHeight="41.0" prefWidth="854.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fx:id="menuButton" fitHeight="30.0" fitWidth="427.0" layoutX="14.0" layoutY="6.0" onMouseClicked="#onMenuButton" pickOnBounds="true" preserveRatio="true" styleClass="menuButton">
-               <image>
-                  <Image url="@../../png/menuIcon.png" />
-               </image>
-            </ImageView>
             <Button id="learning_button" fx:id="dictionary_button" layoutX="205.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Dictionary" />
             <Button id="statistics_button" layoutX="136.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Games" />
             <Button id="dictionary_button" layoutX="54.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Learning" />
@@ -50,20 +82,6 @@
             </TextField>
          </children>
       </Pane>
-      <Pane fx:id="blurPane" layoutX="95.0" layoutY="-632.0" prefHeight="494.0" prefWidth="855.0" styleClass="blur" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <AnchorPane fx:id="drawerMenu" layoutX="-237.0" prefHeight="494.0" prefWidth="235.0" styleClass="sideMenu" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-237.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Pane prefHeight="46.0" prefWidth="235.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css">
-               <children>
-                  <Button fx:id="menuExit" layoutX="164.0" layoutY="1.0" mnemonicParsing="false" onAction="#onMenuExit" style="-fx-font-size: 20;" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Back" />
-               </children>
-            </Pane>
-            <Button layoutY="46.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="235.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Home" />
-            <Button layoutY="92.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="235.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Dictionary" />
-            <Button layoutY="138.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="235.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Games" />
-            <Button layoutY="184.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="235.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Edit Dictionary" />
-            <Button layoutY="230.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="235.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Settings" />
-         </children>
-      </AnchorPane>
+      <Pane fx:id="blurPane" layoutX="95.0" layoutY="-632.0" prefHeight="494.0" prefWidth="855.0" styleClass="blur" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>

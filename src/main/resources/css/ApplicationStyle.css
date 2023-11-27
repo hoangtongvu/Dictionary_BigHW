@@ -7,7 +7,7 @@
 }
 
 .anchorPane {
-    -fx-background-color: #2f2f2f;
+    -fx-background-color: #21252b;
 }
 
 .blur {
@@ -34,11 +34,12 @@
 
 .sideMenuButton {
     -fx-alignment: baseline-left;
-    -fx-padding: 0 0 0 70;
+    -fx-padding: 0 0 0 20;
     -fx-background-color: transparent;
     -fx-font-weight: bold;
     -fx-text-fill: #c2f8ff;
     -fx-font-size: 20;
+    -fx-graphic-text-gap: 30;
 }
 
 .sideMenuButton:hover {
@@ -49,18 +50,25 @@
 }
 
 .sideMenu {
-    -fx-background-color: #2f2f2f;
+    -fx-background-color: #21252b;
 }
 
+.sideMenuScrollPane {
+    -fx-background-color: transparent;
+}
+
+.sideMenuScrollPane > .viewport {
+    -fx-background-color: transparent;
+}
 
 .textArea {
-    -fx-background-color: #2f2f2f;
+    -fx-background-color: #21252b;
     -fx-text-fill: white;
     -fx-font-size: 20;
 }
 
 .textArea .content {
-    -fx-background-color: #2f2f2f;
+    -fx-background-color: #21252b;
     -fx-font-size: 20;
     -fx-text-fill: white;
 }
@@ -70,7 +78,7 @@
 }
 
 .dictionaryRightNav {
-    -fx-background-color: #2f2f2f;
+    -fx-background-color: #21252b;
     -fx-border-color: transparent;
 }
 
@@ -81,3 +89,8 @@
     /*-fx-effect: dropshadow(type,color,radius,spread,offsetx,offsety);*/
 }
 
+.pane-title {
+    -fx-background-color: linear-gradient(to right, #200D3A, #292651, #2E4770);;
+    -fx-background-radius: 10;
+
+}

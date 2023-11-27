@@ -1,0 +1,21 @@
+
+
+.combo-box {
+    -fx-background-radius: 15;
+}
+
+.combo-box>.list-cell {
+    -fx-alignment: center;
+}
+
+.combo-box .list-view {
+    -fx-background-radius: 15;
+    -fx-padding: 10;
+}
+
+.combo-box .list-cell, .list-cell:focused {
+
+    -fx-alignment: center;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+}
