@@ -125,3 +125,19 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
+
+#speakerButton {
+    -fx-background-color: transparent;
+    -fx-background-image: url('../png/speaker.png');
+    -fx-background-size: 27px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#speakerButton:hover {
+    -fx-background-color: transparent;
+    -fx-background-image: url('../png/speaker_filled.png');
+    -fx-background-size: 27px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}

@@ -68,6 +68,8 @@ public class DictionarySceneController implements Initializable {
     protected ListView<String> historyListView;
     @FXML
     protected Button editButton;
+    @FXML
+    protected Button soundButton;
 
     public static WordBlock getCurrentWordBlock() {
         return currentWordBlock;
@@ -133,6 +135,8 @@ public class DictionarySceneController implements Initializable {
             if (!SearchHistory.getInstance().getWordHistory().isEmpty()) {
                 historyListView.getItems().addAll(SearchHistory.getInstance().getWordHistory());
             }
+            soundButton.setDisable(false);
+            starButton.setDisable(false);
 
             if (currentWordBlock != null && currentWordBlock.isEditable()) {
                 editButton.setDisable(false);
@@ -179,6 +183,8 @@ public class DictionarySceneController implements Initializable {
         blurPane.setVisible(false);
         if (currentWordBlock == null) {
             editButton.setDisable(true);
+            soundButton.setDisable(true);
+            starButton.setDisable(true);
         }
         try {
             DicManager.getInstance().getDicWordLoader().LoadFromDatabase();
