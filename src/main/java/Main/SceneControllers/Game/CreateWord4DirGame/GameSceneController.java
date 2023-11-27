@@ -2,8 +2,8 @@ package Main.SceneControllers.Game.CreateWord4DirGame;
 
 import Game.CreateWord4DirGame.CreateWord4DirGameCtrl;
 import Game.CreateWord4DirGame.CreateWord4DirGameManager;
+import Game.CreateWord4DirGame.UI.OnFinishWordAnimator;
 import Game.GamesCtrl;
-import Logger.LoggersCtrl;
 import Main.FxmlFileManager;
 import Main.SceneControllers.Dictionary.HomeSceneController;
 import Main.application.App;
@@ -28,6 +28,8 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class GameSceneController implements Initializable
@@ -79,6 +81,9 @@ public class GameSceneController implements Initializable
     private Text endGamePointText;
 
     @FXML
+    private Text timerText;
+
+    @FXML
     private Button continueButton;
 
     @FXML
@@ -93,11 +98,15 @@ public class GameSceneController implements Initializable
 
     private FadeTransition blurPaneFadeTransition;
 
+    private final List<Label> wordLabels;
+    private final OnFinishWordAnimator onFinishWordAnimator;
+
 
 
     public GameSceneController()
     {
-        System.out.println("HI");
+        this.wordLabels = new ArrayList<>();
+        this.onFinishWordAnimator = new OnFinishWordAnimator(this.wordLabels);
     }
 
     @Override
@@ -120,18 +129,17 @@ public class GameSceneController implements Initializable
 
         this.continueButton.addEventHandler(ActionEvent.ACTION, e -> {
             this.ToggleEndGameVbox();
+            this.BlurPaneDisappear();
             this.MoveBackToStartScreen();
         });
 
         this.blurPaneFadeTransition = new FadeTransition(Duration.seconds(1), blurPane);
     }
 
-    public void StartGame()
+    public void StartGame(int blockCount, int timeLimitSecond)
     {
-        this.gameCtrl.getGameManager().Start();
+        this.gameCtrl.getGameManager().Start(blockCount, timeLimitSecond);
         this.AddKeyBoardEvent();
-        //this.AlignCenterNodes();
-
     }
 
     private void EndGame()
@@ -141,7 +149,6 @@ public class GameSceneController implements Initializable
 
     private void SubEvent()
     {
-        LoggersCtrl.systemLogger.Log("Sub Event.");
         CreateWord4DirGameManager gameManager = this.gameCtrl.getGameManager();
         gameManager.onChoiceCharsChangeEvent.AddListener(this::UpdateChoiceTexts);
         gameManager.onCreatingWordChangeEvent.AddListener(this::UpdateWordText);
@@ -150,6 +157,9 @@ public class GameSceneController implements Initializable
         gameManager.onGameEndEvent.AddListener(this::ShowEndGameDialog);
         gameManager.onGameEndEvent.AddListener(e -> EndGame());
         gameManager.onGameEndEvent.AddListener(e -> BlurPaneAppear());
+        gameManager.onFinishWord.AddListener(this.onFinishWordAnimator::PlayAnimation);
+        gameManager.customTimer.onTickEvent.AddListener(this::UpdateTimerUI);
+        gameManager.onToggleTimerEvent.AddListener(this::ToggleTimerText);
         gameManager.onChooseCharEvent.AddListener((isCorrect, index) -> {
             Button button = GetButtonIndex(index);
             SetButtonChose(button, isCorrect);
@@ -198,26 +208,6 @@ public class GameSceneController implements Initializable
         timeline.play();
     }
 
-    private void SetButtonColor(Button button, double brightness, double contrast, double hue, double saturation) {
-        ColorAdjust colorAdjust = (ColorAdjust) button.getEffect();
-        colorAdjust.setBrightness(brightness);
-        colorAdjust.setContrast(contrast);
-        colorAdjust.setHue(hue);
-        colorAdjust.setSaturation(saturation);
-    }
-
-    private void SetButtonColorGreen(Button button) {
-        this.SetButtonColor(button, 0, 0, 0.5, 1);
-    }
-
-    private void SetButtonColorRed(Button button) {
-        this.SetButtonColor(button, 0, 0, 0, 1);
-    }
-
-    private void SetButtonColorDefault(Button button) {
-        this.SetButtonColor(button, 0, 0, 0, 0);
-    }
-
     @FXML
     private void ChooseUpChar()
     {
@@ -251,6 +241,7 @@ public class GameSceneController implements Initializable
     private void UpdateWordText(String text)
     {
         this.wordHbox.getChildren().clear();
+        this.wordLabels.clear();
         Font font = new Font(this.fontSize);
         for (int i = 0; i < text.length(); i++)
         {
@@ -259,6 +250,7 @@ public class GameSceneController implements Initializable
             label.setPrefWidth(this.labelPrefWidth);
             label.setAlignment(Pos.CENTER);
             this.wordHbox.getChildren().add(label);
+            this.wordLabels.add(label);
         }
 
         int underScorePos = text.indexOf("_");
@@ -347,6 +339,16 @@ public class GameSceneController implements Initializable
     private void MoveBackToStartScreen()
     {
         HomeSceneController.SwitchScene(FxmlFileManager.getInstance().createWord4DirGameStartScene);
+    }
+
+    private void ToggleTimerText(boolean useTimer)
+    {
+        this.timerText.setVisible(useTimer);
+    }
+
+    private void UpdateTimerUI(int second, int maxTimeSecond)
+    {
+        this.timerText.setText("Time left: " + (maxTimeSecond - second));
     }
 
 }
