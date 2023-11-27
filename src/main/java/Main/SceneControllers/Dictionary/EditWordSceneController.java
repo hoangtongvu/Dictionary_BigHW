@@ -5,7 +5,6 @@ import Dictionary.SearchHistory;
 import Main.FxmlFileManager;
 import Main.ProjectDirectory;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
-import Main.SceneControllers.Widget.StudyTimerController;
 import Main.application.App;
 import Word.WordBlock;
 import WordEditing.GraphNode.*;
@@ -18,14 +17,12 @@ import com.google.gson.reflect.TypeToken;
 import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -33,11 +30,10 @@ import javafx.util.Duration;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.net.URL;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Dictionary;
 import java.util.List;
 
 import static java.util.Collections.sort;
@@ -190,7 +186,7 @@ public class EditWordSceneController {
 
     @FXML
     public void toDictionary() {
-        Scene temp = new Scene(FxmlFileManager.getInstance().root);
+        Scene temp = new Scene(FxmlFileManager.getInstance().dictionaryScene);
         App.getPrimaryStage().setScene(temp);
     }
 
@@ -328,6 +324,12 @@ public class EditWordSceneController {
             editableWordList.remove(DicNode.getCurrentlyEditedWord().getWordBlock());
             DicNode.getCurrentlyEditedWord().getWordBlock().deleteFromDatabase();
             SearchHistory.getInstance().deleteWord(DicNode.getCurrentlyEditedWord().getWordBlock().getWord());
+
+            ListView historyListView =  FxmlFileManager.getInstance().dictionarySceneController.getHistoryListView();
+            historyListView.getItems().clear();
+            if (!SearchHistory.getInstance().getWordHistory().isEmpty()) {
+                historyListView.getItems().addAll(SearchHistory.getInstance().getWordHistory());
+            }
             updateListView();
             DicNode.setCurrentlyEditedWord(null);
             DicNode.reset();

@@ -97,7 +97,6 @@ public class SearchHistory {
     }
 
 
-
 //    public static void main(String[] args) {
 //        HashMap<String, String> map = new LinkedHashMap<>();
 //        map.put("A", "B");

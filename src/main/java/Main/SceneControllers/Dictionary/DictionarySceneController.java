@@ -68,6 +68,10 @@ public class DictionarySceneController implements Initializable {
         return currentWordBlock;
     }
 
+    public ListView<String> getHistoryListView() {
+        return historyListView;
+    }
+
     @FXML
     public void editCurrentWord() {
         try {

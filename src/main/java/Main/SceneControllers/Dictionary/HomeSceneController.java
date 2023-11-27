@@ -76,7 +76,7 @@ public class HomeSceneController {
     }
 
     public void SwitchToLookUpScene() {
-        Parent root = FxmlFileManager.getInstance().root;
+        Parent root = FxmlFileManager.getInstance().dictionaryScene;
         SwitchScene(root);
     }
 

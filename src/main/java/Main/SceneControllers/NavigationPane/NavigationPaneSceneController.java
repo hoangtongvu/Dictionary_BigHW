@@ -122,7 +122,7 @@ public class NavigationPaneSceneController implements Initializable
     @FXML
     private void MoveToDictionaryScene()
     {
-        this.MoveToScene(FxmlFileManager.getInstance().root);
+        this.MoveToScene(FxmlFileManager.getInstance().dictionaryScene);
     }
 
     @FXML

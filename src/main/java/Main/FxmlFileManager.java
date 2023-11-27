@@ -1,6 +1,5 @@
 package Main;
 
-import Main.SceneControllers.Dictionary.EditWordSceneController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
@@ -21,7 +20,8 @@ public class FxmlFileManager
     }
 
 
-    public final Parent root;
+    public final Parent dictionaryScene;
+    public final Main.SceneControllers.Dictionary.DictionarySceneController dictionarySceneController;
     public final Parent homeScene;
 
 
@@ -54,10 +54,14 @@ public class FxmlFileManager
     {
         try
         {
-            this.root = FXMLLoader.load(getClass().getResource("/fxml/application/DictionaryScene.fxml"));
+
             this.homeScene = FXMLLoader.load(getClass().getResource("/fxml/application/HomeScene.fxml"));
 
             FXMLLoader loader = null;
+
+            loader = new FXMLLoader(getClass().getResource("/fxml/application/DictionaryScene.fxml"));
+            this.dictionaryScene = loader.load();
+            this.dictionarySceneController = loader.getController();
 
             loader = new FXMLLoader(getClass().getResource("/fxml/Game/MultiChoiceGame/GameScene.fxml"));
             this.multiChoiceWordGameScene = loader.load();
