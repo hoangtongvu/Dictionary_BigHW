@@ -50,13 +50,27 @@ public class ModelListManager
         this.modelListFile = new File(this.modelListDir);
         if (this.modelListFile.exists()) return;
         //create a new file.
+        this.CreateDataDirectory();
+        this.CreateModelListFile();
+
+    }
+
+    private void CreateDataDirectory()
+    {
         try {
             Files.createDirectory(Paths.get(this.dataDirectory));
+        } catch (IOException e) {
+            //throw new RuntimeException(e);
+        }
+    }
+
+    private void CreateModelListFile()
+    {
+        try {
             this.modelListFile.createNewFile();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
         }
-
     }
 
     public boolean AddFileIntoList(File file)
