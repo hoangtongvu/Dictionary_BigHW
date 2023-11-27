@@ -54,11 +54,11 @@ public class NavigationPaneSceneController implements Initializable
     {
         this.drawerTranslateTransition = new TranslateTransition(Duration.seconds(0.5), this.drawerMenu);
         this.blurPaneFadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
-        try {
-            StudyTimerController.loadInstance().addToParent(widgetSpace);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            StudyTimerController.loadInstance().addToParent(widgetSpace);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     public static NavigationPaneSceneController LoadInstance() throws IOException

@@ -61,7 +61,6 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <AnchorPane fx:id="widgetSpace" layoutY="302.0" prefHeight="192.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="302.0" />
          </children>
       </AnchorPane>
    </children>
