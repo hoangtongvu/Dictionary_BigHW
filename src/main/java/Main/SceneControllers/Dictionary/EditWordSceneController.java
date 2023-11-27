@@ -5,6 +5,7 @@ import Dictionary.SearchHistory;
 import Main.FxmlFileManager;
 import Main.ProjectDirectory;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
+import Main.SceneControllers.Widget.StudyTimerController;
 import Main.application.App;
 import Word.WordBlock;
 import WordEditing.GraphNode.*;
@@ -17,6 +18,7 @@ import com.google.gson.reflect.TypeToken;
 import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -31,6 +33,8 @@ import javafx.util.Duration;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,6 +44,7 @@ import static java.util.Collections.sort;
 
 public class EditWordSceneController {
 
+    private static EditWordSceneController sceneController;
     private double mouseStartX;
     private double mouseStartY;
     protected AnchorPane canvasPane;
@@ -47,6 +52,14 @@ public class EditWordSceneController {
     static final NodeOptions options = new NodeOptions();
 
     GridPane grid = new GridPane();
+
+    public static EditWordSceneController getSceneController() {
+        return sceneController;
+    }
+
+    public static void setSceneController(EditWordSceneController sceneController) {
+        EditWordSceneController.sceneController = sceneController;
+    }
 
     @FXML
     AnchorPane root;
@@ -322,8 +335,6 @@ public class EditWordSceneController {
         }
     }
 
-////////////////////////////////////////////////////////////
-
 
     @FXML
     public void addDescription() {
@@ -431,7 +442,6 @@ public class EditWordSceneController {
             System.out.println(e.getMessage());
         }
     }
-
 
     public void showEditingTools(boolean flag) {
         exampleButton.setVisible(flag);
@@ -674,36 +684,4 @@ public class EditWordSceneController {
         node.setNodePanePosition((-1) * canvas.getViewportBounds().getMinX(),
                 (-1) * canvas.getViewportBounds().getMinY());
     }
-    @FXML
-    protected void onMenuButton() {
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5),drawerMenu);
-        translateTransition.setByX(+235);
-        translateTransition.play();
-
-        blurPane.setVisible(true);
-
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
-        fadeTransition.setFromValue(0);
-        fadeTransition.setToValue(1);
-        fadeTransition.play();
-    }
-
-    /**setOnFinished(lambdaExpression) to wait for the blur animation to finish before set blurPane invisible,
-     * otherwise, blurPane will disappear immediately.*/
-    @FXML
-    protected void onMenuExit() {
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5),drawerMenu);
-        translateTransition.setByX(-235);
-        translateTransition.play();
-
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
-        fadeTransition.setFromValue(1);
-        fadeTransition.setToValue(0);
-        fadeTransition.play();
-
-        fadeTransition.setOnFinished(event -> {blurPane.setVisible(false);});
-    }
-
-
-
 }

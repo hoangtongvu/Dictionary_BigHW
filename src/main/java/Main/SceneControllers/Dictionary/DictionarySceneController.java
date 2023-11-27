@@ -1,11 +1,15 @@
 package Main.SceneControllers.Dictionary;
 
 import Dictionary.DicManager;
+import Main.FxmlFileManager;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
+import Main.application.App;
 import Word.WordBlock;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -14,10 +18,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
@@ -55,6 +61,28 @@ public class DictionarySceneController implements Initializable {
     protected ListView<String> starredWordListView;
     @FXML
     protected ListView<String> historyListView;
+    @FXML
+    protected Button editButton;
+
+    public static WordBlock getCurrentWordBlock() {
+        return currentWordBlock;
+    }
+
+    @FXML
+    public void editCurrentWord() {
+        try {
+            FxmlFileManager.getInstance().editWordSceneController.loadWordOnPane(currentWordBlock.getWord());
+            switchScene(FxmlFileManager.getInstance().editWordScene);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void switchScene(Parent newScene) {
+        Stage primaryStage = App.getPrimaryStage();
+        primaryStage.getScene().setRoot(newScene);
+        primaryStage.show();
+    }
 
     private static WordBlock currentWordBlock = null;
 
@@ -97,6 +125,11 @@ public class DictionarySceneController implements Initializable {
                 historyListView.getItems().addAll(SearchHistory.getInstance().getWordHistory());
             }
 
+            if (currentWordBlock != null && currentWordBlock.isEditable()) {
+                editButton.setDisable(false);
+            } else {
+                editButton.setDisable(true);
+            }
         }
     }
 
@@ -135,6 +168,9 @@ public class DictionarySceneController implements Initializable {
         webEngine = webView.getEngine();
         webEngine.loadContent("<html><body>" + styleSheet + "</body></html>");
         blurPane.setVisible(false);
+        if (currentWordBlock == null) {
+            editButton.setDisable(true);
+        }
         try {
             DicManager.getInstance().getDicWordLoader().LoadFromDatabase();
             DicManager.getInstance().getRecentlySearchedWordManager().getRecentlySearchedWordLoader().Load();

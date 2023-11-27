@@ -1,5 +1,6 @@
 package Main;
 
+import Main.SceneControllers.Dictionary.EditWordSceneController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
@@ -35,6 +36,7 @@ public class FxmlFileManager
     public final Parent translateScene;
 
     public final Parent editWordScene;
+    public final Main.SceneControllers.Dictionary.EditWordSceneController editWordSceneController;
 
     public final Main.SceneControllers.Game.MultiChoiceGame.GameSceneController multiChoiceGameSceneController;
 
@@ -79,6 +81,7 @@ public class FxmlFileManager
 
             loader = new FXMLLoader(getClass().getResource("/fxml/application/EditWord.fxml"));
             this.editWordScene = loader.load();
+            this.editWordSceneController = loader.getController();
 
         }
         catch (IOException e)
