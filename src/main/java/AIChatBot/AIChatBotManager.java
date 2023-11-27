@@ -18,7 +18,7 @@ public class AIChatBotManager
 
     public AIChatBotManager()
     {
-        this.Initialize();
+        //this.Initialize();
         this.prompt = "";
     }
 

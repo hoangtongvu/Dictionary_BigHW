@@ -5,6 +5,7 @@ import AIChatBot.AIChatBotManager;
 import AIChatBot.ModelList.ModelListManager;
 import AIChatBot.gpt4all.ModelFileChooser;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
+import Main.application.App;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -56,6 +57,8 @@ public class AIConversationSceneController implements Initializable
     private static final String chooseModelFileComboBoxItem = "Choose model File...";
     private static final String naComboBoxItem = "<N/A>";
     private static final String downloadFromGpt4AllComboBoxItem = "Download model File from Gpt4all...";
+
+    private static final String gpt4AllLink = "https://gpt4all.io";
 
 
 
@@ -113,6 +116,8 @@ public class AIConversationSceneController implements Initializable
         modelNamePathPairs.forEach(pair -> items.add(pair.getKey()));
         items.add(chooseModelFileComboBoxItem);
         items.add(downloadFromGpt4AllComboBoxItem);
+
+        this.modelComboBox.getSelectionModel().select(naComboBoxItem);
     }
 
     @FXML
@@ -125,41 +130,48 @@ public class AIConversationSceneController implements Initializable
 
         switch (selectedItem)
         {
-            case naComboBoxItem:
-                break;
-            case chooseModelFileComboBoxItem:
-                File file = this.modelFileChooser.GetFileFromFileExplorer();
-                if (file == null)
-                {
-                    //todo select previous item instead of NA.
-                    this.modelComboBox.getSelectionModel().select(naComboBoxItem);
-                    return;
-                }
-                System.out.println(file);
-                ModelListManager modelListManager = this.aiChatBotCtrl.getModelListManager();
-
-                //if successful adding into list.
-                if (modelListManager.AddFileIntoList(file))
-                {
-                    String firstItem = modelListManager.getModelNameAndPaths().get(0).getKey();
-                    this.modelComboBox.getItems().add(1, firstItem);
-                    this.modelComboBox.getSelectionModel().select(1);
-                }
-                this.modelComboBox.getSelectionModel().select(ModelListManager.GetFileNameAfterRemoveExtension(file));
-                break;
-            case downloadFromGpt4AllComboBoxItem:
-                //todo open link to gpt4all website.
-                break;
-            default:
-                int index = selectionModel.getSelectedIndex();
-                List<Pair<String, String>> modelNamePathPairs = this.aiChatBotCtrl.getModelListManager().getModelNameAndPaths();
-                Pair<String, String> pair = modelNamePathPairs.get(index - 1);
-                this.aiChatBotCtrl.getAiChatBotManager().InitModel(Path.of(pair.getValue()));
-                break;
+            case naComboBoxItem -> {}
+            case chooseModelFileComboBoxItem -> this.OnSelectChooseFileItem();
+            case downloadFromGpt4AllComboBoxItem -> this.OnSelectDownloadItem();
+            default -> this.OnSelectExistModelItem();
         }
 
+    }
 
+    private void OnSelectChooseFileItem()
+    {
+        SelectionModel<String> selectionModel = this.modelComboBox.getSelectionModel();
+        File file = this.modelFileChooser.GetFileFromFileExplorer();
+        if (file == null)
+        {
+            //todo select previous item instead of NA.
+            selectionModel.select(naComboBoxItem);
+            return;
+        }
+        ModelListManager modelListManager = this.aiChatBotCtrl.getModelListManager();
 
+        //if successful adding into list.
+        if (modelListManager.AddFileIntoList(file))
+        {
+            String firstItem = modelListManager.getModelNameAndPaths().get(0).getKey();
+            this.modelComboBox.getItems().add(1, firstItem);
+            selectionModel.select(1);
+        }
+        selectionModel.select(ModelListManager.GetFileNameAfterRemoveExtension(file));
+    }
+
+    private void OnSelectDownloadItem()
+    {
+        this.modelComboBox.getSelectionModel().select(naComboBoxItem);
+        App.getMyHostServices().showDocument(gpt4AllLink);
+    }
+
+    private void OnSelectExistModelItem()
+    {
+        int index = this.modelComboBox.getSelectionModel().getSelectedIndex();
+        List<Pair<String, String>> modelNamePathPairs = this.aiChatBotCtrl.getModelListManager().getModelNameAndPaths();
+        Pair<String, String> pair = modelNamePathPairs.get(index - 1);
+        this.aiChatBotCtrl.getAiChatBotManager().InitModel(Path.of(pair.getValue()));
     }
 
     private MessageBlockSceneController CreateMessageBlock()
@@ -252,16 +264,13 @@ public class AIConversationSceneController implements Initializable
 
     private void ScrollToLatestMessage()
     {
-        //todo smooth scroll.
         this.messageScrollPane.setVvalue(1);
     }
 
 
     //todo switch to this scene from another scene.
     //todo using spelling API to spell AI's responses.
-    //todo try to word by word generation.
-    //todo large language model downloading.
     //todo loading model in background. x
-    //todo better visualization when no model found.
+    //todo try to word by word generation. x
 
 }
