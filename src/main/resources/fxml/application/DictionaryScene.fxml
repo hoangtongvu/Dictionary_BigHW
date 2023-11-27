@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -25,8 +26,12 @@
                      <children>
                         <Pane prefHeight="60.0" prefWidth="331.0" styleClass="pane-title" stylesheets="@../../css/ApplicationStyle.css">
                            <children>
-                              <Button layoutX="14.0" layoutY="18.0" mnemonicParsing="false" onAction="#addToStarList" text="Star" />
-                              <Button fx:id="editButton" layoutX="61.0" layoutY="18.0" mnemonicParsing="false" onAction="#editCurrentWord" text="Edit" />
+                              <Button id="editButton" fx:id="editButton" layoutX="50.0" layoutY="16.0" mnemonicParsing="false" onAction="#editCurrentWord" prefHeight="31.0" prefWidth="36.0" />
+                              <Button id="starButton" fx:id="starButton" layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#addToStarList" prefHeight="31.0" prefWidth="36.0" styleClass="starButton" stylesheets="@../../css/ApplicationStyle.css">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true" />
+                                 </graphic>
+                              </Button>
                            </children>
                         </Pane>
                      </children></Pane>

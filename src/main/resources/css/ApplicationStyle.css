@@ -76,7 +76,7 @@
 }
 
 .right-nav-box {
-    -fx-effect: dropshadow(three-pass-box, #ce5e82 ,0,1,5,5);
+    -fx-effect: dropshadow(three-pass-box, #ce5e82,0,1,5,5);
     -fx-background-radius: 10px;
     -fx-background-color: #200D3A;
     /*-fx-effect: dropshadow(type,color,radius,spread,offsetx,offsety);*/
@@ -85,5 +85,36 @@
 .pane-title {
     -fx-background-color: linear-gradient(to right, #200D3A, #292651, #2E4770);;
     -fx-background-radius: 10;
+}
 
+#starButton {
+    -fx-background-color: transparent;
+    -fx-background-image: url('../png/star.png');
+    -fx-background-size: 25px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#starButton:hover {
+    -fx-background-color: transparent;
+    -fx-background-image: url('../png/star_filled.png');
+    -fx-background-size: 25px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#editButton {
+    -fx-background-color: transparent;
+    -fx-background-image: url('../png/edit_dictionary.png');
+    -fx-background-size: 25px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#editButton:hover {
+    -fx-background-color: transparent;
+    -fx-background-image: url('../png/edit_filled.png');
+    -fx-background-size: 25px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
 }

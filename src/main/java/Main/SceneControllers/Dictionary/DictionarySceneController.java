@@ -12,10 +12,10 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -45,6 +45,9 @@ public class DictionarySceneController implements Initializable {
     public static List<WordBlock> getStarredWordList() {
         return starredWordList;
     }
+
+    @FXML
+    protected Button starButton;
 
     private  List<String> possibleSuggestions = new ArrayList<>();
     @FXML
@@ -246,6 +249,8 @@ public class DictionarySceneController implements Initializable {
         historyListView.getItems().clear();
         SearchHistory.getInstance().clearHistory();
     }
+
+
 
 //    public static void main(String[] arg) {
 ////        String str = "helloo";
