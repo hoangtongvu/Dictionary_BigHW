@@ -8,10 +8,13 @@ import javafx.util.Pair;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class ModelListManager
 {
-    private final String modelListDir = ProjectDirectory.resourcesPath + "/AIBotData/ModelList.txt";
+    private final String dataDirectory = ProjectDirectory.resourcesPath + "/AIBotData";
+    private final String modelListDir = dataDirectory + "/ModelList.txt";
 
     private File modelListFile;
 
@@ -48,6 +51,7 @@ public class ModelListManager
         if (this.modelListFile.exists()) return;
         //create a new file.
         try {
+            Files.createDirectory(Paths.get(this.dataDirectory));
             this.modelListFile.createNewFile();
         } catch (IOException e) {
             throw new RuntimeException(e);
