@@ -138,6 +138,12 @@ public class NavigationPaneSceneController implements Initializable
     }
 
     @FXML
+    private void MoveToAIChatBotScene()
+    {
+        MoveToScene(FxmlFileManager.getInstance().aiConversationScene);
+    }
+
+    @FXML
     private void MoveToSettingsScene()
     {
         //MoveToScene(FxmlFileManager.getInstance().chooseGameScene);

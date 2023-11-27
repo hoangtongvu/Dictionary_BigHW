@@ -268,7 +268,6 @@ public class AIConversationSceneController implements Initializable
     }
 
 
-    //todo switch to this scene from another scene.
     //todo using spelling API to spell AI's responses.
     //todo loading model in background. x
     //todo try to word by word generation. x
