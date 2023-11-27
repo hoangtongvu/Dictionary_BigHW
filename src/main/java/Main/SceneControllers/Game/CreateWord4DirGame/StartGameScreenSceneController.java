@@ -14,8 +14,8 @@ public class StartGameScreenSceneController
 
         GameSceneController gameSceneController = FxmlFileManager.getInstance().createWord4DirGameSceneController;
 
-        gameSceneController.StartGame();
         HomeSceneController.SwitchScene(FxmlFileManager.getInstance().createWord4DirGameScene);
+        gameSceneController.StartGame();
     }
 
 }

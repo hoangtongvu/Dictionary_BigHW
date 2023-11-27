@@ -1,6 +1,7 @@
 package Game.CreateWord4DirGame;
 
 
+import Logger.LoggersCtrl;
 import Word.WordBlock;
 import Word.WordDefinition;
 import Word.WordDescription;
@@ -82,9 +83,11 @@ public class CreatingWord
             wordBlock.loadData(wordBlock.getWordID());
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            LoggersCtrl.systemLogger.Log("Error loading data.");
         }
         List<WordDescription> wordDescriptions = wordBlock.getDescriptionsList();
         List<WordDefinition> wordDefinitions = wordDescriptions.get(0).getDefinitionList();
+        if (wordDefinitions == null) return;
         this.hint = "[" + wordDescriptions.get(0).getWordType() + "] " + wordDefinitions.get(0).getDefinition();
     }
 
@@ -95,7 +98,7 @@ public class CreatingWord
         return this.wordBlocks.get(randIndex);
     }
 
-    public char[] GetChoiceChars()
+    private char[] GetChoiceChars()
     {
         char nextChar = this.GetNextChar();
         int choiceCharsSize = 4;
@@ -120,8 +123,9 @@ public class CreatingWord
         return choiceChars;
     }
 
-    private char GetNextChar()//
+    public char GetNextChar()//
     {
+        if (this.currentCharPos + 1 >= this.result.length()) return '\0';
         char nextChar = this.result.charAt(this.currentCharPos + 1);
         //if (nextChar == ' ') nextChar = '_';
         return nextChar;
@@ -147,7 +151,7 @@ public class CreatingWord
 
     public void ChooseChar(int index)
     {
-
+        if (this.word.length() >= this.result.length()) return;
         //choiceChars[index] == nextChar addChar, currentCharPos++.
         char nextChar = this.GetNextChar();
         char choseChar = this.choiceChars[index];
@@ -156,6 +160,7 @@ public class CreatingWord
         if (nextChar == choseChar)
         {
             this.OnChooseCorrectChoice();
+            this.gameManager.InvokeOnChooseCharEvent(true, index);
 
             //Only need to choose length - 1 times, so limit is length - 1.
             //System.out.println("[POS] " + this.currentCharPos + " of " + this.result.length());
@@ -170,6 +175,7 @@ public class CreatingWord
         else
         {
             this.OnChooseIncorrectChoice();
+            this.gameManager.InvokeOnChooseCharEvent(false, index);
         }
 
 
@@ -185,6 +191,7 @@ public class CreatingWord
 
         this.gameManager.InvokeOnCreatingWordChangeEvent(this.getCurrentCreatingWord());
         this.gameManager.AddPoint();
+
     }
 
     private void OnChooseIncorrectChoice()
@@ -195,7 +202,7 @@ public class CreatingWord
     private void GenerateChoiceChars()
     {
         this.choiceChars = this.GetChoiceChars();
-        System.out.println("[NEXT CHAR] " + this.GetNextChar());
+        LoggersCtrl.gameLogger.Log("NEXT CHAR", this.GetNextChar() + "");
 
         Character[] characters = this.Convert_chars_to_Characters(this.choiceChars);
         this.gameManager.InvokeOnChoiceCharsChangeEvent(characters);

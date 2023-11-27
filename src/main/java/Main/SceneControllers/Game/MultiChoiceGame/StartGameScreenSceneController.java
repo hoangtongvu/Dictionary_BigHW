@@ -39,8 +39,8 @@ public class StartGameScreenSceneController
         gameSceneController.setMaxQues(maxQues);
         gameSceneController.getTimerManager().getCustomTimer().setMaxTimeSecond(maxTimeSecond);
 
-        gameSceneController.StartGame();
         HomeSceneController.SwitchScene(FxmlFileManager.getInstance().multiChoiceWordGameScene);
+        gameSceneController.StartGame();
     }
 
 }
