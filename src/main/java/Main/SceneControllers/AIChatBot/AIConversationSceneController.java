@@ -4,6 +4,7 @@ import AIChatBot.AIChatBotCtrl;
 import AIChatBot.AIChatBotManager;
 import AIChatBot.ModelList.ModelListManager;
 import AIChatBot.gpt4all.ModelFileChooser;
+import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -15,11 +16,13 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import javafx.util.Pair;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -28,6 +31,9 @@ import java.util.ResourceBundle;
 
 public class AIConversationSceneController implements Initializable
 {
+
+    @FXML
+    private AnchorPane rootAnchorPane;
 
     @FXML
     private VBox conversationVbox;
@@ -63,8 +69,19 @@ public class AIConversationSceneController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        this.AddNavPane();
         this.AddTextAreaKeyCombination();
         this.UpdateModelComboBox();
+    }
+
+    private void AddNavPane()
+    {
+        try {
+            NavigationPaneSceneController navigationPaneSceneController = NavigationPaneSceneController.LoadInstance();
+            navigationPaneSceneController.AddNavPaneComponentsToRoot(this.rootAnchorPane);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void AddTextAreaKeyCombination()
@@ -240,11 +257,11 @@ public class AIConversationSceneController implements Initializable
     }
 
 
+    //todo switch to this scene from another scene.
     //todo using spelling API to spell AI's responses.
     //todo try to word by word generation.
     //todo large language model downloading.
-    //todo loading model in background.
-    //todo switch to this scene from another scene.
+    //todo loading model in background. x
     //todo better visualization when no model found.
 
 }
