@@ -4,7 +4,9 @@ import Dictionary.DicManager;
 import Main.FxmlFileManager;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import Main.application.App;
+import Main.SceneControllers.Translate.TextToSpeech;
 import Word.WordBlock;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -245,6 +247,13 @@ public class DictionarySceneController implements Initializable {
     public void clearHistory() {
         historyListView.getItems().clear();
         SearchHistory.getInstance().clearHistory();
+    }
+
+    @FXML
+    public void onSoundButton(ActionEvent e) {
+        if (searchBar.getText() != null && !searchBar.getText().equals("")) {
+            TextToSpeech.EnTextToSpeech(searchBar.getText());
+        }
     }
 
 //    public static void main(String[] arg) {
