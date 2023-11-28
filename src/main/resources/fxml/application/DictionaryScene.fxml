@@ -15,6 +15,7 @@
    <children>
       <VBox prefHeight="600.0" prefWidth="1202.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <Pane prefHeight="41.0" prefWidth="1200.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css" />
             <Pane id="main_search_bar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="126.0" prefWidth="1200.0" styleClass="secondaryTopBar" stylesheets="@../../css/ApplicationStyle.css">
                <children>
                   <TextField id="searchBar" fx:id="searchBar" layoutX="40.0" layoutY="48.0" onAction="#LookupWord" onKeyTyped="#OnTextChange" prefHeight="31.0" prefWidth="645.0" promptText="Type your word here...">
@@ -28,14 +29,14 @@
                <children>
                   <AnchorPane fx:id="contentAnchorPane" prefHeight="443.0" prefWidth="826.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="374.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <WebView fx:id="webView" layoutX="380.0" layoutY="68.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <WebView fx:id="webView" layoutX="380.0" layoutY="68.0" prefHeight="200.0" prefWidth="200.0" style="-fx-context-menu-enabled: false;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="443.0" prefWidth="375.0" styleClass="dictionaryRightNav" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Pane layoutX="21.0" layoutY="23.0" maxHeight="198.0" minHeight="180.0" prefHeight="198.0" prefWidth="333.0" styleClass="right-nav-box" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="22.0">
+                        <Pane layoutX="23.0" layoutY="25.0" maxHeight="231.0" minHeight="180.0" prefHeight="231.0" prefWidth="330.0" styleClass="right-nav-box" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="24.0">
                            <children>
-                              <Pane prefHeight="60.0" prefWidth="331.0" styleClass="pane-title" stylesheets="@../../css/ApplicationStyle.css">
+                              <Pane prefHeight="60.0" prefWidth="328.0" styleClass="pane-title" stylesheets="@../../css/ApplicationStyle.css">
                                  <children>
                                     <Button id="editButton" fx:id="editButton" layoutX="79.0" layoutY="16.0" mnemonicParsing="false" onAction="#editCurrentWord" prefHeight="31.0" prefWidth="36.0" />
                                     <Button id="starButton" fx:id="starButton" layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#addToStarList" prefHeight="31.0" prefWidth="36.0" styleClass="starButton" stylesheets="@../../css/ApplicationStyle.css" />
@@ -44,23 +45,27 @@
                               </Pane>
                            </children>
                         </Pane>
-                        <TabPane id="tabPane" layoutX="21.0" layoutY="243.0" prefHeight="181.0" prefWidth="331.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="241.99999999999997">
+                        <TabPane id="tabPane" layoutX="16.0" layoutY="275.0" prefHeight="139.0" prefWidth="341.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="274.0">
                           <tabs>
                             <Tab text="Favourite Words">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../../css/ApplicationStyle.css">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="274.0" styleClass="dictionaryRightNav" stylesheets="@../../css/ApplicationStyle.css">
                                        <children>
-                                          <ListView fx:id="starredWordListView" layoutY="-10.0" onMouseClicked="#listViewMouseClicked" prefHeight="200.0" prefWidth="200.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <ListView fx:id="starredWordListView" layoutX="5.0" onMouseClicked="#listViewMouseClicked" prefHeight="110.0" prefWidth="321.0" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                               </content>
                             </Tab>
                             <Tab text="WordHistory">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="331.0" stylesheets="@../../css/ApplicationStyle.css">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="331.0" styleClass="dictionaryRightNav" stylesheets="@../../css/ApplicationStyle.css">
                                        <children>
-                                          <ListView fx:id="historyListView" onMouseClicked="#getWordFromHistory" prefHeight="145.0" prefWidth="331.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                          <Button fx:id="clearHistory" layoutX="118.0" layoutY="153.0" mnemonicParsing="false" onAction="#clearHistory" prefHeight="25.0" prefWidth="94.0" text="Clear History" AnchorPane.bottomAnchor="5.0" />
+                                          <ListView id="historyListView" fx:id="historyListView" layoutX="2.0" layoutY="2.0" onMouseClicked="#getWordFromHistory" prefHeight="77.0" prefWidth="337.0" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
+                                          <AnchorPane id="clearHistoryPane" layoutX="2.0" layoutY="77.85713958740234" prefHeight="29.0" prefWidth="337.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0">
+                                             <children>
+                                                <Button id="clearHistoryButton" fx:id="clearHistory" layoutX="209.0" mnemonicParsing="false" onAction="#clearHistory" prefHeight="29.0" prefWidth="125.0" stylesheets="@../../css/ApplicationStyle.css" text="Clear History" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="209.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0" />
+                                             </children>
+                                          </AnchorPane>
                                        </children>
                                     </AnchorPane>
                               </content>

@@ -91,7 +91,7 @@
 
 .pane-title {
     -fx-background-color: linear-gradient(to right, #200D3A, #292651, #2E4770);;
-    -fx-background-radius: 10;
+    -fx-background-radius: 10 10 0 0;
 }
 
 #starButton {
@@ -143,24 +143,25 @@
 }
 
 .tab .tab-label {
-    -fx-background-color: #21252b;
+    -fx-background-color: #292651;
     -fx-text-fill: #ce5e82;
     -fx-font-family: Roboto;
     -fx-font-weight: bold;
+    -fx-font-size: 15px;
 }
 
 .tab {
-    -fx-background-color: #21252b;
+    -fx-background-color: #292651;
     -fx-text-fill: #ce5e82;
 }
 
 .tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .tab-label {
     -fx-text-fill: white;
-    -fx-background-color: black;
+    -fx-background-color: #200D3A;
 }
 
 .tab-pane:focused > .tab-header-area > .headers-region > .tab:selected {
-    -fx-background-color: black;
+    -fx-background-color: #200D3A;
 }
 
 .tab-pane {
@@ -168,27 +169,68 @@
 }
 
 .tab-pane > .tab-header-area > .tab-header-background {
-    -fx-background-color: transparent;
-}
-
-.list-view {
-    -fx-background-color: #282c34 ;
+    -fx-background-color: #21252b;
 }
 
 .list-cell {
-    -fx-text-fill: #ffffff;
-    -fx-background-color: #282c34;
-    -fx-padding: 0px;
+    -fx-text-fill: #ce5e82;
+    -fx-background-color:  #200D3A;
+    -fx-padding: 0px 0px 0px 10px;
+    -fx-font-family: Roboto;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
 }
 
+
 .list-cell:selected {
-    -fx-text-fill:  black;
-    -fx-background-color: white;
+    -fx-text-fill:  #ce5e82;
+    -fx-background-color:  #2E4770;
 }
 
 #searchBar .list-cell {
     -fx-background-color: white;
 }
+
+#historyListView {
+    -fx-background-color:  #200D3A;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0 10 0 0;
+}
+
+.list-view {
+    -fx-background-color:  #200D3A;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0px 10px 10px 10px;
+}
+
+#clearHistoryPane {
+    -fx-background-color: #200D3A;
+    -fx-background-radius: 0 0 10 10;
+}
+
+#clearHistoryButton {
+    -fx-alignment: baseline-left;
+    -fx-padding: 0 0 0 25;
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+    -fx-text-fill: #b93939;
+    -fx-font-size: 15;
+
+    -fx-background-image: url('../png/delete.png');
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
+}
+
+#clearHistoryButton:hover {
+    -fx-text-fill: white;
+    -fx-background-image: url('../png/delete_filled.png');
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
+}
+
+
 
 
 
