@@ -1,5 +1,8 @@
 package Game.MultiChoiceGame;
 
+
+import CustomEventPackage.OneParameter.CustomEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,40 +12,30 @@ public class ChoiceGameManager
     private final ChoiceGameCtrl choiceGameCtrl;
     private final List<MultiChoiceQues> questions;
 
-    public List<MultiChoiceQues> getQuestions()
-    {
-        return this.questions;
+
+    public final CustomEvent<MultiChoiceQues> onQuesChangeEvent;
+
+    public List<MultiChoiceQues> getQuestions() {
+        return questions;
     }
 
     public ChoiceGameManager(ChoiceGameCtrl choiceGameCtrl)
     {
         this.choiceGameCtrl = choiceGameCtrl;
         this.questions = new ArrayList<>();
+        this.choiceGameCtrl.getChoiceQuesLoader().LoadDefault();
+        this.onQuesChangeEvent = new CustomEvent<>(this);
     }
 
-
-
-    public String GetInfoAllQuestions()
+    public void Start(int maxQues)
     {
-        int length = this.questions.size();
-        String s = "";
-        for (int i = 0; i < length; i++)
-        {
-            s += (i + 1) + ". " + this.questions.get(i).GetInfo() + "\n";
-        }
-        return s;
+        this.LoadQuestions(maxQues);
     }
 
-
-    public String GetInfoAtQuestion(int index)
+    private void LoadQuestions(int maxQues)
     {
-        int length = this.questions.size();
-        if (index >= length) return "Question not found";
-
-        return (index + 1) + ". " + this.questions.get(index).GetInfo() + "\n";
+        this.choiceGameCtrl.getChoiceQuesGenerator().GenerateRandomQuestions(maxQues);
     }
-
-
 
 
 }

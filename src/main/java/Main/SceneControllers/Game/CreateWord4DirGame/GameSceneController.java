@@ -338,7 +338,7 @@ public class GameSceneController implements Initializable
 
     private void MoveBackToStartScreen()
     {
-        HomeSceneController.SwitchScene(FxmlFileManager.getInstance().createWord4DirGameStartScene);
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().createWord4DirGameStartScene);
     }
 
     private void ToggleTimerText(boolean useTimer)

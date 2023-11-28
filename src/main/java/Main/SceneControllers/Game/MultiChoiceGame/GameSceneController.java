@@ -16,7 +16,6 @@ import javafx.scene.text.Text;
 import scenebuilderextended.components.choicegameextendedcomponents.ChoiceGameButton;
 import scenebuilderextended.components.choicegameextendedcomponents.ChoiceGameGridPane;
 
-import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -26,93 +25,64 @@ public class GameSceneController implements Initializable
 {
 
     //region FXML
-    @FXML
-    private CheckBox answerA;
 
-    @FXML
-    private CheckBox answerB;
-
-    @FXML
-    private CheckBox answerC;
-
-    @FXML
-    private CheckBox answerD;
-
-    @FXML
-    private Button nextButton;
-
-    @FXML
-    private Button endGameButton;
-
-    @FXML
-    private Button endReviewButton;
-
-    @FXML
-    private Text question;
-
-    @FXML
-    private Text timerText;
-
-    @FXML
-    private ProgressBar answeredProgress;
-
-    @FXML
-    private ChoiceGameGridPane quesGridPane;
-
-    @FXML
-    private VBox answerResultVbox;
-
-    @FXML
-    private Text finalQuestionStateText;
-
-    @FXML
-    private Text rightAnswerIfIncorrectText;
-
-    @FXML
-    private Text finalPointText;
+    @FXML private CheckBox answerA;
+    @FXML private CheckBox answerB;
+    @FXML private CheckBox answerC;
+    @FXML private CheckBox answerD;
+    @FXML private Button nextButton;
+    @FXML private Button endGameButton;
+    @FXML private Button endReviewButton;
+    @FXML private Text questionText;
+    @FXML private Text timerText;
+    @FXML private ProgressBar answeredProgress;
+    @FXML private ChoiceGameGridPane quesGridPane;
+    @FXML private VBox answerResultVbox;
+    @FXML private Text finalQuestionStateText;
+    @FXML private Text rightAnswerIfIncorrectText;
+    @FXML private Text finalPointText;
 
     //endregion
 
-    private CheckBox choseAnswer;
-    private List<MultiChoiceQues> questions;
-    private ChoiceGameCtrl choiceGameCtrl;
+    private CheckBox choseAnswerCheckBox;
+    private final List<MultiChoiceQues> questions;
+    private final ChoiceGameCtrl choiceGameCtrl;
     private int maxQues = 20;
     private int currentQuesPos = 0;
     private ChoiceCode[] userAnswers;
     private ChoiceGameTimerManager timerManager;
 
 
-    public void setMaxQues(int maxQues) { this.maxQues = maxQues; }
-    public ChoiceGameTimerManager getTimerManager() { return this.timerManager; }
-
+    public GameSceneController()
+    {
+        this.choiceGameCtrl = GamesCtrl.getInstance().getChoiceGameCtrl();
+        this.questions = this.choiceGameCtrl.getChoiceGameManager().getQuestions();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        this.choiceGameCtrl = GamesCtrl.getInstance().getChoiceGameCtrl();
         this.timerManager = new ChoiceGameTimerManager(this.timerText);
-
-        try {
-            this.choiceGameCtrl.getChoiceQuesLoader().LoadDefault();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
         this.SubTimerEvent();
-
     }
 
-    public void StartGame()
+    public void StartGame(int maxQues, int maxTimeSecond)
     {
+        ChoiceGameManager choiceGameManager = this.choiceGameCtrl.getChoiceGameManager();
+
+
+        this.maxQues = maxQues;
+        choiceGameManager.Start(maxQues);
+
+        this.timerManager.getCustomTimer().setMaxTimeSecond(maxTimeSecond);
         this.timerManager.getCustomTimer().Start();
 
-        this.LoadQuestions();
-        this.choseAnswer = null;
+        this.choseAnswerCheckBox = null;
 
-        this.userAnswers = new ChoiceCode[this.maxQues];
+        this.userAnswers = new ChoiceCode[this.maxQues];//
 
-        this.SetQuestion(this.questions.get(0).getQuestion());
-        this.SetAnswers(this.questions.get(0).getAnswers());
+        this.SetQuestionText(this.questions.get(0).getQuestion());
+        this.SetAnswersCheckBox(this.questions.get(0).getAnswers());
 
         this.quesGridPane.AddingButtonsToGridPane(this.maxQues);
 
@@ -123,15 +93,10 @@ public class GameSceneController implements Initializable
 
     private void EndGame()
     {
-        //show point.
-        //show number of correct and incorrect answers.
-        //set color of correct and incorrect answers button.
-        //show right answer if user's answer is incorrect.
         this.MoveToQuestionAt(0);
         this.CheckAnswers();
         this.ToggleAnswerResultVbox();
         this.ToggleFinalPointText();
-        this.ShowTimeOutScreen();
         this.ToggleCheckBoxes();
         this.ToggleEndGameButton();
         this.ToggleEndReviewButton();
@@ -151,8 +116,8 @@ public class GameSceneController implements Initializable
         this.ClearChoseAnswer();
         this.TickAnswerBasedOnUserAnswer();
 
-        this.SetQuestion(this.questions.get(this.currentQuesPos).getQuestion());
-        this.SetAnswers(this.questions.get(this.currentQuesPos).getAnswers());
+        this.SetQuestionText(this.questions.get(this.currentQuesPos).getQuestion());
+        this.SetAnswersCheckBox(this.questions.get(this.currentQuesPos).getAnswers());
         this.SetAnswerResultVbox();
     }
 
@@ -177,11 +142,11 @@ public class GameSceneController implements Initializable
 
     private void ChooseAnswer(ChoiceCode choiceCode)
     {
-        if (this.choseAnswer != null) this.choseAnswer.setSelected(false);
-        this.choseAnswer = this.GetCheckBoxByChoiceCode(choiceCode);
+        if (this.choseAnswerCheckBox != null) this.choseAnswerCheckBox.setSelected(false);
+        this.choseAnswerCheckBox = this.GetCheckBoxByChoiceCode(choiceCode);
 
         this.userAnswers[this.currentQuesPos] = choiceCode;
-        this.choseAnswer.setSelected(true);
+        this.choseAnswerCheckBox.setSelected(true);
 
         this.quesGridPane.getChoiceGameButtons().get(this.currentQuesPos).SetDone();
 
@@ -208,17 +173,12 @@ public class GameSceneController implements Initializable
         this.answeredProgress.setProgress((double) current / max);
     }
 
-    private void LoadQuestions()
+    private void SetQuestionText(String ques)
     {
-        this.questions = this.choiceGameCtrl.getChoiceQuesGenerator().GetRandomQuestions(this.maxQues);
+        this.questionText.setText((this.currentQuesPos + 1) + ". " + ques);
     }
 
-    private void SetQuestion(String ques)
-    {
-        this.question.setText((this.currentQuesPos + 1) + ". " + ques);
-    }
-
-    private void SetAnswers(String[] answers)
+    private void SetAnswersCheckBox(String[] answers)
     {
         this.answerA.setText(answers[0]);
         this.answerB.setText(answers[1]);
@@ -228,17 +188,17 @@ public class GameSceneController implements Initializable
 
     private void ClearChoseAnswer()
     {
-        if (this.choseAnswer == null) return;
-        this.choseAnswer.setSelected(false);
-        this.choseAnswer = null;
+        if (this.choseAnswerCheckBox == null) return;
+        this.choseAnswerCheckBox.setSelected(false);
+        this.choseAnswerCheckBox = null;
     }
 
     private void TickAnswerBasedOnUserAnswer()
     {
         ChoiceCode choseAnswerCode = this.userAnswers[this.currentQuesPos];
         if (choseAnswerCode == null) return;
-        this.choseAnswer = this.GetCheckBoxByChoiceCode(choseAnswerCode);
-        this.choseAnswer.setSelected(true);
+        this.choseAnswerCheckBox = this.GetCheckBoxByChoiceCode(choseAnswerCode);
+        this.choseAnswerCheckBox.setSelected(true);
 
     }
 
@@ -264,11 +224,6 @@ public class GameSceneController implements Initializable
     private void EndGameButton()
     {
         this.timerManager.getCustomTimer().Stop();
-    }
-
-    private void ShowTimeOutScreen()
-    {
-        System.out.println("Time out.");
     }
 
     private void CheckAnswers()
@@ -365,12 +320,6 @@ public class GameSceneController implements Initializable
     @FXML
     private void EndReview()
     {
-
-        this.SwitchBackToStartScreen();
-    }
-
-    private void SwitchBackToStartScreen()
-    {
         this.ToggleEndGameButton();
         this.ToggleEndReviewButton();
         this.ToggleFinalPointText();
@@ -378,8 +327,12 @@ public class GameSceneController implements Initializable
         this.ToggleCheckBoxes();
         this.ClearChoseAnswer();
         this.SetProgressBar(0, this.maxQues);
-        HomeSceneController.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameStartScene);
+        this.SwitchBackToStartScreen();
+    }
 
+    private void SwitchBackToStartScreen()
+    {
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameStartScene);
     }
     
 
