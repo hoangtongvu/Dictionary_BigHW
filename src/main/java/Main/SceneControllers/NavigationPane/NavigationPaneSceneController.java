@@ -147,8 +147,14 @@ public class NavigationPaneSceneController implements Initializable
     }
 
     @FXML
+    private void MoveToTranslateScene()
+    {
+        MoveToScene(FxmlFileManager.getInstance().translateScene);
+    }
+
+    @FXML
     private void MoveToSettingsScene()
     {
-
+        MoveToScene(FxmlFileManager.getInstance().settingsScene);
     }
 }

@@ -58,6 +58,9 @@ public class FxmlFileManager
     public final Parent aiConversationScene;
 
     public final Parent loginScreen;
+    public final Parent settingsScene;
+
+
     public static void SwitchScene(Parent newScene) {
         Stage primaryStage = App.getPrimaryStage();
 
@@ -123,6 +126,9 @@ public class FxmlFileManager
 
             loader = new FXMLLoader(getClass().getResource("/fxml/application/LoginScreen.fxml"));
             this.loginScreen = loader.load();
+
+            loader = new FXMLLoader(getClass().getResource("/fxml/application/SettingScene.fxml"));
+            this.settingsScene = loader.load();
 
         }
         catch (IOException e)
