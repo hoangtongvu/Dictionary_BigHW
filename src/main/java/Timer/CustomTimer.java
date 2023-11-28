@@ -1,105 +1,65 @@
 package Timer;
 
-import java.util.*;
 import CustomEventPackage.ZeroParameter.CustomEvent;
-import javafx.application.Platform;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 public class CustomTimer
 {
-
-    public final CustomEventPackage.OneParameter.CustomEvent<Integer> onTickEvent;
+    public final CustomEventPackage.TwoParameters.CustomEvent<Integer, Integer> onTickEvent;
     public final CustomEvent onStopEvent;
 
-    private Timer timer;
+    private Timeline timeline;
     private boolean isRunning = false;
-
     private int counter = 0;
-    private int maxTimeSecond;
-
-    public int getCounter()
-    {
-        return this.counter;
-    }
-
+    
     public void setMaxTimeSecond(int maxTimeSecond)
     {
-        this.maxTimeSecond = maxTimeSecond;
+        this.timeline.setCycleCount(maxTimeSecond);
     }
-    public int getMaxTimeSecond() { return this.maxTimeSecond; }
 
     public CustomTimer()
     {
-        this.maxTimeSecond = 0;
+        this.InitTimeline();
+        this.setMaxTimeSecond(0);
 
-        this.onTickEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
+        this.onTickEvent = new CustomEventPackage.TwoParameters.CustomEvent<>(this);
         this.onStopEvent = new CustomEvent(this);
     }
 
-    public CustomTimer(int maxTimeSecond)
+    private void InitTimeline()
     {
-        this.maxTimeSecond = maxTimeSecond;
-
-        this.onTickEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
-        this.onStopEvent = new CustomEvent(this);
-
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), e -> this.Tick());
+        this.timeline = new Timeline(keyFrame);
     }
-
 
     public void Start()
     {
         if (this.isRunning) return;
-        this.AssignNewTimer();
         this.isRunning = true;
         this.ResetCounter();
-        this.AddTimerTask();
+        this.timeline.play();
     }
 
     public void Stop()
     {
         if (!this.isRunning) return;
         this.isRunning = false;
-        this.timer.cancel();
         this.onStopEvent.Invoke(this);
-        this.timer.purge();
-
+        this.timeline.stop();
     }
 
     private void Tick()
     {
         counter++;
-        this.onTickEvent.Invoke(this, this.counter);
+        this.onTickEvent.Invoke(this, this.counter, this.timeline.getCycleCount());
+        if (this.counter >= this.timeline.getCycleCount()) this.Stop();
     }
 
-    private void AssignNewTimer()
-    {
-        this.timer = new Timer();
-    }
     public void ResetCounter()
     {
         this.counter = 0;
     }
-
-    private void AddTimerTask()
-    {
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run()
-            {
-                Tick();
-                OnApplicationExitChecking();
-                if (counter >= maxTimeSecond) Stop();
-            }
-        };
-
-        int delayTime = 1000;
-        this.timer.scheduleAtFixedRate(timerTask, 0, delayTime);
-    }
-
-    private void OnApplicationExitChecking()
-    {
-        boolean isClose = Platform.isImplicitExit();
-        if (isClose) this.Stop();
-    }
-
 
 }

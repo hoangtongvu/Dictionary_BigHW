@@ -12,6 +12,7 @@ public class ChoiceGameCtrl extends GameCtrl
     private final ChoiceGameManager choiceGameManager;
     private final ChoiceQuesLoader choiceQuesLoader;
     private final ChoiceQuesGenerator choiceQuesGenerator;
+    private final ChoiceQuesStorage choiceQuesStorage;
 
     public ChoiceQuesLoader getChoiceQuesLoader() {
         return choiceQuesLoader;
@@ -22,27 +23,20 @@ public class ChoiceGameCtrl extends GameCtrl
     public ChoiceQuesGenerator getChoiceQuesGenerator() {
         return choiceQuesGenerator;
     }
+    public ChoiceQuesStorage getChoiceQuesStorage() {
+        return choiceQuesStorage;
+    }
 
 
 
     public ChoiceGameCtrl()
     {
-        super("Multi-Choice", actionEvent -> FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameStartScene));
-        this.choiceGameManager = new ChoiceGameManager(this);
+        super("Multi-Choice", actionEvent -> HomeSceneController.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameStartScene));
         this.choiceQuesLoader = new ChoiceQuesLoader(this);
         this.choiceQuesGenerator = new ChoiceQuesGenerator(this);
+        this.choiceQuesStorage = new ChoiceQuesStorage();
+        this.choiceGameManager = new ChoiceGameManager(this);
     }
 
-
-
-    public static void main(String[] args) throws FileNotFoundException {
-        ChoiceGameCtrl choiceGameCtrl = GamesCtrl.getInstance().getChoiceGameCtrl();
-        choiceGameCtrl.getChoiceQuesLoader().LoadDefault();
-        //System.out.println(choiceGameCtrl.GetInfoAllQuestions());
-        System.out.println(choiceGameCtrl.getChoiceGameManager().GetInfoAtQuestion(0));
-
-        boolean check = choiceGameCtrl.getChoiceGameManager().getQuestions().get(0).CheckAnswer(ChoiceCode.C);
-        System.out.println(check);
-    }
 
 }

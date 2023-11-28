@@ -2,7 +2,7 @@ package Game.CreateWord4DirGame;
 
 import Dictionary.DicManager;
 import Logger.LoggersCtrl;
-import Timer.CustomTimer1;
+import Timer.CustomTimer;
 import Word.WordBlock;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -26,7 +26,7 @@ public class CreateWord4DirGameManager {
 
     private boolean gameIsEnd;
     private final double delayOnFinishWordSecond = 1.5;
-    public final CustomTimer1 customTimer;
+    public final CustomTimer customTimer;
 
 
     public final CustomEventPackage.OneParameter.CustomEvent<String> onCreatingWordChangeEvent;
@@ -61,7 +61,7 @@ public class CreateWord4DirGameManager {
         this.finalPoint = 0;
         this.defaultAddPoint = 7;
         this.defaultDeductPoint = 10;
-        this.customTimer = new CustomTimer1();
+        this.customTimer = new CustomTimer();
         this.customTimer.onStopEvent.AddListener(this::End);
 
 
