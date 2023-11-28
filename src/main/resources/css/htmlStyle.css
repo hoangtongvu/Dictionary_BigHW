@@ -62,12 +62,11 @@ body {
 }
 
 .exampleText {
-    color: #f6dcac;
+    color: #CE5E82 ;
 }
 
 .translation {
-    color: #CE5E82; /* Neon pink */
-    margin-left: 20px;
+    color: #006f73; /* Neon pink */
 }
 
 .wordType {
@@ -86,16 +85,16 @@ body {
 }
 
 .definition h3 {
-    color: #006f73;
+    color: #f6dcac;
 }
+
 .phrase h3{
-    color: aliceblue;
     margin-bottom: 0px;
     color: darksalmon;
 }
 
 .phrase .definition h3 {
-    color: #006f73;
+    color: #f6dcac;
     margin-left: 50px;
     margin-top: 5px;
 }

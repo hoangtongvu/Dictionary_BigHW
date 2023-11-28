@@ -56,7 +56,7 @@ public class WordDefinition {
             }
         }
         exampleFormat += "</div>";
-        String definitionFormat = "<div class = \"definition\">" + "<h3>" + prefixSpace + prefixSymbol + definition + "</h3>" + exampleFormat + "</div>";
+        String definitionFormat = "<div class = \"definition\">" + "<h3>" + prefixSpace + prefixSymbol + definition + "</h3>" + exampleFormat + "</div> <br>";
         return definitionFormat;
     }
 
