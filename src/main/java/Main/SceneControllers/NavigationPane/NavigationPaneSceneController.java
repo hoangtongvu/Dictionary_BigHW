@@ -149,6 +149,6 @@ public class NavigationPaneSceneController implements Initializable
     @FXML
     private void MoveToSettingsScene()
     {
-
+        MoveToScene(FxmlFileManager.getInstance().settingsScene);
     }
 }

@@ -65,5 +65,8 @@ module MainGroup.application {
     exports Main.SceneControllers.Widget;
     opens Main.SceneControllers.Widget to javafx.fxml;
 
+    exports Main.SceneControllers.Settings;
+    opens Main.SceneControllers.Settings to javafx.fxml;
+
 
 }
