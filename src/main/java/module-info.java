@@ -45,6 +45,9 @@ module MainGroup.application {
     opens Main.SceneControllers.Translate to javafx.fxml;
     opens WordEditing to com.google.gson;
 
+    exports Main.SceneControllers.Account to javafx.fxml;
+    opens Main.SceneControllers.Account to javafx.fxml;
+
     exports AIChatBot.gpt4all;
     exports AIChatBot;
     exports AIChatBot.ModelList;

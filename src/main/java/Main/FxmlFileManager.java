@@ -1,7 +1,9 @@
 package Main;
 
+import Main.application.App;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -17,6 +19,12 @@ public class FxmlFileManager
     {
         if (instance == null) instance = new FxmlFileManager();
         return instance;
+    }
+
+    public static void switchScene(Parent newScene) {
+        Stage primaryStage = App.getPrimaryStage();
+        primaryStage.getScene().setRoot(newScene);
+        primaryStage.show();
     }
 
 
@@ -48,6 +56,7 @@ public class FxmlFileManager
 
     public final Parent aiConversationScene;
 
+    public final Parent loginScreen;
 
     private FxmlFileManager()
     {
@@ -91,6 +100,9 @@ public class FxmlFileManager
 
             loader = new FXMLLoader(getClass().getResource("/fxml/Game/Wordle/WordleScene.fxml"));
             this.wordleScene = loader.load();
+
+            loader = new FXMLLoader(getClass().getResource("/fxml/application/LoginScreen.fxml"));
+            this.loginScreen = loader.load();
 
         }
         catch (IOException e)
