@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="navPaneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="899.0" styleClass="anchorPane" stylesheets="@../../css/ApplicationStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.NavigationPane.NavigationPaneSceneController">
+<AnchorPane fx:id="navPaneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="899.0" styleClass="anchorPane" stylesheets="@../../css/ApplicationStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.NavigationPane.NavigationPaneSceneController">
    <children>
       <ImageView fx:id="menuButton" fitHeight="30.0" fitWidth="427.0" layoutX="14.0" layoutY="7.0" onMouseClicked="#onMenuButton" pickOnBounds="true" preserveRatio="true" styleClass="menuButton">
          <image>
@@ -63,6 +63,15 @@
                            </graphic>
                         </Button>
                         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToAIChatBotScene" prefHeight="46.0" prefWidth="248.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="AI Chat">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../png/robot.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button layoutX="10.0" layoutY="196.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToTranslateScene" prefHeight="46.0" prefWidth="248.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Translate">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
