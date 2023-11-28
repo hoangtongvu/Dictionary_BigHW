@@ -22,7 +22,7 @@ public class ChoiceQuesGenerator
     public List<MultiChoiceQues> GetRandomQuestions(int numberOfQuestions)
     {
         List<MultiChoiceQues> randomQuestions = new ArrayList<>();
-        List<MultiChoiceQues> questions = this.choiceGameCtrl.getChoiceGameManager().getQuestions();
+        List<MultiChoiceQues> questions = this.choiceGameCtrl.getChoiceQuesStorage().getQuestions();
         int length = questions.size();
         if (length == 0) return null;
 

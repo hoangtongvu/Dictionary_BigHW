@@ -1,23 +1,24 @@
 package Game.MultiChoiceGame;
 
-import Timer.CustomTimer;
+import Timer.CustomTimer1;
 import javafx.scene.text.Text;
 
 
 public class ChoiceGameTimerManager
 {
-    private final CustomTimer customTimer;
+    private final CustomTimer1 customTimer;
     private final int maxTimerTimeSecond = 7;
     private final Text timerText;
 
-    public CustomTimer getCustomTimer()
+    public CustomTimer1 getCustomTimer()
     {
         return this.customTimer;
     }
 
     public ChoiceGameTimerManager(Text timerText)
     {
-        this.customTimer = new CustomTimer(this.maxTimerTimeSecond);
+        this.customTimer = new CustomTimer1();
+        this.customTimer.setMaxTimeSecond(this.maxTimerTimeSecond);
         this.timerText = timerText;
         this.SubEvent();
     }
@@ -27,9 +28,9 @@ public class ChoiceGameTimerManager
         this.customTimer.onTickEvent.AddListener(this::UpdateTimerUI);
     }
 
-    private void UpdateTimerUI(int counter)
+    private void UpdateTimerUI(int counter, int maxTimeSecond)
     {
-        int tempSec = this.customTimer.getMaxTimeSecond() - counter;
+        int tempSec = maxTimeSecond - counter;
         int tempMin = tempSec / 60;
         tempSec -= tempMin * 60;
         int tempHour = tempMin / 60;
