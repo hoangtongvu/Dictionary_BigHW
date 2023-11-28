@@ -84,8 +84,6 @@ public class EditWordSceneController {
     @FXML
     private Pane blurPane;
     @FXML
-    private AnchorPane drawerMenu;
-    @FXML
     protected TextField editWordSearchBar;
     @FXML
     protected Pane toolBar;
@@ -98,21 +96,8 @@ public class EditWordSceneController {
         return editableWordList;
     }
 
-    //TODO: Save functionality for words
-    //TODO: Add word to favourite list
-    //TODO: Add study timer on the side and probably spotify API
-
-    /**
-     * Create: Done
-     * Read: In progress
-     * Update: In progress
-     * Delete: In progress
-     */
-
     @FXML
     public void saveWord() throws SQLException {
-//        //TODO: Divide saving into 2 cases, when word doesnt exist and when editing a word
-//        //TODO: add repeated word warning
         DicNode.getCurrentlyEditedWord().saveToJSON();
         updateListView();
         save();

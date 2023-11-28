@@ -10,9 +10,10 @@ import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
+
+import static Main.FxmlFileManager.SwitchScene;
 
 public class HomeSceneController {
     @FXML
@@ -67,12 +68,6 @@ public class HomeSceneController {
     public void onTranslateButton(ActionEvent event) throws IOException {
         SwitchScene(FxmlFileManager.getInstance().translateScene);
 
-    }
-
-    public static void SwitchScene(Parent newScene) {
-        Stage primaryStage = App.getPrimaryStage();
-        primaryStage.getScene().setRoot(newScene);
-        primaryStage.show();
     }
 
     public void SwitchToLookUpScene() {

@@ -4,6 +4,7 @@ import Main.FxmlFileManager;
 import Main.ProjectDirectory;
 import Main.SceneControllers.Dictionary.HomeSceneController;
 import Main.SceneControllers.Widget.StudyTimerController;
+import Main.application.App;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
@@ -22,6 +23,8 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static Main.FxmlFileManager.SwitchScene;
 
 public class NavigationPaneSceneController implements Initializable
 {
@@ -46,7 +49,6 @@ public class NavigationPaneSceneController implements Initializable
 
     private TranslateTransition drawerTranslateTransition;
     private FadeTransition blurPaneFadeTransition;
-
 
 
     @Override
@@ -111,7 +113,7 @@ public class NavigationPaneSceneController implements Initializable
     private void MoveToScene(Parent newScene)
     {
         this.onMenuExit();
-        HomeSceneController.SwitchScene(newScene);
+        SwitchScene(newScene);
     }
 
     @FXML
@@ -147,8 +149,6 @@ public class NavigationPaneSceneController implements Initializable
     @FXML
     private void MoveToSettingsScene()
     {
-        //MoveToScene(FxmlFileManager.getInstance().chooseGameScene);
+
     }
-
-
 }

@@ -378,7 +378,7 @@ public class GameSceneController implements Initializable
         this.ToggleCheckBoxes();
         this.ClearChoseAnswer();
         this.SetProgressBar(0, this.maxQues);
-        HomeSceneController.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameStartScene);
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameStartScene);
 
     }
     

@@ -22,7 +22,7 @@ public class CreateWord4DirGameCtrl extends GameCtrl
 
     public CreateWord4DirGameCtrl()
     {
-        super("4 Directions", actionEvent -> HomeSceneController.SwitchScene(FxmlFileManager.getInstance().createWord4DirGameStartScene));
+        super("4 Directions", actionEvent -> FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().createWord4DirGameStartScene));
         this.gameManager = new CreateWord4DirGameManager(this);
         this.gameAutoCompletion = new GameAutoCompletion(this);
     }
