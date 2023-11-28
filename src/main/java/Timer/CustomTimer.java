@@ -5,7 +5,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 
-public class CustomTimer1
+public class CustomTimer
 {
     public final CustomEventPackage.TwoParameters.CustomEvent<Integer, Integer> onTickEvent;
     public final CustomEvent onStopEvent;
@@ -19,7 +19,7 @@ public class CustomTimer1
         this.timeline.setCycleCount(maxTimeSecond);
     }
 
-    public CustomTimer1()
+    public CustomTimer()
     {
         this.InitTimeline();
         this.setMaxTimeSecond(0);

@@ -67,7 +67,7 @@
             </CheckBox>
          </children>
       </VBox>
-      <Text fx:id="question" layoutX="52.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="634.4000000000001" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0">
+      <Text fx:id="questionText" layoutX="52.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="634.4000000000001" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0">
          <font>
             <Font size="17.0" />
          </font></Text>

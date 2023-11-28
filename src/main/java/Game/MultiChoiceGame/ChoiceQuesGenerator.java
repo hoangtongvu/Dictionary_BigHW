@@ -46,6 +46,35 @@ public class ChoiceQuesGenerator
         return randomQuestions;
     }
 
+    public void GenerateRandomQuestions(int numberOfQuestions)
+    {
+
+        List<MultiChoiceQues> questions = this.choiceGameCtrl.getChoiceGameManager().getQuestions();
+        questions.clear();
+
+        List<MultiChoiceQues> storedQuestions = this.choiceGameCtrl.getChoiceQuesStorage().getQuestions();
+        int length = storedQuestions.size();
+        if (length == 0) return;
+
+        Random random = new Random();
+        int randomIndex;
+
+        for (int i = 0; i < numberOfQuestions; i++)
+        {
+            MultiChoiceQues ques;
+
+            do
+            {
+                randomIndex = random.nextInt(length);
+                ques = storedQuestions.get(randomIndex);
+            } while (questions.contains(ques));
+
+            questions.add(ques);
+
+        }
+
+    }
+
 
 
 }

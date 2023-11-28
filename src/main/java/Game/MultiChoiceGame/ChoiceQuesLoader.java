@@ -22,10 +22,14 @@ public class ChoiceQuesLoader
     }
 
 
-    public void LoadDefault() throws FileNotFoundException
+    public void LoadDefault()
     {
-        this.LoadQuestions();
-        this.LoadAnswers();
+        try {
+            this.LoadQuestions();
+            this.LoadAnswers();
+        } catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     private void LoadQuestions() throws FileNotFoundException
