@@ -60,8 +60,8 @@
       <Pane prefHeight="41.0" prefWidth="854.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Button id="learning_button" fx:id="dictionary_button" layoutX="205.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Dictionary" />
-            <Button id="statistics_button" layoutX="136.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Games" />
-            <Button id="dictionary_button" layoutX="54.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Learning" />
+            <Button id="statistics_button" layoutX="136.0" layoutY="5.0" mnemonicParsing="false" onAction="#toGames" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Games" />
+            <Button id="dictionary_button" layoutX="54.0" layoutY="5.0" mnemonicParsing="false" onAction="#toTranslate" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Translate" />
          </children>
       </Pane>
       <Pane id="main_search_bar" layoutX="-1.0" layoutY="41.0" prefHeight="116.0" prefWidth="899.0" styleClass="secondaryTopBar" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">

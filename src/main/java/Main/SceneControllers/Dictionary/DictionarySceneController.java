@@ -7,15 +7,12 @@ import Main.application.App;
 import Main.SceneControllers.Translate.TextToSpeech;
 import Word.WordBlock;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.web.WebEngine;
@@ -25,7 +22,6 @@ import javafx.util.Callback;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
@@ -36,13 +32,9 @@ import static java.util.Collections.sort;
 
 
 public class DictionarySceneController implements Initializable {
-
-    //private Timer timer;
-    //private TimerTask timerTask;
-
-    private static List<WordBlock> starredWordList = new ArrayList<>();
-    private static List<String>    starredWordStringList = new ArrayList<>();
-    private static List<String>    wordHistoryList = new ArrayList<>();
+    private static final List<WordBlock> starredWordList = new ArrayList<>();
+    private static final List<String>    starredWordStringList = new ArrayList<>();
+    private static final List<String>    wordHistoryList = new ArrayList<>();
 
     public static List<WordBlock> getStarredWordList() {
         return starredWordList;
@@ -55,11 +47,7 @@ public class DictionarySceneController implements Initializable {
     @FXML
     private TextField searchBar;
     @FXML
-    protected AnchorPane drawerMenu;
-    @FXML
     protected Pane blurPane;
-    @FXML
-    protected ImageView menuButton;
     @FXML
     protected WebView webView;
     @FXML
@@ -71,10 +59,6 @@ public class DictionarySceneController implements Initializable {
     @FXML
     protected Button soundButton;
 
-    public static WordBlock getCurrentWordBlock() {
-        return currentWordBlock;
-    }
-
     public ListView<String> getHistoryListView() {
         return historyListView;
     }
@@ -82,8 +66,8 @@ public class DictionarySceneController implements Initializable {
     @FXML
     public void editCurrentWord() {
         try {
-            FxmlFileManager.getInstance().editWordSceneController.loadWordOnPane(currentWordBlock.getWord());
             switchScene(FxmlFileManager.getInstance().editWordScene);
+            FxmlFileManager.getInstance().editWordSceneController.loadWordOnPane(currentWordBlock.getWord());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -119,7 +103,7 @@ public class DictionarySceneController implements Initializable {
         //System.out.println("null");
 
         WordBlock lookUpRes = null;
-        if (searchBar.getText() != null && !searchBar.getText().equals("")) {
+        if (searchBar.getText() != null && !searchBar.getText().isEmpty()) {
             lookUpRes = DicManager.getInstance().searchWordBlock(searchBar.getText());
         }
 
@@ -135,14 +119,18 @@ public class DictionarySceneController implements Initializable {
             if (!SearchHistory.getInstance().getWordHistory().isEmpty()) {
                 historyListView.getItems().addAll(SearchHistory.getInstance().getWordHistory());
             }
-            soundButton.setDisable(false);
-            starButton.setDisable(false);
+            enableTasks();
+        }
+    }
 
-            if (currentWordBlock != null && currentWordBlock.isEditable()) {
-                editButton.setDisable(false);
-            } else {
-                editButton.setDisable(true);
-            }
+    private void enableTasks() {
+        soundButton.setDisable(false);
+        starButton.setDisable(false);
+
+        if (currentWordBlock != null && currentWordBlock.isEditable()) {
+            editButton.setDisable(false);
+        } else {
+            editButton.setDisable(true);
         }
     }
 
@@ -191,7 +179,7 @@ public class DictionarySceneController implements Initializable {
             DicManager.getInstance().getRecentlySearchedWordManager().getRecentlySearchedWordLoader().Load();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         try {
@@ -200,7 +188,7 @@ public class DictionarySceneController implements Initializable {
             System.out.println(e.getMessage());
         }
 
-        AutoCompletionBinding auto = TextFields.bindAutoCompletion(this.searchBar,
+        AutoCompletionBinding<String> auto = TextFields.bindAutoCompletion(this.searchBar,
                 new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<String>>() {
                     @Override
                     public Collection<String> call(AutoCompletionBinding.ISuggestionRequest iSuggestionRequest) {
@@ -236,6 +224,7 @@ public class DictionarySceneController implements Initializable {
             String currentlySelectedItem = starredWordListView.getSelectionModel().getSelectedItem().toString();
             WordBlock starredWord = getStarredWord(currentlySelectedItem);
             currentWordBlock = starredWord;
+            enableTasks();
             starredWord.loadData(starredWord.getWordID());
             setupWebView(starredWord.GetInfo());
         }
@@ -244,9 +233,10 @@ public class DictionarySceneController implements Initializable {
     @FXML
     public void getWordFromHistory(MouseEvent event) throws SQLException {
         if (event.getClickCount() > 1) {
-            String selectedItem = historyListView.getSelectionModel().getSelectedItem().toString();
+            String selectedItem = historyListView.getSelectionModel().getSelectedItem();
             WordBlock word = DicManager.getInstance().searchWordBlock(selectedItem);
             currentWordBlock = word;
+            enableTasks();
             word.loadData(word.getWordID());
             setupWebView(word.GetInfo());
         }
@@ -259,10 +249,25 @@ public class DictionarySceneController implements Initializable {
     }
 
     @FXML
-    public void onSoundButton(ActionEvent e) {
+    public void onSoundButton() {
         if (currentWordBlock != null) {
             TextToSpeech.EnTextToSpeech(currentWordBlock.getWord());
         }
+    }
+
+    @FXML
+    public void toDictionary() {
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().dictionaryScene);
+    }
+
+    @FXML
+    public void toGames() {
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().chooseGameScene);
+    }
+
+    @FXML
+    public void toTranslate() {
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().translateScene);
     }
 
 //    public static void main(String[] arg) {

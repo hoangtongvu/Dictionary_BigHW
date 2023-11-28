@@ -1,5 +1,2 @@
-nice
-bad
-testingWord
-hello
 good
+testingWord

@@ -33,7 +33,6 @@ import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Dictionary;
 import java.util.List;
 
 import static java.util.Collections.sort;
@@ -48,14 +47,6 @@ public class EditWordSceneController {
     static final NodeOptions options = new NodeOptions();
 
     GridPane grid = new GridPane();
-
-    public static EditWordSceneController getSceneController() {
-        return sceneController;
-    }
-
-    public static void setSceneController(EditWordSceneController sceneController) {
-        EditWordSceneController.sceneController = sceneController;
-    }
 
     @FXML
     AnchorPane root;
@@ -84,8 +75,6 @@ public class EditWordSceneController {
     @FXML
     private Pane blurPane;
     @FXML
-    private AnchorPane drawerMenu;
-    @FXML
     protected TextField editWordSearchBar;
     @FXML
     protected Pane toolBar;
@@ -98,21 +87,8 @@ public class EditWordSceneController {
         return editableWordList;
     }
 
-    //TODO: Save functionality for words
-    //TODO: Add word to favourite list
-    //TODO: Add study timer on the side and probably spotify API
-
-    /**
-     * Create: Done
-     * Read: In progress
-     * Update: In progress
-     * Delete: In progress
-     */
-
     @FXML
     public void saveWord() throws SQLException {
-//        //TODO: Divide saving into 2 cases, when word doesnt exist and when editing a word
-//        //TODO: add repeated word warning
         DicNode.getCurrentlyEditedWord().saveToJSON();
         updateListView();
         save();
@@ -186,9 +162,19 @@ public class EditWordSceneController {
 
     @FXML
     public void toDictionary() {
-        Scene temp = new Scene(FxmlFileManager.getInstance().dictionaryScene);
-        App.getPrimaryStage().setScene(temp);
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().dictionaryScene);
     }
+
+    @FXML
+    public void toGames() {
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().chooseGameScene);
+    }
+
+    @FXML
+    public void toTranslate() {
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().translateScene);
+    }
+
 
     @FXML
     public void searchEditable() {
@@ -197,6 +183,21 @@ public class EditWordSceneController {
             if (wordBlock.getWord().contains(editWordSearchBar.getText())) {
                 wordListView.getItems().add(wordBlock.getWord());
             }
+        }
+    }
+
+    public boolean changeSceneSave() throws SQLException {
+        int response = Warnings.getInstance().showChangeSceneWarning();
+        if (response != 0) {
+            if (response == 1) {
+                save();
+                DicNode.reset();
+            } else {
+                DicNode.reset();
+            }
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -592,7 +593,7 @@ public class EditWordSceneController {
 
             } else if (event.getButton() == MouseButton.PRIMARY) {
                 if (DicNode.getCurrentlySelected() != null) {
-                    switchScene();
+                    switchEditor();
                 }
             }
 
@@ -652,7 +653,7 @@ public class EditWordSceneController {
 
     }
 
-    public void switchScene() {
+    public void switchEditor() {
         if (DicNode.getCurrentlySelected() instanceof DescriptionNode) {
             setAnchor(((DescriptionNode) DicNode.getCurrentlySelected()).getEditor().getEditorPane());
             editorPane.getChildren().clear();

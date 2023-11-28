@@ -1,9 +1,12 @@
 package Main;
 
+import Main.application.App;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class FxmlFileManager
 {
@@ -48,12 +51,31 @@ public class FxmlFileManager
 
     public final Parent aiConversationScene;
 
+    public static void SwitchScene(Parent newScene) {
+        Stage primaryStage = App.getPrimaryStage();
+
+        if (primaryStage.getScene().getRoot() == getInstance().editWordScene) {
+            if (!editSceneExitHandler()) {
+                return;
+            }
+        }
+
+        primaryStage.getScene().setRoot(newScene);
+        primaryStage.show();
+    }
+
+    private static boolean editSceneExitHandler() {
+        try {
+            return FxmlFileManager.getInstance().editWordSceneController.changeSceneSave();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private FxmlFileManager()
     {
         try
         {
-
             this.homeScene = FXMLLoader.load(getClass().getResource("/fxml/application/HomeScene.fxml"));
 
             FXMLLoader loader = null;
@@ -98,11 +120,4 @@ public class FxmlFileManager
             throw new RuntimeException(e);
         }
     }
-
-
-
-
-
-
-
 }
