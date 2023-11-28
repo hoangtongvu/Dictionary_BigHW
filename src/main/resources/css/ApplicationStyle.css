@@ -141,3 +141,22 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
+
+.tab .tab-label {
+    -fx-background-color: #21252b;
+    -fx-text-fill: #ce5e82;
+    -fx-font-family: Roboto;
+    -fx-font-weight: bold;
+}
+
+.tab {
+    -fx-background-color: #21252b;
+    -fx-text-fill: #ce5e82;
+}
+
+.tab-pane {
+    -fx-background-color: #282c34;
+}
+
+
+
