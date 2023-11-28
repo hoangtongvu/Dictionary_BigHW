@@ -33,7 +33,6 @@ import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Dictionary;
 import java.util.List;
 
 import static java.util.Collections.sort;
@@ -48,14 +47,6 @@ public class EditWordSceneController {
     static final NodeOptions options = new NodeOptions();
 
     GridPane grid = new GridPane();
-
-    public static EditWordSceneController getSceneController() {
-        return sceneController;
-    }
-
-    public static void setSceneController(EditWordSceneController sceneController) {
-        EditWordSceneController.sceneController = sceneController;
-    }
 
     @FXML
     AnchorPane root;
@@ -182,6 +173,21 @@ public class EditWordSceneController {
             if (wordBlock.getWord().contains(editWordSearchBar.getText())) {
                 wordListView.getItems().add(wordBlock.getWord());
             }
+        }
+    }
+
+    public boolean changeSceneSave() throws SQLException {
+        int response = Warnings.getInstance().showChangeSceneWarning();
+        if (response != 0) {
+            if (response == 1) {
+                save();
+                DicNode.reset();
+            } else {
+                DicNode.reset();
+            }
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -577,7 +583,7 @@ public class EditWordSceneController {
 
             } else if (event.getButton() == MouseButton.PRIMARY) {
                 if (DicNode.getCurrentlySelected() != null) {
-                    switchScene();
+                    switchEditor();
                 }
             }
 
@@ -637,7 +643,7 @@ public class EditWordSceneController {
 
     }
 
-    public void switchScene() {
+    public void switchEditor() {
         if (DicNode.getCurrentlySelected() instanceof DescriptionNode) {
             setAnchor(((DescriptionNode) DicNode.getCurrentlySelected()).getEditor().getEditorPane());
             editorPane.getChildren().clear();

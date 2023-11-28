@@ -19,7 +19,9 @@ public class Warnings {
     Alert emptyWordWarning = new Alert(Alert.AlertType.NONE);
     Alert saveChanges = new Alert(Alert.AlertType.NONE);
     Alert deleteWordWarning = new Alert(Alert.AlertType.NONE);
-    Alert showChangingWord = new Alert(Alert.AlertType.NONE);
+
+    Alert changeSceneWarning = new Alert(Alert.AlertType.NONE);
+
     private Warnings() {
         addWordWarning.setTitle("Dictionary");
         addWordWarning.setHeaderText("Make sure all components are linked before continuing");
@@ -46,6 +48,11 @@ public class Warnings {
         deleteWordWarning.setHeaderText("You are DELETING this word");
         deleteWordWarning.setContentText("This word will be permanently deleted. \nAre you sure you want to delete?");
         deleteWordWarning.getButtonTypes().setAll(yes, no);
+
+        changeSceneWarning.setTitle("Dictionary");
+        changeSceneWarning.setHeaderText("Unsaved changes");
+        changeSceneWarning.setContentText("Would you want to save your progress before before exiting?");
+        changeSceneWarning.getButtonTypes().setAll(yes, no, cancel);
     }
 
     public int newWordWarning() {
@@ -59,6 +66,23 @@ public class Warnings {
                 return -1;
             } else {
                 addWordWarning.close();
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    public int showChangeSceneWarning() {
+        Optional<ButtonType> result = changeSceneWarning.showAndWait();
+        if (result.isPresent()) {
+            if (result.get() == yes) {
+                changeSceneWarning.close();
+                return 1;
+            } else if (result.get() == no) {
+                changeSceneWarning.close();
+                return -1;
+            } else {
+                changeSceneWarning.close();
                 return 0;
             }
         }
