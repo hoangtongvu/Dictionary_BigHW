@@ -6,7 +6,6 @@ import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import Main.application.App;
 import Main.SceneControllers.Translate.TextToSpeech;
 import Word.WordBlock;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -33,21 +32,18 @@ import static java.util.Collections.sort;
 
 public class DictionarySceneController implements Initializable {
     private static final List<WordBlock> starredWordList = new ArrayList<>();
-    private static final List<String>    starredWordStringList = new ArrayList<>();
-    private static final List<String>    wordHistoryList = new ArrayList<>();
-
+    private static final List<String> starredWordStringList = new ArrayList<>();
+    private static final List<String> wordHistoryList = new ArrayList<>();
     public static List<WordBlock> getStarredWordList() {
         return starredWordList;
     }
+    private  List<String> possibleSuggestions = new ArrayList<>();
+
 
     @FXML
     protected Button starButton;
-
-    private  List<String> possibleSuggestions = new ArrayList<>();
     @FXML
     private TextField searchBar;
-    @FXML
-    protected Pane blurPane;
     @FXML
     protected WebView webView;
     @FXML
@@ -168,7 +164,7 @@ public class DictionarySceneController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         webEngine = webView.getEngine();
         webEngine.loadContent("<html><body>" + styleSheet + "</body></html>");
-        blurPane.setVisible(false);
+        //blurPane.setVisible(false);
         if (currentWordBlock == null) {
             editButton.setDisable(true);
             soundButton.setDisable(true);
@@ -255,20 +251,6 @@ public class DictionarySceneController implements Initializable {
         }
     }
 
-    @FXML
-    public void toDictionary() {
-        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().dictionaryScene);
-    }
-
-    @FXML
-    public void toGames() {
-        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().chooseGameScene);
-    }
-
-    @FXML
-    public void toTranslate() {
-        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().translateScene);
-    }
 
 //    public static void main(String[] arg) {
 ////        String str = "helloo";
