@@ -12,6 +12,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -109,6 +111,7 @@ public class LoginSceneController {
                     message.setText("");
                     PreparedStatement statement = Database.getUserDB().prepareStatement(update);
                     statement.setString(1, userName);
+                    passWord = hashPassword(passWord);
                     statement.setString(2, passWord);
                     statement.execute();
                     message.setTextFill(Color.GREEN);
@@ -135,6 +138,7 @@ public class LoginSceneController {
                 ResultSet resultSet = statement.executeQuery();
                 resultSet.next();
                 String dbPassword = resultSet.getString("pass_word");
+                passWord = hashPassword(passWord);
                 if (!Database.getUserDB().isClosed()) {
                     if (passWord.equals(dbPassword)) {
                         message.setTextFill(Color.GREEN);
@@ -178,5 +182,25 @@ public class LoginSceneController {
             message.setText("");
             isRegistering = true;
         }
+    }
+
+    public String hashPassword(String password) {
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+
+        md.update(password.getBytes());
+
+        byte[] hash = md.digest();
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (byte b : hash) {
+            stringBuilder.append(String.format("%02x", b));
+        }
+
+        return stringBuilder.toString();
     }
 }
