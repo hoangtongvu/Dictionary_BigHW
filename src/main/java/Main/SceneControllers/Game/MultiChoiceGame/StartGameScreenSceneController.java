@@ -32,7 +32,7 @@ public class StartGameScreenSceneController
         }
 
         GameSceneController gameSceneController = FxmlFileManager.getInstance().multiChoiceGameSceneController;
-        HomeSceneController.SwitchScene(FxmlFileManager.getInstance().multiChoiceWordGameScene);
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().multiChoiceWordGameScene);
         gameSceneController.StartGame(maxQues, maxTimeSecond);
     }
 

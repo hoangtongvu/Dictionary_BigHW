@@ -332,7 +332,7 @@ public class GameSceneController implements Initializable
 
     private void SwitchBackToStartScreen()
     {
-        HomeSceneController.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameStartScene);
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameStartScene);
     }
     
 

@@ -31,7 +31,7 @@ public class ChoiceGameCtrl extends GameCtrl
 
     public ChoiceGameCtrl()
     {
-        super("Multi-Choice", actionEvent -> HomeSceneController.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameStartScene));
+        super("Multi-Choice", actionEvent -> FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameStartScene));
         this.choiceQuesLoader = new ChoiceQuesLoader(this);
         this.choiceQuesGenerator = new ChoiceQuesGenerator(this);
         this.choiceQuesStorage = new ChoiceQuesStorage();
