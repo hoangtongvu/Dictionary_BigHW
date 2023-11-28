@@ -210,14 +210,14 @@
 
 #clearHistoryButton {
     -fx-alignment: baseline-left;
-    -fx-padding: 0 0 0 25;
+    -fx-padding: 0 0 0 20;
     -fx-background-color: transparent;
     -fx-font-weight: bold;
     -fx-text-fill: #b93939;
     -fx-font-size: 15;
 
     -fx-background-image: url('../png/delete.png');
-    -fx-background-size: 20px;
+    -fx-background-size: 15px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: left;
 }
@@ -225,7 +225,7 @@
 #clearHistoryButton:hover {
     -fx-text-fill: white;
     -fx-background-image: url('../png/delete_filled.png');
-    -fx-background-size: 20px;
+    -fx-background-size: 15px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: left;
 }
