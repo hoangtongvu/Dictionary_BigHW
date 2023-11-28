@@ -22,10 +22,14 @@ public class ChoiceQuesLoader
     }
 
 
-    public void LoadDefault() throws FileNotFoundException
+    public void LoadDefault()
     {
-        this.LoadQuestions();
-        this.LoadAnswers();
+        try {
+            this.LoadQuestions();
+            this.LoadAnswers();
+        } catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     private void LoadQuestions() throws FileNotFoundException
@@ -61,7 +65,7 @@ public class ChoiceQuesLoader
 
             }
 
-            this.choiceGameCtrl.getChoiceGameManager().getQuestions().add(new MultiChoiceQues(ques, answers));
+            this.choiceGameCtrl.getChoiceQuesStorage().getQuestions().add(new MultiChoiceQues(ques, answers));
         }
 
 
@@ -76,7 +80,7 @@ public class ChoiceQuesLoader
         int length = line.length();
         for (int i = 0; i < length; i++)
         {
-            this.choiceGameCtrl.getChoiceGameManager().getQuestions().get(i).setRightAnswerCode(line.substring(i, i + 1));
+            this.choiceGameCtrl.getChoiceQuesStorage().getQuestions().get(i).setRightAnswerCode(line.substring(i, i + 1));
         }
 
 

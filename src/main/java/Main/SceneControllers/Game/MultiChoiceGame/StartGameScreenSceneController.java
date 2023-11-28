@@ -23,24 +23,17 @@ public class StartGameScreenSceneController
     {
         int maxQues;
         int maxTimeSecond;
-        try
-        {
+        try {
             maxQues = Integer.parseInt(numOfQuesTextField.getText());
             maxTimeSecond = Integer.parseInt(maxTimeTextField.getText());
         }
-        catch (NumberFormatException e)
-        {
+        catch (NumberFormatException e) {
             return;
         }
 
         GameSceneController gameSceneController = FxmlFileManager.getInstance().multiChoiceGameSceneController;
-
-
-        gameSceneController.setMaxQues(maxQues);
-        gameSceneController.getTimerManager().getCustomTimer().setMaxTimeSecond(maxTimeSecond);
-
         HomeSceneController.SwitchScene(FxmlFileManager.getInstance().multiChoiceWordGameScene);
-        gameSceneController.StartGame();
+        gameSceneController.StartGame(maxQues, maxTimeSecond);
     }
 
 }
