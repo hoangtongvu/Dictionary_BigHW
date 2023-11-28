@@ -22,6 +22,12 @@ public class FxmlFileManager
         return instance;
     }
 
+    public static void switchScene(Parent newScene) {
+        Stage primaryStage = App.getPrimaryStage();
+        primaryStage.getScene().setRoot(newScene);
+        primaryStage.show();
+    }
+
 
     public final Parent dictionaryScene;
     public final Main.SceneControllers.Dictionary.DictionarySceneController dictionarySceneController;
@@ -51,6 +57,7 @@ public class FxmlFileManager
 
     public final Parent aiConversationScene;
 
+    public final Parent loginScreen;
     public static void SwitchScene(Parent newScene) {
         Stage primaryStage = App.getPrimaryStage();
 
@@ -113,6 +120,9 @@ public class FxmlFileManager
 
             loader = new FXMLLoader(getClass().getResource("/fxml/Game/Wordle/WordleScene.fxml"));
             this.wordleScene = loader.load();
+
+            loader = new FXMLLoader(getClass().getResource("/fxml/application/LoginScreen.fxml"));
+            this.loginScreen = loader.load();
 
         }
         catch (IOException e)

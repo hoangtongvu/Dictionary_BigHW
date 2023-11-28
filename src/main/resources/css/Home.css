@@ -14,6 +14,12 @@
     -fx-border-radius: 10px;
 }
 
+.widget {
+    -fx-background-color: #bb4a49;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
 .timer-label {
     -fx-font-family: Roboto;
     -fx-font-weight: bold;
