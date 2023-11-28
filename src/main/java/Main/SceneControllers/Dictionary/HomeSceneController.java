@@ -50,30 +50,19 @@ public class HomeSceneController {
 
     /**Switching scene*/
     @FXML
-    public void onDictionaryButton(ActionEvent event) throws IOException {
-//        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/application/DictionaryScene.fxml")));
-//        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        stage.getScene().setRoot(root);
-//        stage.show();
-        this.SwitchToLookUpScene();
+    public void onDictionaryButton() throws IOException {
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().dictionaryScene);
     }
 
     @FXML
     public void onGameButton(ActionEvent event) throws IOException
     {
-        SwitchScene(FxmlFileManager.getInstance().chooseGameScene);
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().chooseGameScene);
     }
 
     @FXML
     public void onTranslateButton(ActionEvent event) throws IOException {
-        SwitchScene(FxmlFileManager.getInstance().translateScene);
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().translateScene);
 
     }
-
-    public void SwitchToLookUpScene() {
-        Parent root = FxmlFileManager.getInstance().dictionaryScene;
-        SwitchScene(root);
-    }
-
-
 }

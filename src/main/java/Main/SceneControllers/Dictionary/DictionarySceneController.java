@@ -255,6 +255,21 @@ public class DictionarySceneController implements Initializable {
         }
     }
 
+    @FXML
+    public void toDictionary() {
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().dictionaryScene);
+    }
+
+    @FXML
+    public void toGames() {
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().chooseGameScene);
+    }
+
+    @FXML
+    public void toTranslate() {
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().translateScene);
+    }
+
 //    public static void main(String[] arg) {
 ////        String str = "helloo";
 ////        String str2 = str;

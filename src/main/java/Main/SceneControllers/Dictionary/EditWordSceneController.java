@@ -162,9 +162,19 @@ public class EditWordSceneController {
 
     @FXML
     public void toDictionary() {
-        Scene temp = new Scene(FxmlFileManager.getInstance().dictionaryScene);
-        App.getPrimaryStage().setScene(temp);
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().dictionaryScene);
     }
+
+    @FXML
+    public void toGames() {
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().chooseGameScene);
+    }
+
+    @FXML
+    public void toTranslate() {
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().translateScene);
+    }
+
 
     @FXML
     public void searchEditable() {
