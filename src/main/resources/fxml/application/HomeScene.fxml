@@ -8,9 +8,9 @@
     <children>
         <Pane prefHeight="41.0" prefWidth="854.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-            <Button id="dictionary_button" fx:id="dictionary_button" layoutX="205.0" layoutY="5.0" mnemonicParsing="false" onAction="#onDictionaryButton" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Dictionary" />
-            <Button id="games_button" layoutX="136.0" layoutY="5.0" mnemonicParsing="false" onAction="#onGameButton" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Games" />
-            <Button id="translate_button" layoutX="54.0" layoutY="5.0" mnemonicParsing="false" onAction="#onTranslateButton" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Translate" />
+            <Button id="dictionary_button" fx:id="dictionary_button" layoutX="205.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Dictionary" />
+            <Button id="games_button" layoutX="136.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Games" />
+            <Button id="translate_button" layoutX="54.0" layoutY="5.0" mnemonicParsing="false" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Translate" />
             </children>
         </Pane>
         <Pane fx:id="blurPane" prefHeight="494.0" prefWidth="1200.0" styleClass="blur" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />

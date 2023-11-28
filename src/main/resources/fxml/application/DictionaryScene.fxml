@@ -11,13 +11,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" styleClass="anchorPane" stylesheets="@../../css/ApplicationStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Dictionary.DictionarySceneController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" styleClass="anchorPane" stylesheets="@../../css/ApplicationStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Dictionary.DictionarySceneController">
    <children>
       <VBox prefHeight="600.0" prefWidth="1202.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane id="main_search_bar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="126.0" prefWidth="1200.0" styleClass="secondaryTopBar" stylesheets="@../../css/ApplicationStyle.css">
                <children>
-                  <TextField fx:id="searchBar" layoutX="40.0" layoutY="48.0" onAction="#LookupWord" onKeyTyped="#OnTextChange" prefHeight="31.0" prefWidth="645.0" promptText="Type your word here...">
+                  <TextField id="searchBar" fx:id="searchBar" layoutX="40.0" layoutY="48.0" onAction="#LookupWord" onKeyTyped="#OnTextChange" prefHeight="31.0" prefWidth="645.0" promptText="Type your word here...">
                      <font>
                         <Font name="System Italic" size="15.0" />
                      </font>
@@ -44,7 +44,7 @@
                               </Pane>
                            </children>
                         </Pane>
-                        <TabPane layoutX="21.0" layoutY="243.0" prefHeight="181.0" prefWidth="331.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="241.99999999999997">
+                        <TabPane id="tabPane" layoutX="21.0" layoutY="243.0" prefHeight="181.0" prefWidth="331.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="241.99999999999997">
                           <tabs>
                             <Tab text="Favourite Words">
                               <content>
@@ -57,10 +57,10 @@
                             </Tab>
                             <Tab text="WordHistory">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../../css/ApplicationStyle.css">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="331.0" stylesheets="@../../css/ApplicationStyle.css">
                                        <children>
-                                          <ListView fx:id="historyListView" layoutY="42.0" onMouseClicked="#getWordFromHistory" prefHeight="108.0" prefWidth="331.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0" />
-                                          <Button fx:id="clearHistory" layoutX="236.0" layoutY="8.0" mnemonicParsing="false" onAction="#clearHistory" prefHeight="25.0" prefWidth="94.0" text="Clear History" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="8.0" />
+                                          <ListView fx:id="historyListView" onMouseClicked="#getWordFromHistory" prefHeight="145.0" prefWidth="331.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <Button fx:id="clearHistory" layoutX="118.0" layoutY="153.0" mnemonicParsing="false" onAction="#clearHistory" prefHeight="25.0" prefWidth="94.0" text="Clear History" AnchorPane.bottomAnchor="5.0" />
                                        </children>
                                     </AnchorPane>
                               </content>
