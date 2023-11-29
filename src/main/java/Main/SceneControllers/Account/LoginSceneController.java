@@ -104,7 +104,7 @@ public class LoginSceneController extends BaseSceneController {
 
     @FXML
     public void continueWithoutAccount() {
-        FxmlFileManager.switchScene(FxmlFileManager.getInstance().homeScene);
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().homeSC);
     }
 
     @FXML
@@ -154,7 +154,7 @@ public class LoginSceneController extends BaseSceneController {
                     if (passWord.equals(dbPassword)) {
                         message.setTextFill(Color.GREEN);
                         message.setText("Login successful!");
-                        FxmlFileManager.switchScene(FxmlFileManager.getInstance().homeScene);
+                        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().homeSC);
                     } else {
                         message.setTextFill(Color.RED);
                         message.setText("Incorrect username or password");

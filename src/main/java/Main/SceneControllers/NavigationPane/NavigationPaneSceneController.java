@@ -1,12 +1,10 @@
 package Main.SceneControllers.NavigationPane;
 
 import Main.FxmlFileManager;
-import Main.ProjectDirectory;
 import Main.SceneControllers.BaseSceneController;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -16,16 +14,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import static Main.FxmlFileManager.SwitchScene;
 
-public class NavigationPaneSceneController implements Initializable
+public class NavigationPaneSceneController extends BaseSceneController implements Initializable
 {
 
     @FXML
@@ -68,23 +64,17 @@ public class NavigationPaneSceneController implements Initializable
 //        }
     }
 
-    public static NavigationPaneSceneController LoadInstance() throws IOException
-    {
-        String absolutePath = ProjectDirectory.resourcesPath + "\\fxml\\application\\NavigationPaneScene.fxml";
-        URL fxmlURL = Paths.get(absolutePath).toUri().toURL();
-        FXMLLoader loader = new FXMLLoader(fxmlURL);
-        loader.load();
+    @Override
+    public void StartShow() {
 
-        return loader.getController();
     }
 
-    public void AddNavPaneComponentsToRoot(Pane root)
-    {
-        List<Node> nodes = navPaneRoot.getChildren();
-        root.getChildren().addAll(nodes);
+    @Override
+    public void EndShow() {
+
     }
 
-    public static void AddNavPaneComponentsToRoot1(Parent root)
+    public static void AddNavPaneComponentsToRoot(Parent root)
     {
         ((Pane) root).getChildren().addAll(nodes);
     }
@@ -119,12 +109,6 @@ public class NavigationPaneSceneController implements Initializable
         });
     }
 
-    private void MoveToScene(Parent newScene)
-    {
-        this.onMenuExit();
-        SwitchScene(newScene);
-    }
-
     private void MoveToScene(BaseSceneController newScene)
     {
         this.onMenuExit();
@@ -134,7 +118,7 @@ public class NavigationPaneSceneController implements Initializable
     @FXML
     private void MoveToHomeScene()
     {
-        this.MoveToScene(FxmlFileManager.getInstance().homeScene);
+        this.MoveToScene(FxmlFileManager.getInstance().homeSC);
     }
 
     @FXML
@@ -152,7 +136,7 @@ public class NavigationPaneSceneController implements Initializable
     @FXML
     private void MoveToDictionaryEditorScene()
     {
-        MoveToScene(FxmlFileManager.getInstance().editWordScene);
+        MoveToScene(FxmlFileManager.getInstance().editWordSceneController);
     }
 
     @FXML

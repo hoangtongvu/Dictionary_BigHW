@@ -4,7 +4,8 @@ import Dictionary.DicManager;
 import Dictionary.SearchHistory;
 import Main.FxmlFileManager;
 import Main.ProjectDirectory;
-import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
+import Main.SceneControllers.BaseSceneController;
+import Main.SceneControllers.IHasNavPane;
 import Word.WordBlock;
 import WordEditing.GraphNode.*;
 import WordEditing.NodeJSON;
@@ -35,7 +36,7 @@ import java.util.List;
 
 import static java.util.Collections.sort;
 
-public class EditWordSceneController {
+public class EditWordSceneController extends BaseSceneController implements IHasNavPane {
 
     private static EditWordSceneController sceneController;
     private double mouseStartX;
@@ -83,6 +84,21 @@ public class EditWordSceneController {
 
     public static List<WordBlock> getEditableWordList() {
         return editableWordList;
+    }
+
+
+    @Override
+    public void StartShow() {
+
+    }
+
+    @Override
+    public void EndShow() {
+        try {
+            changeSceneSave();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -437,11 +453,6 @@ public class EditWordSceneController {
         canvasPane.getChildren().add(grid);
         hideToolBar();
 
-        try {
-            NavigationPaneSceneController.LoadInstance().AddNavPaneComponentsToRoot(this.root);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     public void showEditingTools(boolean flag) {
