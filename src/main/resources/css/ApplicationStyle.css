@@ -166,14 +166,17 @@
 
 .tab-pane {
     -fx-background-color: #200D3A;
-}
-
-.tab-pane > .tab-header-area > .tab-header-background {
-    -fx-background-color: #200D3A;
     -fx-background-radius: 10px;
 }
 
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-color: transparent;
+    -fx-background-radius: 10 10 0 0;
+}
 
+.tab-anchor {
+    -fx-background-radius: 10px;
+}
 
 .list-cell {
     -fx-text-fill: #ce5e82;
@@ -207,7 +210,7 @@
 }
 
 #clearHistoryPane {
-    -fx-background-color: #200D3A;
+    -fx-background-color: transparent;
     -fx-background-radius: 0 0 10 10;
 }
 
