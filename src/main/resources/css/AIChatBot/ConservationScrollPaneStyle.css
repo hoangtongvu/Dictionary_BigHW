@@ -1,0 +1,9 @@
+
+
+.scroll-pane {
+    -fx-background-radius: 30;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-radius: 30;
+}
