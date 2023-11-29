@@ -2,10 +2,15 @@ package Main;
 
 import Logger.LoggersCtrl;
 import Main.SceneControllers.AIChatBot.AIConversationSceneController;
+import Main.SceneControllers.Account.LoginSceneController;
 import Main.SceneControllers.BaseSceneController;
+import Main.SceneControllers.Dictionary.DictionarySceneController;
 import Main.SceneControllers.Game.ChooseGameSceneController;
+import Main.SceneControllers.Game.Wordle.WordleController;
 import Main.SceneControllers.IHasNavPane;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
+import Main.SceneControllers.Settings.SettingSceneController;
+import Main.SceneControllers.Translate.TranslateController;
 import Main.application.App;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -37,8 +42,7 @@ public class FxmlFileManager
     private static BaseSceneController currentSC;
 
 
-    public final Parent dictionaryScene;
-    public final Main.SceneControllers.Dictionary.DictionarySceneController dictionarySceneController;
+    public final DictionarySceneController dictionarySC;
     public final Parent homeScene;
 
 
@@ -49,7 +53,7 @@ public class FxmlFileManager
     public final Main.SceneControllers.Game.MultiChoiceGame.GameSceneController multiChoiceGameSC;
 
 
-    public final Parent translateScene;
+    public final TranslateController translateSC;
 
     public final Parent editWordScene;
     public final Main.SceneControllers.Dictionary.EditWordSceneController editWordSceneController;
@@ -57,12 +61,13 @@ public class FxmlFileManager
 
     public final Main.SceneControllers.Game.CreateWord4DirGame.StartGameScreenSceneController createWord4DirStartSC;
     public final Main.SceneControllers.Game.CreateWord4DirGame.GameSceneController createWord4DirSC;
-    public final Parent wordleScene;
+    public final WordleController wordleSC;
 
     public final AIConversationSceneController aiSC;
 
-    public final Parent loginScreen;
-    public final Parent settingsScene;
+    //public final Parent loginScreen;
+    public final LoginSceneController loginSC;
+    public final SettingSceneController settingSC;
 
 
     public static void SwitchScene(Parent newScene) {
@@ -119,9 +124,7 @@ public class FxmlFileManager
 
             FXMLLoader loader = null;
 
-            loader = new FXMLLoader(getClass().getResource("/fxml/application/DictionaryScene.fxml"));
-            this.dictionaryScene = loader.load();
-            this.dictionarySceneController = loader.getController();
+            this.dictionarySC = this.LoadSC("/application/DictionaryScene.fxml");
 
 
             this.chooseGameSC = this.LoadSC("/Game/ChooseGameScene.fxml");
@@ -134,8 +137,7 @@ public class FxmlFileManager
             this.createWord4DirSC = this.LoadSC("/Game/CreateWord4DirGame/GameScene.fxml");
 
 
-            loader = new FXMLLoader(getClass().getResource("/fxml/Translate/translateScene.fxml"));
-            this.translateScene = loader.load();
+            this.translateSC = this.LoadSC("/Translate/translateScene.fxml");
 
             loader = new FXMLLoader(getClass().getResource("/fxml/application/EditWord.fxml"));
             this.editWordScene = loader.load();
@@ -144,14 +146,13 @@ public class FxmlFileManager
 
             this.aiSC = this.LoadSC("/AIChatBot/AIConversationScene.fxml");
 
-            loader = new FXMLLoader(getClass().getResource("/fxml/Game/Wordle/WordleScene.fxml"));
-            this.wordleScene = loader.load();
+            this.wordleSC = this.LoadSC("/Game/Wordle/WordleScene.fxml");
 
-            loader = new FXMLLoader(getClass().getResource("/fxml/application/LoginScreen.fxml"));
-            this.loginScreen = loader.load();
+//            loader = new FXMLLoader(getClass().getResource("/fxml/application/LoginScreen.fxml"));
+//            this.loginScreen = loader.load();
+            this.loginSC = this.LoadSC("/application/LoginScreen.fxml");
 
-            loader = new FXMLLoader(getClass().getResource("/fxml/application/SettingScene.fxml"));
-            this.settingsScene = loader.load();
+            this.settingSC = this.LoadSC("/application/SettingScene.fxml");
 
         }
         catch (IOException e)

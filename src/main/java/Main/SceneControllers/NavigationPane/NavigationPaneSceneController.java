@@ -3,9 +3,6 @@ package Main.SceneControllers.NavigationPane;
 import Main.FxmlFileManager;
 import Main.ProjectDirectory;
 import Main.SceneControllers.BaseSceneController;
-import Main.SceneControllers.Dictionary.HomeSceneController;
-import Main.SceneControllers.Widget.StudyTimerController;
-import Main.application.App;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
@@ -143,7 +140,7 @@ public class NavigationPaneSceneController implements Initializable
     @FXML
     private void MoveToDictionaryScene()
     {
-        this.MoveToScene(FxmlFileManager.getInstance().dictionaryScene);
+        this.MoveToScene(FxmlFileManager.getInstance().dictionarySC);
     }
 
     @FXML
@@ -167,12 +164,12 @@ public class NavigationPaneSceneController implements Initializable
     @FXML
     private void MoveToTranslateScene()
     {
-        MoveToScene(FxmlFileManager.getInstance().translateScene);
+        MoveToScene(FxmlFileManager.getInstance().translateSC);
     }
 
     @FXML
     private void MoveToSettingsScene()
     {
-        MoveToScene(FxmlFileManager.getInstance().settingsScene);
+        MoveToScene(FxmlFileManager.getInstance().settingSC);
     }
 }

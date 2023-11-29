@@ -2,6 +2,7 @@ package Main.SceneControllers.Account;
 
 import Main.Database;
 import Main.FxmlFileManager;
+import Main.SceneControllers.BaseSceneController;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -20,7 +21,7 @@ import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class LoginSceneController {
+public class LoginSceneController extends BaseSceneController {
     private boolean isRegistering = false;
     private boolean isOnline = false;
 
@@ -65,6 +66,16 @@ public class LoginSceneController {
             System.out.println(e.getMessage());
             offLineState();
         }
+    }
+
+    @Override
+    public void StartShow() {
+
+    }
+
+    @Override
+    public void EndShow() {
+
     }
 
     public void offLineState() {

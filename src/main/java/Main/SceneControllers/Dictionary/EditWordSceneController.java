@@ -5,7 +5,6 @@ import Dictionary.SearchHistory;
 import Main.FxmlFileManager;
 import Main.ProjectDirectory;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
-import Main.application.App;
 import Word.WordBlock;
 import WordEditing.GraphNode.*;
 import WordEditing.NodeJSON;
@@ -18,7 +17,6 @@ import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
@@ -162,7 +160,7 @@ public class EditWordSceneController {
 
     @FXML
     public void toDictionary() {
-        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().dictionaryScene);
+        //FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().dictionaryScene);
     }
 
     @FXML
@@ -172,7 +170,7 @@ public class EditWordSceneController {
 
     @FXML
     public void toTranslate() {
-        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().translateScene);
+        //FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().translateScene);
     }
 
 
@@ -326,7 +324,7 @@ public class EditWordSceneController {
             DicNode.getCurrentlyEditedWord().getWordBlock().deleteFromDatabase();
             SearchHistory.getInstance().deleteWord(DicNode.getCurrentlyEditedWord().getWordBlock().getWord());
 
-            ListView historyListView =  FxmlFileManager.getInstance().dictionarySceneController.getHistoryListView();
+            ListView historyListView =  FxmlFileManager.getInstance().dictionarySC.getHistoryListView();
             historyListView.getItems().clear();
             if (!SearchHistory.getInstance().getWordHistory().isEmpty()) {
                 historyListView.getItems().addAll(SearchHistory.getInstance().getWordHistory());
