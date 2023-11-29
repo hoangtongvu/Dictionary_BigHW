@@ -6,7 +6,6 @@ import AIChatBot.ModelList.ModelListManager;
 import AIChatBot.gpt4all.ModelFileChooser;
 import Main.SceneControllers.BaseSceneController;
 import Main.SceneControllers.IHasNavPane;
-import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import Main.application.App;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -19,13 +18,11 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import javafx.util.Pair;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -34,9 +31,6 @@ import java.util.ResourceBundle;
 
 public class AIConversationSceneController extends BaseSceneController implements Initializable, IHasNavPane
 {
-
-    @FXML
-    private AnchorPane rootAnchorPane;
 
     @FXML
     private VBox conversationVbox;
@@ -74,7 +68,6 @@ public class AIConversationSceneController extends BaseSceneController implement
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        //this.AddNavPane();
         this.AddTextAreaKeyCombination();
         this.UpdateModelComboBox();
     }

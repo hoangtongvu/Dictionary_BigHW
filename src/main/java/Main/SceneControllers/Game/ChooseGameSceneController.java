@@ -4,12 +4,10 @@ import Game.GameCtrl;
 import Game.GamesCtrl;
 import Main.SceneControllers.BaseSceneController;
 import Main.SceneControllers.IHasNavPane;
-import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import java.net.URL;
 import java.util.ArrayList;
@@ -28,7 +26,6 @@ public class ChooseGameSceneController extends BaseSceneController implements In
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.chooseGameButtons = new ArrayList<>();
         this.CreateAllButtons();
-        //this.AddNavPane();
     }
 
     @Override

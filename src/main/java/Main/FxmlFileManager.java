@@ -9,7 +9,6 @@ import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import Main.application.App;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -161,6 +160,12 @@ public class FxmlFileManager
         }
     }
 
+    /**
+     * SC stands for SceneController.
+     * @param localPath is local path of fxml file in /fxml directory.
+     * @param <T> is type of SceneController.
+     * @return SceneController.
+     */
     private <T extends BaseSceneController> T LoadSC(String localPath)
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml" + localPath));

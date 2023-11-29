@@ -36,9 +36,6 @@ public class GameSceneController extends BaseSceneController implements Initiali
 {
 
     @FXML
-    private AnchorPane rootAnchorPane;
-
-    @FXML
     private GridPane gameGridPane;
 
     @FXML
