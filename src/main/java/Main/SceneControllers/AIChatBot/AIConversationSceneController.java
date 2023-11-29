@@ -6,6 +6,7 @@ import AIChatBot.ModelList.ModelListManager;
 import AIChatBot.gpt4all.ModelFileChooser;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import Main.application.App;
+import animatefx.animation.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -15,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -33,20 +35,12 @@ import java.util.ResourceBundle;
 public class AIConversationSceneController implements Initializable
 {
 
-    @FXML
-    private AnchorPane rootAnchorPane;
-
-    @FXML
-    private VBox conversationVbox;
-
-    @FXML
-    private TextArea userTextArea;
-
-    @FXML
-    private ScrollPane messageScrollPane;
-
-    @FXML
-    private ComboBox<String> modelComboBox;
+    @FXML private AnchorPane rootAnchorPane;
+    @FXML private VBox conversationVbox;
+    @FXML private TextArea userTextArea;
+    @FXML private ScrollPane messageScrollPane;
+    @FXML private ComboBox<String> modelComboBox;
+    @FXML private ImageView confirmButtonImageView;
 
     private final AIChatBotCtrl aiChatBotCtrl;
 
@@ -180,18 +174,22 @@ public class AIConversationSceneController implements Initializable
         this.conversationVbox.getChildren().add(pair.getKey());
         this.messageBlocks.add(pair.getValue());
         this.ScrollToLatestMessage();
+        new FadeInUp(pair.getKey()).play();
         return pair.getValue();
     }
 
     @FXML
     private void OnUserConfirmInstruction()
     {
+        //play animation for send button.
+        this.PlayButtonAnimation();
+
         if (this.isUserTextFieldDisabled) return;
         String input = this.userTextArea.getText();
         if (input.isEmpty()) return;
-        this.userTextArea.clear();
 
         if (!this.aiChatBotCtrl.getAiChatBotManager().ModelExist()) return;//todo why intellij suggests safe del this function? why it is not working?
+        this.userTextArea.clear();
 
 
         MessageBlockSceneController userMessageBlock = this.CreateMessageBlock();
@@ -267,6 +265,13 @@ public class AIConversationSceneController implements Initializable
         this.messageScrollPane.setVvalue(1);
     }
 
+    private void PlayButtonAnimation()
+    {
+        FadeOutRight fadeOutRight = new FadeOutRight(this.confirmButtonImageView);
+        fadeOutRight.setSpeed(2);
+        fadeOutRight.playOnFinished(new FadeInLeft(this.confirmButtonImageView));
+        fadeOutRight.play();
+    }
 
     //todo using spelling API to spell AI's responses.
     //todo loading model in background. x
