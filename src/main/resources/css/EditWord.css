@@ -27,7 +27,6 @@
 }
 
 .node-title {
-
     -fx-background-color: #ffee92;
     -fx-text-fill: #000000;
     -fx-alignment: center;
@@ -57,6 +56,15 @@
     -fx-text-fill: white;
     -fx-background-color: #597f9d;
     -fx-background-radius: 30;
+}
+
+.tool-buttons:hover {
+    -fx-background-color: #3e5b70;
+}
+
+.toggle-button:selected {
+    /*-fx-background-color: #3c586c;*/
+    -fx-text-fill: #ffee92;
 }
 
 .scroll-pane {

@@ -28,12 +28,11 @@ public class PhraseEditor {
         phraseTextArea.setWrapText(true);
         this.node = node;
         editorPane.setPrefSize(240.0, 400.0);
-        editorPane.setStyle("-fx-background-color: white;");
 
         phraseLabel.setLayoutX(61.0);
         phraseLabel.setLayoutY(25.0);
         phraseLabel.setPrefSize(197.0, 26.0);
-        phraseLabel.setStyle("-fx-background-color: pink; -fx-alignment: center;");
+
         AnchorPane.setTopAnchor(phraseLabel, 0.0);
         AnchorPane.setLeftAnchor(phraseLabel, 0.0);
         AnchorPane.setRightAnchor(phraseLabel, 0.0);

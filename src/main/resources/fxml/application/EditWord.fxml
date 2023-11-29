@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -76,8 +77,8 @@
                                        </graphic>
                                     </Button>
                                     <Button fx:id="saveButton" layoutX="563.0" layoutY="6.0" mnemonicParsing="false" onAction="#saveWord" prefHeight="33.0" prefWidth="49.0" styleClass="tool-buttons" stylesheets="@../../css/EditWord.css" text="Save" AnchorPane.rightAnchor="247.14285714285722" />
-                                    <Button fx:id="connectButton" layoutX="619.0" layoutY="6.0" mnemonicParsing="false" onAction="#toggleConnectMode" prefHeight="33.0" prefWidth="141.0" styleClass="tool-buttons" stylesheets="@../../css/EditWord.css" text="Toggle Connect Mode" AnchorPane.rightAnchor="99.14285714285722" />
                                     <Button fx:id="deleteButton" layoutX="767.0" layoutY="6.0" mnemonicParsing="false" onAction="#deleteWord" prefHeight="33.0" prefWidth="71.0" styleClass="tool-buttons" stylesheets="@../../css/EditWord.css" text="Delete" AnchorPane.rightAnchor="20.85714285714289" />
+                                    <ToggleButton fx:id="connectButton" layoutX="616.0" layoutY="6.0" mnemonicParsing="false" onAction="#toggleConnectMode" prefHeight="33.0" prefWidth="141.0" styleClass="tool-buttons" stylesheets="@../../css/EditWord.css" text="Toggle Connect Mode" AnchorPane.rightAnchor="99.0" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane layoutX="-46.0" layoutY="2.0" prefHeight="53.0" prefWidth="179.0" style="-fx-background-radius: 90;" styleClass="editor-anchor-pane" stylesheets="@../../css/EditWord.css" AnchorPane.leftAnchor="-46.0">

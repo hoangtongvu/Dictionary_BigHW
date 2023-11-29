@@ -178,7 +178,7 @@
     -fx-background-radius: 10px;
 }
 
-.list-cell {
+.tab-pane-list-view .list-cell {
     -fx-text-fill: #ce5e82;
     -fx-background-color:  #200D3A;
     -fx-padding: 0px 0px 0px 10px;
@@ -188,13 +188,13 @@
 }
 
 
-.list-cell:selected {
+.tab-pane-list-view .list-cell:selected {
     -fx-text-fill:  #ce5e82;
     -fx-background-color:  #2E4770;
 }
 
 #searchBar .list-cell {
-    -fx-background-color: white;
+    -fx-background-color: #2E4770;
 }
 
 #historyListView {
@@ -203,7 +203,7 @@
     -fx-background-radius: 0px;
 }
 
-.list-view {
+.tab-pane-list-view {
     -fx-background-color:  #200D3A;
     -fx-background-insets: 0;
     -fx-background-radius: 0px 10px 10px 10px;

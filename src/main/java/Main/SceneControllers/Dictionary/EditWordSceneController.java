@@ -67,7 +67,7 @@ public class EditWordSceneController {
     @FXML
     protected Button saveButton;
     @FXML
-    protected Button connectButton;
+    protected ToggleButton connectButton;
     @FXML
     protected Button deleteButton;
     @FXML
@@ -362,9 +362,9 @@ public class EditWordSceneController {
     @FXML
     public void toggleConnectMode() {
         if (!DicNode.isToggleConnectMode()) {
-            connectButton.setTextFill(Color.GREEN);
+            connectButton.setSelected(true);
         } else {
-            connectButton.setTextFill(Color.RED);
+            connectButton.setSelected(false);
         }
         DicNode.setToggleConnectMode(!DicNode.isToggleConnectMode());
     }
