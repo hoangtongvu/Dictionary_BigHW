@@ -4,7 +4,6 @@ import Dictionary.DicManager;
 import Main.FxmlFileManager;
 import Main.SceneControllers.BaseSceneController;
 import Main.SceneControllers.IHasNavPane;
-import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import Main.application.App;
 import Main.SceneControllers.Translate.TextToSpeech;
 import Word.WordBlock;
@@ -65,7 +64,7 @@ public class DictionarySceneController extends BaseSceneController implements In
     @FXML
     public void editCurrentWord() {
         try {
-            switchScene(FxmlFileManager.getInstance().editWordScene);
+            FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().editWordSceneController);
             FxmlFileManager.getInstance().editWordSceneController.loadWordOnPane(currentWordBlock.getWord());
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -194,11 +193,6 @@ public class DictionarySceneController extends BaseSceneController implements In
             System.out.println(e.getMessage());
         }
 
-        try {
-            NavigationPaneSceneController.LoadInstance().AddNavPaneComponentsToRoot(this.root);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
 
         AutoCompletionBinding<String> auto = TextFields.bindAutoCompletion(this.searchBar,
                 new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<String>>() {

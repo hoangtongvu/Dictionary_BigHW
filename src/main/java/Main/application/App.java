@@ -1,9 +1,9 @@
 package Main.application;
 
 import Main.FxmlFileManager;
+import Main.SceneControllers.Dictionary.HomeSceneController;
 import javafx.application.Application;
 import javafx.application.HostServices;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -19,13 +19,11 @@ public class App extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         myHostServices = getHostServices();
-        Parent root;
 
-        //root = FXMLLoader.load(getClass().getResource("/fxml/application/DictionaryScene.fxml"));
-        root = FxmlFileManager.getInstance().homeScene;
-        Scene scene = new Scene(root);
+        HomeSceneController initSC = FxmlFileManager.getInstance().homeSC;
+        FxmlFileManager.SwitchToInitScene(initSC);
+        Scene scene = new Scene(initSC.getRoot());
 
-        //InputManager inputManager = new InputManager(scene);
         primaryStage.setMinWidth(800);
         primaryStage.setMinHeight(600);
         primaryStage.setTitle("MyBigDic");

@@ -1,6 +1,7 @@
 package Main.SceneControllers.Dictionary;
 
-import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
+import Main.SceneControllers.BaseSceneController;
+import Main.SceneControllers.IHasNavPane;
 import Main.SceneControllers.Widget.StudyTimerController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -9,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
 
-public class HomeSceneController {
+public class HomeSceneController extends BaseSceneController implements IHasNavPane {
     @FXML
     protected AnchorPane drawerMenu;
     @FXML
@@ -31,12 +32,16 @@ public class HomeSceneController {
             throw new RuntimeException(e);
         }
 
-        try {
-            NavigationPaneSceneController.LoadInstance().AddNavPaneComponentsToRoot(this.root);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
 
 
+    @Override
+    public void StartShow() {
+
+    }
+
+    @Override
+    public void EndShow() {
+
+    }
 }
