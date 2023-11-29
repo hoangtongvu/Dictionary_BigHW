@@ -1,10 +1,7 @@
 package Game.MultiChoiceGame;
 
 import Game.GameCtrl;
-import Game.GamesCtrl;
 import Main.FxmlFileManager;
-import Main.SceneControllers.Dictionary.HomeSceneController;
-import java.io.FileNotFoundException;
 
 public class ChoiceGameCtrl extends GameCtrl
 {
@@ -31,7 +28,7 @@ public class ChoiceGameCtrl extends GameCtrl
 
     public ChoiceGameCtrl()
     {
-        super("Multi-Choice", actionEvent -> FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameStartScene));
+        super("Multi-Choice", actionEvent -> FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameStartSC));
         this.choiceQuesLoader = new ChoiceQuesLoader(this);
         this.choiceQuesGenerator = new ChoiceQuesGenerator(this);
         this.choiceQuesStorage = new ChoiceQuesStorage();

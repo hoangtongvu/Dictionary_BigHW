@@ -3,7 +3,7 @@ package Main.SceneControllers.Game.MultiChoiceGame;
 import Game.GamesCtrl;
 import Game.MultiChoiceGame.*;
 import Main.FxmlFileManager;
-import Main.SceneControllers.Dictionary.HomeSceneController;
+import Main.SceneControllers.BaseSceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class GameSceneController implements Initializable
+public class GameSceneController extends BaseSceneController implements Initializable
 {
 
     //region FXML
@@ -64,6 +64,18 @@ public class GameSceneController implements Initializable
     {
         this.timerManager = new ChoiceGameTimerManager(this.timerText);
         this.SubTimerEvent();
+    }
+
+    @Override
+    public void StartShow()
+    {
+
+    }
+
+    @Override
+    public void EndShow()
+    {
+
     }
 
     public void StartGame(int maxQues, int maxTimeSecond)
@@ -332,7 +344,7 @@ public class GameSceneController implements Initializable
 
     private void SwitchBackToStartScreen()
     {
-        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameStartScene);
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameStartSC);
     }
     
 

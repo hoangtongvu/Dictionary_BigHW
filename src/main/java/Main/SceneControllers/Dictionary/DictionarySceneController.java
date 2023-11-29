@@ -2,6 +2,8 @@ package Main.SceneControllers.Dictionary;
 
 import Dictionary.DicManager;
 import Main.FxmlFileManager;
+import Main.SceneControllers.BaseSceneController;
+import Main.SceneControllers.IHasNavPane;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import Main.application.App;
 import Main.SceneControllers.Translate.TextToSpeech;
@@ -31,7 +33,7 @@ import static java.util.Collections.binarySearch;
 import static java.util.Collections.sort;
 
 
-public class DictionarySceneController implements Initializable {
+public class DictionarySceneController extends BaseSceneController implements Initializable, IHasNavPane {
     private static final List<WordBlock> starredWordList = new ArrayList<>();
     private static final List<String> starredWordStringList = new ArrayList<>();
     private static final List<String> wordHistoryList = new ArrayList<>();
@@ -95,6 +97,18 @@ public class DictionarySceneController implements Initializable {
 //        System.out.println("<html><body>" + styleSheet + encoding + content + "</body></html>");
     }
 
+
+    @Override
+    public void StartShow()
+    {
+
+    }
+
+    @Override
+    public void EndShow()
+    {
+
+    }
 
     @FXML
     public void LookupWord() throws SQLException {

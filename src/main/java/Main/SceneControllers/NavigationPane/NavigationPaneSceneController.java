@@ -2,9 +2,7 @@ package Main.SceneControllers.NavigationPane;
 
 import Main.FxmlFileManager;
 import Main.ProjectDirectory;
-import Main.SceneControllers.Dictionary.HomeSceneController;
-import Main.SceneControllers.Widget.StudyTimerController;
-import Main.application.App;
+import Main.SceneControllers.BaseSceneController;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
@@ -21,6 +19,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -49,14 +48,19 @@ public class NavigationPaneSceneController implements Initializable
 
     private TranslateTransition drawerTranslateTransition;
     private FadeTransition blurPaneFadeTransition;
+    private static List<Node> nodes;
 
+    public NavigationPaneSceneController()
+    {
+        nodes = new ArrayList<>();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         this.drawerTranslateTransition = new TranslateTransition(Duration.seconds(0.5), this.drawerMenu);
         this.blurPaneFadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
-
+        nodes.addAll(this.navPaneRoot.getChildren());
 //        try {
 //            StudyTimerController.loadInstance().addToParent(timerPlaceHolder);
 //        } catch (IOException e) {
@@ -78,6 +82,11 @@ public class NavigationPaneSceneController implements Initializable
     {
         List<Node> nodes = navPaneRoot.getChildren();
         root.getChildren().addAll(nodes);
+    }
+
+    public static void AddNavPaneComponentsToRoot1(Parent root)
+    {
+        ((Pane) root).getChildren().addAll(nodes);
     }
 
 
@@ -116,6 +125,12 @@ public class NavigationPaneSceneController implements Initializable
         SwitchScene(newScene);
     }
 
+    private void MoveToScene(BaseSceneController newScene)
+    {
+        this.onMenuExit();
+        SwitchScene(newScene);
+    }
+
     @FXML
     private void MoveToHomeScene()
     {
@@ -125,13 +140,13 @@ public class NavigationPaneSceneController implements Initializable
     @FXML
     private void MoveToDictionaryScene()
     {
-        this.MoveToScene(FxmlFileManager.getInstance().dictionaryScene);
+        this.MoveToScene(FxmlFileManager.getInstance().dictionarySC);
     }
 
     @FXML
     private void MoveToGamesScene()
     {
-        MoveToScene(FxmlFileManager.getInstance().chooseGameScene);
+        MoveToScene(FxmlFileManager.getInstance().chooseGameSC);
     }
 
     @FXML
@@ -143,18 +158,18 @@ public class NavigationPaneSceneController implements Initializable
     @FXML
     private void MoveToAIChatBotScene()
     {
-        MoveToScene(FxmlFileManager.getInstance().aiConversationScene);
+        MoveToScene(FxmlFileManager.getInstance().aiSC);
     }
 
     @FXML
     private void MoveToTranslateScene()
     {
-        MoveToScene(FxmlFileManager.getInstance().translateScene);
+        MoveToScene(FxmlFileManager.getInstance().translateSC);
     }
 
     @FXML
     private void MoveToSettingsScene()
     {
-        MoveToScene(FxmlFileManager.getInstance().settingsScene);
+        MoveToScene(FxmlFileManager.getInstance().settingSC);
     }
 }
