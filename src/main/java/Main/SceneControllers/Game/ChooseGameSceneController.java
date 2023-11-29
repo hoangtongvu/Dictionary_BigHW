@@ -3,6 +3,7 @@ package Main.SceneControllers.Game;
 import Game.GameCtrl;
 import Game.GamesCtrl;
 import Main.SceneControllers.BaseSceneController;
+import Main.SceneControllers.IHasNavPane;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,11 +17,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.scene.control.Button;
 
-public class ChooseGameSceneController extends BaseSceneController implements Initializable
+public class ChooseGameSceneController extends BaseSceneController implements Initializable, IHasNavPane
 {
 
     @FXML private HBox chooseGameButtonsHbox;
-    @FXML private AnchorPane rootAnchorPane;
 
     private List<Button> chooseGameButtons;
 
@@ -34,13 +34,13 @@ public class ChooseGameSceneController extends BaseSceneController implements In
     @Override
     public void StartShow()
     {
-
+        System.out.println("HI from ChooseGame.");
     }
 
     @Override
     public void EndShow()
     {
-
+        System.out.println("BYE from ChooseGame.");
     }
 
     private void CreateAllButtons()

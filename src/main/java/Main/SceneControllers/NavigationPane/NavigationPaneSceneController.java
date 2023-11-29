@@ -22,6 +22,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -50,14 +51,19 @@ public class NavigationPaneSceneController implements Initializable
 
     private TranslateTransition drawerTranslateTransition;
     private FadeTransition blurPaneFadeTransition;
+    private static List<Node> nodes;
 
+    public NavigationPaneSceneController()
+    {
+        nodes = new ArrayList<>();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         this.drawerTranslateTransition = new TranslateTransition(Duration.seconds(0.5), this.drawerMenu);
         this.blurPaneFadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
-
+        nodes.addAll(this.navPaneRoot.getChildren());
 //        try {
 //            StudyTimerController.loadInstance().addToParent(timerPlaceHolder);
 //        } catch (IOException e) {
@@ -79,6 +85,11 @@ public class NavigationPaneSceneController implements Initializable
     {
         List<Node> nodes = navPaneRoot.getChildren();
         root.getChildren().addAll(nodes);
+    }
+
+    public static void AddNavPaneComponentsToRoot1(Parent root)
+    {
+        ((Pane) root).getChildren().addAll(nodes);
     }
 
 
@@ -150,7 +161,7 @@ public class NavigationPaneSceneController implements Initializable
     @FXML
     private void MoveToAIChatBotScene()
     {
-        MoveToScene(FxmlFileManager.getInstance().aiConversationScene);
+        MoveToScene(FxmlFileManager.getInstance().aiSC);
     }
 
     @FXML

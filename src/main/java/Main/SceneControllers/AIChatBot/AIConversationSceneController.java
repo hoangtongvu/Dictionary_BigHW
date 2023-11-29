@@ -4,6 +4,8 @@ import AIChatBot.AIChatBotCtrl;
 import AIChatBot.AIChatBotManager;
 import AIChatBot.ModelList.ModelListManager;
 import AIChatBot.gpt4all.ModelFileChooser;
+import Main.SceneControllers.BaseSceneController;
+import Main.SceneControllers.IHasNavPane;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import Main.application.App;
 import javafx.animation.Animation;
@@ -30,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AIConversationSceneController implements Initializable
+public class AIConversationSceneController extends BaseSceneController implements Initializable, IHasNavPane
 {
 
     @FXML
@@ -72,19 +74,21 @@ public class AIConversationSceneController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        this.AddNavPane();
+        //this.AddNavPane();
         this.AddTextAreaKeyCombination();
         this.UpdateModelComboBox();
     }
 
-    private void AddNavPane()
+    @Override
+    public void StartShow()
     {
-        try {
-            NavigationPaneSceneController navigationPaneSceneController = NavigationPaneSceneController.LoadInstance();
-            navigationPaneSceneController.AddNavPaneComponentsToRoot(this.rootAnchorPane);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        System.out.println("HI from AI.");
+    }
+
+    @Override
+    public void EndShow()
+    {
+        System.out.println("BYE from AI.");
     }
 
     private void AddTextAreaKeyCombination()

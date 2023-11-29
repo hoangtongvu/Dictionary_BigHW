@@ -1,10 +1,15 @@
 package Main;
 
+import Logger.LoggersCtrl;
+import Main.SceneControllers.AIChatBot.AIConversationSceneController;
 import Main.SceneControllers.BaseSceneController;
 import Main.SceneControllers.Game.ChooseGameSceneController;
+import Main.SceneControllers.IHasNavPane;
+import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import Main.application.App;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -30,6 +35,8 @@ public class FxmlFileManager
         primaryStage.show();
     }
 
+    private static BaseSceneController currentSC;
+
 
     public final Parent dictionaryScene;
     public final Main.SceneControllers.Dictionary.DictionarySceneController dictionarySceneController;
@@ -53,7 +60,7 @@ public class FxmlFileManager
     public final Main.SceneControllers.Game.CreateWord4DirGame.GameSceneController createWord4DirSC;
     public final Parent wordleScene;
 
-    public final Parent aiConversationScene;
+    public final AIConversationSceneController aiSC;
 
     public final Parent loginScreen;
     public final Parent settingsScene;
@@ -72,7 +79,14 @@ public class FxmlFileManager
         primaryStage.show();
     }
 
-    public static void SwitchScene(BaseSceneController newSceneController) {
+    public static void SwitchScene(BaseSceneController newSceneController)
+    {
+        if (currentSC == newSceneController) return;
+        if (currentSC != null) currentSC.EndShow();
+        currentSC = newSceneController;
+        currentSC.StartShow();
+
+
         Stage primaryStage = App.getPrimaryStage();
 
         if (primaryStage.getScene().getRoot() == getInstance().editWordScene) {
@@ -83,6 +97,11 @@ public class FxmlFileManager
 
         primaryStage.getScene().setRoot(newSceneController.getRoot());
         primaryStage.show();
+
+        //Check if SC implements IHasNavPane flag -> add navPane to that scene.
+        if (newSceneController instanceof IHasNavPane) NavigationPaneSceneController.AddNavPaneComponentsToRoot1(newSceneController.getRoot());
+        else LoggersCtrl.systemLogger.Log(newSceneController.getClass() + " does not have IHasNavPane flag");
+
     }
 
     private static boolean editSceneExitHandler() {
@@ -114,7 +133,7 @@ public class FxmlFileManager
 
             this.createWord4DirStartSC = this.LoadSC("/Game/CreateWord4DirGame/StartGameScreenScene.fxml");
             this.createWord4DirSC = this.LoadSC("/Game/CreateWord4DirGame/GameScene.fxml");
-            
+
 
             loader = new FXMLLoader(getClass().getResource("/fxml/Translate/translateScene.fxml"));
             this.translateScene = loader.load();
@@ -123,8 +142,8 @@ public class FxmlFileManager
             this.editWordScene = loader.load();
             this.editWordSceneController = loader.getController();
 
-            loader = new FXMLLoader(getClass().getResource("/fxml/AIChatBot/AIConversationScene.fxml"));
-            this.aiConversationScene = loader.load();
+
+            this.aiSC = this.LoadSC("/AIChatBot/AIConversationScene.fxml");
 
             loader = new FXMLLoader(getClass().getResource("/fxml/Game/Wordle/WordleScene.fxml"));
             this.wordleScene = loader.load();
@@ -154,5 +173,6 @@ public class FxmlFileManager
             throw new RuntimeException(e);
         }
     }
+
 
 }
