@@ -31,13 +31,13 @@ public class ChooseGameSceneController extends BaseSceneController implements In
     @Override
     public void StartShow()
     {
-        System.out.println("HI from ChooseGame.");
+
     }
 
     @Override
     public void EndShow()
     {
-        System.out.println("BYE from ChooseGame.");
+
     }
 
     private void CreateAllButtons()

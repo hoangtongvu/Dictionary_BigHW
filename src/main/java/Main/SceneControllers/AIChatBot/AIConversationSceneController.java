@@ -75,13 +75,13 @@ public class AIConversationSceneController extends BaseSceneController implement
     @Override
     public void StartShow()
     {
-        System.out.println("HI from AI.");
+
     }
 
     @Override
     public void EndShow()
     {
-        System.out.println("BYE from AI.");
+
     }
 
     private void AddTextAreaKeyCombination()

@@ -94,7 +94,11 @@ public class EditWordSceneController extends BaseSceneController implements IHas
 
     @Override
     public void EndShow() {
-
+        try {
+            changeSceneSave();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

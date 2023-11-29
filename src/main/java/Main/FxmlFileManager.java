@@ -19,7 +19,6 @@ import javafx.scene.Parent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class FxmlFileManager
 {
@@ -35,8 +34,9 @@ public class FxmlFileManager
         return instance;
     }
 
-
     private static BaseSceneController currentSC;
+
+    //region SCs declaration
     public final DictionarySceneController dictionarySC;
     public final HomeSceneController homeSC;
 
@@ -57,8 +57,9 @@ public class FxmlFileManager
     public final LoginSceneController loginSC;
     public final SettingSceneController settingSC;
     public final NavigationPaneSceneController navigationPaneSC;
+//endregion
 
-
+    //region SwitchScene functions.
     public static void SwitchToInitScene(BaseSceneController initSC)
     {
         currentSC = initSC;
@@ -76,12 +77,6 @@ public class FxmlFileManager
 
         Stage primaryStage = App.getPrimaryStage();
 
-        if (primaryStage.getScene().getRoot() == getInstance().editWordSceneController.getRoot()) {
-            if (!editSceneExitHandler()) {
-                return;
-            }
-        }
-
         primaryStage.getScene().setRoot(newSceneController.getRoot());
         primaryStage.show();
 
@@ -96,44 +91,28 @@ public class FxmlFileManager
         else LoggersCtrl.systemLogger.Log(newSceneController.getClass() + " does not have IHasNavPane flag");
     }
 
-    private static boolean editSceneExitHandler() {
-        try {
-            return FxmlFileManager.getInstance().editWordSceneController.changeSceneSave();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
+//endregion
+
 
     private FxmlFileManager()
     {
         this.homeSC = this.LoadSC("/application/HomeScene.fxml");
-
-        FXMLLoader loader = null;
-
         this.dictionarySC = this.LoadSC("/application/DictionaryScene.fxml");
-
 
         this.chooseGameSC = this.LoadSC("/Game/ChooseGameScene.fxml");
 
         this.multiChoiceGameStartSC = this.LoadSC("/Game/MultiChoiceGame/StartGameScreenScene.fxml");
         this.multiChoiceGameSC = this.LoadSC("/Game/MultiChoiceGame/GameScene.fxml");
 
-
         this.createWord4DirStartSC = this.LoadSC("/Game/CreateWord4DirGame/StartGameScreenScene.fxml");
         this.createWord4DirSC = this.LoadSC("/Game/CreateWord4DirGame/GameScene.fxml");
 
-
         this.translateSC = this.LoadSC("/Translate/translateScene.fxml");
-
         this.editWordSceneController = this.LoadSC("/application/EditWord.fxml");
-
-
         this.aiSC = this.LoadSC("/AIChatBot/AIConversationScene.fxml");
-
         this.wordleSC = this.LoadSC("/Game/Wordle/WordleScene.fxml");
-
         this.loginSC = this.LoadSC("/application/LoginScreen.fxml");
-
         this.settingSC = this.LoadSC("/application/SettingScene.fxml");
         this.navigationPaneSC = this.LoadSC("/application/NavigationPaneScene.fxml");
     }
