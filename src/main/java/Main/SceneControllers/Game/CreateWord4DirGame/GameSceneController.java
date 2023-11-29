@@ -5,7 +5,7 @@ import Game.CreateWord4DirGame.CreateWord4DirGameManager;
 import Game.CreateWord4DirGame.UI.OnFinishWordAnimator;
 import Game.GamesCtrl;
 import Main.FxmlFileManager;
-import Main.SceneControllers.Dictionary.HomeSceneController;
+import Main.SceneControllers.BaseSceneController;
 import Main.application.App;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class GameSceneController implements Initializable
+public class GameSceneController extends BaseSceneController implements Initializable
 {
 
     @FXML
@@ -134,6 +134,18 @@ public class GameSceneController implements Initializable
         });
 
         this.blurPaneFadeTransition = new FadeTransition(Duration.seconds(1), blurPane);
+    }
+
+    @Override
+    public void StartShow()
+    {
+        //do some animation on show.
+    }
+
+    @Override
+    public void EndShow()
+    {
+        //do some clean up things.
     }
 
     public void StartGame(int blockCount, int timeLimitSecond)
@@ -338,7 +350,7 @@ public class GameSceneController implements Initializable
 
     private void MoveBackToStartScreen()
     {
-        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().createWord4DirGameStartScene);
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().createWord4DirStartSC);
     }
 
     private void ToggleTimerText(boolean useTimer)
@@ -350,5 +362,6 @@ public class GameSceneController implements Initializable
     {
         this.timerText.setText("Time left: " + (maxTimeSecond - second));
     }
+
 
 }

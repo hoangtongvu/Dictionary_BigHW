@@ -2,6 +2,7 @@ package Main.SceneControllers.Game;
 
 import Game.GameCtrl;
 import Game.GamesCtrl;
+import Main.SceneControllers.BaseSceneController;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.scene.control.Button;
 
-public class ChooseGameSceneController implements Initializable
+public class ChooseGameSceneController extends BaseSceneController implements Initializable
 {
 
     @FXML private HBox chooseGameButtonsHbox;
@@ -27,16 +28,19 @@ public class ChooseGameSceneController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.chooseGameButtons = new ArrayList<>();
         this.CreateAllButtons();
-        this.AddNavPane();
+        //this.AddNavPane();
     }
 
-    private void AddNavPane()
+    @Override
+    public void StartShow()
     {
-        try {
-            NavigationPaneSceneController.LoadInstance().AddNavPaneComponentsToRoot(this.rootAnchorPane);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+
+    }
+
+    @Override
+    public void EndShow()
+    {
+
     }
 
     private void CreateAllButtons()

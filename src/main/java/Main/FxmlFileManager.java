@@ -1,5 +1,7 @@
 package Main;
 
+import Main.SceneControllers.BaseSceneController;
+import Main.SceneControllers.Game.ChooseGameSceneController;
 import Main.application.App;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,25 +36,21 @@ public class FxmlFileManager
     public final Parent homeScene;
 
 
-    public final Parent chooseGameScene;
+    public final ChooseGameSceneController chooseGameSC;
 
 
-    public final Parent multiChoiceGameStartScene;
-    public final Parent multiChoiceWordGameScene;
+    public final Main.SceneControllers.Game.MultiChoiceGame.StartGameScreenSceneController multiChoiceGameStartSC;
+    public final Main.SceneControllers.Game.MultiChoiceGame.GameSceneController multiChoiceGameSC;
 
-  
 
     public final Parent translateScene;
 
     public final Parent editWordScene;
     public final Main.SceneControllers.Dictionary.EditWordSceneController editWordSceneController;
 
-    public final Main.SceneControllers.Game.MultiChoiceGame.GameSceneController multiChoiceGameSceneController;
 
-
-    public final Parent createWord4DirGameStartScene;
-    public final Parent createWord4DirGameScene;
-    public final Main.SceneControllers.Game.CreateWord4DirGame.GameSceneController createWord4DirGameSceneController;
+    public final Main.SceneControllers.Game.CreateWord4DirGame.StartGameScreenSceneController createWord4DirStartSC;
+    public final Main.SceneControllers.Game.CreateWord4DirGame.GameSceneController createWord4DirSC;
     public final Parent wordleScene;
 
     public final Parent aiConversationScene;
@@ -71,6 +69,19 @@ public class FxmlFileManager
         }
 
         primaryStage.getScene().setRoot(newScene);
+        primaryStage.show();
+    }
+
+    public static void SwitchScene(BaseSceneController newSceneController) {
+        Stage primaryStage = App.getPrimaryStage();
+
+        if (primaryStage.getScene().getRoot() == getInstance().editWordScene) {
+            if (!editSceneExitHandler()) {
+                return;
+            }
+        }
+
+        primaryStage.getScene().setRoot(newSceneController.getRoot());
         primaryStage.show();
     }
 
@@ -94,22 +105,16 @@ public class FxmlFileManager
             this.dictionaryScene = loader.load();
             this.dictionarySceneController = loader.getController();
 
-            loader = new FXMLLoader(getClass().getResource("/fxml/Game/MultiChoiceGame/GameScene.fxml"));
-            this.multiChoiceWordGameScene = loader.load();
-            this.multiChoiceGameSceneController = loader.getController();
 
-            loader = new FXMLLoader(getClass().getResource("/fxml/Game/MultiChoiceGame/StartGameScreenScene.fxml"));
-            this.multiChoiceGameStartScene = loader.load();
+            this.chooseGameSC = this.LoadSC("/Game/ChooseGameScene.fxml");
 
-            loader = new FXMLLoader(getClass().getResource("/fxml/Game/CreateWord4DirGame/GameScene.fxml"));
-            this.createWord4DirGameScene = loader.load();
-            this.createWord4DirGameSceneController = loader.getController();
+            this.multiChoiceGameStartSC = this.LoadSC("/Game/MultiChoiceGame/StartGameScreenScene.fxml");
+            this.multiChoiceGameSC = this.LoadSC("/Game/MultiChoiceGame/GameScene.fxml");
 
-            loader = new FXMLLoader(getClass().getResource("/fxml/Game/CreateWord4DirGame/StartGameScreenScene.fxml"));
-            this.createWord4DirGameStartScene = loader.load();
 
-            loader = new FXMLLoader(getClass().getResource("/fxml/Game/ChooseGameScene.fxml"));
-            this.chooseGameScene = loader.load();
+            this.createWord4DirStartSC = this.LoadSC("/Game/CreateWord4DirGame/StartGameScreenScene.fxml");
+            this.createWord4DirSC = this.LoadSC("/Game/CreateWord4DirGame/GameScene.fxml");
+            
 
             loader = new FXMLLoader(getClass().getResource("/fxml/Translate/translateScene.fxml"));
             this.translateScene = loader.load();
@@ -136,4 +141,18 @@ public class FxmlFileManager
             throw new RuntimeException(e);
         }
     }
+
+    private <T extends BaseSceneController> T LoadSC(String localPath)
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml" + localPath));
+        try {
+            Parent root = loader.load();
+            T sceneController = loader.getController();
+            sceneController.setRoot(root);
+            return sceneController;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

@@ -167,7 +167,7 @@ public class EditWordSceneController {
 
     @FXML
     public void toGames() {
-        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().chooseGameScene);
+        //FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().chooseGameScene);
     }
 
     @FXML

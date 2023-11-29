@@ -1,12 +1,12 @@
 package Main.SceneControllers.Game.MultiChoiceGame;
 
 import Main.FxmlFileManager;
-import Main.SceneControllers.Dictionary.HomeSceneController;
+import Main.SceneControllers.BaseSceneController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class StartGameScreenSceneController
+public class StartGameScreenSceneController extends BaseSceneController
 {
 
     @FXML
@@ -17,6 +17,19 @@ public class StartGameScreenSceneController
 
     @FXML
     private Button startGameButton;
+
+
+    @Override
+    public void StartShow()
+    {
+
+    }
+
+    @Override
+    public void EndShow()
+    {
+
+    }
 
     @FXML
     private void MoveToGameScene()
@@ -31,9 +44,10 @@ public class StartGameScreenSceneController
             return;
         }
 
-        GameSceneController gameSceneController = FxmlFileManager.getInstance().multiChoiceGameSceneController;
-        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().multiChoiceWordGameScene);
+        GameSceneController gameSceneController = FxmlFileManager.getInstance().multiChoiceGameSC;
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameSC);
         gameSceneController.StartGame(maxQues, maxTimeSecond);
     }
+
 
 }

@@ -2,6 +2,7 @@ package Main.SceneControllers.NavigationPane;
 
 import Main.FxmlFileManager;
 import Main.ProjectDirectory;
+import Main.SceneControllers.BaseSceneController;
 import Main.SceneControllers.Dictionary.HomeSceneController;
 import Main.SceneControllers.Widget.StudyTimerController;
 import Main.application.App;
@@ -116,6 +117,12 @@ public class NavigationPaneSceneController implements Initializable
         SwitchScene(newScene);
     }
 
+    private void MoveToScene(BaseSceneController newScene)
+    {
+        this.onMenuExit();
+        SwitchScene(newScene);
+    }
+
     @FXML
     private void MoveToHomeScene()
     {
@@ -131,7 +138,7 @@ public class NavigationPaneSceneController implements Initializable
     @FXML
     private void MoveToGamesScene()
     {
-        MoveToScene(FxmlFileManager.getInstance().chooseGameScene);
+        MoveToScene(FxmlFileManager.getInstance().chooseGameSC);
     }
 
     @FXML

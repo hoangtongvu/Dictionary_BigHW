@@ -2,9 +2,6 @@ package Game.CreateWord4DirGame;
 
 import Game.GameCtrl;
 import Main.FxmlFileManager;
-import Main.SceneControllers.Dictionary.HomeSceneController;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
 public class CreateWord4DirGameCtrl extends GameCtrl
 {
@@ -22,7 +19,7 @@ public class CreateWord4DirGameCtrl extends GameCtrl
 
     public CreateWord4DirGameCtrl()
     {
-        super("4 Directions", actionEvent -> FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().createWord4DirGameStartScene));
+        super("4 Directions", actionEvent -> FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().createWord4DirStartSC));
         this.gameManager = new CreateWord4DirGameManager(this);
         this.gameAutoCompletion = new GameAutoCompletion(this);
     }
