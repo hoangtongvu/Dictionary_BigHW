@@ -4,8 +4,8 @@ import Dictionary.DicManager;
 import Dictionary.SearchHistory;
 import Main.FxmlFileManager;
 import Main.ProjectDirectory;
-import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
-import Main.application.App;
+import Main.SceneControllers.BaseSceneController;
+import Main.SceneControllers.IHasNavPane;
 import Word.WordBlock;
 import WordEditing.GraphNode.*;
 import WordEditing.NodeJSON;
@@ -18,7 +18,6 @@ import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
@@ -37,7 +36,7 @@ import java.util.List;
 
 import static java.util.Collections.sort;
 
-public class EditWordSceneController {
+public class EditWordSceneController extends BaseSceneController implements IHasNavPane {
 
     private static EditWordSceneController sceneController;
     private double mouseStartX;
@@ -67,7 +66,7 @@ public class EditWordSceneController {
     @FXML
     protected Button saveButton;
     @FXML
-    protected Button connectButton;
+    protected ToggleButton connectButton;
     @FXML
     protected Button deleteButton;
     @FXML
@@ -85,6 +84,21 @@ public class EditWordSceneController {
 
     public static List<WordBlock> getEditableWordList() {
         return editableWordList;
+    }
+
+
+    @Override
+    public void StartShow() {
+
+    }
+
+    @Override
+    public void EndShow() {
+        try {
+            changeSceneSave();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -162,17 +176,17 @@ public class EditWordSceneController {
 
     @FXML
     public void toDictionary() {
-        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().dictionaryScene);
+        //FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().dictionaryScene);
     }
 
     @FXML
     public void toGames() {
-        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().chooseGameScene);
+        //FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().chooseGameScene);
     }
 
     @FXML
     public void toTranslate() {
-        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().translateScene);
+        //FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().translateScene);
     }
 
 
@@ -326,7 +340,7 @@ public class EditWordSceneController {
             DicNode.getCurrentlyEditedWord().getWordBlock().deleteFromDatabase();
             SearchHistory.getInstance().deleteWord(DicNode.getCurrentlyEditedWord().getWordBlock().getWord());
 
-            ListView historyListView =  FxmlFileManager.getInstance().dictionarySceneController.getHistoryListView();
+            ListView historyListView =  FxmlFileManager.getInstance().dictionarySC.getHistoryListView();
             historyListView.getItems().clear();
             if (!SearchHistory.getInstance().getWordHistory().isEmpty()) {
                 historyListView.getItems().addAll(SearchHistory.getInstance().getWordHistory());
@@ -362,9 +376,9 @@ public class EditWordSceneController {
     @FXML
     public void toggleConnectMode() {
         if (!DicNode.isToggleConnectMode()) {
-            connectButton.setTextFill(Color.GREEN);
+            connectButton.setSelected(true);
         } else {
-            connectButton.setTextFill(Color.RED);
+            connectButton.setSelected(false);
         }
         DicNode.setToggleConnectMode(!DicNode.isToggleConnectMode());
     }
@@ -439,11 +453,6 @@ public class EditWordSceneController {
         canvasPane.getChildren().add(grid);
         hideToolBar();
 
-        try {
-            NavigationPaneSceneController.LoadInstance().AddNavPaneComponentsToRoot(this.root);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     public void showEditingTools(boolean flag) {

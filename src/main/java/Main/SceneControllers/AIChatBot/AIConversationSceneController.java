@@ -4,7 +4,8 @@ import AIChatBot.AIChatBotCtrl;
 import AIChatBot.AIChatBotManager;
 import AIChatBot.ModelList.ModelListManager;
 import AIChatBot.gpt4all.ModelFileChooser;
-import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
+import Main.SceneControllers.BaseSceneController;
+import Main.SceneControllers.IHasNavPane;
 import Main.application.App;
 import animatefx.animation.*;
 import javafx.animation.Animation;
@@ -19,28 +20,26 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import javafx.util.Pair;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AIConversationSceneController implements Initializable
+public class AIConversationSceneController extends BaseSceneController implements Initializable, IHasNavPane
 {
 
-    @FXML private AnchorPane rootAnchorPane;
     @FXML private VBox conversationVbox;
     @FXML private TextArea userTextArea;
     @FXML private ScrollPane messageScrollPane;
     @FXML private ComboBox<String> modelComboBox;
     @FXML private ImageView confirmButtonImageView;
+
 
     private final AIChatBotCtrl aiChatBotCtrl;
 
@@ -66,19 +65,20 @@ public class AIConversationSceneController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        this.AddNavPane();
         this.AddTextAreaKeyCombination();
         this.UpdateModelComboBox();
     }
 
-    private void AddNavPane()
+    @Override
+    public void StartShow()
     {
-        try {
-            NavigationPaneSceneController navigationPaneSceneController = NavigationPaneSceneController.LoadInstance();
-            navigationPaneSceneController.AddNavPaneComponentsToRoot(this.rootAnchorPane);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
+    }
+
+    @Override
+    public void EndShow()
+    {
+
     }
 
     private void AddTextAreaKeyCombination()

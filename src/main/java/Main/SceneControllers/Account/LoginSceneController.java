@@ -2,6 +2,7 @@ package Main.SceneControllers.Account;
 
 import Main.Database;
 import Main.FxmlFileManager;
+import Main.SceneControllers.BaseSceneController;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -20,7 +21,7 @@ import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class LoginSceneController {
+public class LoginSceneController extends BaseSceneController {
     private boolean isRegistering = false;
     private boolean isOnline = false;
 
@@ -67,6 +68,16 @@ public class LoginSceneController {
         }
     }
 
+    @Override
+    public void StartShow() {
+
+    }
+
+    @Override
+    public void EndShow() {
+
+    }
+
     public void offLineState() {
         isOnline = false;
         retryButton.setVisible(true);
@@ -93,7 +104,7 @@ public class LoginSceneController {
 
     @FXML
     public void continueWithoutAccount() {
-        FxmlFileManager.switchScene(FxmlFileManager.getInstance().homeScene);
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().homeSC);
     }
 
     @FXML
@@ -143,7 +154,7 @@ public class LoginSceneController {
                     if (passWord.equals(dbPassword)) {
                         message.setTextFill(Color.GREEN);
                         message.setText("Login successful!");
-                        FxmlFileManager.switchScene(FxmlFileManager.getInstance().homeScene);
+                        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().homeSC);
                     } else {
                         message.setTextFill(Color.RED);
                         message.setText("Incorrect username or password");

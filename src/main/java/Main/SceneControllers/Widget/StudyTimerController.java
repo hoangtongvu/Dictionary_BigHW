@@ -100,7 +100,7 @@ public class StudyTimerController {
 
     @FXML
     public void onKeyTyped() {
-        if (timerTextField.getText() != null && !StudyTimer.getInstance().isPlaying()) {
+        if (!timerTextField.getText().isEmpty() && !StudyTimer.getInstance().isPlaying()) {
             StudyTimer.getInstance().setTime(Integer.parseInt(timerTextField.getText()));
         }
     }

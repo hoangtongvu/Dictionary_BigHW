@@ -2,7 +2,8 @@ package Main.SceneControllers.Dictionary;
 
 import Dictionary.DicManager;
 import Main.FxmlFileManager;
-import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
+import Main.SceneControllers.BaseSceneController;
+import Main.SceneControllers.IHasNavPane;
 import Main.application.App;
 import Main.SceneControllers.Translate.TextToSpeech;
 import Word.WordBlock;
@@ -31,7 +32,7 @@ import static java.util.Collections.binarySearch;
 import static java.util.Collections.sort;
 
 
-public class DictionarySceneController implements Initializable {
+public class DictionarySceneController extends BaseSceneController implements Initializable, IHasNavPane {
     private static final List<WordBlock> starredWordList = new ArrayList<>();
     private static final List<String> starredWordStringList = new ArrayList<>();
     private static final List<String> wordHistoryList = new ArrayList<>();
@@ -63,7 +64,7 @@ public class DictionarySceneController implements Initializable {
     @FXML
     public void editCurrentWord() {
         try {
-            switchScene(FxmlFileManager.getInstance().editWordScene);
+            FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().editWordSceneController);
             FxmlFileManager.getInstance().editWordSceneController.loadWordOnPane(currentWordBlock.getWord());
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -92,8 +93,21 @@ public class DictionarySceneController implements Initializable {
     public void setupWebView(String content) {
         String encoding = "<meta charset=\"UTF-8\">";
         webEngine.loadContent("<html><body>" + styleSheet + encoding + content + "</body></html>");
+//        System.out.println("<html><body>" + styleSheet + encoding + content + "</body></html>");
     }
 
+
+    @Override
+    public void StartShow()
+    {
+
+    }
+
+    @Override
+    public void EndShow()
+    {
+
+    }
 
     @FXML
     public void LookupWord() throws SQLException {
@@ -179,11 +193,6 @@ public class DictionarySceneController implements Initializable {
             System.out.println(e.getMessage());
         }
 
-        try {
-            NavigationPaneSceneController.LoadInstance().AddNavPaneComponentsToRoot(this.root);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
 
         AutoCompletionBinding<String> auto = TextFields.bindAutoCompletion(this.searchBar,
                 new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<String>>() {

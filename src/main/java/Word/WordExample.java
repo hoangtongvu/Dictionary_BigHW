@@ -50,7 +50,7 @@ public class WordExample {
 
 
     public String GetInfo(String prefixSpace)   {
-        String exampleText= "<span class = \"exampleText\"> " + prefixSpace + prefixSymbol + example + " </span> <br>";
+        String exampleText= "<span class = \"exampleText\"> " + prefixSpace + prefixSymbol + example + ": </span>";
         exampleText += "<span class=\"translation\">" + translation  + "</span> <br>";
         return exampleText;
     }

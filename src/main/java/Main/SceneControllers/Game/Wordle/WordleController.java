@@ -2,6 +2,7 @@ package Main.SceneControllers.Game.Wordle;
 
 import Game.GamesCtrl;
 import Game.Wordle.WordleCtrl;
+import Main.SceneControllers.BaseSceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,7 +16,7 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-public class WordleController implements Initializable {
+public class WordleController extends BaseSceneController implements Initializable {
 
     @FXML
     private TextField guessBox;
@@ -120,6 +121,17 @@ public class WordleController implements Initializable {
     private int guesses;
 
     private WordleCtrl wordleCtrl;
+
+
+    @Override
+    public void StartShow() {
+
+    }
+
+    @Override
+    public void EndShow() {
+
+    }
 
     public void generateWord() throws FileNotFoundException {
         Random random = new Random();

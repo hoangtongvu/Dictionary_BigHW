@@ -1,13 +1,13 @@
 package Main.SceneControllers.Game.CreateWord4DirGame;
 
 import Main.FxmlFileManager;
-import Main.SceneControllers.Dictionary.HomeSceneController;
+import Main.SceneControllers.BaseSceneController;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
-public class StartGameScreenSceneController
+public class StartGameScreenSceneController extends BaseSceneController
 {
 
     @FXML
@@ -21,6 +21,16 @@ public class StartGameScreenSceneController
 
     @FXML
     private CheckBox useTimerCheckBox;
+
+    @Override
+    public void StartShow() {
+
+    }
+
+    @Override
+    public void EndShow() {
+
+    }
 
     @FXML
     private void MoveToGameScene()
@@ -36,9 +46,10 @@ public class StartGameScreenSceneController
             return;
         }
 
-        GameSceneController gameSceneController = FxmlFileManager.getInstance().createWord4DirGameSceneController;
+        GameSceneController gameSceneController = FxmlFileManager.getInstance().createWord4DirSC;
 
-        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().createWord4DirGameScene);
+        //FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().createWord4DirGameScene);
+        FxmlFileManager.SwitchScene(gameSceneController);
 
         gameSceneController.StartGame(blockCount, timeLimitSecond);
     }
@@ -48,5 +59,7 @@ public class StartGameScreenSceneController
     {
         this.timeLimitHbox.setVisible(!this.timeLimitHbox.isVisible());
     }
+
+
     //todo add Timer.
 }

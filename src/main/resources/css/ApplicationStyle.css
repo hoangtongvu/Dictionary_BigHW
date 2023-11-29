@@ -165,14 +165,20 @@
 }
 
 .tab-pane {
-    -fx-background-color: #2c313c;
+    -fx-background-color: #200D3A;
+    -fx-background-radius: 10px;
 }
 
 .tab-pane > .tab-header-area > .tab-header-background {
-    -fx-background-color: #21252b;
+    -fx-background-color: transparent;
+    -fx-background-radius: 10 10 0 0;
 }
 
-.list-cell {
+.tab-anchor {
+    -fx-background-radius: 10px;
+}
+
+.tab-pane-list-view .list-cell {
     -fx-text-fill: #ce5e82;
     -fx-background-color:  #200D3A;
     -fx-padding: 0px 0px 0px 10px;
@@ -182,29 +188,29 @@
 }
 
 
-.list-cell:selected {
+.tab-pane-list-view .list-cell:selected {
     -fx-text-fill:  #ce5e82;
     -fx-background-color:  #2E4770;
 }
 
 #searchBar .list-cell {
-    -fx-background-color: white;
+    -fx-background-color: #2E4770;
 }
 
 #historyListView {
     -fx-background-color:  #200D3A;
     -fx-background-insets: 0;
-    -fx-background-radius: 0 10 0 0;
+    -fx-background-radius: 0px;
 }
 
-.list-view {
+.tab-pane-list-view {
     -fx-background-color:  #200D3A;
     -fx-background-insets: 0;
     -fx-background-radius: 0px 10px 10px 10px;
 }
 
 #clearHistoryPane {
-    -fx-background-color: #200D3A;
+    -fx-background-color: transparent;
     -fx-background-radius: 0 0 10 10;
 }
 
@@ -229,7 +235,6 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: left;
 }
-
 
 
 
