@@ -36,12 +36,12 @@
             </Pane>
             <AnchorPane VBox.vgrow="ALWAYS">
                <children>
-                  <AnchorPane fx:id="contentAnchorPane" prefHeight="443.0" prefWidth="826.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="374.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="contentAnchorPane" prefHeight="438.0" prefWidth="802.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="398.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <WebView fx:id="webView" layoutY="137.0" prefHeight="301.0" prefWidth="826.0" style="-fx-context-menu-enabled: false;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0" />
                         <AnchorPane id="wordAnchor" prefHeight="126.0" prefWidth="826.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <children>
-                              <AnchorPane fx:id="wordDisplay" layoutX="14.0" layoutY="14.0" prefHeight="110.0" prefWidth="764.0" styleClass="right-nav-box" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="42.0">
+                              <AnchorPane fx:id="wordDisplay" layoutX="14.0" layoutY="14.0" prefHeight="105.0" prefWidth="746.0" styleClass="right-nav-box" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="42.0">
                                  <children>
                                     <Button id="starButton" fx:id="starButton" layoutX="714.0" layoutY="18.0" mnemonicParsing="false" onAction="#addToStarList" prefHeight="31.0" prefWidth="36.0" styleClass="starButton" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.rightAnchor="18.0" />
                                     <Button id="editButton" fx:id="editButton" layoutX="714.0" layoutY="55.0" mnemonicParsing="false" onAction="#editCurrentWord" prefHeight="31.0" prefWidth="36.0" AnchorPane.rightAnchor="18.0" />
@@ -84,19 +84,22 @@
                         <FlowPane layoutX="28.0" layoutY="146.0" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="443.0" prefWidth="375.0" styleClass="dictionaryRightNav" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane prefHeight="436.0" prefWidth="398.0" styleClass="dictionaryRightNav" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="25.0" layoutY="14.0" prefHeight="229.0" prefWidth="330.0" styleClass="right-nav-box" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="14.0">
                            <children>
-                              <Pane prefHeight="60.0" prefWidth="328.0" styleClass="pane-title" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <Pane prefHeight="60.0" prefWidth="328.0" styleClass="pane-title" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label layoutX="66.0" layoutY="10.0" styleClass="wordLabel" text="Usage over time" />
+                                 </children></Pane>
                               <AnchorPane fx:id="ngramPlaceHolder" layoutY="60.0" prefHeight="169.0" prefWidth="322.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
                                  <children>
-                                    <LineChart fx:id="wordUsageGraph" animated="false" layoutX="-120.0" layoutY="-6.0" prefHeight="193.0" prefWidth="322.0" AnchorPane.bottomAnchor="-18.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-6.0">
+                                    <LineChart id="wordUsage" fx:id="wordUsageGraph" alternativeRowFillVisible="false" animated="false" horizontalZeroLineVisible="false" layoutX="-2.0" layoutY="2.0" legendVisible="false" prefHeight="161.0" prefWidth="345.0" styleClass="graph" stylesheets="@../../css/ApplicationStyle.css" verticalGridLinesVisible="false" verticalZeroLineVisible="false" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
                                       </xAxis>
                                       <yAxis>
-                                        <NumberAxis side="LEFT" />
+                                        <NumberAxis prefHeight="128.0" prefWidth="41.0" side="LEFT" />
                                       </yAxis>
                                     </LineChart>
                                  </children>

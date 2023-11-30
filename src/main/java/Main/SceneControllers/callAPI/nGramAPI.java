@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -45,7 +46,7 @@ public class nGramAPI implements ApiClient {
     public String get(String endpoint) throws IOException {
         String path = "https://books.google.com/ngrams/json?content=" + endpoint
                 + "&year_start=" + startYear
-                + "&year_end=" + endYear + "&corpus=en-2019&smoothing=3";
+                + "&year_end=" + endYear + "&corpus=en-" + endYear + "&smoothing=3";
 
         //Open connection
         URL url = new URL(path);
@@ -96,16 +97,17 @@ public class nGramAPI implements ApiClient {
         usageByPercent.clear();
         year.clear();
         processData(get(word));
-
-        series.setName("My words");
-
         series.getData().clear();
         //Populate chart
         for (int i = 0; i < year.size(); i++) {
-            series.getData().add(new XYChart.Data<String, Number>(year.get(i).toString(), usageByPercent.get(i)));
+            XYChart.Data data = new XYChart.Data<String, Number>(year.get(i).toString(), usageByPercent.get(i));
+            series.getData().add(data);
+        }
+
+        for (int i = 0; i < year.size(); i++) {
+            XYChart.Data data = series.getData().get(i);
+            Tooltip.install(data.getNode(), new Tooltip("Year: " + data.getXValue() + " " +  data.getYValue()));
         }
         return series;
     }
-
-
 }

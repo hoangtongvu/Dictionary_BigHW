@@ -11,7 +11,9 @@ import Word.WordBlock;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -19,6 +21,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Duration;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -66,6 +69,7 @@ public class DictionarySceneController extends BaseSceneController implements In
     protected HBox wordHbox;
     @FXML
     protected LineChart<String, Number> wordUsageGraph;
+    protected XYChart.Series<String, Number> series;
 
     public ListView<String> getHistoryListView() {
         return historyListView;
@@ -85,7 +89,14 @@ public class DictionarySceneController extends BaseSceneController implements In
         if (currentWordBlock != null) {
             wordUsageGraph.getData().clear();
             try {
-                wordUsageGraph.getData().add(nGramAPI.getInstance().getSeries(currentWordBlock.getWord()));
+                series = nGramAPI.getInstance().getSeries(currentWordBlock.getWord());
+                wordUsageGraph.getData().add(series);
+                for (XYChart.Data<String, Number> entry : series.getData()) {
+                    Tooltip t =  new Tooltip(entry.getXValue() + " " + String.format("%5f", entry.getYValue()) + "%");
+                    Tooltip.install(entry.getNode(), t);
+                    t.setShowDelay(Duration.seconds(0));
+
+                }
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
@@ -151,6 +162,7 @@ public class DictionarySceneController extends BaseSceneController implements In
                 historyListView.getItems().addAll(SearchHistory.getInstance().getWordHistory());
             }
             updateGraph();
+
             enableTasks();
         }
     }
@@ -220,7 +232,9 @@ public class DictionarySceneController extends BaseSceneController implements In
             System.out.println(e.getMessage());
         }
 
-        wordUsageGraph.setTitle("Word usage by year");
+        wordUsageGraph.setLegendVisible(false);
+
+
 
         AutoCompletionBinding<String> auto = TextFields.bindAutoCompletion(this.searchBar,
                 new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<String>>() {
