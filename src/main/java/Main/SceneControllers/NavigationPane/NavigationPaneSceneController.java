@@ -26,21 +26,31 @@ public class NavigationPaneSceneController extends BaseSceneController implement
 
     @FXML
     private AnchorPane navPaneRoot;
-
     @FXML
     private AnchorPane drawerMenu;
-
     @FXML
     private Pane blurPane;
-
     @FXML
     private ImageView menuButton;
-
     @FXML
     private Button backButton;
-
     @FXML
     protected AnchorPane timerPlaceHolder;
+    @FXML
+    protected Button homeButton;
+    @FXML
+    protected Button dictionaryButton;
+    @FXML
+    protected Button gameButton;
+    @FXML
+    protected Button editSceneButton;
+    @FXML
+    protected Button chatButton;
+    @FXML
+    protected Button translateButton;
+    @FXML
+    protected Button settingButton;
+
 
     private TranslateTransition drawerTranslateTransition;
     private FadeTransition blurPaneFadeTransition;
@@ -51,6 +61,17 @@ public class NavigationPaneSceneController extends BaseSceneController implement
         nodes = new ArrayList<>();
     }
 
+    public void setDisableStatus(boolean status) {
+        homeButton.setDisable(status);
+        dictionaryButton.setDisable(status);
+        gameButton.setDisable(status);
+        editSceneButton.setDisable(status);
+        chatButton.setDisable(status);
+        translateButton.setDisable(status);
+        settingButton.setDisable(status);
+    }
+
+    //TODO: set all buttons on nav pane to disable until animation is done
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
@@ -62,6 +83,7 @@ public class NavigationPaneSceneController extends BaseSceneController implement
 //        } catch (IOException e) {
 //            throw new RuntimeException(e);
 //        }
+        setDisableStatus(true);
     }
 
     @Override
@@ -83,6 +105,10 @@ public class NavigationPaneSceneController extends BaseSceneController implement
     @FXML
     private void onMenuButton()
     {
+        this.drawerTranslateTransition.setOnFinished(event -> {
+            setDisableStatus(false);
+            drawerTranslateTransition.setOnFinished(null);
+        });
         this.drawerTranslateTransition.setByX(drawerMenu.getWidth());
         this.drawerTranslateTransition.play();
 
@@ -98,7 +124,7 @@ public class NavigationPaneSceneController extends BaseSceneController implement
     {
         this.drawerTranslateTransition.setByX(-drawerMenu.getWidth());
         this.drawerTranslateTransition.play();
-
+        setDisableStatus(true);
         this.blurPaneFadeTransition.setFromValue(1);
         this.blurPaneFadeTransition.setToValue(0);
         this.blurPaneFadeTransition.play();

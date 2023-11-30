@@ -42,6 +42,10 @@
     -fx-graphic-text-gap: 30;
 }
 
+.sideMenuButton:disabled {
+    -fx-opacity: 1;
+}
+
 .sideMenuButton:hover {
     -fx-background-color: linear-gradient(to right,#200D3A, #292651, #2E4770);
     -fx-font-weight: bold;
