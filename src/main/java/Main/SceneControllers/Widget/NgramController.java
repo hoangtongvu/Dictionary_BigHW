@@ -30,8 +30,7 @@ public class NgramController implements ApiClient {
     protected AnchorPane root;
     private static FXMLLoader loader;
 
-    private String path = "https://books.google.com/ngrams/json?content=Churchill&year_start=1800&year_end=2000&corpus=26&smoothing=3";
-    private String startYear = "1800";
+    private String startYear = String.valueOf(Year.now().minusYears(200));
     private String endYear = String.valueOf(Year.now());
     private static List<Integer> year = new ArrayList<>();
     private static List<Double> usageByPercent = new ArrayList<>();
@@ -42,6 +41,10 @@ public class NgramController implements ApiClient {
 
     @Override
     public String get(String endpoint) throws IOException {
+        String path = "https://books.google.com/ngrams/json?content=" + endpoint
+                + "&year_start=" + startYear
+                + "&year_end=" + endYear + "&corpus=en-2019&smoothing=3";
+
         //Open connection
         URL url = new URL(path);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -88,7 +91,7 @@ public class NgramController implements ApiClient {
     }
 
     public void initialize() throws IOException {
-        processData(get(""));
+        processData(get("boob"));
 
         xAxis.setLabel("Year");
         yAxis.setLabel("Usage");
