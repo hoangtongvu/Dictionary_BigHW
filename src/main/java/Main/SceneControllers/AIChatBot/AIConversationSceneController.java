@@ -3,6 +3,7 @@ package Main.SceneControllers.AIChatBot;
 import AIChatBot.AIChatBotCtrl;
 import AIChatBot.AIChatBotManager;
 import AIChatBot.ModelList.ModelListManager;
+import AIChatBot.VoiceThread;
 import AIChatBot.gpt4all.ModelFileChooser;
 import Main.SceneControllers.BaseSceneController;
 import Main.SceneControllers.IHasNavPane;
@@ -52,6 +53,7 @@ public class AIConversationSceneController extends BaseSceneController implement
     private static final String downloadFromGpt4AllComboBoxItem = "Download model File from Gpt4all...";
 
     private static final String gpt4AllLink = "https://gpt4all.io";
+    private VoiceThread voiceThread;
 
 
 
@@ -191,13 +193,16 @@ public class AIConversationSceneController extends BaseSceneController implement
         if (!this.aiChatBotCtrl.getAiChatBotManager().ModelExist()) return;//todo why intellij suggests safe del this function? why it is not working?
         this.userTextArea.clear();
 
+        //terminate previous voice thread.
+        if (voiceThread != null) voiceThread.TerminateThread();
 
+        //create user message block
         MessageBlockSceneController userMessageBlock = this.CreateMessageBlock();
         userMessageBlock.setText(input);
         userMessageBlock.SetUserRole();
         userMessageBlock.PlayOnAppearAnimation();
 
-
+        //get task.
         Task<String> task = this.GetResponseProcessingTask(input);
 
         MessageBlockSceneController botMessageBlock = this.CreateMessageBlock();
@@ -227,11 +232,12 @@ public class AIConversationSceneController extends BaseSceneController implement
 
                 //play waiting animation.
                 double delaySecond = 0.2;
-                KeyFrame oneDotFrame = new KeyFrame(Duration.seconds(1 * delaySecond), e -> updateMessage("."));
+                char dotChar = '●';
+                KeyFrame oneDotFrame = new KeyFrame(Duration.seconds(1 * delaySecond), e -> this.updateMessage(new String(new char[1]).replace('\0', dotChar)));
 
-                KeyFrame twoDotFrame = new KeyFrame(Duration.seconds(2 * delaySecond), e -> updateMessage(".."));
+                KeyFrame twoDotFrame = new KeyFrame(Duration.seconds(2 * delaySecond), e -> this.updateMessage(new String(new char[2]).replace('\0', dotChar)));
 
-                KeyFrame threeDotFrame = new KeyFrame(Duration.seconds(3 * delaySecond), e -> updateMessage("..."));
+                KeyFrame threeDotFrame = new KeyFrame(Duration.seconds(3 * delaySecond), e -> this.updateMessage(new String(new char[3]).replace('\0', dotChar)));
                 Timeline timeline = new Timeline(oneDotFrame, twoDotFrame, threeDotFrame);
                 timeline.setCycleCount(Animation.INDEFINITE);
                 timeline.play();
@@ -241,13 +247,16 @@ public class AIConversationSceneController extends BaseSceneController implement
                 //stop animation on get response.
                 timeline.stop();
 
+                //Create a new voice thread.
+                voiceThread = aiChatBotCtrl.getAiVoice().Speak(response);
+
                 for (int i = 1; i < response.length(); i = i + 2)
                 {
-                    updateMessage(response.substring(0, i));
+                    this.updateMessage(response.substring(0, i));
                     Thread.sleep(50);
                 }
 
-                updateMessage(response);
+                this.updateMessage(response);
                 ToggleTextField();
                 return response;
             }
