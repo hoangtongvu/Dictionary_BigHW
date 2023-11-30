@@ -245,6 +245,22 @@
     -fx-font-family: Roboto;
 }
 
+.wordLabel {
+    -fx-font-family: 'Roboto', sans-serif;
+    -fx-text-fill: #CE5E82;
+    -fx-font-weight: bold;
+    -fx-font-size: 28;
+    -fx-wrap-text: true;
+}
+
+.soundLabel {
+    -fx-font-family: 'Roboto', sans-serif;
+    -fx-text-fill: #f6dcac;
+    -fx-font-weight: bold;
+    -fx-font-size: 22;
+    -fx-wrap-text: true;
+}
+
 
 
 

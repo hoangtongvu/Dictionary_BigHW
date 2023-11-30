@@ -15,6 +15,6 @@
       <Label fx:id="timerLabel" layoutX="53.0" layoutY="85.0" prefHeight="25.0" prefWidth="183.0" styleClass="timer-label" stylesheets="@../../css/Home.css" text="00:00:00" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="85.0" />
       <TextField fx:id="timerTextField" layoutX="169.0" layoutY="152.0" onAction="#onTimerSet" onKeyReleased="#onKeyTyped" prefHeight="25.0" prefWidth="104.0" promptText="minutes" AnchorPane.bottomAnchor="96.85714285714286" AnchorPane.leftAnchor="169.0" AnchorPane.rightAnchor="15.0" />
       <CheckBox fx:id="soundCheckBox" layoutX="14.0" layoutY="192.0" mnemonicParsing="false" onAction="#onTick" prefHeight="17.0" prefWidth="261.0" stylesheets="@../../css/Home.css" text="Play sound after timer ends?" AnchorPane.bottomAnchor="60.85714285714286" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="12.857142857142833" />
-      <Label layoutX="17.0" layoutY="152.0" prefHeight="25.0" prefWidth="147.0" styleClass="title-label" stylesheets="@../../css/Home.css" text="How many minutes?" AnchorPane.bottomAnchor="96.85714285714286" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="123.57142857142858" />
+      <Label layoutX="17.0" layoutY="152.0" prefHeight="25.0" prefWidth="147.0" styleClass="title-label" stylesheets="@../../css/Home.css" text="How many minutes?" AnchorPane.bottomAnchor="96.85714285714286" AnchorPane.leftAnchor="17.0" />
    </children>
 </AnchorPane>
