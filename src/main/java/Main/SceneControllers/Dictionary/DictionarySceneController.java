@@ -100,6 +100,10 @@ public class DictionarySceneController extends BaseSceneController implements In
     @FXML
     protected AnchorPane contentAnchorPane;
 
+    public static WordBlock getCurrentWordBlock() {
+        return currentWordBlock;
+    }
+
     public void setupWebView(String content) {
         String encoding = "<meta charset=\"UTF-8\">";
         webEngine.loadContent("<html><body>" + styleSheet + encoding + content + "</body></html>");

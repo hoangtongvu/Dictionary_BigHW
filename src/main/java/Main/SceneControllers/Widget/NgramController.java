@@ -2,6 +2,7 @@ package Main.SceneControllers.Widget;
 
 import Main.ApiClient;
 import Main.ProjectDirectory;
+import Main.SceneControllers.Dictionary.DictionarySceneController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.chart.LineChart;
@@ -18,6 +19,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +29,57 @@ public class NgramController implements ApiClient {
     @FXML
     protected AnchorPane root;
     private static FXMLLoader loader;
+
+    private String path = "https://books.google.com/ngrams/json?content=Churchill&year_start=1800&year_end=2000&corpus=26&smoothing=3";
+    private String startYear = "1800";
+    private String endYear = String.valueOf(Year.now());
+    private static List<Integer> year = new ArrayList<>();
+    private static List<Double> usageByPercent = new ArrayList<>();
+
+    //Create series
+    final NumberAxis xAxis = new NumberAxis();
+    final NumberAxis yAxis = new NumberAxis();
+
     @Override
     public String get(String endpoint) throws IOException {
-        return null;
+        //Open connection
+        URL url = new URL(path);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+        //Set request type to GET
+        connection.setRequestMethod("GET");
+        connection.setDoOutput(true);
+
+
+        //Read input stream
+        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            stringBuilder.append(line).append("\n");
+        }
+
+        return stringBuilder.toString();
+    }
+
+    public void processData(String data) {
+        JSONArray resultArray = new JSONArray(data);
+        JSONObject resultObject = resultArray.getJSONObject(0); //The only JSON object from request
+        /*  Result contains:
+            time series: an jsonArray of time stamps
+            type: NGRAM
+            ngram: the word that we are searching for
+         */
+
+        JSONArray usageJSON = resultObject.getJSONArray("timeseries");
+
+        for (int i = 0; i < usageJSON.length(); i++) {
+            usageByPercent.add(usageJSON.getDouble(i)* 1e9);
+        }
+
+        for (int i = 0; i < usageByPercent.size(); i++) {
+            year.add(Integer.parseInt(startYear) + i);
+        }
     }
 
     @Override
@@ -38,56 +88,23 @@ public class NgramController implements ApiClient {
     }
 
     public void initialize() throws IOException {
-        String path = "https://books.google.com/ngrams/json?content=Churchill&year_start=1800&year_end=2000&corpus=26&smoothing=3";
-        URL url = new URL(path);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        processData(get(""));
 
-        connection.setRequestMethod("GET");
-        connection.setDoOutput(true);
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        StringBuilder stringBuilder = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            stringBuilder.append(line).append("\n");
-        }
-
-        System.out.println(stringBuilder.toString());
-        JSONArray jsonArray = new JSONArray(stringBuilder.toString());
-        JSONObject jsonObject = jsonArray.getJSONObject(0);
-        System.out.println(jsonObject.get("ngram"));
-
-        JSONArray time = jsonObject.getJSONArray("timeseries");
-
-        List<Double> timeSeries = new ArrayList<>();
-
-        for (int i = 0; i < time.length(); i++) {
-            timeSeries.add(time.getDouble(i)* 1e9);
-            System.out.println(time.getDouble(i));
-        }
-        System.out.println(timeSeries.size());
-
-        List<Integer> year = new ArrayList<>();
-        for (int i = 0; i < timeSeries.size(); i++) {
-            year.add(1800 + i);
-        }
-
-        final NumberAxis xAxis = new NumberAxis();
-        final NumberAxis yAxis = new NumberAxis();
         xAxis.setLabel("Year");
         yAxis.setLabel("Usage");
 
-//        ngramChart = new LineChart<>(xAxis, yAxis);
         ngramChart.setTitle("Word usage by year");
         XYChart.Series<String, Number> series = new XYChart.Series<String,Number>();
         series.setName("My words");
 
-        for (int i = 0; i < timeSeries.size(); i++) {
-            series.getData().add(new XYChart.Data<String, Number>(year.get(i).toString(), timeSeries.get(i)));
+        //Populate chart
+        for (int i = 0; i < year.size(); i++) {
+            series.getData().add(new XYChart.Data<String, Number>(year.get(i).toString(), usageByPercent.get(i)));
         }
-
         ngramChart.getData().add(series);
     }
+
+
 
     public void addToParent(Pane parent) {
         AnchorPane.setTopAnchor(root, 0.0);
