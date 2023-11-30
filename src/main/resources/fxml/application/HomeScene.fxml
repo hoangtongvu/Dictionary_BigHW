@@ -19,11 +19,11 @@
                      <left>
                         <AnchorPane prefHeight="642.0" prefWidth="333.0" BorderPane.alignment="CENTER">
                            <children>
-                              <AnchorPane fx:id="timerPlaceHolder11" layoutX="24.0" layoutY="32.0" prefHeight="289.0" prefWidth="394.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="32.0" />
-                              <AnchorPane fx:id="timerPlaceHolder112" layoutX="26.0" layoutY="347.0" prefHeight="75.0" prefWidth="389.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="33.0" />
-                              <AnchorPane fx:id="timerPlaceHolder1121" layoutX="26.0" layoutY="433.0" prefHeight="75.0" prefWidth="389.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="33.0" />
-                              <AnchorPane fx:id="timerPlaceHolder1122" layoutX="26.0" layoutY="524.0" prefHeight="75.0" prefWidth="389.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="33.0" />
-                              <Label layoutX="24.0" layoutY="15.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="LeaderBoard">
+                              <AnchorPane fx:id="timerPlaceHolder11" layoutX="24.0" layoutY="32.0" prefHeight="289.0" prefWidth="394.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.bottomAnchor="321.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="32.0" />
+                              <AnchorPane fx:id="timerPlaceHolder112" layoutX="26.0" layoutY="347.0" prefHeight="75.0" prefWidth="389.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="33.0" />
+                              <AnchorPane fx:id="timerPlaceHolder1121" layoutX="26.0" layoutY="433.0" prefHeight="75.0" prefWidth="389.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.bottomAnchor="134.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="33.0" />
+                              <AnchorPane fx:id="timerPlaceHolder1122" layoutX="26.0" layoutY="524.0" prefHeight="75.0" prefWidth="389.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="33.0" />
+                              <Label layoutX="24.0" layoutY="15.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="LeaderBoard" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="78.0">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -34,12 +34,12 @@
                      <top>
                         <AnchorPane prefHeight="86.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label layoutX="30.0" prefHeight="53.0" prefWidth="610.0" style="-fx-font-weight: bold;" styleClass="normal-label" stylesheets="@../../css/ApplicationStyle.css" text="Welcome back! Ready to study?">
+                              <Label alignment="CENTER" layoutX="426.0" prefHeight="53.0" prefWidth="610.0" style="-fx-font-weight: bold;" styleClass="normal-label" stylesheets="@../../css/ApplicationStyle.css" text="Welcome back! Ready to study?" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <font>
                                     <Font size="28.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="30.0" layoutY="43.0" prefHeight="35.0" prefWidth="610.0" styleClass="normal-label" stylesheets="@../../css/ApplicationStyle.css" text="Motivational quote that say something motivational">
+                              <Label alignment="CENTER" layoutX="405.0" layoutY="43.0" prefHeight="35.0" prefWidth="610.0" styleClass="normal-label" stylesheets="@../../css/ApplicationStyle.css" text="Motivational quote that say something motivational" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="43.0">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -50,7 +50,14 @@
                      <right>
                         <AnchorPane prefHeight="642.0" prefWidth="340.0" BorderPane.alignment="CENTER">
                            <children>
-                              <AnchorPane fx:id="timerPlaceHolder1" layoutY="312.0" prefHeight="291.0" prefWidth="325.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="312.0" />
+                              <AnchorPane fx:id="timerPlaceHolder1" layoutY="312.0" prefHeight="291.0" prefWidth="325.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="312.0">
+                                 <children>
+                                    <Label layoutY="-17.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="To-do list">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                 </children></AnchorPane>
                               <AnchorPane fx:id="timerPlaceHolder" layoutX="-33.0" prefHeight="288.0" prefWidth="324.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
@@ -59,16 +66,16 @@
                         <AnchorPane prefHeight="574.0" prefWidth="448.0" BorderPane.alignment="CENTER">
                            <children>
                               <AnchorPane fx:id="timerPlaceHolder111" layoutX="19.0" layoutY="352.0" prefHeight="251.0" prefWidth="562.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="352.0" />
-                              <AnchorPane fx:id="timerPlaceHolder113" layoutX="17.0" layoutY="74.0" prefHeight="247.0" prefWidth="264.0" styleClass="widget" stylesheets="@../../css/Home.css" />
+                              <AnchorPane fx:id="timerPlaceHolder113" layoutX="17.0" layoutY="74.0" prefHeight="247.0" prefWidth="264.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.leftAnchor="17.0" AnchorPane.topAnchor="74.0" />
                               <AnchorPane fx:id="timerPlaceHolder1123" layoutX="303.0" layoutY="160.0" prefHeight="75.0" prefWidth="288.0" styleClass="widget" stylesheets="@../../css/Home.css" />
                               <AnchorPane fx:id="timerPlaceHolder11231" layoutX="303.0" layoutY="246.0" prefHeight="75.0" prefWidth="288.0" styleClass="widget" stylesheets="@../../css/Home.css" />
                               <AnchorPane fx:id="timerPlaceHolder11232" layoutX="303.0" layoutY="74.0" prefHeight="75.0" prefWidth="288.0" styleClass="widget" stylesheets="@../../css/Home.css" />
-                              <Label layoutX="14.0" layoutY="57.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Today">
+                              <Label layoutX="14.0" layoutY="57.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Today" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="57.0">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="19.0" layoutY="335.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Statistic">
+                              <Label layoutX="19.0" layoutY="335.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Statistic" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="357.0">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
