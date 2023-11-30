@@ -253,6 +253,10 @@
     -fx-wrap-text: true;
 }
 
+.chart-line-symbol.default-color0 {
+    -fx-background-color: rgba(0, 0, 0, 0);
+}
+
 .soundLabel {
     -fx-font-family: 'Roboto', sans-serif;
     -fx-text-fill: #f6dcac;

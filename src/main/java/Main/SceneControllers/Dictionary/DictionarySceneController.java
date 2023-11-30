@@ -4,6 +4,8 @@ import Dictionary.DicManager;
 import Main.FxmlFileManager;
 import Main.SceneControllers.BaseSceneController;
 import Main.SceneControllers.IHasNavPane;
+import Main.SceneControllers.Widget.NgramController;
+import Main.SceneControllers.Widget.StudyTimerController;
 import Main.application.App;
 import Main.SceneControllers.Translate.TextToSpeech;
 import Word.WordBlock;
@@ -21,6 +23,7 @@ import javafx.util.Callback;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
@@ -89,7 +92,8 @@ public class DictionarySceneController extends BaseSceneController implements In
     private final String  styleSheet = "<link rel=\"stylesheet\" href=\"" + cssPath + "\">";
 
     private WebEngine webEngine;
-
+    @FXML
+    protected AnchorPane ngramPlaceHolder;
 
     @FXML
     protected AnchorPane root;
@@ -205,6 +209,11 @@ public class DictionarySceneController extends BaseSceneController implements In
             System.out.println(e.getMessage());
         }
 
+        try {
+            NgramController.loadInstance().addToParent(ngramPlaceHolder);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         AutoCompletionBinding<String> auto = TextFields.bindAutoCompletion(this.searchBar,
                 new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<String>>() {
