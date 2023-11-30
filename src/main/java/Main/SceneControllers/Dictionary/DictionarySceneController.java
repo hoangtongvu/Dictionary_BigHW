@@ -4,13 +4,16 @@ import Dictionary.DicManager;
 import Main.FxmlFileManager;
 import Main.SceneControllers.BaseSceneController;
 import Main.SceneControllers.IHasNavPane;
+import Main.SceneControllers.callAPI.nGramAPI;
 import Main.application.App;
 import Main.SceneControllers.Translate.TextToSpeech;
 import Word.WordBlock;
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -18,9 +21,11 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Duration;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
@@ -62,6 +67,9 @@ public class DictionarySceneController extends BaseSceneController implements In
     protected Label wordLabel;
     @FXML
     protected HBox wordHbox;
+    @FXML
+    protected LineChart<String, Number> wordUsageGraph;
+    protected XYChart.Series<String, Number> series;
 
     public ListView<String> getHistoryListView() {
         return historyListView;
@@ -77,10 +85,22 @@ public class DictionarySceneController extends BaseSceneController implements In
         }
     }
 
-    public static void switchScene(Parent newScene) {
-        Stage primaryStage = App.getPrimaryStage();
-        primaryStage.getScene().setRoot(newScene);
-        primaryStage.show();
+    public void updateGraph() {
+        if (currentWordBlock != null) {
+            wordUsageGraph.getData().clear();
+            try {
+                series = nGramAPI.getInstance().getSeries(currentWordBlock.getWord());
+                wordUsageGraph.getData().add(series);
+                for (XYChart.Data<String, Number> entry : series.getData()) {
+                    Tooltip t =  new Tooltip(entry.getXValue() + " " + String.format("%5f", entry.getYValue()) + "%");
+                    Tooltip.install(entry.getNode(), t);
+                    t.setShowDelay(Duration.seconds(0));
+
+                }
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private static WordBlock currentWordBlock = null;
@@ -89,12 +109,17 @@ public class DictionarySceneController extends BaseSceneController implements In
     private final String  styleSheet = "<link rel=\"stylesheet\" href=\"" + cssPath + "\">";
 
     private WebEngine webEngine;
-
+    @FXML
+    protected AnchorPane ngramPlaceHolder;
 
     @FXML
     protected AnchorPane root;
     @FXML
     protected AnchorPane contentAnchorPane;
+
+    public static WordBlock getCurrentWordBlock() {
+        return currentWordBlock;
+    }
 
     public void setupWebView(String content) {
         String encoding = "<meta charset=\"UTF-8\">";
@@ -136,6 +161,8 @@ public class DictionarySceneController extends BaseSceneController implements In
             if (!SearchHistory.getInstance().getWordHistory().isEmpty()) {
                 historyListView.getItems().addAll(SearchHistory.getInstance().getWordHistory());
             }
+            updateGraph();
+
             enableTasks();
         }
     }
@@ -204,6 +231,9 @@ public class DictionarySceneController extends BaseSceneController implements In
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+        wordUsageGraph.setLegendVisible(false);
+
 
 
         AutoCompletionBinding<String> auto = TextFields.bindAutoCompletion(this.searchBar,

@@ -253,6 +253,10 @@
     -fx-wrap-text: true;
 }
 
+.chart-line-symbol.default-color0 {
+    -fx-background-color: rgba(0, 0, 0, 0);
+}
+
 .soundLabel {
     -fx-font-family: 'Roboto', sans-serif;
     -fx-text-fill: #f6dcac;
@@ -261,7 +265,22 @@
     -fx-wrap-text: true;
 }
 
+.chart{
+    -fx-background-color: transparent;
+    -fx-font-size: 10;
+    -fx-text-fill: white;
+    -fx-legend-visible: false;
+}
 
+.axis-label {
+    -fx-text-fill: #200d3a;
+}
+
+.chart-plot-background {
+    -fx-background-color:transparent;
+}
+
+.default-color0.chart-series-line { -fx-stroke: #b45479; }
 
 
 
