@@ -7,13 +7,11 @@ import Main.SceneControllers.IHasNavPane;
 import Main.application.App;
 import Main.SceneControllers.Translate.TextToSpeech;
 import Word.WordBlock;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.web.WebEngine;
@@ -56,6 +54,14 @@ public class DictionarySceneController extends BaseSceneController implements In
     protected Button editButton;
     @FXML
     protected Button soundButton;
+    @FXML
+    protected AnchorPane wordDisplay;
+    @FXML
+    protected Label soundLabel;
+    @FXML
+    protected Label wordLabel;
+    @FXML
+    protected HBox wordHbox;
 
     public ListView<String> getHistoryListView() {
         return historyListView;
@@ -135,13 +141,18 @@ public class DictionarySceneController extends BaseSceneController implements In
     }
 
     private void enableTasks() {
+        wordLabel.setMinWidth(currentWordBlock.getWord().length() * 15);
+        soundLabel.setText( "[" + currentWordBlock.getSpelling() + "]");
+        wordLabel.setText(currentWordBlock.getWord());
+
+        wordDisplay.setVisible(true);
         soundButton.setDisable(false);
         starButton.setDisable(false);
 
         if (currentWordBlock != null && currentWordBlock.isEditable()) {
-            editButton.setDisable(false);
+            editButton.setVisible(true);
         } else {
-            editButton.setDisable(true);
+            editButton.setVisible(false);
         }
     }
 
@@ -179,9 +190,10 @@ public class DictionarySceneController extends BaseSceneController implements In
     public void initialize(URL location, ResourceBundle resources) {
         webEngine = webView.getEngine();
         webEngine.loadContent("<html><body>" + styleSheet + "</body></html>");
+        wordDisplay.setVisible(false);
         //blurPane.setVisible(false);
         if (currentWordBlock == null) {
-            editButton.setDisable(true);
+            editButton.setVisible(false);
             soundButton.setDisable(true);
             starButton.setDisable(true);
         }

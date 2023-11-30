@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -37,27 +38,27 @@
                         <WebView fx:id="webView" layoutY="137.0" prefHeight="301.0" prefWidth="826.0" style="-fx-context-menu-enabled: false;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0" />
                         <AnchorPane id="wordAnchor" prefHeight="126.0" prefWidth="826.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <children>
-                              <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="110.0" prefWidth="764.0" styleClass="right-nav-box" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="42.0">
+                              <AnchorPane fx:id="wordDisplay" layoutX="14.0" layoutY="14.0" prefHeight="110.0" prefWidth="764.0" styleClass="right-nav-box" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="42.0">
                                  <children>
                                     <Button id="starButton" fx:id="starButton" layoutX="714.0" layoutY="18.0" mnemonicParsing="false" onAction="#addToStarList" prefHeight="31.0" prefWidth="36.0" styleClass="starButton" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.rightAnchor="18.0" />
                                     <Button id="editButton" fx:id="editButton" layoutX="714.0" layoutY="55.0" mnemonicParsing="false" onAction="#editCurrentWord" prefHeight="31.0" prefWidth="36.0" AnchorPane.rightAnchor="18.0" />
                                     <VBox layoutY="14.0" AnchorPane.leftAnchor="0.0">
                                        <children>
-                                          <HBox prefHeight="40.0" prefWidth="281.0">
+                                          <HBox fx:id="wordHbox" prefHeight="40.0" prefWidth="281.0">
                                              <children>
-                                                <Label fx:id="wordLabel" prefHeight="40.0" prefWidth="72.0" styleClass="wordLabel" stylesheets="@../../css/ApplicationStyle.css" text="word">
+                                                <Label fx:id="wordLabel" maxWidth="1000.0" minWidth="-Infinity" prefHeight="40.0" prefWidth="79.0" styleClass="wordLabel" stylesheets="@../../css/ApplicationStyle.css" text="word" wrapText="true">
                                                    <HBox.margin>
                                                       <Insets left="20.0" />
                                                    </HBox.margin>
                                                 </Label>
                                                 <Button id="speakerButton" fx:id="soundButton" mnemonicParsing="false" onAction="#onSoundButton" prefHeight="29.0" prefWidth="29.0">
                                                    <HBox.margin>
-                                                      <Insets left="20.0" top="6.0" />
+                                                      <Insets top="6.0" />
                                                    </HBox.margin>
                                                 </Button>
                                              </children>
                                           </HBox>
-                                          <Label prefHeight="32.0" prefWidth="289.0" styleClass="soundLabel" text="[sound label]">
+                                          <Label fx:id="soundLabel" prefHeight="32.0" prefWidth="289.0" styleClass="soundLabel" text="[sound label]">
                                              <padding>
                                                 <Insets left="20.0" />
                                              </padding>
@@ -72,11 +73,12 @@
                            <effect>
                               <Shadow blurType="GAUSSIAN">
                                  <color>
-                                    <Color red="0.12319999933242798" green="0.13792000710964203" blue="0.1599999964237213" />
+                                    <Color red="0.12941177189350128" green="0.14509804546833038" blue="0.16862745583057404" />
                                  </color>
                               </Shadow>
                            </effect>
                         </AnchorPane>
+                        <FlowPane layoutX="28.0" layoutY="146.0" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="443.0" prefWidth="375.0" styleClass="dictionaryRightNav" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
