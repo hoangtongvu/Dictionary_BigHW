@@ -240,6 +240,10 @@
     -fx-background-position: left;
 }
 
+.normal-label {
+    -fx-text-fill: white;
+    -fx-font-family: Roboto;
+}
 
 
 

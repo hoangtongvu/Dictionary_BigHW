@@ -6,6 +6,7 @@ import Main.SceneControllers.Widget.StudyTimerController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
@@ -22,6 +23,9 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
     @FXML
     AnchorPane timerPlaceHolder;
 
+    @FXML
+    Pane blurPane;
+
     /**This part is for side menu*/
     @FXML
     public void initialize() {
@@ -31,6 +35,8 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        blurPane.setVisible(false);
 
     }
 
