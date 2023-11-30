@@ -1,15 +1,12 @@
-package Main.SceneControllers.Widget;
+package Main.SceneControllers.callAPI;
 
-import Main.ApiClient;
 import Main.ProjectDirectory;
-import Main.SceneControllers.Dictionary.DictionarySceneController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -23,21 +20,26 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NgramController implements ApiClient {
-    @FXML
-    protected LineChart<String, Number> ngramChart;
-    @FXML
-    protected AnchorPane root;
-    private static FXMLLoader loader;
+public class nGramAPI implements ApiClient {
+    private final String startYear = String.valueOf(Year.now().minusYears(200));
+    private final String endYear = String.valueOf(Year.now());
+    private static List<Integer> year;
+    private static List<Double> usageByPercent;
+    private static XYChart.Series<String, Number> series;
+    private static nGramAPI instance;
 
-    private String startYear = String.valueOf(Year.now().minusYears(200));
-    private String endYear = String.valueOf(Year.now());
-    private static List<Integer> year = new ArrayList<>();
-    private static List<Double> usageByPercent = new ArrayList<>();
+    private nGramAPI() {
+        year = new ArrayList<>();
+        usageByPercent = new ArrayList<>();
+        series = new XYChart.Series<>();
+    }
 
-    //Create series
-    final NumberAxis xAxis = new NumberAxis();
-    final NumberAxis yAxis = new NumberAxis();
+    public static nGramAPI getInstance() {
+        if (instance == null) {
+            instance = new nGramAPI();
+        }
+        return instance;
+    }
 
     @Override
     public String get(String endpoint) throws IOException {
@@ -77,7 +79,7 @@ public class NgramController implements ApiClient {
         JSONArray usageJSON = resultObject.getJSONArray("timeseries");
 
         for (int i = 0; i < usageJSON.length(); i++) {
-            usageByPercent.add(usageJSON.getDouble(i)* 1e9);
+            usageByPercent.add(usageJSON.getDouble(i));
         }
 
         for (int i = 0; i < usageByPercent.size(); i++) {
@@ -90,39 +92,20 @@ public class NgramController implements ApiClient {
         return null;
     }
 
-    public void initialize() throws IOException {
-        processData(get("boob"));
+    public XYChart.Series<String, Number> getSeries(String word) throws IOException {
+        usageByPercent.clear();
+        year.clear();
+        processData(get(word));
 
-        xAxis.setLabel("Year");
-        yAxis.setLabel("Usage");
-
-        ngramChart.setTitle("Word usage by year");
-        XYChart.Series<String, Number> series = new XYChart.Series<String,Number>();
         series.setName("My words");
 
+        series.getData().clear();
         //Populate chart
         for (int i = 0; i < year.size(); i++) {
             series.getData().add(new XYChart.Data<String, Number>(year.get(i).toString(), usageByPercent.get(i)));
         }
-        ngramChart.getData().add(series);
+        return series;
     }
 
-
-
-    public void addToParent(Pane parent) {
-        AnchorPane.setTopAnchor(root, 0.0);
-        AnchorPane.setBottomAnchor(root, 0.0);
-        AnchorPane.setLeftAnchor(root, 0.0);
-        AnchorPane.setRightAnchor(root, 0.0);
-        parent.getChildren().addAll(root);
-    }
-
-    public static NgramController loadInstance() throws IOException {
-        String absolutePath = ProjectDirectory.resourcesPath + "\\fxml\\Widget\\Ngrams.fxml";
-        URL fxmlURL = Paths.get(absolutePath).toUri().toURL();
-        loader = new FXMLLoader(fxmlURL);
-        loader.load();
-        return loader.getController();
-    }
 
 }

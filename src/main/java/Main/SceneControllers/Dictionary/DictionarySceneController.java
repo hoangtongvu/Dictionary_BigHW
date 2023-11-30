@@ -4,15 +4,14 @@ import Dictionary.DicManager;
 import Main.FxmlFileManager;
 import Main.SceneControllers.BaseSceneController;
 import Main.SceneControllers.IHasNavPane;
-import Main.SceneControllers.Widget.NgramController;
-import Main.SceneControllers.Widget.StudyTimerController;
+import Main.SceneControllers.callAPI.nGramAPI;
 import Main.application.App;
 import Main.SceneControllers.Translate.TextToSpeech;
 import Word.WordBlock;
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -65,6 +64,8 @@ public class DictionarySceneController extends BaseSceneController implements In
     protected Label wordLabel;
     @FXML
     protected HBox wordHbox;
+    @FXML
+    protected LineChart<String, Number> wordUsageGraph;
 
     public ListView<String> getHistoryListView() {
         return historyListView;
@@ -80,10 +81,15 @@ public class DictionarySceneController extends BaseSceneController implements In
         }
     }
 
-    public static void switchScene(Parent newScene) {
-        Stage primaryStage = App.getPrimaryStage();
-        primaryStage.getScene().setRoot(newScene);
-        primaryStage.show();
+    public void updateGraph() {
+        if (currentWordBlock != null) {
+            wordUsageGraph.getData().clear();
+            try {
+                wordUsageGraph.getData().add(nGramAPI.getInstance().getSeries(currentWordBlock.getWord()));
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private static WordBlock currentWordBlock = null;
@@ -144,6 +150,7 @@ public class DictionarySceneController extends BaseSceneController implements In
             if (!SearchHistory.getInstance().getWordHistory().isEmpty()) {
                 historyListView.getItems().addAll(SearchHistory.getInstance().getWordHistory());
             }
+            updateGraph();
             enableTasks();
         }
     }
@@ -213,11 +220,7 @@ public class DictionarySceneController extends BaseSceneController implements In
             System.out.println(e.getMessage());
         }
 
-        try {
-            NgramController.loadInstance().addToParent(ngramPlaceHolder);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        wordUsageGraph.setTitle("Word usage by year");
 
         AutoCompletionBinding<String> auto = TextFields.bindAutoCompletion(this.searchBar,
                 new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<String>>() {
