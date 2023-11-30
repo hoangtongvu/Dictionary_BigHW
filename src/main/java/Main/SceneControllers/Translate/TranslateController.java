@@ -5,7 +5,7 @@ import Main.SceneControllers.IHasNavPane;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
-import LanguageTranslate.TranslatorAPI;
+import LanguageTranslation.TranslatorAPI;
 
 
 public class TranslateController extends BaseSceneController implements IHasNavPane {
