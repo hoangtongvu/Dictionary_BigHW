@@ -1,4 +1,4 @@
-package Main.SceneControllers.Translate;
+package LanguageTranslate;
 
 import java.io.BufferedReader;
 import java.io.IOException;
