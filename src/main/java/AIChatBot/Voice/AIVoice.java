@@ -1,4 +1,4 @@
-package AIChatBot;
+package AIChatBot.Voice;
 
 import Main.SceneControllers.Translate.TextToSpeech;
 

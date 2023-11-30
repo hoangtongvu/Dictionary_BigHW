@@ -3,7 +3,7 @@ package Main.SceneControllers.AIChatBot;
 import AIChatBot.AIChatBotCtrl;
 import AIChatBot.AIChatBotManager;
 import AIChatBot.ModelList.ModelListManager;
-import AIChatBot.VoiceThread;
+import AIChatBot.Voice.VoiceThread;
 import AIChatBot.gpt4all.ModelFileChooser;
 import Main.SceneControllers.BaseSceneController;
 import Main.SceneControllers.IHasNavPane;

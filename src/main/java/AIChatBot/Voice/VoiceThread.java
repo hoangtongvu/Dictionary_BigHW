@@ -1,4 +1,4 @@
-package AIChatBot;
+package AIChatBot.Voice;
 
 public class VoiceThread extends Thread
 {
