@@ -102,7 +102,7 @@ public class DailyRecordDAO implements Dao<DailyRecord> {
             PreparedStatement statement = Database.getUserDB().prepareStatement(insert);
             statement.setString (1, dailyRecord.getUserName());
             statement.setString (2, dailyRecord.getAccessDate());
-            statement.setInt    (3, dailyRecord.getSession_time());
+            statement.setInt    (3, dailyRecord.getStudy_time());
             statement.setInt (4, dailyRecord.getSession_time());
 
             statement.executeUpdate();
