@@ -4,6 +4,7 @@ import Game.GamesCtrl;
 import Game.MultiChoiceGame.*;
 import Main.FxmlFileManager;
 import Main.SceneControllers.BaseSceneController;
+import User.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -263,6 +264,10 @@ public class GameSceneController extends BaseSceneController implements Initiali
         finalPoint = (double) correctAnswerAmount / this.maxQues * 10;
         finalPoint = Math.round(finalPoint * 100.0) / 100.0;
 
+        if (User.getCurrentUser().isOnline()) {
+            User.getCurrentUser().setScore(User.getCurrentUser().getScore() + (int) finalPoint);
+            User.getCurrentUser().updateScore();
+        }
         this.finalPointText.setText("Point: " + finalPoint);
 
     }

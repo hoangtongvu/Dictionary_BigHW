@@ -30,7 +30,7 @@
                      <left>
                         <AnchorPane prefHeight="642.0" prefWidth="333.0" BorderPane.alignment="CENTER">
                            <children>
-                              <AnchorPane fx:id="timerPlaceHolder11" layoutX="24.0" layoutY="32.0" prefHeight="289.0" prefWidth="394.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.bottomAnchor="321.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="32.0">
+                              <AnchorPane fx:id="timerPlaceHolder11" layoutX="24.0" layoutY="32.0" prefHeight="289.0" prefWidth="394.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.bottomAnchor="320.5714285714285" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="32.0">
                                  <children>
                                     <ScrollPane fx:id="leaderBoardScrollPane" layoutX="13.0" layoutY="13.0" prefHeight="262.0" prefWidth="252.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="13.0">
                                        <content>
@@ -46,7 +46,7 @@
                                        </content>
                                     </ScrollPane>
                                  </children></AnchorPane>
-                              <VBox layoutX="10.0" layoutY="353.0" prefWidth="379.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="30.0">
+                              <VBox layoutX="24.0" layoutY="341.0" prefWidth="379.0" AnchorPane.bottomAnchor="14.428571428571388" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="30.0">
                                  <children>
                                     <AnchorPane fx:id="timerPlaceHolder112" prefHeight="75.0" prefWidth="389.0" styleClass="widget" stylesheets="@../../css/Home.css">
                                        <VBox.margin>
@@ -113,7 +113,7 @@
                      <right>
                         <AnchorPane prefHeight="642.0" prefWidth="340.0" BorderPane.alignment="CENTER">
                            <children>
-                              <AnchorPane fx:id="timerPlaceHolder1" layoutY="312.0" prefHeight="291.0" prefWidth="325.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="312.0">
+                              <AnchorPane fx:id="timerPlaceHolder1" layoutY="312.0" prefHeight="291.0" prefWidth="325.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="312.0">
                                  <children>
                                     <Label layoutY="-17.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="To-do list">
                                        <font>
@@ -121,7 +121,7 @@
                                        </font>
                                     </Label>
                                  </children></AnchorPane>
-                              <AnchorPane fx:id="timerPlaceHolder" layoutX="-33.0" prefHeight="288.0" prefWidth="324.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="0.0" />
+                              <AnchorPane fx:id="timerPlaceHolder" layoutX="-33.0" prefHeight="288.0" prefWidth="324.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                      </right>

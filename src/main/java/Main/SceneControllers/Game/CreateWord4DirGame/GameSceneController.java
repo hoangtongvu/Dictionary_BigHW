@@ -7,11 +7,13 @@ import Game.GamesCtrl;
 import Main.FxmlFileManager;
 import Main.SceneControllers.BaseSceneController;
 import Main.application.App;
+import User.User;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
+import javafx.css.SizeUnits;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -310,6 +312,15 @@ public class GameSceneController extends BaseSceneController implements Initiali
 
     private void ShowEndGameDialog(int finalPoint)
     {
+        if (User.getCurrentUser().isOnline()) {
+            int tempPoint = User.getCurrentUser().getScore();
+            tempPoint += finalPoint;
+            if (tempPoint <= 0) {
+                tempPoint = 0;
+            }
+            User.getCurrentUser().setScore(tempPoint);
+            User.getCurrentUser().updateScore();
+        }
         this.ToggleEndGameVbox();
         this.endGamePointText.setText("Your point is " + finalPoint + ".");
     }

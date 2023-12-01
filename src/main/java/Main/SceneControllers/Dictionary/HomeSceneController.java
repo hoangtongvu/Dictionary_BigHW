@@ -68,6 +68,7 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
         } else {
             PieChart.Data incomplete = new PieChart.Data("Incomplete", 100);
             dailyGoalChart.getData().add(incomplete);
+            dailyGoalChart.setLabelsVisible(false);
             incomplete.getNode().setStyle("-fx-background-color: grey");
         }
     }
