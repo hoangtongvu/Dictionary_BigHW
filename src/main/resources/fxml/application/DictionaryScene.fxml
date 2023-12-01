@@ -45,7 +45,7 @@
                                  <children>
                                     <Button id="starButton" fx:id="starButton" layoutX="714.0" layoutY="18.0" mnemonicParsing="false" onAction="#addToStarList" prefHeight="31.0" prefWidth="36.0" styleClass="starButton" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.rightAnchor="18.0" />
                                     <Button id="editButton" fx:id="editButton" layoutX="714.0" layoutY="55.0" mnemonicParsing="false" onAction="#editCurrentWord" prefHeight="31.0" prefWidth="36.0" AnchorPane.rightAnchor="18.0" />
-                                    <VBox layoutY="14.0" AnchorPane.leftAnchor="0.0">
+                                    <VBox layoutY="14.0" prefHeight="72.0" prefWidth="410.0" AnchorPane.leftAnchor="0.0">
                                        <children>
                                           <HBox fx:id="wordHbox" prefHeight="40.0" prefWidth="281.0">
                                              <children>
@@ -61,7 +61,7 @@
                                                 </Button>
                                              </children>
                                           </HBox>
-                                          <Label fx:id="soundLabel" prefHeight="32.0" prefWidth="289.0" styleClass="soundLabel" text="[sound label]">
+                                          <Label fx:id="soundLabel" prefHeight="32.0" prefWidth="412.0" styleClass="soundLabel" text="[sound label]">
                                              <padding>
                                                 <Insets left="20.0" />
                                              </padding>
@@ -119,7 +119,7 @@
                                           </AnchorPane>
                                     </content>
                                   </Tab>
-                                  <Tab text="WordHistory">
+                                  <Tab text="Search History">
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="331.0" styleClass="tab-anchor" stylesheets="@../../css/ApplicationStyle.css">
                                              <children>

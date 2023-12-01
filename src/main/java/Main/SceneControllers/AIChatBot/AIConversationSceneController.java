@@ -6,7 +6,7 @@ import AIChatBot.ModelList.ModelListManager;
 import AIChatBot.Voice.VoiceThread;
 import AIChatBot.gpt4all.ModelFileChooser;
 import Main.SceneControllers.BaseSceneController;
-import Main.SceneControllers.IHasNavPane;
+import Interfaces.IHasNavPane;
 import Main.application.App;
 import animatefx.animation.*;
 import javafx.animation.Animation;

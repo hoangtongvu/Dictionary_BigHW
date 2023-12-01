@@ -3,6 +3,7 @@ package Main.SceneControllers.Account;
 import Main.Database;
 import Main.FxmlFileManager;
 import Main.SceneControllers.BaseSceneController;
+import User.User;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -133,7 +134,6 @@ public class LoginSceneController extends BaseSceneController {
                     message.setText("Username can only contains '0-9', 'A-Z', 'a-z', '.'");
                 }
 
-
             } catch (Exception e) {
                 if (!Database.getUserDB().isClosed()) {
                     message.setText("Username already exist");
@@ -154,6 +154,7 @@ public class LoginSceneController extends BaseSceneController {
                     if (passWord.equals(dbPassword)) {
                         message.setTextFill(Color.GREEN);
                         message.setText("Login successful!");
+                        User.getCurrentUser().getUserDao().get(userName);
                         FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().homeSC);
                     } else {
                         message.setTextFill(Color.RED);

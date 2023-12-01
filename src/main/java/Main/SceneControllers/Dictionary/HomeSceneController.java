@@ -1,7 +1,7 @@
 package Main.SceneControllers.Dictionary;
 
 import Main.SceneControllers.BaseSceneController;
-import Main.SceneControllers.IHasNavPane;
+import Interfaces.IHasNavPane;
 import Main.SceneControllers.Widget.StudyTimerController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

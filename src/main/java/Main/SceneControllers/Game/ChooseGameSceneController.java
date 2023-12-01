@@ -3,7 +3,7 @@ package Main.SceneControllers.Game;
 import Game.GameCtrl;
 import Game.GamesCtrl;
 import Main.SceneControllers.BaseSceneController;
-import Main.SceneControllers.IHasNavPane;
+import Interfaces.IHasNavPane;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

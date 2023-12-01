@@ -22,7 +22,7 @@ public class App extends Application {
 
         HomeSceneController initSC = FxmlFileManager.getInstance().homeSC;
         FxmlFileManager.SwitchToInitScene(initSC);
-        Scene scene = new Scene(initSC.getRoot());
+        Scene scene = new Scene(FxmlFileManager.getInstance().loginSC.getRoot());
 
         primaryStage.setMinWidth(800);
         primaryStage.setMinHeight(600);
