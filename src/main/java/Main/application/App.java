@@ -1,6 +1,7 @@
 package Main.application;
 
 import Main.FxmlFileManager;
+import Main.SceneControllers.Account.LoginSceneController;
 import Main.SceneControllers.Dictionary.HomeSceneController;
 import javafx.application.Application;
 import javafx.application.HostServices;
@@ -20,7 +21,7 @@ public class App extends Application {
         this.primaryStage = primaryStage;
         myHostServices = getHostServices();
 
-        HomeSceneController initSC = FxmlFileManager.getInstance().homeSC;
+        LoginSceneController initSC = FxmlFileManager.getInstance().loginSC;
         FxmlFileManager.SwitchToInitScene(initSC);
         Scene scene = new Scene(FxmlFileManager.getInstance().loginSC.getRoot());
 

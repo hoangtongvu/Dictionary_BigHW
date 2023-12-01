@@ -25,9 +25,6 @@ public class UserDao implements Dao<User> {
             User.getCurrentUser().setPassWord(resultSet.getString("pass_word"));
             User.getCurrentUser().setStudyGoal(resultSet.getInt("study_goal"));
             User.getCurrentUser().setScore(resultSet.getInt("score"));
-            User.getCurrentUser().setStartTime(resultSet.getString("start_time"));
-            User.getCurrentUser().setEndTime(resultSet.getString("end_time"));
-            User.getCurrentUser().setStudiedTime(resultSet.getString("study_time"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
@@ -84,8 +81,8 @@ public class UserDao implements Dao<User> {
     @Override
     public void save(User user) {
         String insert = "INSERT INTO " + tableName +
-                        " (user_name, pass_word, study_goal, profile_image_path, score, start_time, end_time, study_time) " +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                        " (user_name, pass_word, study_goal, profile_image_path, score) " +
+                        "VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement statement = Database.getUserDB().prepareStatement(insert);
             statement.setString (1, user.getUserName());
@@ -93,9 +90,6 @@ public class UserDao implements Dao<User> {
             statement.setInt    (3, user.getStudyGoal());
             statement.setString (4, user.getImagePath());
             statement.setInt    (5, user.getScore());
-            statement.setString (6, user.getStartTime());
-            statement.setString (7, user.getEndTime());
-            statement.setString (8, user.getStudiedTime());
 
             statement.executeUpdate();
 

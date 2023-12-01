@@ -1,19 +1,22 @@
 package User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     private String userName;
     private String passWord;
     private Integer studyGoal;
     private String imagePath;
     private Integer score;
-    private String startTime;
-    private String endTime;
-    private String studiedTime;
     private UserDao userDao;
     private static User currentUser;
+    private List<DailyRecord> dailyRecordList;
+
 
     private User() {
         userDao = new UserDao();
+        dailyRecordList = new ArrayList<>();
     }
 
     public static User getCurrentUser() {
@@ -23,16 +26,28 @@ public class User {
         return currentUser;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static void setCurrentUser(User currentUser) {
         User.currentUser = currentUser;
     }
 
     public void setScore(Integer score) {
         this.score = score;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
     }
 
     public void setImagePath(String imagePath) {
@@ -43,20 +58,8 @@ public class User {
         this.passWord = passWord;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public void setStudiedTime(String studiedTime) {
-        this.studiedTime = studiedTime;
-    }
-
     public void setStudyGoal(Integer studyGoal) {
         this.studyGoal = studyGoal;
-    }
-
-    public String getEndTime() {
-        return endTime;
     }
 
     public void setUserName(String userName) {
@@ -77,14 +80,6 @@ public class User {
 
     public String getPassWord() {
         return passWord;
-    }
-
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public String getStudiedTime() {
-        return studiedTime;
     }
 
     public String getUserName() {
