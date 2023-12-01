@@ -41,7 +41,7 @@ public class AccountManager {
         try {
             Matcher matcher = usrNamePattern.matcher(userName);
             if (matcher.matches()) {
-                User.getCurrentUser().logOut();
+                User.getCurrentUser().reset();
                 passWord = hashPassword(passWord);
                 User.getCurrentUser().newAccount(userName, passWord);
                 return Status.REGISTERED;
@@ -68,7 +68,9 @@ public class AccountManager {
 
             if (!Database.getUserDB().isClosed()) {
                 if (passWord.equals(dbPassword)) {
-                    User.getCurrentUser().setOnline(true);
+
+                    User.getCurrentUser().loginHandler();
+
                     return Status.LOGGED_IN;
                 } else {
                     return Status.INVALID_CREDENTIALS;

@@ -1,6 +1,6 @@
 package User;
 
-import Main.SceneControllers.Account.LoginSceneController;
+import Timer.SessionTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +14,9 @@ public class User {
     private UserDao userDao;
     private static User currentUser;
     private List<DailyRecord> dailyRecordList;
-    private boolean isOnline = false;
+    private DailyRecord currentRecord;
 
-    public void logOut() {
-        currentUser = null;
-    }
+    private boolean isOnline = false;
 
     public void newAccount(String userName, String passWord) {
         this.userName = userName;
@@ -36,6 +34,35 @@ public class User {
     private User() {
         userDao = new UserDao();
         dailyRecordList = new ArrayList<>();
+        currentRecord = new DailyRecord();
+    }
+
+    public void reset() {
+        currentUser = null;
+    }
+
+    public void loginHandler() {
+        setOnline(true);
+        userDao.get(userName);
+        //Start session counter
+        SessionTime.getInstance().startCounter();
+        //Save access date
+    }
+
+    public void logoutHandler() {
+        setOnline(false);
+        currentUser = null;
+        SessionTime.getInstance().stopCounter();
+    }
+
+
+
+    public void saveSessionData() {
+        //Save session timer
+        //Save score
+        //Save access date
+        userDao.save(currentUser);
+
     }
 
 
@@ -49,6 +76,14 @@ public class User {
 
     public static void setCurrentUser(User currentUser) {
         User.currentUser = currentUser;
+    }
+
+    public DailyRecord getCurrentRecord() {
+        return currentRecord;
+    }
+
+    public List<DailyRecord> getDailyRecordList() {
+        return dailyRecordList;
     }
 
     public void setScore(Integer score) {

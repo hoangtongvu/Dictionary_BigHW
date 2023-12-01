@@ -193,23 +193,4 @@ public class LoginSceneController extends BaseSceneController {
         messagePane.getChildren().add(message);
         isRegistering = false;
     }
-
-    public String hashPassword(String password) {
-        MessageDigest md = null;
-        try {
-            md = MessageDigest.getInstance("MD5");
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-
-        md.update(password.getBytes());
-
-        byte[] hash = md.digest();
-
-        StringBuilder stringBuilder = new StringBuilder();
-        for (byte b : hash) {
-            stringBuilder.append(String.format("%02x", b));
-        }
-        return stringBuilder.toString();
-    }
 }
