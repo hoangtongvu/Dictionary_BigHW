@@ -17,6 +17,7 @@ import java.net.URL;
 public class StudyTimer {
     private static StudyTimer instance;
     private Integer timeSeconds = 0;
+    private Integer totalTime = 0;
     private Timeline timeline;
     private boolean isPlaying = false;
     private StringProperty time = new SimpleStringProperty();
@@ -25,6 +26,10 @@ public class StudyTimer {
 
     public boolean isPlaySound() {
         return playSound;
+    }
+
+    public Integer getTotalTime() {
+        return totalTime;
     }
 
     public void setPlaySound(boolean playSound) {
@@ -44,6 +49,7 @@ public class StudyTimer {
                 new KeyFrame(Duration.seconds(1),
                         event -> {
                             this.timeSeconds--;
+                            this.totalTime++;
 //                            System.out.println(this.toString());
                             time.set(toString());
                             if (this.timeSeconds <= 0) {

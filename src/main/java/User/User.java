@@ -2,6 +2,7 @@ package User;
 
 import Main.Database;
 import Timer.SessionTime;
+import Timer.StudyTimer;
 
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -29,6 +30,9 @@ public class User {
     public void newAccount(String userName, String passWord) {
         this.userName = userName;
         this.passWord = passWord;
+        score = 0;
+        studyGoal = 0;
+        imagePath = ""; //Default profile picture
     }
 
     public void setOnline(boolean online) {
@@ -55,7 +59,7 @@ public class User {
         //Start session counter
         SessionTime.getInstance().startCounter();
 
-        //Save access date
+        //Initiate access date
         LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String currentTime = date.format(formatter);
@@ -65,6 +69,8 @@ public class User {
 
         System.out.println(currentTime);
 
+        dailyRecordList = currentRecord.getRecordDAO().getAll();
+
         try {
             currentRecord = currentRecord.getRecordDAO().get(userName + " " + currentTime).get();
             System.out.println("Got existing record");
@@ -72,12 +78,10 @@ public class User {
         } catch (Exception e) {
             currentRecord.setSession_time(0);
             System.out.println(e.getMessage());
+            dailyRecordList.add(currentRecord);
             System.out.println("Date record does not exist");
         }
-        dailyRecordList = currentRecord.getRecordDAO().getAll();
-        for (DailyRecord record : dailyRecordList) {
-            System.out.println(record.getAccessDate() + " " + record.getSession_time());
-        }
+
     }
 
     public void logoutHandler() {
@@ -87,13 +91,7 @@ public class User {
         currentUser = null;
     }
 
-
-
     public void saveSessionData() {
-        //Save session timer
-
-        //Save score
-
         //Save access date
         saveCurrentRecord();
         //Save changes to user credential
@@ -102,20 +100,23 @@ public class User {
 
     public void saveUserCredentials() {
         try {
-            userDao.save(currentUser);
+            updateAll();
         } catch (Exception e) {
             System.out.println("User already exist, this exception is for updating user credential");
             System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
     public void saveCurrentRecord() {
         currentRecord.setSession_time(SessionTime.getInstance().getSeconds() + currentRecord.getSession_time());
+        currentRecord.setStudy_time(StudyTimer.getInstance().getTotalTime()  + currentRecord.getStudy_time());
         try {
             currentRecord.getRecordDAO().save(currentRecord);
             System.out.println("Saved new date record");
         } catch (Exception e) {
             System.out.println("Overridden new save record");
+
             String[] param = {"study_time", String.valueOf(currentRecord.getStudy_time())};
             currentRecord.getRecordDAO().update(currentRecord, param);
 
@@ -149,20 +150,49 @@ public class User {
         this.score = score;
     }
 
+    public void updateScore() {
+        this.userDao.update(currentUser, new String[] {"score", String.valueOf(score)});
+        //Update in database, only in effect until the next load from database
+    }
+
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public void updateImagePath() {
+        this.userDao.update(currentUser, new String[] {"profile_image_path", imagePath});
     }
 
     public void setPassWord(String passWord) {
         this.passWord = passWord;
     }
 
+    public void updatePassWord() {
+        this.userDao.update(currentUser, new String[] {"pass_word", passWord});
+    }
+
     public void setStudyGoal(Integer studyGoal) {
         this.studyGoal = studyGoal;
     }
 
+    public void updateStudyGoal() {
+        this.userDao.update(currentUser, new String[] {"study_goal", String.valueOf(studyGoal)});
+    }
+
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public void updateUserName() {
+        this.userDao.update(currentUser, new String[] {"user_name", String.valueOf(userName)});
+    }
+
+    public void updateAll() {
+        updateUserName();
+        updateScore();
+        updateImagePath();
+        updatePassWord();
+        updateStudyGoal();
     }
 
     public Integer getScore() {

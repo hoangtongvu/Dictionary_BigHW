@@ -62,12 +62,11 @@ public class UserDao implements Dao<User> {
 
     @Override
     public void update(User user, String[] params) {
-        String update = "UPDATE " + tableName + " SET ? = ? WHERE user_name = ?";
+        String update = "UPDATE " + tableName + " SET " + params[0] + " = ? WHERE user_name = ?";
         try {
             PreparedStatement statement = Database.getUserDB().prepareStatement(update);
             statement.setString(1, params[1]);
-            statement.setString(2, params[2]);
-            statement.setString(3, user.getUserName());
+            statement.setString(2, user.getUserName());
 
             statement.executeUpdate();
 
@@ -77,6 +76,7 @@ public class UserDao implements Dao<User> {
             throw new RuntimeException(e);
         }
     }
+
 
     @Override
     public void save(User user) {
