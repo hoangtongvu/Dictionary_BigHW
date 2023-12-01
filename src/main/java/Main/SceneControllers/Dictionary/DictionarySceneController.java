@@ -91,7 +91,6 @@ public class DictionarySceneController extends BaseSceneController implements In
                     Tooltip t =  new Tooltip(entry.getXValue() + " " + String.format("%5f", entry.getYValue()) + "%");
                     Tooltip.install(entry.getNode(), t);
                     t.setShowDelay(Duration.seconds(0));
-
                 }
             } catch (IOException e) {
                 System.out.println(e.getMessage());
