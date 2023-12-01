@@ -6,7 +6,9 @@ import Main.SceneControllers.Widget.StudyTimerController;
 import User.User;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
@@ -17,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 import User.DailyRecord;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import jnr.ffi.annotations.In;
 
@@ -32,11 +35,20 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
 
     @FXML
     LineChart<String, Number> dailyChart;
+    @FXML
+    PieChart dailyGoalChart;
+
+    @FXML
+    protected VBox leaderBoardVbox;
+    @FXML
+    protected ScrollPane leaderBoardScrollPane;
 
     /**This part is for side menu*/
     @FXML
     public void initialize() {
         //this.SwitchToLookUpScene(); //dunno why this bug.
+        leaderBoardVbox.prefWidthProperty().bind(leaderBoardScrollPane.widthProperty());
+        leaderBoardScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         try {
             StudyTimerController.loadInstance().addToParent(timerPlaceHolder);
         } catch (IOException e) {
@@ -50,29 +62,68 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
     public void updateChart() {
         if (User.getCurrentUser().isOnline()) {
             dailyChart.getData().clear();
-            try {
-                XYChart.Series<String, Number> sessionTimeSeries = new XYChart.Series<>();
-                List<DailyRecord> recordList = User.getCurrentUser().getDailyRecordList();
+            setUpLineChart();
+            dailyGoalChart.getData().clear();
+            setUpPieChart();
+        } else {
+            PieChart.Data incomplete = new PieChart.Data("Incomplete", 100);
+            dailyGoalChart.getData().add(incomplete);
+            incomplete.getNode().setStyle("-fx-background-color: grey");
+        }
+    }
 
-                //Create series
-                for (DailyRecord record : recordList) {
-                    sessionTimeSeries.getData().add(new XYChart.Data<>(record.getAccessDate(), record.getSession_time()));
-                }
-                //Add series to chart
-                dailyChart.getData().add(sessionTimeSeries);
-                addChartLine(sessionTimeSeries, "Online time");
+    public void setUpPieChart() {
+        Integer dailyGoal = User.getCurrentUser().getStudyGoal();
+        Integer studyTime = User.getCurrentUser().getCurrentRecord().getStudy_time();
+        Double completionRate = ((double)studyTime / dailyGoal);
+        if (dailyGoal == 0) {
+            PieChart.Data incomplete = new PieChart.Data("Incomplete", 100);
+            dailyGoalChart.getData().add(incomplete);
+            incomplete.getNode().setStyle("-fx-background-color: grey");
+        }
 
-                XYChart.Series<String, Number> studyTimeSeries = new XYChart.Series<>();
-                //Create series
-                for (DailyRecord record : recordList) {
-                    studyTimeSeries.getData().add(new XYChart.Data<>(record.getAccessDate(), record.getStudy_time()));
-                }
-                //Add series to chart
-                dailyChart.getData().add(studyTimeSeries);
-                addChartLine(studyTimeSeries, "Study time");
-            } catch (Exception e) {
-                e.printStackTrace();
+        if (completionRate > 1) {
+            PieChart.Data progress = new PieChart.Data("Completed", 100);
+            dailyGoalChart.getData().add(progress);
+            progress.getNode().setStyle("-fx-background-color: green");
+        } else {
+            PieChart.Data progress = new PieChart.Data("Completed", completionRate * 100);
+            PieChart.Data incomplete = new PieChart.Data("Incomplete", (1 - completionRate) * 100);
+            dailyGoalChart.getData().add(progress);
+            dailyGoalChart.getData().add(incomplete);
+
+
+            progress.getNode().setStyle("-fx-background-color: green");
+            incomplete.getNode().setStyle("-fx-background-color: grey");
+
+            dailyGoalChart.setLabelsVisible(false);
+
+        }
+    }
+
+    public void setUpLineChart() {
+        try {
+            XYChart.Series<String, Number> sessionTimeSeries = new XYChart.Series<>();
+            List<DailyRecord> recordList = User.getCurrentUser().getDailyRecordList();
+
+            //Create series
+            for (DailyRecord record : recordList) {
+                sessionTimeSeries.getData().add(new XYChart.Data<>(record.getAccessDate(), record.getSession_time()));
             }
+            //Add series to chart
+            dailyChart.getData().add(sessionTimeSeries);
+            addChartLine(sessionTimeSeries, "Online time");
+
+            XYChart.Series<String, Number> studyTimeSeries = new XYChart.Series<>();
+            //Create series
+            for (DailyRecord record : recordList) {
+                studyTimeSeries.getData().add(new XYChart.Data<>(record.getAccessDate(), record.getStudy_time()));
+            }
+            //Add series to chart
+            dailyChart.getData().add(studyTimeSeries);
+            addChartLine(studyTimeSeries, "Study time");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

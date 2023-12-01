@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" styleClass="anchorPane" stylesheets="@../../css/ApplicationStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Dictionary.HomeSceneController">
@@ -23,11 +30,63 @@
                      <left>
                         <AnchorPane prefHeight="642.0" prefWidth="333.0" BorderPane.alignment="CENTER">
                            <children>
-                              <AnchorPane fx:id="timerPlaceHolder11" layoutX="24.0" layoutY="32.0" prefHeight="289.0" prefWidth="394.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.bottomAnchor="321.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="32.0" />
-                              <AnchorPane fx:id="timerPlaceHolder112" layoutX="26.0" layoutY="347.0" prefHeight="75.0" prefWidth="389.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="33.0" />
-                              <AnchorPane fx:id="timerPlaceHolder1121" layoutX="26.0" layoutY="433.0" prefHeight="75.0" prefWidth="389.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.bottomAnchor="134.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="33.0" />
-                              <AnchorPane fx:id="timerPlaceHolder1122" layoutX="26.0" layoutY="524.0" prefHeight="75.0" prefWidth="389.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="33.0" />
-                              <Label layoutX="24.0" layoutY="15.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="LeaderBoard" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="78.0">
+                              <AnchorPane fx:id="timerPlaceHolder11" layoutX="24.0" layoutY="32.0" prefHeight="289.0" prefWidth="394.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.bottomAnchor="321.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="32.0">
+                                 <children>
+                                    <ScrollPane fx:id="leaderBoardScrollPane" layoutX="13.0" layoutY="13.0" prefHeight="262.0" prefWidth="252.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="13.0">
+                                       <content>
+                                          <VBox fx:id="leaderBoardVbox" prefHeight="268.0" prefWidth="259.0">
+                                             <children>
+                                                <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="62.0" prefWidth="259.0" styleClass="leader-board-view" text="tranduong123">
+                                                   <graphic>
+                                                      <ImageView fitHeight="52.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                    </ScrollPane>
+                                 </children></AnchorPane>
+                              <VBox layoutX="10.0" layoutY="353.0" prefWidth="379.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="30.0">
+                                 <children>
+                                    <AnchorPane fx:id="timerPlaceHolder112" prefHeight="75.0" prefWidth="389.0" styleClass="widget" stylesheets="@../../css/Home.css">
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin>
+                                       <children>
+                                          <Label layoutX="14.0" layoutY="20.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Multiple choice">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="timerPlaceHolder1121" prefHeight="75.0" prefWidth="389.0" styleClass="widget" stylesheets="@../../css/Home.css">
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin>
+                                       <children>
+                                          <Label layoutX="14.0" layoutY="20.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Wordle">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="timerPlaceHolder1122" prefHeight="75.0" prefWidth="389.0" styleClass="widget" stylesheets="@../../css/Home.css">
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin>
+                                       <children>
+                                          <Label layoutX="14.0" layoutY="20.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Arrows">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </VBox>
+                              <Label layoutX="24.0" layoutY="14.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="LeaderBoard" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="78.0">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -69,8 +128,55 @@
                      <center>
                         <AnchorPane prefHeight="574.0" prefWidth="448.0" BorderPane.alignment="CENTER">
                            <children>
+                              <AnchorPane fx:id="timerPlaceHolder113" layoutX="17.0" layoutY="74.0" prefHeight="247.0" prefWidth="264.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.leftAnchor="17.0" AnchorPane.topAnchor="74.0" />
+                              <VBox layoutX="303.0" layoutY="74.0" AnchorPane.leftAnchor="303.0">
+                                 <children>
+                                    <AnchorPane fx:id="timerPlaceHolder11232" prefHeight="75.0" prefWidth="275.0" styleClass="widget" stylesheets="@../../css/Home.css">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                       <children>
+                                          <Label layoutX="22.0" layoutY="20.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Dictionary">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="timerPlaceHolder1123" prefHeight="75.0" prefWidth="275.0" styleClass="widget" stylesheets="@../../css/Home.css">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                       <children>
+                                          <Label layoutX="22.0" layoutY="20.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="AI Chat bot">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="timerPlaceHolder11231" prefHeight="75.0" prefWidth="275.0" styleClass="widget" stylesheets="@../../css/Home.css">
+                                       <children>
+                                          <Label layoutX="22.0" layoutY="20.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Translate">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children></AnchorPane>
+                                 </children>
+                              </VBox>
+                              <Label layoutX="14.0" layoutY="57.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Today" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="57.0">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
                               <AnchorPane fx:id="timerPlaceHolder111" layoutX="19.0" layoutY="352.0" prefHeight="251.0" prefWidth="562.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="352.0">
                                  <children>
+                                    <Label prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Statistic" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="362.0">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
                                     <AnchorPane layoutY="25.0" prefHeight="251.0" prefWidth="362.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                           <LineChart fx:id="dailyChart" layoutX="-14.0" layoutY="30.0" prefHeight="221.0" prefWidth="362.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
@@ -83,26 +189,18 @@
                                           </LineChart>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane layoutX="375.0" layoutY="25.0" prefHeight="200.0" prefWidth="132.0" style="-fx-background-color: pink;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <AnchorPane layoutX="375.0" layoutY="25.0" prefHeight="200.0" prefWidth="132.0" styleClass="pie-chart-anchor" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <PieChart layoutX="-33.0" layoutY="-94.0" prefHeight="251.0" prefWidth="233.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <StackPane layoutY="22.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="22.0">
+                                             <children>
+                                                <PieChart fx:id="dailyGoalChart" clockwise="false" minWidth="200.0" prefHeight="165.0" prefWidth="200.0" startAngle="90.0" />
+                                                <Circle fill="DODGERBLUE" radius="34.0" stroke="BLACK" strokeType="INSIDE" styleClass="pie-chart-cover" />
+                                                <Label text="Percentage" />
+                                             </children>
+                                          </StackPane>
                                        </children>
                                     </AnchorPane>
                                  </children></AnchorPane>
-                              <AnchorPane fx:id="timerPlaceHolder113" layoutX="17.0" layoutY="74.0" prefHeight="247.0" prefWidth="264.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.leftAnchor="17.0" AnchorPane.topAnchor="74.0" />
-                              <AnchorPane fx:id="timerPlaceHolder1123" layoutX="303.0" layoutY="160.0" prefHeight="75.0" prefWidth="275.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.leftAnchor="303.0" />
-                              <AnchorPane fx:id="timerPlaceHolder11231" layoutX="303.0" layoutY="246.0" prefHeight="75.0" prefWidth="275.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.leftAnchor="303.0" />
-                              <AnchorPane fx:id="timerPlaceHolder11232" layoutX="303.0" layoutY="74.0" prefHeight="75.0" prefWidth="275.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.leftAnchor="303.0" />
-                              <Label layoutX="14.0" layoutY="57.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Today" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="57.0">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="14.0" layoutY="334.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Statistic" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="362.0">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
                            </children>
                         </AnchorPane>
                      </center>

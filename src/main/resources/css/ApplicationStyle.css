@@ -42,6 +42,18 @@
     -fx-graphic-text-gap: 30;
 }
 
+.leader-board-view {
+    -fx-alignment: top-left;
+    -fx-padding: 0 0 0 0;
+    -fx-background-color: pink;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000;
+    -fx-font-size: 20;
+    -fx-graphic-text-gap: 0;
+    -fx-background-radius: 10px;
+
+}
+
 .sideMenuButton:disabled {
     -fx-opacity: 1;
 }
@@ -297,7 +309,26 @@
     -fx-background-color:transparent;
 }
 
-.default-color0.chart-series-line { -fx-stroke: #b45479; }
+.default-color0.chart-series-line {
+    -fx-stroke: #b45479;
+}
+
+.chart-pie {
+    -fx-background-insets: 0;
+    -fx-border-width: 0;
+}
+
+.pie-chart-anchor {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+}
+
+.pie-chart-cover {
+    -fx-fill: white;
+    -fx-stroke: white;
+}
+
+
 
 
 
