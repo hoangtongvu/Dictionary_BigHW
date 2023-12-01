@@ -1,5 +1,7 @@
 package User;
 
+import Main.SceneControllers.Account.LoginSceneController;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +14,31 @@ public class User {
     private UserDao userDao;
     private static User currentUser;
     private List<DailyRecord> dailyRecordList;
+    private boolean isOnline = false;
 
+    public void logOut() {
+        currentUser = null;
+    }
+
+    public void newAccount(String userName, String passWord) {
+        this.userName = userName;
+        this.passWord = passWord;
+    }
+
+    public void setOnline(boolean online) {
+        isOnline = online;
+    }
+
+    public boolean isOnline() {
+        return isOnline;
+    }
 
     private User() {
         userDao = new UserDao();
         dailyRecordList = new ArrayList<>();
     }
+
+
 
     public static User getCurrentUser() {
         if (currentUser == null) {
@@ -25,22 +46,6 @@ public class User {
         }
         return currentUser;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public static void setCurrentUser(User currentUser) {
         User.currentUser = currentUser;
