@@ -1,7 +1,10 @@
 package Main.application;
 
 import Main.FxmlFileManager;
+import Main.SceneControllers.Account.LoginSceneController;
 import Main.SceneControllers.Dictionary.HomeSceneController;
+import Timer.SessionTime;
+import User.User;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.scene.Scene;
@@ -13,6 +16,14 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch(args);
+        exitApplicationHandler();
+    }
+
+    public static void exitApplicationHandler() {
+        System.out.println("Program exited");
+        if (User.getCurrentUser().isOnline()) {
+            User.getCurrentUser().logoutHandler();
+        }
     }
 
     @Override
@@ -20,16 +31,19 @@ public class App extends Application {
         this.primaryStage = primaryStage;
         myHostServices = getHostServices();
 
-        HomeSceneController initSC = FxmlFileManager.getInstance().homeSC;
+        LoginSceneController initSC = FxmlFileManager.getInstance().loginSC;
         FxmlFileManager.SwitchToInitScene(initSC);
-        Scene scene = new Scene(initSC.getRoot());
+        Scene scene = new Scene(FxmlFileManager.getInstance().loginSC.getRoot());
 
         primaryStage.setMinWidth(800);
         primaryStage.setMinHeight(600);
         primaryStage.setTitle("MyBigDic");
         primaryStage.setScene(scene);
         primaryStage.show();
+
     }
+
+
 
     public static HostServices getMyHostServices() {
         return myHostServices;

@@ -3,6 +3,7 @@ package Main.SceneControllers.Account;
 import Main.Database;
 import Main.FxmlFileManager;
 import Main.SceneControllers.BaseSceneController;
+import User.User;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -20,6 +21,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import User.AccountManager;
 
 public class LoginSceneController extends BaseSceneController {
     private boolean isRegistering = false;
@@ -55,7 +57,7 @@ public class LoginSceneController extends BaseSceneController {
 
         try {
             if (Database.getUserDB().isClosed()) {
-                offLineState();
+                setOffLineState();
                 throw new Exception();
             } else {
                 isOnline = true;
@@ -64,7 +66,7 @@ public class LoginSceneController extends BaseSceneController {
             //Offline
             System.out.println("Currently offline");
             System.out.println(e.getMessage());
-            offLineState();
+            setOffLineState();
         }
     }
 
@@ -78,28 +80,31 @@ public class LoginSceneController extends BaseSceneController {
 
     }
 
-    public void offLineState() {
+    public void setOffLineState() {
         isOnline = false;
         retryButton.setVisible(true);
         message.setTextFill(Color.RED);
         message.setText("You are currently offline");
+    }
+
+    public void setOnlineState() {
+        isOnline = true;
+        retryButton.setVisible(false);
+        message.setTextFill(Color.GREEN);
+        message.setText("Connected!");
     }
     @FXML
     public void retryConnection() {
         try {
             Database.connectUserDB();
             if (Database.getUserDB().isClosed()) {
-                offLineState();
+                setOffLineState();
             } else {
-                isOnline = true;
-                retryButton.setVisible(false);
-                message.setTextFill(Color.GREEN);
-                message.setText("Connected!");
+                setOnlineState();
             }
         } catch (Exception e) {
-            offLineState();
+            setOffLineState();
         }
-
     }
 
     @FXML
@@ -109,67 +114,49 @@ public class LoginSceneController extends BaseSceneController {
 
     @FXML
     public void onEnter() throws SQLException, ClassNotFoundException {
-        String userName = nameField.getText();
-        String passWord = passwordField.getText();
-        String usrNameRegex = "^[A-Za-z0-9.]+$";
-        Pattern usrNamePattern = Pattern.compile(usrNameRegex);
-
         if (isRegistering) {
-            String update = "INSERT INTO user_credentials (user_name, pass_word) VALUES (?, ?)";
-            try {
-                Matcher matcher = usrNamePattern.matcher(userName);
-                if (matcher.matches()) {
+            AccountManager.Status status = AccountManager.getInstance().register(nameField.getText(), passwordField.getText());
+            switch (status) {
+                case REGISTERED:
                     message.setText("");
-                    PreparedStatement statement = Database.getUserDB().prepareStatement(update);
-                    statement.setString(1, userName);
-                    passWord = hashPassword(passWord);
-                    statement.setString(2, passWord);
-                    statement.execute();
                     message.setTextFill(Color.GREEN);
                     message.setText("Register successful!");
-
-                } else {
+                    break;
+                case OFFLINE:
+                    setOffLineState();
+                    break;
+                case INVALID_CHARACTERS:
                     message.setTextFill(Color.RED);
                     message.setText("Username can only contains '0-9', 'A-Z', 'a-z', '.'");
-                }
-
-
-            } catch (Exception e) {
-                if (!Database.getUserDB().isClosed()) {
+                    break;
+                case USERNAME_TAKEN:
+                    message.setTextFill(Color.RED);
                     message.setText("Username already exist");
-                } else {
-                    offLineState();
-                }
+                    break;
+                case NULL_FIELD:
+                    message.setTextFill(Color.RED);
+                    message.setText("PassWord and Username must not be left blank!");
+                    break;
             }
         } else {
-            String query = "SELECT * FROM user_credentials WHERE user_name = ?";
-            try {
-                PreparedStatement statement = Database.getUserDB().prepareStatement(query);
-                statement.setString(1, userName);
-                ResultSet resultSet = statement.executeQuery();
-                resultSet.next();
-                String dbPassword = resultSet.getString("pass_word");
-                passWord = hashPassword(passWord);
-                if (!Database.getUserDB().isClosed()) {
-                    if (passWord.equals(dbPassword)) {
-                        message.setTextFill(Color.GREEN);
-                        message.setText("Login successful!");
-                        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().homeSC);
-                    } else {
-                        message.setTextFill(Color.RED);
-                        message.setText("Incorrect username or password");
-                    }
-                } else {
-                    offLineState();
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-                message.setTextFill(Color.RED);
-                if (!Database.getUserDB().isClosed()) {
+            AccountManager.Status status = AccountManager.getInstance().login(nameField.getText(), passwordField.getText());
+            switch (status) {
+                case LOGGED_IN:
+                    message.setTextFill(Color.GREEN);
+                    message.setText("Login successful!");
+                    FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().homeSC);
+                    break;
+                case INVALID_CREDENTIALS:
+                    message.setTextFill(Color.RED);
                     message.setText("Incorrect username or password");
-                } else {
-                    offLineState();
-                }
+                    break;
+                case OFFLINE:
+                    setOffLineState();
+                    break;
+                case NULL_FIELD:
+                    message.setTextFill(Color.RED);
+                    message.setText("Password and Username must not be left blank!");
+                    break;
             }
         }
     }
@@ -178,40 +165,32 @@ public class LoginSceneController extends BaseSceneController {
     public void onRegister() {
         if (isRegistering) {
             //Revert back to log in
-            loginLabel.setText("Login");
-            registerButton.setText("Register a new account");
-            messagePane.getChildren().clear();
-            message.setText("");
-            messagePane.getChildren().add(message);
-            isRegistering = false;
+            goToLogin();
         } else {
             //Go to register
-            loginLabel.setText("Creating a new account");
-            registerButton.setText("Login to an account");
-            messagePane.getChildren().clear();
-            messagePane.getChildren().add(message);
-            message.setText("");
-            isRegistering = true;
+            goToRegister();
         }
     }
 
-    public String hashPassword(String password) {
-        MessageDigest md = null;
-        try {
-            md = MessageDigest.getInstance("MD5");
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
+    public void goToRegister() {
+        passwordField.clear();
+        nameField.clear();
+        loginLabel.setText("Creating a new account");
+        registerButton.setText("Login to an account");
+        messagePane.getChildren().clear();
+        messagePane.getChildren().add(message);
+        message.setText("");
+        isRegistering = true;
+    }
 
-        md.update(password.getBytes());
-
-        byte[] hash = md.digest();
-
-        StringBuilder stringBuilder = new StringBuilder();
-        for (byte b : hash) {
-            stringBuilder.append(String.format("%02x", b));
-        }
-
-        return stringBuilder.toString();
+    public void goToLogin() {
+        passwordField.clear();
+        nameField.clear();
+        loginLabel.setText("Login");
+        registerButton.setText("Register a new account");
+        messagePane.getChildren().clear();
+        message.setText("");
+        messagePane.getChildren().add(message);
+        isRegistering = false;
     }
 }

@@ -9,7 +9,7 @@ import Main.SceneControllers.Dictionary.EditWordSceneController;
 import Main.SceneControllers.Dictionary.HomeSceneController;
 import Main.SceneControllers.Game.ChooseGameSceneController;
 import Main.SceneControllers.Game.Wordle.WordleController;
-import Main.SceneControllers.IHasNavPane;
+import Interfaces.IHasNavPane;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import Main.SceneControllers.Settings.SettingSceneController;
 import Main.SceneControllers.Translate.TranslateController;

@@ -1,8 +1,7 @@
 package Main.SceneControllers.Settings;
 
 import Main.SceneControllers.BaseSceneController;
-import Main.SceneControllers.IHasNavPane;
-import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
+import Interfaces.IHasNavPane;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
