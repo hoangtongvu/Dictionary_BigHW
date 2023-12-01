@@ -14,8 +14,35 @@ public class DailyRecordDAO implements Dao<DailyRecord> {
 
     @Override
     public Optional<DailyRecord> get(String id) {
-        return Optional.<DailyRecord>empty();
+        String param[] = id.split(" ", 2);
+        System.out.println(id);
+        String query = "SELECT * FROM daily_record WHERE user_name = ? AND access_date = ?";
+        DailyRecord record;
+        try {
+            PreparedStatement statement = Database.getUserDB().prepareStatement(query);
+            statement.setString(1, param[0]);
+            statement.setString(2, param[1]);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                record = new DailyRecord(
+                        resultSet.getString("user_name"),
+                        resultSet.getString("access_date"),
+                        resultSet.getInt("study_time"),
+                        resultSet.getInt("session_time")
+                );
+                return Optional.of(record);
+            } else {
+                return Optional.empty();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("SQLException occurred: " + e.getMessage(), e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("ClassNotFoundException occurred: " + e.getMessage(), e);
+        }
     }
+
 
     @Override
     public List<DailyRecord> getAll() {
@@ -48,8 +75,22 @@ public class DailyRecordDAO implements Dao<DailyRecord> {
 
     @Override
     public void update(DailyRecord dailyRecord, String[] params) {
+        String update = "UPDATE " + tableName + " SET " + params[0] + " = ? WHERE user_name = ? AND access_date = ?";
+        try {
+            PreparedStatement statement = Database.getUserDB().prepareStatement(update);
+            statement.setString(1, params[1]);
+            statement.setString(2, dailyRecord.getUserName());
+            statement.setString(3, dailyRecord.getAccessDate());
 
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
+
 
     @Override
     public void save(DailyRecord dailyRecord) {

@@ -65,9 +65,9 @@ public class UserDao implements Dao<User> {
         String update = "UPDATE " + tableName + " SET ? = ? WHERE user_name = ?";
         try {
             PreparedStatement statement = Database.getUserDB().prepareStatement(update);
-            statement.setString(1, user.getUserName());
-            statement.setString(2, params[1]);
-            statement.setString(3, params[2]);
+            statement.setString(1, params[1]);
+            statement.setString(2, params[2]);
+            statement.setString(3, user.getUserName());
 
             statement.executeUpdate();
 
@@ -81,8 +81,8 @@ public class UserDao implements Dao<User> {
     @Override
     public void save(User user) {
         String insert = "INSERT INTO " + tableName +
-                        " (user_name, pass_word, study_goal, profile_image_path, score) " +
-                        "VALUES (?, ?, ?, ?, ?)";
+                " (user_name, pass_word, study_goal, profile_image_path, score) " +
+                "VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement statement = Database.getUserDB().prepareStatement(insert);
             statement.setString (1, user.getUserName());
@@ -99,5 +99,6 @@ public class UserDao implements Dao<User> {
             throw new RuntimeException(e);
         }
     }
+
 
 }

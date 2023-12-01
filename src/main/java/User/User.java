@@ -1,8 +1,16 @@
 package User;
 
+import Main.Database;
 import Timer.SessionTime;
 
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class User {
@@ -46,23 +54,74 @@ public class User {
         userDao.get(userName);
         //Start session counter
         SessionTime.getInstance().startCounter();
+
         //Save access date
+        LocalDate date = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String currentTime = date.format(formatter);
+
+        currentRecord.setUserName(userName);
+        currentRecord.setAccessDate(currentTime);
+
+        System.out.println(currentTime);
+
+        try {
+            currentRecord = currentRecord.getRecordDAO().get(userName + " " + currentTime).get();
+            System.out.println("Got existing record");
+            System.out.println(currentRecord.getSession_time());
+        } catch (Exception e) {
+            currentRecord.setSession_time(0);
+            System.out.println(e.getMessage());
+            System.out.println("Date record does not exist");
+        }
+        dailyRecordList = currentRecord.getRecordDAO().getAll();
+        for (DailyRecord record : dailyRecordList) {
+            System.out.println(record.getAccessDate() + " " + record.getSession_time());
+        }
     }
 
     public void logoutHandler() {
         setOnline(false);
-        currentUser = null;
         SessionTime.getInstance().stopCounter();
+        saveSessionData();
+        currentUser = null;
     }
 
 
 
     public void saveSessionData() {
         //Save session timer
-        //Save score
-        //Save access date
-        userDao.save(currentUser);
 
+        //Save score
+
+        //Save access date
+        saveCurrentRecord();
+        //Save changes to user credential
+        saveUserCredentials();
+    }
+
+    public void saveUserCredentials() {
+        try {
+            userDao.save(currentUser);
+        } catch (Exception e) {
+            System.out.println("User already exist, this exception is for updating user credential");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void saveCurrentRecord() {
+        currentRecord.setSession_time(SessionTime.getInstance().getSeconds() + currentRecord.getSession_time());
+        try {
+            currentRecord.getRecordDAO().save(currentRecord);
+            System.out.println("Saved new date record");
+        } catch (Exception e) {
+            System.out.println("Overridden new save record");
+            String[] param = {"study_time", String.valueOf(currentRecord.getStudy_time())};
+            currentRecord.getRecordDAO().update(currentRecord, param);
+
+            param = new String[]{"session_time", String.valueOf(currentRecord.getSession_time())};
+            currentRecord.getRecordDAO().update(currentRecord, param);
+        }
     }
 
 

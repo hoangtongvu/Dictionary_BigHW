@@ -4,9 +4,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class DailyRecord {
-    private int timeInSeconds;
-    private DateTimeFormatter dtt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private LocalDateTime currentTime = LocalDateTime.now();
     private String accessDate;
     private int study_time;
     private int session_time;
@@ -16,6 +13,13 @@ public class DailyRecord {
 
     public DailyRecord() {
 
+    }
+
+    public DailyRecordDAO getRecordDAO() {
+        if (recordDAO == null) {
+            recordDAO = new DailyRecordDAO();
+        }
+        return recordDAO;
     }
 
     public DailyRecord(String userName, String accessDate, int studyTime, int sessionTime) {
