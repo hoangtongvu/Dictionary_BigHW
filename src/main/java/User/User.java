@@ -28,6 +28,9 @@ public class User {
     private List<DailyRecord> dailyRecordList;
     private DailyRecord currentRecord;
 
+    private int totalSessionTime;
+    private int totalStudyTime;
+
     private boolean isOnline = false;
 
     public void newAccount(String userName, String passWord) {
@@ -36,6 +39,8 @@ public class User {
         score = 0;
         studyGoal = 0;
         imagePath = ""; //Default profile picture
+        totalSessionTime = 0;
+        totalStudyTime = 0;
     }
 
     public void setOnline(boolean online) {
@@ -85,8 +90,29 @@ public class User {
             System.out.println("Date record does not exist");
         }
 
+        for (DailyRecord record : dailyRecordList) {
+            totalSessionTime += record.getSession_time();
+            totalStudyTime += record.getStudy_time();
+        }
+
         FxmlFileManager.getInstance().navigationPaneSC.setupProfileDisplay();
 
+    }
+
+    public double getCompletionRatio() {
+        if (studyGoal == 0) {
+            return 0;
+        } else {
+            return (double) currentRecord.getStudy_time() /studyGoal * 100;
+
+        }
+    }
+    public int getTotalSessionTime() {
+        return totalSessionTime;
+    }
+
+    public int getTotalStudyTime() {
+        return totalStudyTime;
     }
 
     public void logoutHandler() {

@@ -8,10 +8,8 @@ import User.User;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
-import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -19,13 +17,9 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.List;
 
-import User.DailyRecord;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
-import jnr.ffi.annotations.In;
+import User.AccountManager;
 
 
 public class HomeSceneController extends BaseSceneController implements IHasNavPane {
@@ -46,6 +40,8 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
     protected VBox leaderBoardVbox;
     @FXML
     protected ScrollPane leaderBoardScrollPane;
+    @FXML
+    protected Label ratioLabel;
 
     /**This part is for side menu*/
     @FXML
@@ -78,75 +74,17 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
     }
 
     public void setUpPieChart() {
-        Integer dailyGoal = User.getCurrentUser().getStudyGoal();
-        Integer studyTime = User.getCurrentUser().getCurrentRecord().getStudy_time();
-        Double completionRate = ((double)studyTime / dailyGoal);
-        if (dailyGoal == 0) {
-            PieChart.Data incomplete = new PieChart.Data("Incomplete", 100);
-            dailyGoalChart.getData().add(incomplete);
-            incomplete.getNode().setStyle("-fx-background-color: grey");
-        }
-
-        if (completionRate > 1) {
-            PieChart.Data progress = new PieChart.Data("Completed", 100);
-            dailyGoalChart.getData().add(progress);
-            progress.getNode().setStyle("-fx-background-color: green");
-        } else {
-            PieChart.Data progress = new PieChart.Data("Completed", completionRate * 100);
-            PieChart.Data incomplete = new PieChart.Data("Incomplete", (1 - completionRate) * 100);
-            dailyGoalChart.getData().add(progress);
-            dailyGoalChart.getData().add(incomplete);
-
-
-            progress.getNode().setStyle("-fx-background-color: green");
-            incomplete.getNode().setStyle("-fx-background-color: grey");
-
-            dailyGoalChart.setLabelsVisible(false);
-
-        }
+        AccountManager.getInstance().getPieChart(dailyGoalChart);
+        AccountManager.getInstance().getLabel(ratioLabel, AccountManager.DataCategory.COMPLETION_RATIO);
     }
 
     public void setUpLineChart() {
         try {
-            XYChart.Series<String, Number> sessionTimeSeries = new XYChart.Series<>();
-            List<DailyRecord> recordList = User.getCurrentUser().getDailyRecordList();
-
-            //Create series
-            for (DailyRecord record : recordList) {
-                sessionTimeSeries.getData().add(new XYChart.Data<>(record.getAccessDate(), record.getSession_time()));
-            }
-            //Add series to chart
-            dailyChart.getData().add(sessionTimeSeries);
-            addChartLine(sessionTimeSeries, "Online time");
-
-            XYChart.Series<String, Number> studyTimeSeries = new XYChart.Series<>();
-            //Create series
-            for (DailyRecord record : recordList) {
-                studyTimeSeries.getData().add(new XYChart.Data<>(record.getAccessDate(), record.getStudy_time()));
-            }
-            //Add series to chart
-            dailyChart.getData().add(studyTimeSeries);
-            addChartLine(studyTimeSeries, "Study time");
+            AccountManager.getInstance().getLineChart(dailyChart, AccountManager.DataCategory.STUDY_TIME, "Study time");
+            AccountManager.getInstance().getLineChart(dailyChart, AccountManager.DataCategory.SESSION_TIME, "Access time");
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void addChartLine(XYChart.Series<String, Number> series, String name) {
-            for (XYChart.Data<String, Number> entry : series.getData()) {
-                Integer time = (Integer)entry.getYValue();
-                String[] tmp = entry.getXValue().split("-");
-                String date = tmp[2] + "/" + tmp[1] + "/" + tmp[0];
-                Tooltip tooltip = null;
-                if (time < 3600) {
-                    tooltip = new Tooltip(name + ":\n" + String.format("%.2f", time/60f) + " minutes\n" + String.format("Date: %s", date));
-                } else {
-                    tooltip = new Tooltip(name + ":\n" + String.format("%.2f", time/60f/60f) + " hours\n" + String.format("Date: %s", date));
-                }
-
-                Tooltip.install(entry.getNode(), tooltip);
-                tooltip.setShowDelay(Duration.seconds(0));
-            }
     }
 
     public void setUpLeaderBoard() {

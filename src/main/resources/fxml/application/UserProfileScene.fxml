@@ -49,7 +49,7 @@
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="sessionTimeLabel" alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="0h" textAlignment="CENTER">
+                              <Label fx:id="totalSessionTimeLabel" alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="0h" textAlignment="CENTER">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -63,14 +63,14 @@
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="studyTimeLabel" alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="0h" textAlignment="CENTER">
+                              <Label fx:id="totalStudyTimeLabel" alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="0h" textAlignment="CENTER">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
                            </children>
                         </VBox>
-                        <VBox>
+                        <VBox alignment="CENTER">
                            <children>
                               <Label alignment="CENTER" style="-fx-font-weight: bold;" styleClass="normal-label" text="Score" textAlignment="CENTER">
                                  <font>
@@ -105,7 +105,7 @@
                   </HBox>
                   <AnchorPane prefHeight="410.0" prefWidth="551.0">
                      <children>
-                        <LineChart layoutX="40.0" layoutY="31.0" prefHeight="216.0" prefWidth="511.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="30.0">
+                        <LineChart fx:id="dailyChart" layoutX="40.0" layoutY="31.0" prefHeight="216.0" prefWidth="511.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="30.0">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>
@@ -125,7 +125,7 @@
                   </AnchorPane>
                   <HBox alignment="CENTER" prefHeight="185.0" prefWidth="551.0">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="181.0" prefWidth="393.0" spacing="10.0">
+                        <VBox alignment="CENTER" prefHeight="181.0" prefWidth="285.0" spacing="10.0">
                            <children>
                               <HBox prefHeight="37.0" prefWidth="351.0">
                                  <children>
@@ -137,7 +137,7 @@
                                           <Insets right="30.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <Label alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="4h" textAlignment="CENTER">
+                                    <Label fx:id="dailyGoalLabel" alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="0h" textAlignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -154,7 +154,7 @@
                                           <Insets right="30.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <Label alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="2h" textAlignment="CENTER">
+                                    <Label fx:id="studyTimeLabel" alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="0h" textAlignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -174,7 +174,7 @@
                                           <Insets right="30.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <Label alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="50%" textAlignment="CENTER">
+                                    <Label fx:id="ratioLabel1" alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="0%" textAlignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -183,12 +183,17 @@
                               </HBox>
                            </children>
                         </VBox>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                        <AnchorPane prefHeight="200.0" prefWidth="162.0">
                            <children>
                               <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <PieChart fx:id="studyGoalChart" prefWidth="229.0" />
+                                    <PieChart fx:id="dailyGoalChart" clockwise="false" prefWidth="229.0" startAngle="90.0" />
                                     <Circle fill="DODGERBLUE" radius="42.0" stroke="BLACK" strokeType="INSIDE" />
+                                    <Label fx:id="ratioLabel" alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="0%" textAlignment="CENTER">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </StackPane>
                            </children>
