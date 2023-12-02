@@ -1,5 +1,6 @@
 package Main.SceneControllers.Dictionary;
 
+import Main.Database;
 import Main.SceneControllers.BaseSceneController;
 import Interfaces.IHasNavPane;
 import Main.SceneControllers.Widget.StudyTimerController;
@@ -15,6 +16,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
@@ -145,6 +149,29 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
                 tooltip.setShowDelay(Duration.seconds(0));
             }
     }
+
+    public void setUpLeaderBoard() {
+        String query = "SELECT user_name, score FROM user_credentials ORDER BY score, user_name DESC LIMIT 10";
+        try {
+            PreparedStatement statement = Database.getUserDB().prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            int ranking = 1;
+            while (resultSet.next()) {
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addRankingCard(String userName, int score, int rank) {
+        AnchorPane pane = new AnchorPane();
+        pane.setPrefWidth(260); pane.setPrefHeight(62);
+
+    }
+
 
     @Override
     public void StartShow() {

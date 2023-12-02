@@ -114,6 +114,7 @@ public class FxmlFileManager
         this.wordleSC = this.LoadSC("/Game/Wordle/WordleScene.fxml");
         this.loginSC = this.LoadSC("/application/LoginScreen.fxml");
         this.settingSC = this.LoadSC("/application/SettingScene.fxml");
+
         this.navigationPaneSC = this.LoadSC("/application/NavigationPaneScene.fxml");
     }
 

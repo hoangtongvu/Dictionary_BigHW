@@ -35,8 +35,8 @@ public class App extends Application {
         FxmlFileManager.SwitchToInitScene(initSC);
         Scene scene = new Scene(FxmlFileManager.getInstance().loginSC.getRoot());
 
-        primaryStage.setMinWidth(800);
-        primaryStage.setMinHeight(600);
+        primaryStage.setMinWidth(1280);
+        primaryStage.setMinHeight(768);
         primaryStage.setTitle("MyBigDic");
         primaryStage.setScene(scene);
         primaryStage.show();

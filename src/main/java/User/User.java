@@ -1,8 +1,11 @@
 package User;
 
 import Main.Database;
+import Main.FxmlFileManager;
+import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import Timer.SessionTime;
 import Timer.StudyTimer;
+import javafx.fxml.FXML;
 
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -81,6 +84,8 @@ public class User {
             dailyRecordList.add(currentRecord);
             System.out.println("Date record does not exist");
         }
+
+        FxmlFileManager.getInstance().navigationPaneSC.setupProfileDisplay();
 
     }
 

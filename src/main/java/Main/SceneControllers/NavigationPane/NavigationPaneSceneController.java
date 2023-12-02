@@ -1,17 +1,26 @@
 package Main.SceneControllers.NavigationPane;
 
 import Main.FxmlFileManager;
+import Main.ProjectDirectory;
 import Main.SceneControllers.BaseSceneController;
+import User.User;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -50,7 +59,10 @@ public class NavigationPaneSceneController extends BaseSceneController implement
     protected Button translateButton;
     @FXML
     protected Button settingButton;
-
+    @FXML
+    protected Circle profilePic;
+    @FXML
+    protected Button accountButton;
 
     private TranslateTransition drawerTranslateTransition;
     private FadeTransition blurPaneFadeTransition;
@@ -78,14 +90,42 @@ public class NavigationPaneSceneController extends BaseSceneController implement
         this.drawerTranslateTransition = new TranslateTransition(Duration.seconds(0.5), this.drawerMenu);
         this.blurPaneFadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
         nodes.addAll(this.navPaneRoot.getChildren());
-//        try {
-//            StudyTimerController.loadInstance().addToParent(timerPlaceHolder);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
         setDisableStatus(true);
+
+        accountButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (User.getCurrentUser().isOnline()) {
+                    //Go to view profile scene
+                } else {
+                    //Popup login window
+                }
+            }
+        });
     }
 
+    @FXML
+    protected Circle profilePicBackground;
+
+    public void setupProfileDisplay() {
+        if (User.getCurrentUser().isOnline()) {
+            accountButton.setText(User.getCurrentUser().getUserName());
+            System.out.println("Yes");
+
+            addProfilePic("/png/profilePic.png");
+            //Set event handler -> view profile
+        } else {
+            addProfilePic("/png/profilePic.png");
+        }
+    }
+
+    public void addProfilePic(String path) {
+        Image image = new Image(String.valueOf(getClass().getResource(path)));
+        profilePic.setStrokeWidth(0);
+        profilePicBackground.setStrokeWidth(0);
+        profilePicBackground.setFill(Color.GREY);
+        profilePic.setFill(new ImagePattern(image));
+    }
     @Override
     public void StartShow() {
 
