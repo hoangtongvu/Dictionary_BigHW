@@ -59,7 +59,6 @@ public class ChooseGameSceneController extends BaseSceneController implements In
         newCard.SetGameName(gameCtrl.getGameName());
         newCard.AddActionEventHandler(gameCtrl.getOnGameOpenEventHandler());
         newCard.SetTrailerGif(gameCtrl.getTrailerImage());
-        System.out.println(gameCtrl.getTrailerImage());
 
         this.AddCard(newCard);
         this.AddHoverListener(newCard);

@@ -27,6 +27,6 @@ public class CreateWord4DirGameCtrl extends GameCtrl
     @Override
     public String getTrailerImagePath()
     {
-        return "/gif/GameTrailers/OzV.gif";
+        return "/gif/GameTrailers/4Directions.gif";
     }
 }

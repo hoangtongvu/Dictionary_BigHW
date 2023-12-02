@@ -38,6 +38,6 @@ public class ChoiceGameCtrl extends GameCtrl
 
     @Override
     public String getTrailerImagePath() {
-        return "";
+        return "/gif/GameTrailers/multi choice.gif";
     }
 }

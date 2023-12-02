@@ -13,6 +13,6 @@ public class WordleCtrl extends GameCtrl {
 
     @Override
     public String getTrailerImagePath() {
-        return "";
+        return "/gif/GameTrailers/wordle.gif";
     }
 }
