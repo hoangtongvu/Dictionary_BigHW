@@ -2,9 +2,12 @@ package Main.SceneControllers.Account;
 
 import Main.Database;
 import Main.FxmlFileManager;
+import Main.ProjectDirectory;
 import Main.SceneControllers.BaseSceneController;
+import Main.SceneControllers.Widget.StudyTimerController;
 import User.User;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,6 +17,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
@@ -25,7 +31,6 @@ import User.AccountManager;
 
 public class LoginSceneController extends BaseSceneController {
     private boolean isRegistering = false;
-    private boolean isOnline = false;
 
     @FXML
     protected TextField nameField;
@@ -41,6 +46,10 @@ public class LoginSceneController extends BaseSceneController {
     protected AnchorPane messagePane;
     @FXML
     protected Label loginLabel;
+    @FXML
+    protected Label suggestLabel;
+    @FXML
+    protected AnchorPane root;
 
     protected Label message;
     public void initialize() {
@@ -60,7 +69,7 @@ public class LoginSceneController extends BaseSceneController {
                 setOffLineState();
                 throw new Exception();
             } else {
-                isOnline = true;
+
             }
         } catch (Exception e) {
             //Offline
@@ -68,6 +77,13 @@ public class LoginSceneController extends BaseSceneController {
             System.out.println(e.getMessage());
             setOffLineState();
         }
+    }
+
+    @FXML
+    protected Button continueWithoutAccountButton;
+
+    public Button getContinueWithoutAccountButton() {
+        return continueWithoutAccountButton;
     }
 
     @Override
@@ -81,14 +97,12 @@ public class LoginSceneController extends BaseSceneController {
     }
 
     public void setOffLineState() {
-        isOnline = false;
         retryButton.setVisible(true);
         message.setTextFill(Color.RED);
         message.setText("You are currently offline");
     }
 
     public void setOnlineState() {
-        isOnline = true;
         retryButton.setVisible(false);
         message.setTextFill(Color.GREEN);
         message.setText("Connected!");
@@ -121,6 +135,7 @@ public class LoginSceneController extends BaseSceneController {
                     message.setText("");
                     message.setTextFill(Color.GREEN);
                     message.setText("Register successful!");
+
                     break;
                 case OFFLINE:
                     setOffLineState();
@@ -177,6 +192,7 @@ public class LoginSceneController extends BaseSceneController {
         nameField.clear();
         loginLabel.setText("Creating a new account");
         registerButton.setText("Login to an account");
+        suggestLabel.setText("Don't have an account yet?");
         messagePane.getChildren().clear();
         messagePane.getChildren().add(message);
         message.setText("");
@@ -188,9 +204,30 @@ public class LoginSceneController extends BaseSceneController {
         nameField.clear();
         loginLabel.setText("Login");
         registerButton.setText("Register a new account");
+        suggestLabel.setText("Already have an account?");
         messagePane.getChildren().clear();
         message.setText("");
         messagePane.getChildren().add(message);
         isRegistering = false;
     }
+
+    public void addToParent(AnchorPane parent) {
+        AnchorPane.setRightAnchor(root, 0d);
+        AnchorPane.setTopAnchor(root, 0d);
+        AnchorPane.setLeftAnchor(root, 0d);
+        AnchorPane.setBottomAnchor(root, 0d);
+
+        parent.getChildren().addAll(root);
+    }
+
+    public static LoginSceneController loadInstance() throws IOException {
+        FXMLLoader loader;
+        String absolutePath = ProjectDirectory.resourcesPath + "\\fxml\\application\\LoginScreen.fxml";
+        URL fxmlURL = Paths.get(absolutePath).toUri().toURL();
+        loader = new FXMLLoader(fxmlURL);
+        loader.load();
+        return loader.getController();
+    }
+
+
 }

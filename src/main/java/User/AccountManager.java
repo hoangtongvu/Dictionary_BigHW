@@ -44,6 +44,7 @@ public class AccountManager {
                 User.getCurrentUser().reset();
                 passWord = hashPassword(passWord);
                 User.getCurrentUser().newAccount(userName, passWord);
+                User.getCurrentUser().getUserDao().save(User.getCurrentUser());
                 return Status.REGISTERED;
             } else {
                 return Status.INVALID_CHARACTERS;

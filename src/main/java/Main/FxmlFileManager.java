@@ -3,6 +3,7 @@ package Main;
 import Logger.LoggersCtrl;
 import Main.SceneControllers.AIChatBot.AIConversationSceneController;
 import Main.SceneControllers.Account.LoginSceneController;
+import Main.SceneControllers.Account.UserProfileSceneController;
 import Main.SceneControllers.BaseSceneController;
 import Main.SceneControllers.Dictionary.DictionarySceneController;
 import Main.SceneControllers.Dictionary.EditWordSceneController;
@@ -57,6 +58,8 @@ public class FxmlFileManager
     public final LoginSceneController loginSC;
     public final SettingSceneController settingSC;
     public final NavigationPaneSceneController navigationPaneSC;
+    public final UserProfileSceneController profileSC;
+
 //endregion
 
     //region SwitchScene functions.
@@ -114,8 +117,10 @@ public class FxmlFileManager
         this.wordleSC = this.LoadSC("/Game/Wordle/WordleScene.fxml");
         this.loginSC = this.LoadSC("/application/LoginScreen.fxml");
         this.settingSC = this.LoadSC("/application/SettingScene.fxml");
+        this.profileSC = this.LoadSC("/application/UserProfileScene.fxml");
 
         this.navigationPaneSC = this.LoadSC("/application/NavigationPaneScene.fxml");
+
     }
 
     /**

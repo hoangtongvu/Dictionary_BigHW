@@ -2,7 +2,9 @@ package Main.SceneControllers.NavigationPane;
 
 import Main.FxmlFileManager;
 import Main.ProjectDirectory;
+import Main.SceneControllers.Account.LoginSceneController;
 import Main.SceneControllers.BaseSceneController;
+import UnsortedScript.NodeAligner;
 import User.User;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -14,9 +16,11 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
@@ -63,6 +67,10 @@ public class NavigationPaneSceneController extends BaseSceneController implement
     protected Circle profilePic;
     @FXML
     protected Button accountButton;
+    @FXML
+    protected StackPane loginPane;
+    @FXML
+    protected AnchorPane loginPlaceholder;
 
     private TranslateTransition drawerTranslateTransition;
     private FadeTransition blurPaneFadeTransition;
@@ -91,17 +99,47 @@ public class NavigationPaneSceneController extends BaseSceneController implement
         this.blurPaneFadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
         nodes.addAll(this.navPaneRoot.getChildren());
         setDisableStatus(true);
-
+        addProfilePic("/png/profilePic.png");
         accountButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 if (User.getCurrentUser().isOnline()) {
                     //Go to view profile scene
+                    SwitchScene(FxmlFileManager.getInstance().profileSC);
                 } else {
                     //Popup login window
+                    FxmlFileManager.getInstance().loginSC.getContinueWithoutAccountButton().setVisible(false);
+                    showLogin();
                 }
             }
         });
+
+        loginPane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            if (User.getCurrentUser().isOnline()) {
+                FxmlFileManager.getInstance().homeSC.updateChart();
+                exitLogin();
+            }
+        });
+
+        loginPane.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (User.getCurrentUser().isOnline()) {
+                FxmlFileManager.getInstance().homeSC.updateChart();
+                exitLogin();
+            }
+        });
+
+        try {
+            LoginSceneController.loadInstance().addToParent(loginPlaceholder);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        loginPane.setVisible(false);
+    }
+
+    @FXML
+    public void exitLogin() {
+        blurPane.setVisible(false);
+        loginPane.setVisible(false);
     }
 
     @FXML
@@ -173,6 +211,11 @@ public class NavigationPaneSceneController extends BaseSceneController implement
             blurPane.setVisible(false);
             blurPaneFadeTransition.setOnFinished(null);
         });
+    }
+
+    public void showLogin() {
+        blurPane.setVisible(true);
+        loginPane.setVisible(true);
     }
 
     private void MoveToScene(BaseSceneController newScene)
