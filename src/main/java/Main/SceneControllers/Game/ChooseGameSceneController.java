@@ -3,10 +3,13 @@ package Main.SceneControllers.Game;
 import Game.GameCtrl;
 import Game.GamesCtrl;
 import Main.SceneControllers.BaseSceneController;
-import Main.SceneControllers.IHasNavPane;
+
 import animatefx.animation.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+
+import Interfaces.IHasNavPane;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;

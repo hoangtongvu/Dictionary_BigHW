@@ -6,7 +6,7 @@ import AIChatBot.ModelList.ModelListManager;
 import AIChatBot.Voice.VoiceThread;
 import AIChatBot.gpt4all.ModelFileChooser;
 import Main.SceneControllers.BaseSceneController;
-import Main.SceneControllers.IHasNavPane;
+import Interfaces.IHasNavPane;
 import Main.application.App;
 import animatefx.animation.*;
 import javafx.animation.Animation;
@@ -224,13 +224,34 @@ public class AIConversationSceneController extends BaseSceneController implement
         AIChatBotManager aiChatBotManager = this.aiChatBotCtrl.getAiChatBotManager();
         
         return new Task<>() {
+
             @Override
             protected String call() throws InterruptedException {
 
-                //block textField from being used while waiting for response.
-                ToggleTextField();
+                LockUserTextField();
 
                 //play waiting animation.
+                Timeline waitingTimeline = this.GetWaitingAnimationTimeline();
+                waitingTimeline.play();
+
+                //Get response from AI.
+                String response = aiChatBotManager.Chat(input);
+
+                //stop animation on get response.
+                waitingTimeline.stop();
+
+                //Create a new voice thread.
+                voiceThread = aiChatBotCtrl.getAiVoice().Speak(response);
+
+                this.UpdateResponseWithFakeEffect(response);
+
+                UnlockUserTextField();
+
+                return response;
+            }
+
+            private Timeline GetWaitingAnimationTimeline()
+            {
                 double delaySecond = 0.2;
                 char dotChar = '●';
                 KeyFrame oneDotFrame = new KeyFrame(Duration.seconds(1 * delaySecond), e -> this.updateMessage(new String(new char[1]).replace('\0', dotChar)));
@@ -240,33 +261,31 @@ public class AIConversationSceneController extends BaseSceneController implement
                 KeyFrame threeDotFrame = new KeyFrame(Duration.seconds(3 * delaySecond), e -> this.updateMessage(new String(new char[3]).replace('\0', dotChar)));
                 Timeline timeline = new Timeline(oneDotFrame, twoDotFrame, threeDotFrame);
                 timeline.setCycleCount(Animation.INDEFINITE);
-                timeline.play();
+                return timeline;
+            }
 
-                String response = aiChatBotManager.Chat(input);
-
-                //stop animation on get response.
-                timeline.stop();
-
-                //Create a new voice thread.
-                voiceThread = aiChatBotCtrl.getAiVoice().Speak(response);
-
+            private void UpdateResponseWithFakeEffect(String response) throws InterruptedException
+            {
                 for (int i = 1; i < response.length(); i = i + 2)
                 {
                     this.updateMessage(response.substring(0, i));
                     Thread.sleep(50);
                 }
-
                 this.updateMessage(response);
-                ToggleTextField();
-                return response;
             }
+
         };
 
     }
 
-    private void ToggleTextField()
+    private void LockUserTextField()
     {
-        this.isUserTextFieldDisabled = !this.isUserTextFieldDisabled;
+        this.isUserTextFieldDisabled = true;
+    }
+
+    private void UnlockUserTextField()
+    {
+        this.isUserTextFieldDisabled = false;
     }
 
     private void ScrollToLatestMessage()

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="anchorPane" stylesheets="@../../css/ApplicationStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Account.UserProfileSceneController">
+   <children>
+      <Pane prefHeight="41.0" prefWidth="854.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <BorderPane layoutY="41.0" prefHeight="559.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="41.0">
+         <left>
+            <AnchorPane prefHeight="559.0" prefWidth="250.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Circle fill="DODGERBLUE" layoutX="125.0" layoutY="120.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Button layoutX="26.0" layoutY="301.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="197.0" text="Change username" />
+                  <Button layoutX="26.0" layoutY="340.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="197.0" text="Change password" />
+                  <Button layoutX="164.0" layoutY="187.0" mnemonicParsing="false" text="Edit " />
+                  <Label alignment="CENTER" layoutX="48.0" layoutY="244.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="tranduong123" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="26.0" layoutY="381.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="197.0" text="Set study goal" />
+                  <Button layoutX="99.0" layoutY="520.0" mnemonicParsing="false" text="Logout" />
+               </children>
+            </AnchorPane>
+         </left>
+         <center>
+            <VBox BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" spacing="30.0">
+                     <children>
+                        <VBox alignment="CENTER">
+                           <children>
+                              <Label alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="Access time" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="sessionTimeLabel" alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="0h" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER">
+                           <children>
+                              <Label alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="Studied time" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="studyTimeLabel" alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="0h" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label alignment="CENTER" style="-fx-font-weight: bold;" styleClass="normal-label" text="Score" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="scoreLabel" alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="0" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER">
+                           <children>
+                              <Label alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="Ranking" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="rankingLabel" alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="0" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <AnchorPane prefHeight="410.0" prefWidth="551.0">
+                     <children>
+                        <LineChart layoutX="40.0" layoutY="31.0" prefHeight="216.0" prefWidth="511.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="30.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </LineChart>
+                        <Label alignment="CENTER" layoutY="230.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Daily statistics" textAlignment="CENTER" AnchorPane.bottomAnchor="12.857142857142847" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </AnchorPane>
+                  <HBox alignment="CENTER" prefHeight="185.0" prefWidth="551.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="181.0" prefWidth="393.0" spacing="10.0">
+                           <children>
+                              <HBox prefHeight="37.0" prefWidth="351.0">
+                                 <children>
+                                    <Label alignment="TOP_LEFT" maxWidth="150.0" prefHeight="35.0" prefWidth="150.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Goal" textAlignment="CENTER">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="30.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="4h" textAlignment="CENTER">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="37.0" prefWidth="351.0">
+                                 <children>
+                                    <Label alignment="TOP_LEFT" maxWidth="150.0" prefWidth="150.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Studied time" textAlignment="CENTER">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="30.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="2h" textAlignment="CENTER">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="37.0" prefWidth="351.0">
+                                 <children>
+                                    <Label alignment="TOP_LEFT" maxWidth="150.0" prefWidth="150.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Ratio" textAlignment="CENTER">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="30.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="50%" textAlignment="CENTER">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <PieChart fx:id="studyGoalChart" prefWidth="229.0" />
+                                    <Circle fill="DODGERBLUE" radius="42.0" stroke="BLACK" strokeType="INSIDE" />
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

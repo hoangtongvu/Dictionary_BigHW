@@ -5,7 +5,7 @@ import Dictionary.SearchHistory;
 import Main.FxmlFileManager;
 import Main.ProjectDirectory;
 import Main.SceneControllers.BaseSceneController;
-import Main.SceneControllers.IHasNavPane;
+import Interfaces.IHasNavPane;
 import Word.WordBlock;
 import WordEditing.GraphNode.*;
 import WordEditing.NodeJSON;
@@ -21,7 +21,6 @@ import javafx.geometry.Side;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -95,7 +94,9 @@ public class EditWordSceneController extends BaseSceneController implements IHas
     @Override
     public void EndShow() {
         try {
-            changeSceneSave();
+            if (!DicNode.isChangesSaved()) {
+                changeSceneSave();
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
