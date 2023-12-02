@@ -1,10 +1,8 @@
 package Main.SceneControllers.NavigationPane;
 
 import Main.FxmlFileManager;
-import Main.ProjectDirectory;
 import Main.SceneControllers.Account.LoginSceneController;
 import Main.SceneControllers.BaseSceneController;
-import UnsortedScript.NodeAligner;
 import User.User;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -23,7 +21,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
@@ -31,6 +28,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import User.AccountManager;
 
 import static Main.FxmlFileManager.SwitchScene;
 
@@ -99,7 +97,7 @@ public class NavigationPaneSceneController extends BaseSceneController implement
         this.blurPaneFadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
         nodes.addAll(this.navPaneRoot.getChildren());
         setDisableStatus(true);
-        addProfilePic("/png/profilePic.png");
+        addProfilePic("/png/profilePictures/default.png");
         accountButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -147,12 +145,10 @@ public class NavigationPaneSceneController extends BaseSceneController implement
     public void setupProfileDisplay() {
         if (User.getCurrentUser().isOnline()) {
             accountButton.setText(User.getCurrentUser().getUserName());
-            System.out.println("Yes");
-
-            addProfilePic("/png/profilePic.png");
+            AccountManager.getInstance().loadProfilePic(profilePic);
             //Set event handler -> view profile
         } else {
-            addProfilePic("/png/profilePic.png");
+            addProfilePic("/png/profilePictures/default.png");
         }
     }
 

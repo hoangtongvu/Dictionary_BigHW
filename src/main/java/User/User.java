@@ -36,6 +36,7 @@ public class User {
     public void newAccount(String userName, String passWord) {
         this.userName = userName;
         this.passWord = passWord;
+        imagePath = "/png/profilePictures/default.png";
         score = 0;
         studyGoal = 0;
         imagePath = ""; //Default profile picture

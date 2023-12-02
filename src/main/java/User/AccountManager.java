@@ -1,11 +1,16 @@
 package User;
 
 import Main.Database;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 import java.security.MessageDigest;
@@ -134,6 +139,27 @@ public class AccountManager {
             Tooltip.install(entry.getNode(), tooltip);
             tooltip.setShowDelay(Duration.seconds(0));
         }
+    }
+
+    public void loadProfilePic(Circle profilePic) {
+        String path = User.getCurrentUser().getImagePath();
+        Image image = new Image(String.valueOf(getClass().getResource(path)));
+        double sideLength = Math.min(image.getWidth(), image.getHeight());
+
+        ImageView imageView = new ImageView(image);
+
+        imageView.setViewport(new Rectangle2D(
+                (image.getWidth() - sideLength) / 2,
+                (image.getHeight() - sideLength) / 2,
+                sideLength,
+                sideLength
+        ));
+
+        Circle circleClip = new Circle(sideLength / 2);
+
+        imageView.setClip(circleClip);
+
+        profilePic.setFill(new ImagePattern(imageView.getImage()));
     }
 
     private static Tooltip getTooltip(String name, XYChart.Data<String, Number> entry) {

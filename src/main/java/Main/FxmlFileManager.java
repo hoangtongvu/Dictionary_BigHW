@@ -2,6 +2,7 @@ package Main;
 
 import Logger.LoggersCtrl;
 import Main.SceneControllers.AIChatBot.AIConversationSceneController;
+import Main.SceneControllers.Account.EditProfilePic;
 import Main.SceneControllers.Account.LoginSceneController;
 import Main.SceneControllers.Account.UserProfileSceneController;
 import Main.SceneControllers.BaseSceneController;
@@ -59,6 +60,7 @@ public class FxmlFileManager
     public final SettingSceneController settingSC;
     public final NavigationPaneSceneController navigationPaneSC;
     public final UserProfileSceneController profileSC;
+    public final EditProfilePic editProfilePicSC;
 
 //endregion
 
@@ -118,6 +120,7 @@ public class FxmlFileManager
         this.loginSC = this.LoadSC("/application/LoginScreen.fxml");
         this.settingSC = this.LoadSC("/application/SettingScene.fxml");
         this.profileSC = this.LoadSC("/application/UserProfileScene.fxml");
+        this.editProfilePicSC = this.LoadSC("/application/ProfilePicScene.fxml");
 
         this.navigationPaneSC = this.LoadSC("/application/NavigationPaneScene.fxml");
 

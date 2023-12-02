@@ -1,40 +1,59 @@
 package Main.SceneControllers.Account;
 
 import Interfaces.IHasNavPane;
+import Main.ProjectDirectory;
 import Main.SceneControllers.BaseSceneController;
 import User.DailyRecord;
 import User.User;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import User.AccountManager;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Stack;
 
 public class UserProfileSceneController extends BaseSceneController implements Initializable, IHasNavPane {
 
     @FXML
-    Label totalSessionTimeLabel;
+    protected Label totalSessionTimeLabel;
     @FXML
-    Label studyTimeLabel;
+    protected Label studyTimeLabel;
     @FXML
-    Label scoreLabel;
+    protected Label scoreLabel;
     @FXML
-    LineChart<String, Number> dailyChart;
+    protected LineChart<String, Number> dailyChart;
     @FXML
-    PieChart dailyGoalChart;
+    protected PieChart dailyGoalChart;
     @FXML
-    Label ratioLabel;
+    protected Label ratioLabel;
     @FXML
-    Label dailyGoalLabel;
+    protected Label dailyGoalLabel;
     @FXML
-    Label totalStudyTimeLabel;
+    protected Label totalStudyTimeLabel;
     @FXML
-    Label ratioLabel1;
+    protected Label ratioLabel1;
+    @FXML
+    protected Circle profilePic;
+    @FXML
+    protected StackPane editPicPane;
+    @FXML
+    AnchorPane root;
 
     @Override
     public void StartShow() {
@@ -50,7 +69,12 @@ public class UserProfileSceneController extends BaseSceneController implements I
         AccountManager.getInstance().getLineChart(dailyChart, AccountManager.DataCategory.STUDY_TIME, "Study time");
         AccountManager.getInstance().getLineChart(dailyChart, AccountManager.DataCategory.SESSION_TIME, "Access time");
         AccountManager.getInstance().getPieChart(dailyGoalChart);
+        AccountManager.getInstance().loadProfilePic(profilePic);
+    }
 
+    @FXML
+    public void editProfile() {
+        editPicPane.setVisible(true);
     }
 
     @Override
@@ -65,6 +89,11 @@ public class UserProfileSceneController extends BaseSceneController implements I
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        editPicPane.setVisible(false);
+        try {
+            EditProfilePic.loadInstance().addToParent(editPicPane);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
