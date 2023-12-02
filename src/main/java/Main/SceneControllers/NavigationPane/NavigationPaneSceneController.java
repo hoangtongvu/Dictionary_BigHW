@@ -108,7 +108,6 @@ public class NavigationPaneSceneController extends BaseSceneController implement
                     SwitchScene(FxmlFileManager.getInstance().profileSC);
                 } else {
                     //Popup login window
-                    FxmlFileManager.getInstance().loginSC.getContinueWithoutAccountButton().setVisible(false);
                     showLogin();
                 }
             }
@@ -129,7 +128,7 @@ public class NavigationPaneSceneController extends BaseSceneController implement
         });
 
         try {
-            LoginSceneController.loadInstance().addToParent(loginPlaceholder);
+            LoginSceneController.loadInstance().addToParent(loginPlaceholder, false);
         } catch (Exception e) {
             e.printStackTrace();
         }

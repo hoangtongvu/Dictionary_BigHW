@@ -82,10 +82,6 @@ public class LoginSceneController extends BaseSceneController {
     @FXML
     protected Button continueWithoutAccountButton;
 
-    public Button getContinueWithoutAccountButton() {
-        return continueWithoutAccountButton;
-    }
-
     @Override
     public void StartShow() {
 
@@ -211,13 +207,15 @@ public class LoginSceneController extends BaseSceneController {
         isRegistering = false;
     }
 
-    public void addToParent(AnchorPane parent) {
+    public void addToParent(AnchorPane parent, boolean continueButtonStatus) {
         AnchorPane.setRightAnchor(root, 0d);
         AnchorPane.setTopAnchor(root, 0d);
         AnchorPane.setLeftAnchor(root, 0d);
         AnchorPane.setBottomAnchor(root, 0d);
 
         parent.getChildren().addAll(root);
+        continueWithoutAccountButton.setVisible(continueButtonStatus);
+
     }
 
     public static LoginSceneController loadInstance() throws IOException {
@@ -226,8 +224,7 @@ public class LoginSceneController extends BaseSceneController {
         URL fxmlURL = Paths.get(absolutePath).toUri().toURL();
         loader = new FXMLLoader(fxmlURL);
         loader.load();
+
         return loader.getController();
     }
-
-
 }

@@ -133,7 +133,6 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
     }
 
     public void addChartLine(XYChart.Series<String, Number> series, String name) {
-            //Add toolTip
             for (XYChart.Data<String, Number> entry : series.getData()) {
                 Integer time = (Integer)entry.getYValue();
                 String[] tmp = entry.getXValue().split("-");

@@ -7,8 +7,6 @@
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
@@ -34,32 +32,7 @@
                                  <children>
                                     <ScrollPane fx:id="leaderBoardScrollPane" layoutX="13.0" layoutY="13.0" prefHeight="262.0" prefWidth="252.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="13.0">
                                        <content>
-                                          <VBox fx:id="leaderBoardVbox" prefHeight="268.0" prefWidth="275.0">
-                                             <children>
-                                                <AnchorPane fx:id="leaderBoardPane" prefHeight="71.0" prefWidth="278.0" style="-fx-background-color: pink; -fx-background-radius: 10px;">
-                                                   <children>
-                                                      <Label fx:id="nameLabel" layoutX="14.0" layoutY="7.0" prefHeight="35.0" prefWidth="199.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="#1 tramduong123">
-                                                         <font>
-                                                            <Font size="20.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <ImageView fitHeight="41.0" fitWidth="44.0" layoutX="216.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../../png/hotdog.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                      <Label fx:id="nameLabel1" layoutX="50.0" layoutY="35.0" prefHeight="35.0" prefWidth="159.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Score: 1900">
-                                                         <font>
-                                                            <Font size="18.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                   <VBox.margin>
-                                                      <Insets bottom="5.0" />
-                                                   </VBox.margin>
-                                                </AnchorPane>
-                                             </children>
-                                          </VBox>
+                                          <VBox fx:id="leaderBoardVbox" prefHeight="268.0" prefWidth="275.0" />
                                        </content>
                                     </ScrollPane>
                                  </children></AnchorPane>
