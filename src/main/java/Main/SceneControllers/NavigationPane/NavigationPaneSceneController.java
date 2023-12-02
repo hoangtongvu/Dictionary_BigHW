@@ -173,6 +173,11 @@ public class NavigationPaneSceneController extends BaseSceneController implement
 
     }
 
+    @Override
+    public void update() {
+
+    }
+
     public static void AddNavPaneComponentsToRoot(Parent root)
     {
         ((Pane) root).getChildren().addAll(nodes);

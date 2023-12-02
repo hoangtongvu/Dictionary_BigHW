@@ -147,6 +147,11 @@ public class GameSceneController extends BaseSceneController implements Initiali
         //do some clean up things.
     }
 
+    @Override
+    public void update() {
+
+    }
+
     public void StartGame(int blockCount, int timeLimitSecond)
     {
         this.gameCtrl.getGameManager().Start(blockCount, timeLimitSecond);

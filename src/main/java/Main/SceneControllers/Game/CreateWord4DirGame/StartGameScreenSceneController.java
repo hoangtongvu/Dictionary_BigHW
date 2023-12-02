@@ -32,6 +32,11 @@ public class StartGameScreenSceneController extends BaseSceneController
 
     }
 
+    @Override
+    public void update() {
+
+    }
+
     @FXML
     private void MoveToGameScene()
     {

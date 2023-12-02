@@ -92,6 +92,11 @@ public class LoginSceneController extends BaseSceneController {
 
     }
 
+    @Override
+    public void update() {
+
+    }
+
     public void setOffLineState() {
         retryButton.setVisible(true);
         message.setTextFill(Color.RED);

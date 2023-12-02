@@ -52,6 +52,11 @@ public class UserProfileSceneController extends BaseSceneController implements I
     }
 
     @Override
+    public void update() {
+
+    }
+
+    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }

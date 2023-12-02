@@ -135,6 +135,11 @@ public class DictionarySceneController extends BaseSceneController implements In
 
     }
 
+    @Override
+    public void update() {
+
+    }
+
     @FXML
     public void LookupWord() throws SQLException {
         //System.out.println("null");

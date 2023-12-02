@@ -181,4 +181,9 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
     public void EndShow() {
 
     }
+
+    @Override
+    public void update() {
+
+    }
 }

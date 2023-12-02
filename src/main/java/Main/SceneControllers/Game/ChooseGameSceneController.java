@@ -40,6 +40,11 @@ public class ChooseGameSceneController extends BaseSceneController implements In
 
     }
 
+    @Override
+    public void update() {
+
+    }
+
     private void CreateAllButtons()
     {
         GamesCtrl gamesCtrl = GamesCtrl.getInstance();

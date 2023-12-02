@@ -83,6 +83,11 @@ public class AIConversationSceneController extends BaseSceneController implement
 
     }
 
+    @Override
+    public void update() {
+
+    }
+
     private void AddTextAreaKeyCombination()
     {
         this.userTextArea.addEventFilter(KeyEvent.KEY_PRESSED, keyEvent ->
