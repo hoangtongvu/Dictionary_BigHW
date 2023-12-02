@@ -23,4 +23,10 @@ public class CreateWord4DirGameCtrl extends GameCtrl
         this.gameManager = new CreateWord4DirGameManager(this);
         this.gameAutoCompletion = new GameAutoCompletion(this);
     }
+
+    @Override
+    public String getTrailerImagePath()
+    {
+        return "/gif/GameTrailers/4Directions.gif";
+    }
 }
