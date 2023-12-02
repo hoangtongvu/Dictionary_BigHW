@@ -61,9 +61,7 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
 
     public void updateChart() {
         if (User.getCurrentUser().isOnline()) {
-            dailyChart.getData().clear();
             setUpLineChart();
-            dailyGoalChart.getData().clear();
             setUpPieChart();
         } else {
             PieChart.Data incomplete = new PieChart.Data("Incomplete", 100);
@@ -74,12 +72,14 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
     }
 
     public void setUpPieChart() {
+        dailyGoalChart.getData().clear();
         AccountManager.getInstance().getPieChart(dailyGoalChart);
         AccountManager.getInstance().getLabel(ratioLabel, AccountManager.DataCategory.COMPLETION_RATIO);
     }
 
     public void setUpLineChart() {
         try {
+            dailyChart.getData().clear();
             AccountManager.getInstance().getLineChart(dailyChart, AccountManager.DataCategory.STUDY_TIME, "Study time");
             AccountManager.getInstance().getLineChart(dailyChart, AccountManager.DataCategory.SESSION_TIME, "Access time");
         } catch (Exception e) {

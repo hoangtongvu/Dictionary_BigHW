@@ -35,8 +35,11 @@ public class UserProfileSceneController extends BaseSceneController implements I
     Label totalStudyTimeLabel;
     @FXML
     Label ratioLabel1;
+
     @Override
     public void StartShow() {
+        dailyGoalChart.getData().clear();
+        dailyChart.getData().clear();
         AccountManager.getInstance().getLabel(dailyGoalLabel, AccountManager.DataCategory.DAILY_GOAL);
         AccountManager.getInstance().getLabel(ratioLabel1, AccountManager.DataCategory.COMPLETION_RATIO);
         AccountManager.getInstance().getLabel(ratioLabel, AccountManager.DataCategory.COMPLETION_RATIO);
