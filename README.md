@@ -9,3 +9,5 @@ vm configuration: --add-exports javafx.base/com.sun.javafx.event=org.controlsfx.
   + Pool Object.
   + Fly weight.
   + State pattern.
+  + Mediator
+    
