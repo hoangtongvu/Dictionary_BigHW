@@ -133,6 +133,11 @@ public class WordleController extends BaseSceneController implements Initializab
 
     }
 
+    @Override
+    public void update() {
+
+    }
+
     public void generateWord() throws FileNotFoundException {
         Random random = new Random();
         int n = random.nextInt(3103) + 1;

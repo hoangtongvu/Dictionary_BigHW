@@ -102,6 +102,11 @@ public class EditWordSceneController extends BaseSceneController implements IHas
         }
     }
 
+    @Override
+    public void update() {
+
+    }
+
     @FXML
     public void saveWord() throws SQLException {
         DicNode.getCurrentlyEditedWord().saveToJSON();

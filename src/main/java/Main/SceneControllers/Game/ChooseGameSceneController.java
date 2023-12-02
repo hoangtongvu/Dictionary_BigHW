@@ -47,7 +47,13 @@ public class ChooseGameSceneController extends BaseSceneController implements In
     @Override
     public void EndShow() { }
 
+    @Override
+    public void update() {
+
+    }
+
     private void CreateAllCards()
+
     {
         GamesCtrl gamesCtrl = GamesCtrl.getInstance();
         for (GameCtrl gameCtrl : gamesCtrl.getGameCtrls())

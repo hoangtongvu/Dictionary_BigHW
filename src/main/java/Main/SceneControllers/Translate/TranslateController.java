@@ -27,6 +27,11 @@ public class TranslateController extends BaseSceneController implements IHasNavP
 
     }
 
+    @Override
+    public void update() {
+
+    }
+
     @FXML
     public void onViToEnButton(ActionEvent event) {
         String text = VietArea.getText();

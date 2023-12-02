@@ -32,5 +32,10 @@ public class SettingSceneController extends BaseSceneController implements Initi
 
     }
 
+    @Override
+    public void update() {
+
+    }
+
 
 }

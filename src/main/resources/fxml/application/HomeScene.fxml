@@ -184,8 +184,11 @@
                                           <StackPane layoutY="22.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="22.0">
                                              <children>
                                                 <PieChart fx:id="dailyGoalChart" clockwise="false" minWidth="200.0" prefHeight="165.0" prefWidth="200.0" startAngle="90.0" />
-                                                <Circle fill="DODGERBLUE" radius="34.0" stroke="BLACK" strokeType="INSIDE" styleClass="pie-chart-cover" />
-                                                <Label text="Percentage" />
+                                                <Circle fill="DODGERBLUE" radius="34.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: pink;" styleClass="pie-chart-cover" />
+                                                <Label fx:id="ratioLabel" style="-fx-font-weight: bold;" styleClass="normal-label" text="0%">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font></Label>
                                              </children>
                                           </StackPane>
                                        </children>

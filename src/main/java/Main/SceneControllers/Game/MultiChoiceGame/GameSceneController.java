@@ -79,6 +79,11 @@ public class GameSceneController extends BaseSceneController implements Initiali
 
     }
 
+    @Override
+    public void update() {
+
+    }
+
     public void StartGame(int maxQues, int maxTimeSecond)
     {
         ChoiceGameManager choiceGameManager = this.choiceGameCtrl.getChoiceGameManager();

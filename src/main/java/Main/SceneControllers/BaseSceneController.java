@@ -18,4 +18,6 @@ public abstract class BaseSceneController
     public abstract void StartShow();
     public abstract void EndShow();
 
+    public abstract void update();
+
 }
