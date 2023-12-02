@@ -36,4 +36,8 @@ public class ChoiceGameCtrl extends GameCtrl
     }
 
 
+    @Override
+    public String getTrailerImagePath() {
+        return "";
+    }
 }

@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
@@ -22,10 +24,12 @@ public class GameChoosingCard implements Initializable
 {
 
     @FXML private Button rootButton;
+    @FXML private ImageView trailerImageView;
 
     private boolean isDisabled = false;
     private CardSide cardSide;
     private Duration animationDuration;
+    private Image defaultTrailerGif;
 
 
     public CardSide getCardSide() {
@@ -33,11 +37,13 @@ public class GameChoosingCard implements Initializable
     }
 
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
         this.cardSide = CardSide.Right;
         this.animationDuration = Duration.seconds(0.4);
+        this.defaultTrailerGif = new Image(getClass().getResource("/gif/GameTrailers/DLAN.gif").toExternalForm());
     }
 
     public static GameChoosingCard CreateInstance()
@@ -137,14 +143,14 @@ public class GameChoosingCard implements Initializable
 //endregion
 
 
-    public void SetDisable(boolean isDisable)
-    {
-        this.isDisabled = isDisable;
-    }
+    public void SetDisable(boolean isDisable) { this.isDisabled = isDisable; }
 
-    public boolean IsDisable()
+    public boolean IsDisable() { return this.isDisabled; }
+
+    public void SetTrailerGif(Image image)
     {
-        return this.isDisabled;
+        if (image == null) image = this.defaultTrailerGif;
+        this.trailerImageView.setImage(image);
     }
 
 }

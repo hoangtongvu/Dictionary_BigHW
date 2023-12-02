@@ -7,8 +7,6 @@ import Main.SceneControllers.IHasNavPane;
 import animatefx.animation.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
@@ -51,15 +49,17 @@ public class ChooseGameSceneController extends BaseSceneController implements In
         GamesCtrl gamesCtrl = GamesCtrl.getInstance();
         for (GameCtrl gameCtrl : gamesCtrl.getGameCtrls())
         {
-            this.CreateNewCard(gameCtrl.getGameName(), gameCtrl.getOnGameOpenEventHandler());
+            this.CreateNewCard(gameCtrl);
         }
     }
 
-    private void CreateNewCard(String gameName, EventHandler<ActionEvent> eventHandler)
+    private void CreateNewCard(GameCtrl gameCtrl)
     {
         GameChoosingCard newCard = GameChoosingCard.CreateInstance();
-        newCard.SetGameName(gameName);
-        newCard.AddActionEventHandler(eventHandler);
+        newCard.SetGameName(gameCtrl.getGameName());
+        newCard.AddActionEventHandler(gameCtrl.getOnGameOpenEventHandler());
+        newCard.SetTrailerGif(gameCtrl.getTrailerImage());
+        System.out.println(gameCtrl.getTrailerImage());
 
         this.AddCard(newCard);
         this.AddHoverListener(newCard);
