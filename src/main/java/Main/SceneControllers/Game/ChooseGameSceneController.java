@@ -4,6 +4,9 @@ import Game.GameCtrl;
 import Game.GamesCtrl;
 import Main.SceneControllers.BaseSceneController;
 import Main.SceneControllers.IHasNavPane;
+import animatefx.animation.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,59 +16,122 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
 
 public class ChooseGameSceneController extends BaseSceneController implements Initializable, IHasNavPane
 {
 
-    @FXML private HBox chooseGameButtonsHbox;
+    @FXML private HBox leftCardHbox;
+    @FXML private HBox rightCardHbox;
+    @FXML private StackPane orderStackPane;
 
-    private List<Button> chooseGameButtons;
+    private final List<GameChoosingCard> cards;
+    private GameChoosingCard currentHoveringCard;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.chooseGameButtons = new ArrayList<>();
-        this.CreateAllButtons();
-    }
 
-    @Override
-    public void StartShow()
+    public ChooseGameSceneController()
     {
-
+        this.cards = new ArrayList<>();
     }
 
     @Override
-    public void EndShow()
+    public void initialize(URL url, ResourceBundle resourceBundle)
     {
-
+        this.CreateAllCards();
     }
 
-    private void CreateAllButtons()
+    @Override
+    public void StartShow() { }
+
+    @Override
+    public void EndShow() { }
+
+    private void CreateAllCards()
     {
         GamesCtrl gamesCtrl = GamesCtrl.getInstance();
         for (GameCtrl gameCtrl : gamesCtrl.getGameCtrls())
         {
-            this.CreateNewButton(gameCtrl.getGameName(), gameCtrl.getOnGameOpenEventHandler());
+            this.CreateNewCard(gameCtrl.getGameName(), gameCtrl.getOnGameOpenEventHandler());
         }
     }
 
-    private void CreateNewButton(String gameName, EventHandler<ActionEvent> eventHandler)
+    private void CreateNewCard(String gameName, EventHandler<ActionEvent> eventHandler)
     {
-        Button newBut = new Button(gameName);
-        newBut.addEventHandler(ActionEvent.ACTION, eventHandler);
-        this.FillHeightButton(newBut);
-        this.AddChooseGameButton(newBut);
+        GameChoosingCard newCard = GameChoosingCard.CreateInstance();
+        newCard.SetGameName(gameName);
+        newCard.AddActionEventHandler(eventHandler);
+
+        this.AddCard(newCard);
+        this.AddHoverListener(newCard);
     }
 
-    private void AddChooseGameButton(Button button)
+    private void AddCard(GameChoosingCard card)
     {
-        this.chooseGameButtons.add(button);
-        this.chooseGameButtonsHbox.getChildren().add(button);
+        this.cards.add(card);
+        card.MoveParent(this.rightCardHbox);
     }
 
-    private void FillHeightButton(Button button)
+    private void AddHoverListener(GameChoosingCard card)
     {
-        button.setPrefHeight(Integer.MAX_VALUE);
+        card.AddHoverListener(new ChangeListener<>()
+        {
+
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean prev, Boolean isHover)
+            {
+                if (!isHover) return;
+                if (card.IsDisable()) return;
+                if (currentHoveringCard == card) return;
+
+                DisableAllCards();
+
+                //after this, currentHoveringCard is null.
+                if (currentHoveringCard != null) this.HandleOldCard();
+
+                PlayAllCardsTranslateAnimation();
+
+                this.HandleNewCard();
+
+            }
+
+            private void HandleOldCard()
+            {
+                CardSide cardSide = card.getCardSide();
+                switch (cardSide)
+                {
+                    case Left -> currentHoveringCard.MoveToRightCardHBox(rightCardHbox);
+                    case Right -> currentHoveringCard.MoveToLeftCardHBox(leftCardHbox);
+                }
+                currentHoveringCard.PlayNotHoveringAnimation();
+
+            }
+
+            private void HandleNewCard()
+            {
+                currentHoveringCard = card;
+                currentHoveringCard.MoveParent(orderStackPane);
+                card.PlayHoveringAnimation(e -> EnableAllCards());
+            }
+
+
+        });
+    }
+
+    private void DisableAllCards()
+    {
+        cards.forEach(c -> c.SetDisable(true));
+    }
+
+    private void EnableAllCards()
+    {
+        cards.forEach(c -> c.SetDisable(false));
+    }
+
+    private void PlayAllCardsTranslateAnimation()
+    {
+        this.rightCardHbox.getChildren().forEach(card -> new SlideInRight(card).play());
+        this.leftCardHbox.getChildren().forEach(card -> new SlideInLeft(card).play());
+
     }
 
 
