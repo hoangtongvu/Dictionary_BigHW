@@ -68,6 +68,7 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
             dailyGoalChart.getData().add(incomplete);
             dailyGoalChart.setLabelsVisible(false);
             incomplete.getNode().setStyle("-fx-background-color: grey");
+            dailyChart.getData().clear();
         }
     }
 
@@ -112,7 +113,7 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
 
     @Override
     public void StartShow() {
-        updateChart();
+        update();
     }
 
     @Override
@@ -122,6 +123,10 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
 
     @Override
     public void update() {
-
+        if (User.getCurrentUser().isOnline()) {
+            updateChart();
+        } else {
+            updateChart();
+        }
     }
 }

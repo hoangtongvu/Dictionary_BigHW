@@ -142,16 +142,6 @@ public class NavigationPaneSceneController extends BaseSceneController implement
     @FXML
     protected Circle profilePicBackground;
 
-    public void setupProfileDisplay() {
-        if (User.getCurrentUser().isOnline()) {
-            accountButton.setText(User.getCurrentUser().getUserName());
-            AccountManager.getInstance().loadProfilePic(profilePic);
-            //Set event handler -> view profile
-        } else {
-            addProfilePic("/png/profilePictures/default.png");
-        }
-    }
-
     public void addProfilePic(String path) {
         Image image = new Image(String.valueOf(getClass().getResource(path)));
         profilePic.setStrokeWidth(0);
@@ -171,7 +161,13 @@ public class NavigationPaneSceneController extends BaseSceneController implement
 
     @Override
     public void update() {
-
+        if (User.getCurrentUser().isOnline()) {
+            accountButton.setText(User.getCurrentUser().getUserName());
+            AccountManager.getInstance().loadProfilePic(profilePic);
+        } else {
+            accountButton.setText("Login/Register");
+            addProfilePic("/png/profilePictures/default.png");
+        }
     }
 
     public static void AddNavPaneComponentsToRoot(Parent root)

@@ -96,7 +96,7 @@ public class User {
             totalStudyTime += record.getStudy_time();
         }
 
-        FxmlFileManager.getInstance().navigationPaneSC.setupProfileDisplay();
+        FxmlFileManager.getInstance().navigationPaneSC.update();
 
     }
 
@@ -119,7 +119,9 @@ public class User {
     public void logoutHandler() {
         setOnline(false);
         SessionTime.getInstance().stopCounter();
+        updateAll();
         saveSessionData();
+        updateAllGUI();
         currentUser = null;
     }
 
@@ -157,7 +159,11 @@ public class User {
         }
     }
 
-
+    public void updateAllGUI() {
+        FxmlFileManager.getInstance().profileSC.update();
+        FxmlFileManager.getInstance().homeSC.update();
+        FxmlFileManager.getInstance().navigationPaneSC.update();
+    }
 
     public static User getCurrentUser() {
         if (currentUser == null) {

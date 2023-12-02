@@ -46,7 +46,7 @@ public class EditProfilePic extends BaseSceneController implements Initializable
                 if (event.getClickCount() > 1) {
                     User.getCurrentUser().setImagePath(path);
                     User.getCurrentUser().updateImagePath();
-
+                    User.getCurrentUser().updateAllGUI();
                     exitEditPic();
                 }
             });

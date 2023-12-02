@@ -188,6 +188,7 @@ public class AccountManager {
                 User.getCurrentUser().reset();
                 passWord = hashPassword(passWord);
                 User.getCurrentUser().newAccount(userName, passWord);
+                User.getCurrentUser().setImagePath("/png/profilePictures/default.png");
                 User.getCurrentUser().getUserDao().save(User.getCurrentUser());
                 return Status.REGISTERED;
             } else {
