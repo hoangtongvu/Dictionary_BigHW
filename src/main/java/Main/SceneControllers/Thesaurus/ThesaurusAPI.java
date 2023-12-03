@@ -10,11 +10,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ThesaurusAPI {
-    public static void thesaurus(String word) {
+    public static JSONObject thesaurus(String word) {
         //String word = "";
         String apiURL = "https://api.api-ninjas.com/v1/thesaurus?word=" + word;
         String apiKey = "jWtGX6M7EGJA5Ye2ZmZ1fw==GRKT4LDQIQniLvzC";
-
+        JSONObject res = new JSONObject("{\"hypernyms\":[],\"synonyms\":[],\"antonyms\":[],\"hyponyms\":[]}");
         try {
             URL url = new URL(apiURL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -30,33 +30,14 @@ public class ThesaurusAPI {
                     response.append(inputLine);
                 }
                 reader.close();
-                JSONObject jo = new JSONObject(response.toString());
-
-                System.out.println("Synonyms:");
-                fetchData(jo, "synonyms");
-
-                System.out.println("Antonyms");
-                fetchData(jo, "antonyms");
-
+                res = new JSONObject(response.toString());
             } else {
                 System.out.println("Error: " + responseCode + " " + connection.getResponseMessage());
             }
             connection.disconnect();
-
-
         } catch (IOException e) {
             System.out.println("No internet connection!");
         }
-    }
-
-    public static void fetchData(JSONObject list, String type) {
-        JSONArray wordlist = list.getJSONArray(type);
-        if (wordlist.isEmpty()) {
-            System.out.println("Can't find anything");
-        }
-
-        for (Object v : wordlist) {
-            System.out.println((String) v);
-        }
+        return res;
     }
 }
