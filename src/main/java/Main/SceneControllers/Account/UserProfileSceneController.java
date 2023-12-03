@@ -56,6 +56,8 @@ public class UserProfileSceneController extends BaseSceneController implements I
     protected StackPane editPicPane;
     @FXML
     AnchorPane root;
+    @FXML
+    protected StackPane timePickerPane;
 
     @Override
     public void StartShow() {
@@ -66,6 +68,20 @@ public class UserProfileSceneController extends BaseSceneController implements I
         User.getCurrentUser().logoutHandler();
         FxmlFileManager.getInstance().homeSC.update();
         FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().homeSC);
+    }
+
+    @FXML
+    public void editStudyGoal() {
+        int second = User.getCurrentUser().getStudyGoal();
+        int hour = second/3600;
+        int minute = second%3600/60;
+        second = second%3600%60;
+
+        FxmlFileManager.getInstance().timePickerSC.hourField.getValueFactory().setValue(10);
+        FxmlFileManager.getInstance().timePickerSC.minuteField.getValueFactory().setValue(12);
+        FxmlFileManager.getInstance().timePickerSC.secondField.getValueFactory().setValue(3);
+
+        timePickerPane.setVisible(true);
     }
 
     @FXML
@@ -97,14 +113,20 @@ public class UserProfileSceneController extends BaseSceneController implements I
         } else {
 
         }
-
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         editPicPane.setVisible(false);
+        timePickerPane.setVisible(false);
         try {
             EditProfilePic.loadInstance().addToParent(editPicPane);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            TimePickerController.loadInstance().addToParent(timePickerPane);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

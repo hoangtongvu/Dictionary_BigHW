@@ -4,6 +4,7 @@ import Logger.LoggersCtrl;
 import Main.SceneControllers.AIChatBot.AIConversationSceneController;
 import Main.SceneControllers.Account.EditProfilePic;
 import Main.SceneControllers.Account.LoginSceneController;
+import Main.SceneControllers.Account.TimePickerController;
 import Main.SceneControllers.Account.UserProfileSceneController;
 import Main.SceneControllers.BaseSceneController;
 import Main.SceneControllers.Dictionary.DictionarySceneController;
@@ -61,6 +62,7 @@ public class FxmlFileManager
     public final NavigationPaneSceneController navigationPaneSC;
     public final UserProfileSceneController profileSC;
     public final EditProfilePic editProfilePicSC;
+    public final TimePickerController timePickerSC;
 
 //endregion
 
@@ -123,6 +125,7 @@ public class FxmlFileManager
         this.editProfilePicSC = this.LoadSC("/application/ProfilePicScene.fxml");
 
         this.navigationPaneSC = this.LoadSC("/application/NavigationPaneScene.fxml");
+        this.timePickerSC = this.LoadSC("/application/TimePicker.fxml");
 
     }
 

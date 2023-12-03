@@ -87,6 +87,8 @@ public class EditProfilePic extends BaseSceneController implements Initializable
 
     }
 
+
+
     public void addChoice(String path) {
         Circle circle = new Circle();
         circle.setRadius(45);
