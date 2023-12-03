@@ -7,6 +7,8 @@
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -18,6 +20,9 @@
 
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="anchorPane" stylesheets="@../../css/ApplicationStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Account.UserProfileSceneController">
    <children>
+      <StackPane fx:id="timePickerPane" prefHeight="150.0" prefWidth="200.0" styleClass="blur" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <StackPane fx:id="editPicPane" prefHeight="150.0" prefWidth="200.0" styleClass="blur" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <StackPane fx:id="passwordPane" prefHeight="150.0" prefWidth="200.0" styleClass="blur" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <BorderPane layoutY="41.0" prefHeight="559.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="41.0">
          <left>
             <AnchorPane prefHeight="559.0" prefWidth="250.0" BorderPane.alignment="CENTER">
@@ -31,6 +36,18 @@
                      </font>
                   </Label>
                   <Button fx:id="logOutButton" layoutX="99.0" layoutY="520.0" mnemonicParsing="false" onAction="#logOut" text="Logout" AnchorPane.bottomAnchor="14.285714285714302" />
+                  <MenuButton layoutX="116.0" layoutY="339.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="MenuButton">
+                     <items>
+                        <RadioMenuItem mnemonicParsing="false" text="Neon" />
+                        <RadioMenuItem mnemonicParsing="false" text="Bone white" />
+                        <RadioMenuItem mnemonicParsing="false" text="Noir en Blanc" />
+                     </items>
+                  </MenuButton>
+                  <Label layoutX="27.0" layoutY="337.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Theme">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </left>
@@ -226,9 +243,6 @@
             </VBox>
          </center>
       </BorderPane>
-      <StackPane fx:id="timePickerPane" prefHeight="150.0" prefWidth="200.0" styleClass="blur" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <StackPane fx:id="editPicPane" prefHeight="150.0" prefWidth="200.0" styleClass="blur" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <StackPane fx:id="passwordPane" prefHeight="150.0" prefWidth="200.0" styleClass="blur" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Pane prefHeight="41.0" prefWidth="854.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>

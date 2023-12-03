@@ -3,6 +3,7 @@ package User;
 import Main.Database;
 import Main.FxmlFileManager;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
+import Ranking.LeaderBoard;
 import Timer.SessionTime;
 import Timer.StudyTimer;
 import javafx.fxml.FXML;
@@ -37,7 +38,7 @@ public class User {
     }
 
     public int getRank() {
-        return rank;
+        return LeaderBoard.getInstance().getUserRank(currentUser);
     }
 
     private boolean isOnline = false;
