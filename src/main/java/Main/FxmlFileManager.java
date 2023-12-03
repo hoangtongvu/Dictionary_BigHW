@@ -4,6 +4,7 @@ import Logger.LoggersCtrl;
 import Main.SceneControllers.AIChatBot.AIConversationSceneController;
 import Main.SceneControllers.Account.EditProfilePic;
 import Main.SceneControllers.Account.LoginSceneController;
+import Main.SceneControllers.Account.TimePickerController;
 import Main.SceneControllers.Account.UserProfileSceneController;
 import Main.SceneControllers.BaseSceneController;
 import Main.SceneControllers.Dictionary.DictionarySceneController;
@@ -61,6 +62,7 @@ public class FxmlFileManager
     public final NavigationPaneSceneController navigationPaneSC;
     public final UserProfileSceneController profileSC;
     public final EditProfilePic editProfilePicSC;
+    public final TimePickerController timePickerSC;
 
 //endregion
 
@@ -117,6 +119,7 @@ public class FxmlFileManager
         this.editWordSceneController = this.LoadSC("/application/EditWord.fxml");
         this.aiSC = this.LoadSC("/AIChatBot/AIConversationScene.fxml");
         this.wordleSC = this.LoadSC("/Game/Wordle/WordleScene.fxml");
+        this.timePickerSC = this.LoadSC("/application/TimePicker.fxml");
         this.loginSC = this.LoadSC("/application/LoginScreen.fxml");
         this.settingSC = this.LoadSC("/application/SettingScene.fxml");
         this.profileSC = this.LoadSC("/application/UserProfileScene.fxml");

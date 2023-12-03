@@ -5,6 +5,7 @@ import Main.FxmlFileManager;
 import Main.ProjectDirectory;
 import Main.SceneControllers.BaseSceneController;
 import Main.SceneControllers.Dictionary.HomeSceneController;
+import Main.SceneControllers.Widget.StudyTimerController;
 import User.DailyRecord;
 import User.User;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import User.AccountManager;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -56,6 +58,8 @@ public class UserProfileSceneController extends BaseSceneController implements I
     protected StackPane editPicPane;
     @FXML
     AnchorPane root;
+    @FXML
+    protected StackPane timePickerPane;
 
     @Override
     public void StartShow() {
@@ -65,7 +69,34 @@ public class UserProfileSceneController extends BaseSceneController implements I
     public void logOut() {
         User.getCurrentUser().logoutHandler();
         FxmlFileManager.getInstance().homeSC.update();
+        try {
+            StudyTimerController.loadInstance().resetTimer();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().homeSC);
+    }
+
+    @FXML
+    public void editStudyGoal() {
+        int second = User.getCurrentUser().getStudyGoal();
+        int hour = second/3600;
+        int minute = second%3600/60;
+        second = second%3600%60;
+
+        try {
+            TimePickerController.loadInstance().hourField.getValueFactory().setValue(hour);
+            TimePickerController.loadInstance().minuteField.getValueFactory().setValue(minute);
+            TimePickerController.loadInstance().secondField.getValueFactory().setValue(second);
+
+            TimePickerController.loadInstance().notification.setText("Your current goal is set to "
+                    + String.format("%dh%dm%ds", hour, minute, second));
+
+            System.out.println("all set");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        timePickerPane.setVisible(true);
     }
 
     @FXML
@@ -97,14 +128,20 @@ public class UserProfileSceneController extends BaseSceneController implements I
         } else {
 
         }
-
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         editPicPane.setVisible(false);
+        timePickerPane.setVisible(false);
         try {
             EditProfilePic.loadInstance().addToParent(editPicPane);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            TimePickerController.loadInstance().addToParent(timePickerPane);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
