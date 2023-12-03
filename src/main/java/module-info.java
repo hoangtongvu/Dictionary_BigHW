@@ -69,5 +69,6 @@ module MainGroup.application {
     opens Main.SceneControllers.Settings to javafx.fxml;
     exports AIChatBot.Voice;
 
-
+    exports Main.SceneControllers.Thesaurus;
+    opens Main.SceneControllers.Thesaurus to javafx.fxml;
 }

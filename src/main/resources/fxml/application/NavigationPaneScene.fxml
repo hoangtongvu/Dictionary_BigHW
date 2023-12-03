@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane fx:id="navPaneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="899.0" styleClass="anchorPane" stylesheets="@../../css/ApplicationStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.NavigationPane.NavigationPaneSceneController">
+<AnchorPane fx:id="navPaneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="899.0" styleClass="anchorPane" stylesheets="@../../css/ApplicationStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.NavigationPane.NavigationPaneSceneController">
    <children>
       <ImageView fx:id="menuButton" fitHeight="30.0" fitWidth="427.0" layoutX="14.0" layoutY="7.0" onMouseClicked="#onMenuButton" pickOnBounds="true" preserveRatio="true" styleClass="menuButton">
          <image>
@@ -91,6 +91,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <Button fx:id="thesaurusButton" mnemonicParsing="false" onAction="#MoveToThesaurusScene" prefHeight="46.0" prefWidth="248.0" text="Thesaurus" />
                      </children>
                   </VBox>
                </children>
