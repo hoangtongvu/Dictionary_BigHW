@@ -119,13 +119,13 @@ public class FxmlFileManager
         this.editWordSceneController = this.LoadSC("/application/EditWord.fxml");
         this.aiSC = this.LoadSC("/AIChatBot/AIConversationScene.fxml");
         this.wordleSC = this.LoadSC("/Game/Wordle/WordleScene.fxml");
+        this.timePickerSC = this.LoadSC("/application/TimePicker.fxml");
         this.loginSC = this.LoadSC("/application/LoginScreen.fxml");
         this.settingSC = this.LoadSC("/application/SettingScene.fxml");
         this.profileSC = this.LoadSC("/application/UserProfileScene.fxml");
         this.editProfilePicSC = this.LoadSC("/application/ProfilePicScene.fxml");
 
         this.navigationPaneSC = this.LoadSC("/application/NavigationPaneScene.fxml");
-        this.timePickerSC = this.LoadSC("/application/TimePicker.fxml");
 
     }
 

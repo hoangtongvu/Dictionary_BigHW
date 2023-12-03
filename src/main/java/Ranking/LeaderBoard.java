@@ -67,7 +67,7 @@ public class LeaderBoard {
         updateLeaderBoard();
 
         for (UserCard userCard : leaderBoardList) {
-            System.out.println(userCard.getUserName());
+//            System.out.println(userCard.getUserName());
             vBox.getChildren().addAll(userCard.getUserCardShape().getCard());
         }
     }

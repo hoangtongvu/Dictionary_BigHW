@@ -3,6 +3,7 @@ package Main.SceneControllers.Account;
 import Main.FxmlFileManager;
 import Main.ProjectDirectory;
 import Main.SceneControllers.BaseSceneController;
+import User.User;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -67,13 +68,14 @@ public class TimePickerController extends BaseSceneController {
         parent.getChildren().addAll(root);
     }
 
+    private static FXMLLoader loader = null;
     public static TimePickerController loadInstance() throws IOException {
-        FXMLLoader loader;
-        String absolutePath = ProjectDirectory.resourcesPath + "\\fxml\\application\\TimePicker.fxml";
-        URL fxmlURL = Paths.get(absolutePath).toUri().toURL();
-        loader = new FXMLLoader(fxmlURL);
-        loader.load();
-
+        if (loader == null) {
+            String absolutePath = ProjectDirectory.resourcesPath + "\\fxml\\application\\TimePicker.fxml";
+            URL fxmlURL = Paths.get(absolutePath).toUri().toURL();
+            loader = new FXMLLoader(fxmlURL);
+            loader.load();
+        }
         return loader.getController();
     }
 
@@ -84,7 +86,11 @@ public class TimePickerController extends BaseSceneController {
 
     @FXML
     public void saveGoal() {
-
+        int second = hourField.getValue() * 3600 + minuteField.getValue() * 60 + secondField.getValue();
+        User.getCurrentUser().setStudyGoal(second);
+        User.getCurrentUser().updateStudyGoal();
+        notification.setText("Your current goal is set to "
+                + String.format("%dh%dm%ds", hourField.getValue(), minuteField.getValue(), secondField.getValue()));
     }
 
 }

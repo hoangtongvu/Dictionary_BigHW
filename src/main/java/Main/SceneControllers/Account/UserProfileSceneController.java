@@ -5,6 +5,7 @@ import Main.FxmlFileManager;
 import Main.ProjectDirectory;
 import Main.SceneControllers.BaseSceneController;
 import Main.SceneControllers.Dictionary.HomeSceneController;
+import Main.SceneControllers.Widget.StudyTimerController;
 import User.DailyRecord;
 import User.User;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import User.AccountManager;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -67,6 +69,11 @@ public class UserProfileSceneController extends BaseSceneController implements I
     public void logOut() {
         User.getCurrentUser().logoutHandler();
         FxmlFileManager.getInstance().homeSC.update();
+        try {
+            StudyTimerController.loadInstance().resetTimer();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().homeSC);
     }
 
@@ -77,10 +84,18 @@ public class UserProfileSceneController extends BaseSceneController implements I
         int minute = second%3600/60;
         second = second%3600%60;
 
-        FxmlFileManager.getInstance().timePickerSC.hourField.getValueFactory().setValue(10);
-        FxmlFileManager.getInstance().timePickerSC.minuteField.getValueFactory().setValue(12);
-        FxmlFileManager.getInstance().timePickerSC.secondField.getValueFactory().setValue(3);
+        try {
+            TimePickerController.loadInstance().hourField.getValueFactory().setValue(hour);
+            TimePickerController.loadInstance().minuteField.getValueFactory().setValue(minute);
+            TimePickerController.loadInstance().secondField.getValueFactory().setValue(second);
 
+            TimePickerController.loadInstance().notification.setText("Your current goal is set to "
+                    + String.format("%dh%dm%ds", hour, minute, second));
+
+            System.out.println("all set");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         timePickerPane.setVisible(true);
     }
 
