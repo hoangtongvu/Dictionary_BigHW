@@ -56,8 +56,8 @@ public class UserCardShape {
 
         nameLabel.setLayoutX(70.0);
         nameLabel.setLayoutY(7.0);
-        nameLabel.setStyle("-fx-font-weight: bold;");
-        nameLabel.setFont(new Font(22.0));
+//        nameLabel.setStyle("-fx-font-weight: bold;");
+//        nameLabel.setFont(new Font(22.0));
         AnchorPane.setLeftAnchor(nameLabel, 70.0);
         AnchorPane.setTopAnchor(nameLabel, 7.0);
 
@@ -67,8 +67,8 @@ public class UserCardShape {
 
         rankLabel.setLayoutX(244.0);
         rankLabel.setLayoutY(13.0);
-        rankLabel.setStyle("-fx-font-weight: bold;");
-        rankLabel.setFont(new Font(24.0));
+//        rankLabel.setStyle("-fx-font-weight: bold;");
+//        rankLabel.setFont(new Font(24.0));
         AnchorPane.setRightAnchor(rankLabel, 15.0);
         AnchorPane.setTopAnchor(rankLabel, 14.0);
 
@@ -78,8 +78,8 @@ public class UserCardShape {
 
         scoreLabel.setLayoutX(70.0);
         scoreLabel.setLayoutY(30.0);
-        scoreLabel.setStyle("-fx-font-weight: bold;");
-        scoreLabel.setFont(new Font(18.0));
+//        scoreLabel.setStyle("-fx-font-weight: bold;");
+//        scoreLabel.setFont(new Font(18.0));
         AnchorPane.setLeftAnchor(scoreLabel, 70.0);
         AnchorPane.setTopAnchor(scoreLabel, 30.0);
 

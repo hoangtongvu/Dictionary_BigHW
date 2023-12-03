@@ -41,7 +41,7 @@
                      <children>
                         <VBox alignment="CENTER">
                            <children>
-                              <Label alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="Access time" textAlignment="CENTER">
+                              <Label alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="Online time" textAlignment="CENTER">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -110,7 +110,7 @@
                             <NumberAxis side="LEFT" />
                           </yAxis>
                         </LineChart>
-                        <Label alignment="CENTER" layoutY="230.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Daily statistics" textAlignment="CENTER" AnchorPane.bottomAnchor="12.857142857142847" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <Label alignment="CENTER" layoutY="212.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Daily statistics" textAlignment="CENTER" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -183,6 +183,26 @@
                                     </Label>
                                  </children>
                               </HBox>
+                              <HBox prefHeight="37.0" prefWidth="351.0">
+                                 <children>
+                                    <Label alignment="TOP_LEFT" maxWidth="150.0" prefWidth="150.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Online time" textAlignment="CENTER">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="30.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="accessTimeLabel" alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="0h" textAlignment="CENTER">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
                         <AnchorPane prefHeight="200.0" prefWidth="162.0">
@@ -206,9 +226,9 @@
             </VBox>
          </center>
       </BorderPane>
-      <Pane prefHeight="41.0" prefWidth="854.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <StackPane fx:id="timePickerPane" prefHeight="150.0" prefWidth="200.0" styleClass="blur" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <StackPane fx:id="editPicPane" prefHeight="150.0" prefWidth="200.0" styleClass="blur" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <StackPane fx:id="passwordPane" prefHeight="150.0" prefWidth="200.0" styleClass="blur" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Pane prefHeight="41.0" prefWidth="854.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>

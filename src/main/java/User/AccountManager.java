@@ -106,6 +106,9 @@ public class AccountManager {
             case TOTAL_STUDY_TIME:
                 label.setText(formatTime(User.getCurrentUser().getTotalStudyTime()));
                 break;
+            case RANKING:
+                label.setText(String.valueOf(User.getCurrentUser().getRank()));
+                break;
         }
     }
 
