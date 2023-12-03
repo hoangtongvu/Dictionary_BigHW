@@ -168,7 +168,7 @@ public class DictionarySceneController extends BaseSceneController implements In
     }
 
     private void enableTasks() {
-        wordLabel.setMinWidth(currentWordBlock.getWord().length() * 15);
+        wordLabel.setMinWidth(currentWordBlock.getWord().length() * 18);
         soundLabel.setText( "[" + currentWordBlock.getSpelling() + "]");
         wordLabel.setText(currentWordBlock.getWord());
 

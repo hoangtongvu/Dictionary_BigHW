@@ -97,9 +97,9 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="658.0" layoutY="1.0" prefHeight="41.0" prefWidth="292.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="658.0" layoutY="1.0" prefHeight="41.0" prefWidth="227.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="accountButton" alignment="BASELINE_LEFT" minHeight="41.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="293.0" styleClass="horizontalButton" text="Login/Register">
+            <Button fx:id="accountButton" alignment="BASELINE_LEFT" minHeight="41.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="227.0" styleClass="horizontalButton" text="Login/Register">
                <graphic>
                   <StackPane prefHeight="42.0" prefWidth="60.0">
                      <children>
