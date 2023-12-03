@@ -214,9 +214,6 @@ public class AccountManager {
 
             if (!Database.getUserDB().isClosed()) {
                 if (passWord.equals(dbPassword)) {
-
-                    User.getCurrentUser().loginHandler();
-
                     return Status.LOGGED_IN;
                 } else {
                     return Status.INVALID_CREDENTIALS;

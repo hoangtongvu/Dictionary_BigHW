@@ -60,6 +60,8 @@ public class UserProfileSceneController extends BaseSceneController implements I
     AnchorPane root;
     @FXML
     protected StackPane timePickerPane;
+    @FXML
+    protected StackPane passwordPane;
 
     @Override
     public void StartShow() {
@@ -134,6 +136,7 @@ public class UserProfileSceneController extends BaseSceneController implements I
     public void initialize(URL url, ResourceBundle resourceBundle) {
         editPicPane.setVisible(false);
         timePickerPane.setVisible(false);
+        passwordPane.setVisible(false);
         try {
             EditProfilePic.loadInstance().addToParent(editPicPane);
         } catch (IOException e) {
@@ -145,5 +148,16 @@ public class UserProfileSceneController extends BaseSceneController implements I
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        try {
+            ChangePasswordController.loadInstance().addToParent(passwordPane);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    public void editPassword() {
+        passwordPane.setVisible(true);
     }
 }
