@@ -32,14 +32,16 @@ public class LeaderBoard {
     }
 
     public void updateLeaderBoard() {
+        leaderBoardList.clear();
 
-        String query = "SELECT user_name, score, profile_image_path FROM user_credentials ORDER BY score, user_name DESC";
+        String query = "SELECT user_name, score, profile_image_path FROM user_credentials ORDER BY score DESC";
         try {
             PreparedStatement statement = Database.getUserDB().prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             int rank = 1;
+
             while (resultSet.next()) {
-                leaderBoardList.clear();
+//                System.out.println(resultSet.getString("user_name") + " " + resultSet.getInt("score") + " " + resultSet.getString("profile_image_path"));
                 leaderBoardList.add(new UserCard(
                         resultSet.getString("user_name"),
                         resultSet.getInt("score"),
@@ -63,8 +65,9 @@ public class LeaderBoard {
 
     public void updateGUI(VBox vBox) {
         updateLeaderBoard();
-        vBox.getChildren().clear();
+
         for (UserCard userCard : leaderBoardList) {
+            System.out.println(userCard.getUserName());
             vBox.getChildren().addAll(userCard.getUserCardShape().getCard());
         }
     }

@@ -129,6 +129,7 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
         } else {
             updateChart();
         }
+        leaderboardVbox.getChildren().clear();
         LeaderBoard.getInstance().updateGUI(leaderboardVbox);
     }
 }
