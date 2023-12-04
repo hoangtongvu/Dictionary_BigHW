@@ -73,7 +73,7 @@ public class TranslateController extends BaseSceneController implements IHasNavP
             recordingStatus.setText("Listening...");
             Thread voiceRegThread = new Thread(() -> {
                 AudioManager.startRecording();
-                EngArea.setText("Retrieving data...");
+                EngArea.setText("Processing...");
                 String searchRes = SpeechToText.getSpeechToText();
                 Platform.runLater(() -> {
                     EngArea.setText(searchRes);
