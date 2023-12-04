@@ -33,6 +33,8 @@ public class TodoList implements Initializable
     private final List<TodoLabel> todoLabels;
     private final List<Node> nodes;
 
+    public final String labelNormalStyle = getClass().getResource("/css/TodoList/TodoLabelDefaultStyle.css").toExternalForm();
+    public final String labelTickedStyle = getClass().getResource("/css/TodoList/TodoLabelTickedStyle.css").toExternalForm();
 
     public TodoList()
     {
@@ -103,8 +105,8 @@ public class TodoList implements Initializable
 
         switch (tickStatus)
         {
-            case YES -> label.SetUnderLine(true);
-            case NO -> label.SetUnderLine(false);
+            case YES -> label.SetStrikeThrough();
+            case NO -> label.SetNormal();
         }
 
         label.SetNewParentPane(this.todoHolderVbox);

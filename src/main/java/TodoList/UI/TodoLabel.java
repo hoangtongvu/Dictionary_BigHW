@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class TodoLabel implements Initializable
@@ -76,9 +77,24 @@ public class TodoLabel implements Initializable
         pane.getChildren().add(this.rootHbox);
     }
 
-    public void SetUnderLine(boolean value)
+    public void SetNormal()
     {
-        this.label.setUnderline(value);
+        List<String> styles = this.label.getStylesheets();
+        String normStyle = this.todoList.labelNormalStyle;
+        String tickedStyle = this.todoList.labelTickedStyle;
+
+        styles.remove(tickedStyle);
+        if (!styles.contains(normStyle)) styles.add(normStyle);
+    }
+
+    public void SetStrikeThrough()
+    {
+        List<String> styles = this.label.getStylesheets();
+        String normStyle = this.todoList.labelNormalStyle;
+        String tickedStyle = this.todoList.labelTickedStyle;
+
+        styles.remove(normStyle);
+        if (!styles.contains(tickedStyle)) styles.add(tickedStyle);
     }
 
     public void SetContent(String value)
