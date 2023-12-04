@@ -162,6 +162,7 @@ public class LoginSceneController extends BaseSceneController {
                     message.setText("Login successful!");
                     nameField.clear();
                     passwordField.clear();
+                    User.getCurrentUser().loginHandler();
                     FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().homeSC);
                     break;
                 case INVALID_CREDENTIALS:

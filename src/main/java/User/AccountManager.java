@@ -106,6 +106,9 @@ public class AccountManager {
             case TOTAL_STUDY_TIME:
                 label.setText(formatTime(User.getCurrentUser().getTotalStudyTime()));
                 break;
+            case RANKING:
+                label.setText(String.valueOf(User.getCurrentUser().getRank()));
+                break;
         }
     }
 
@@ -214,9 +217,6 @@ public class AccountManager {
 
             if (!Database.getUserDB().isClosed()) {
                 if (passWord.equals(dbPassword)) {
-
-                    User.getCurrentUser().loginHandler();
-
                     return Status.LOGGED_IN;
                 } else {
                     return Status.INVALID_CREDENTIALS;

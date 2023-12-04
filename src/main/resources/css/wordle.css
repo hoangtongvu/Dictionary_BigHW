@@ -22,3 +22,7 @@
 #Pane {
     -fx-background-color: "#404140";
 }
+
+#guess {
+    -fx-border-radius: 10;
+}

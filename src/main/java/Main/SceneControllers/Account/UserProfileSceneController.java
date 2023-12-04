@@ -60,6 +60,12 @@ public class UserProfileSceneController extends BaseSceneController implements I
     AnchorPane root;
     @FXML
     protected StackPane timePickerPane;
+    @FXML
+    protected StackPane passwordPane;
+    @FXML
+    protected Label rankingLabel;
+    @FXML
+    protected Label accessTimeLabel;
 
     @Override
     public void StartShow() {
@@ -114,6 +120,8 @@ public class UserProfileSceneController extends BaseSceneController implements I
         if (User.getCurrentUser().isOnline()) {
             dailyGoalChart.getData().clear();
             dailyChart.getData().clear();
+            AccountManager.getInstance().getLabel(rankingLabel, AccountManager.DataCategory.RANKING);
+            AccountManager.getInstance().getLabel(accessTimeLabel, AccountManager.DataCategory.SESSION_TIME);
             AccountManager.getInstance().getLabel(dailyGoalLabel, AccountManager.DataCategory.DAILY_GOAL);
             AccountManager.getInstance().getLabel(ratioLabel1, AccountManager.DataCategory.COMPLETION_RATIO);
             AccountManager.getInstance().getLabel(ratioLabel, AccountManager.DataCategory.COMPLETION_RATIO);
@@ -134,6 +142,7 @@ public class UserProfileSceneController extends BaseSceneController implements I
     public void initialize(URL url, ResourceBundle resourceBundle) {
         editPicPane.setVisible(false);
         timePickerPane.setVisible(false);
+        passwordPane.setVisible(false);
         try {
             EditProfilePic.loadInstance().addToParent(editPicPane);
         } catch (IOException e) {
@@ -145,5 +154,16 @@ public class UserProfileSceneController extends BaseSceneController implements I
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        try {
+            ChangePasswordController.loadInstance().addToParent(passwordPane);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    public void editPassword() {
+        passwordPane.setVisible(true);
     }
 }

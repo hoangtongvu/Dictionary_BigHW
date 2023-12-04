@@ -92,5 +92,4 @@ public class TimePickerController extends BaseSceneController {
         notification.setText("Your current goal is set to "
                 + String.format("%dh%dm%ds", hourField.getValue(), minuteField.getValue(), secondField.getValue()));
     }
-
 }
