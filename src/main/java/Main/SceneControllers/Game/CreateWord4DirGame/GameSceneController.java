@@ -14,7 +14,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
-import javafx.css.SizeUnits;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -364,7 +363,7 @@ public class GameSceneController extends BaseSceneController implements Initiali
 
     private void MoveBackToStartScreen()
     {
-        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().createWord4DirStartSC);
+        FxmlFileManager.SwitchBack2PrevScene(this.getPrevSC());
     }
 
     private void ToggleTimerText(boolean useTimer)

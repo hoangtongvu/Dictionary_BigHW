@@ -355,7 +355,7 @@ public class GameSceneController extends BaseSceneController implements Initiali
 
     private void SwitchBackToStartScreen()
     {
-        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameStartSC);
+        FxmlFileManager.SwitchBack2PrevScene(this.getPrevSC());
     }
     
 
