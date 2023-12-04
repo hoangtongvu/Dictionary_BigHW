@@ -44,14 +44,14 @@
             <Label layoutY="21.0" prefHeight="47.0" prefWidth="516.0" text="English" />
             <Button layoutX="537.0" layoutY="14.0" mnemonicParsing="false" onAction="#onEnToViButton" prefHeight="27.0" prefWidth="51.0">
                <graphic>
-                  <ImageView fitHeight="19.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="20.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../png/arrow_right.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="538.0" layoutY="45.0" mnemonicParsing="false" onAction="#onViToEnButton" prefHeight="25.0" prefWidth="51.0">
+            <Button layoutX="538.0" layoutY="45.0" mnemonicParsing="false" onAction="#onViToEnButton" prefHeight="27.0" prefWidth="51.0">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -62,5 +62,6 @@
             </Button>
          </children>
       </AnchorPane>
+      <Label fx:id="translatorTitle" layoutY="12.0" prefHeight="76.0" prefWidth="1280.0" text="Translator" />
    </children>
 </AnchorPane>
