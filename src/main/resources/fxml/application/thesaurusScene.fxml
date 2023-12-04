@@ -5,14 +5,25 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Thesaurus.ThesaurusController">
+<AnchorPane fx:id="Pane" prefHeight="768.0" prefWidth="1280.0" stylesheets="@../../css/thesaurus.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Thesaurus.ThesaurusController">
    <children>
-      <TextField fx:id="sourceWord" layoutX="486.0" layoutY="36.0" prefHeight="42.0" prefWidth="307.0" promptText="Enter your word here..." />
-      <Button layoutX="614.0" layoutY="100.0" mnemonicParsing="false" onAction="#onContinueButton" text="Continue" />
-      <TextArea fx:id="synonymArea" editable="false" layoutX="124.0" layoutY="163.0" prefHeight="561.0" prefWidth="301.0" wrapText="true" />
-      <TextArea fx:id="antonymArea" editable="false" layoutX="787.0" layoutY="163.0" prefHeight="561.0" prefWidth="301.0" wrapText="true" />
-      <Label layoutX="124.0" layoutY="117.0" prefHeight="33.0" prefWidth="65.0" text="Synonyms" />
-      <Label layoutX="793.0" layoutY="117.0" prefHeight="33.0" prefWidth="65.0" text="Antonyms" />
+      <TextField fx:id="sourceWord" layoutX="487.0" layoutY="97.0" prefHeight="42.0" prefWidth="307.0" promptText="Enter your word here...">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Button layoutX="608.0" layoutY="155.0" mnemonicParsing="false" onAction="#onContinueButton" text="Continue" />
+      <TextArea fx:id="synonymArea" editable="false" layoutX="189.0" layoutY="227.0" prefHeight="497.0" prefWidth="301.0" wrapText="true">
+         <font>
+            <Font size="24.0" />
+         </font></TextArea>
+      <TextArea fx:id="antonymArea" editable="false" layoutX="793.0" layoutY="227.0" prefHeight="497.0" prefWidth="301.0" wrapText="true">
+         <font>
+            <Font size="24.0" />
+         </font></TextArea>
+      <Label layoutX="189.0" layoutY="180.0" prefHeight="33.0" prefWidth="108.0" text="Synonyms" />
+      <Label layoutX="793.0" layoutY="180.0" prefHeight="33.0" prefWidth="108.0" text="Antonyms" />
+      <Label fx:id="thesaurusTitle" layoutX="1.0" prefHeight="33.0" prefWidth="1280.0" text="Thesaurus" />
    </children>
 </AnchorPane>
