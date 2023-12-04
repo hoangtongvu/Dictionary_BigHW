@@ -42,3 +42,4 @@ src/main/resources/data/anh_viet
 .idea/dataSources.local.xml
 .idea/sqldialects.xml
 src/main/resources/AIBotData/ModelList.txt
+src/main/resources/data/userTodoList.txt
