@@ -30,9 +30,9 @@
                            <children>
                               <AnchorPane fx:id="timerPlaceHolder11" layoutX="24.0" layoutY="32.0" prefHeight="289.0" prefWidth="291.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.bottomAnchor="321.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="32.0">
                                  <children>
-                                    <ScrollPane fx:id="leaderBoardScrollPane" layoutX="13.0" layoutY="13.0" prefHeight="262.0" prefWidth="252.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="13.0">
+                                    <ScrollPane fx:id="leaderBoardScrollPane" fitToWidth="true" layoutX="13.0" layoutY="13.0" prefHeight="262.0" prefWidth="252.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="13.0">
                                        <content>
-                                          <VBox fx:id="leaderBoardVbox" prefHeight="268.0" prefWidth="275.0" />
+                                          <VBox fx:id="leaderboardVbox" prefHeight="237.0" prefWidth="287.0" />
                                        </content>
                                     </ScrollPane>
                                  </children></AnchorPane>
@@ -169,7 +169,7 @@
                                     </Label>
                                     <AnchorPane layoutY="25.0" prefHeight="251.0" prefWidth="362.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <LineChart fx:id="dailyChart" layoutX="-14.0" layoutY="30.0" prefHeight="221.0" prefWidth="362.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                                          <LineChart fx:id="dailyChart" animated="false" layoutX="-14.0" layoutY="30.0" prefHeight="221.0" prefWidth="362.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                                             <xAxis>
                                               <CategoryAxis side="BOTTOM" />
                                             </xAxis>
@@ -179,7 +179,7 @@
                                           </LineChart>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane layoutX="375.0" layoutY="25.0" prefHeight="200.0" prefWidth="132.0" styleClass="pie-chart-anchor" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <AnchorPane layoutX="375.0" layoutY="25.0" prefHeight="249.0" prefWidth="200.0" style="-fx-background-color: pink;" styleClass="pie-chart-anchor" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                           <StackPane layoutY="22.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="22.0">
                                              <children>
@@ -191,6 +191,11 @@
                                                    </font></Label>
                                              </children>
                                           </StackPane>
+                                          <Label alignment="CENTER" layoutX="28.0" layoutY="191.0" prefHeight="35.0" prefWidth="144.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Daily goal">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
                                        </children>
                                     </AnchorPane>
                                  </children></AnchorPane>

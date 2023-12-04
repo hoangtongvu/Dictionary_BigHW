@@ -1,12 +1,13 @@
 package Main.SceneControllers.Game.MultiChoiceGame;
 
+import Interfaces.IHasBackButton;
 import Main.FxmlFileManager;
 import Main.SceneControllers.BaseSceneController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class StartGameScreenSceneController extends BaseSceneController
+public class StartGameScreenSceneController extends BaseSceneController implements IHasBackButton
 {
 
     @FXML

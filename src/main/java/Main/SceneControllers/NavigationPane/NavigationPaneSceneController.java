@@ -1,10 +1,8 @@
 package Main.SceneControllers.NavigationPane;
 
 import Main.FxmlFileManager;
-import Main.ProjectDirectory;
 import Main.SceneControllers.Account.LoginSceneController;
 import Main.SceneControllers.BaseSceneController;
-import UnsortedScript.NodeAligner;
 import User.User;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -23,7 +21,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
@@ -31,6 +28,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import User.AccountManager;
 
 import static Main.FxmlFileManager.SwitchScene;
 
@@ -71,6 +69,8 @@ public class NavigationPaneSceneController extends BaseSceneController implement
     protected StackPane loginPane;
     @FXML
     protected AnchorPane loginPlaceholder;
+    @FXML
+    protected Button thesaurusButton;
 
     private TranslateTransition drawerTranslateTransition;
     private FadeTransition blurPaneFadeTransition;
@@ -89,6 +89,7 @@ public class NavigationPaneSceneController extends BaseSceneController implement
         chatButton.setDisable(status);
         translateButton.setDisable(status);
         settingButton.setDisable(status);
+        thesaurusButton.setDisable(status);
     }
 
     //TODO: set all buttons on nav pane to disable until animation is done
@@ -99,7 +100,7 @@ public class NavigationPaneSceneController extends BaseSceneController implement
         this.blurPaneFadeTransition = new FadeTransition(Duration.seconds(0.5),blurPane);
         nodes.addAll(this.navPaneRoot.getChildren());
         setDisableStatus(true);
-        addProfilePic("/png/profilePic.png");
+        addProfilePic("/png/profilePictures/default.png");
         accountButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -144,18 +145,6 @@ public class NavigationPaneSceneController extends BaseSceneController implement
     @FXML
     protected Circle profilePicBackground;
 
-    public void setupProfileDisplay() {
-        if (User.getCurrentUser().isOnline()) {
-            accountButton.setText(User.getCurrentUser().getUserName());
-            System.out.println("Yes");
-
-            addProfilePic("/png/profilePic.png");
-            //Set event handler -> view profile
-        } else {
-            addProfilePic("/png/profilePic.png");
-        }
-    }
-
     public void addProfilePic(String path) {
         Image image = new Image(String.valueOf(getClass().getResource(path)));
         profilePic.setStrokeWidth(0);
@@ -175,12 +164,20 @@ public class NavigationPaneSceneController extends BaseSceneController implement
 
     @Override
     public void update() {
-
+        if (User.getCurrentUser().isOnline()) {
+            accountButton.setText(User.getCurrentUser().getUserName());
+            AccountManager.getInstance().loadProfilePic(profilePic);
+        } else {
+            accountButton.setText("Login/Register");
+            addProfilePic("/png/profilePictures/default.png");
+        }
     }
 
-    public static void AddNavPaneComponentsToRoot(Parent root)
+    public static void AddNavPaneComponentsToRoot(Parent root)//Checking BaseSC reference has better performance.
     {
-        ((Pane) root).getChildren().addAll(nodes);
+        List<Node> children = ((Pane) root).getChildren();
+        if (children.containsAll(nodes)) return;
+        children.addAll(nodes);
     }
 
 
@@ -269,4 +266,7 @@ public class NavigationPaneSceneController extends BaseSceneController implement
     {
         MoveToScene(FxmlFileManager.getInstance().settingSC);
     }
+
+    @FXML
+    private void MoveToThesaurusScene() {MoveToScene(FxmlFileManager.getInstance().thesaurusSC);}
 }

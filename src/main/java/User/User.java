@@ -3,6 +3,7 @@ package User;
 import Main.Database;
 import Main.FxmlFileManager;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
+import Ranking.LeaderBoard;
 import Timer.SessionTime;
 import Timer.StudyTimer;
 import javafx.fxml.FXML;
@@ -30,12 +31,22 @@ public class User {
 
     private int totalSessionTime;
     private int totalStudyTime;
+    private int rank;
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public int getRank() {
+        return LeaderBoard.getInstance().getUserRank(currentUser);
+    }
 
     private boolean isOnline = false;
 
     public void newAccount(String userName, String passWord) {
         this.userName = userName;
         this.passWord = passWord;
+        imagePath = "/png/profilePictures/default.png";
         score = 0;
         studyGoal = 0;
         imagePath = ""; //Default profile picture
@@ -95,7 +106,7 @@ public class User {
             totalStudyTime += record.getStudy_time();
         }
 
-        FxmlFileManager.getInstance().navigationPaneSC.setupProfileDisplay();
+        FxmlFileManager.getInstance().navigationPaneSC.update();
 
     }
 
@@ -118,7 +129,9 @@ public class User {
     public void logoutHandler() {
         setOnline(false);
         SessionTime.getInstance().stopCounter();
+        updateAll();
         saveSessionData();
+        updateAllGUI();
         currentUser = null;
     }
 
@@ -156,7 +169,11 @@ public class User {
         }
     }
 
-
+    public void updateAllGUI() {
+        FxmlFileManager.getInstance().profileSC.update();
+        FxmlFileManager.getInstance().homeSC.update();
+        FxmlFileManager.getInstance().navigationPaneSC.update();
+    }
 
     public static User getCurrentUser() {
         if (currentUser == null) {

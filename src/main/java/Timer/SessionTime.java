@@ -30,6 +30,7 @@ public class SessionTime {
 
     public void stopCounter() {
         timeline.stop();
+        timeline = new Timeline();
     }
 
     public int getSeconds() {

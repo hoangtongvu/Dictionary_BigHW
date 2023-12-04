@@ -2,12 +2,16 @@ package Main.SceneControllers.Game.Wordle;
 
 import Game.GamesCtrl;
 import Game.Wordle.WordleCtrl;
+
+import Interfaces.IHasBackButton;
+
 import Main.SceneControllers.BaseSceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,7 +20,9 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-public class WordleController extends BaseSceneController implements Initializable {
+
+public class WordleController extends BaseSceneController implements Initializable, IHasBackButton {
+
 
     @FXML
     private TextField guessBox;
@@ -114,6 +120,9 @@ public class WordleController extends BaseSceneController implements Initializab
     @FXML
     private Label box54 = new Label();
 
+    @FXML
+    private AnchorPane DialogBox;
+
     private String answer;
     private final String green = "#538D4E";
     private final String yellow = "#F1D669";
@@ -140,7 +149,7 @@ public class WordleController extends BaseSceneController implements Initializab
 
     public void generateWord() throws FileNotFoundException {
         Random random = new Random();
-        int n = random.nextInt(3103) + 1;
+        int n = random.nextInt(3104) + 1;
         File file = new File("src/main/resources/data/wordsForWordle.txt");
         Scanner sc = new Scanner(file);
 
@@ -151,6 +160,7 @@ public class WordleController extends BaseSceneController implements Initializab
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        DialogBox.setVisible(false);
         this.wordleCtrl = GamesCtrl.getInstance().getWordleCtrl();
         guesses = 0;
         try {
@@ -161,12 +171,13 @@ public class WordleController extends BaseSceneController implements Initializab
     }
 
     @FXML
-    public void onSubmitButtonClick(ActionEvent e) throws NullPointerException {
-        Label[] row = getLabels();
+    public void onSubmitButtonClick(ActionEvent e) throws NullPointerException, FileNotFoundException {
+        Label[] row = getLabels(guesses);
         int[] state = {-1, -1, -1, -1, -1};
         String text = guessBox.getText().toUpperCase();
 
-        if (text.length() == 5) {
+        if (text.length() == 5 && findWord(text)) {
+            report.setText("");
             int[] arr = new int[26];
             for (int i = 0; i < 5; i++) {
                 arr[answer.charAt(i) - 65] += 1;
@@ -198,26 +209,66 @@ public class WordleController extends BaseSceneController implements Initializab
 
             if (text.equals(answer)) {
                 report.setText("Congratulations! You win!");
+                DialogBox.setVisible(true);
                 return;
             }
             guesses += 1;
-        } else {
+        } else if(text.length() != 5) {
             report.setText("Please enter a 5-letter word!");
+        } else if(!findWord(text)) {
+            report.setText("Not in word list!");
         }
 
         if(guesses == 6) {
             report.setText("You lose! The correct answer is: " + answer);
+            DialogBox.setVisible(true);
         }
     }
 
-    private Label[] getLabels() {
+    private Label[] getLabels(int number) {
         Label[] row = new Label[5];
-        if (guesses == 0) row = new Label[]{box00, box01, box02, box03, box04};
-        if (guesses == 1) row = new Label[]{box10, box11, box12, box13, box14};
-        if (guesses == 2) row = new Label[]{box20, box21, box22, box23, box24};
-        if (guesses == 3) row = new Label[]{box30, box31, box32, box33, box34};
-        if (guesses == 4) row = new Label[]{box40, box41, box42, box43, box44};
-        if (guesses == 5) row = new Label[]{box50, box51, box52, box53, box54};
+        if (number == 0) row = new Label[]{box00, box01, box02, box03, box04};
+        if (number == 1) row = new Label[]{box10, box11, box12, box13, box14};
+        if (number == 2) row = new Label[]{box20, box21, box22, box23, box24};
+        if (number == 3) row = new Label[]{box30, box31, box32, box33, box34};
+        if (number == 4) row = new Label[]{box40, box41, box42, box43, box44};
+        if (number == 5) row = new Label[]{box50, box51, box52, box53, box54};
         return row;
+    }
+
+    private boolean findWord(String text) throws FileNotFoundException {
+        File file = new File("src/main/resources/data/wordsForWordle.txt");
+        Scanner sc = new Scanner(file);
+        String str = "";
+        for (int i = 1; i <= 3104; i++) {
+            str = sc.nextLine().toUpperCase();
+            if (str.equals(text)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void clearLabels() {
+        Label[] row;
+        for (int i = 0; i <= 5; i++) {
+            row = getLabels(i);
+            for (int j = 0; j < 5; j++) {
+                row[j].setText("");
+                row[j].setStyle("-fx-background-color: white");
+            }
+        }
+    }
+    @FXML
+    public void playAgain(ActionEvent e) throws FileNotFoundException {
+        clearLabels();
+        generateWord();
+        guesses = 0;
+        report.setText("");
+        DialogBox.setVisible(false);
+    }
+
+    public void noPlayAgain(ActionEvent e) {
+        DialogBox.setVisible(false);
     }
 }

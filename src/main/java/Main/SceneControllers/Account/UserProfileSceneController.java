@@ -1,56 +1,113 @@
 package Main.SceneControllers.Account;
 
 import Interfaces.IHasNavPane;
+import Main.FxmlFileManager;
+import Main.ProjectDirectory;
 import Main.SceneControllers.BaseSceneController;
+import Main.SceneControllers.Dictionary.HomeSceneController;
+import Main.SceneControllers.Widget.StudyTimerController;
 import User.DailyRecord;
 import User.User;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import User.AccountManager;
+import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Stack;
 
 public class UserProfileSceneController extends BaseSceneController implements Initializable, IHasNavPane {
 
     @FXML
-    Label totalSessionTimeLabel;
+    protected Label totalSessionTimeLabel;
     @FXML
-    Label studyTimeLabel;
+    protected Label studyTimeLabel;
     @FXML
-    Label scoreLabel;
+    protected Label scoreLabel;
     @FXML
-    LineChart<String, Number> dailyChart;
+    protected LineChart<String, Number> dailyChart;
     @FXML
-    PieChart dailyGoalChart;
+    protected PieChart dailyGoalChart;
     @FXML
-    Label ratioLabel;
+    protected Label ratioLabel;
     @FXML
-    Label dailyGoalLabel;
+    protected Label dailyGoalLabel;
     @FXML
-    Label totalStudyTimeLabel;
+    protected Label totalStudyTimeLabel;
     @FXML
-    Label ratioLabel1;
+    protected Label ratioLabel1;
+    @FXML
+    protected Circle profilePic;
+    @FXML
+    protected StackPane editPicPane;
+    @FXML
+    AnchorPane root;
+    @FXML
+    protected StackPane timePickerPane;
+    @FXML
+    protected StackPane passwordPane;
+    @FXML
+    protected Label rankingLabel;
+    @FXML
+    protected Label accessTimeLabel;
 
     @Override
     public void StartShow() {
-        dailyGoalChart.getData().clear();
-        dailyChart.getData().clear();
-        AccountManager.getInstance().getLabel(dailyGoalLabel, AccountManager.DataCategory.DAILY_GOAL);
-        AccountManager.getInstance().getLabel(ratioLabel1, AccountManager.DataCategory.COMPLETION_RATIO);
-        AccountManager.getInstance().getLabel(ratioLabel, AccountManager.DataCategory.COMPLETION_RATIO);
-        AccountManager.getInstance().getLabel(studyTimeLabel, AccountManager.DataCategory.STUDY_TIME);
-        AccountManager.getInstance().getLabel(totalSessionTimeLabel, AccountManager.DataCategory.TOTAL_SESSION_TIME);
-        AccountManager.getInstance().getLabel(totalStudyTimeLabel, AccountManager.DataCategory.TOTAL_STUDY_TIME);
-        AccountManager.getInstance().getLabel(scoreLabel, AccountManager.DataCategory.SCORE);
-        AccountManager.getInstance().getLineChart(dailyChart, AccountManager.DataCategory.STUDY_TIME, "Study time");
-        AccountManager.getInstance().getLineChart(dailyChart, AccountManager.DataCategory.SESSION_TIME, "Access time");
-        AccountManager.getInstance().getPieChart(dailyGoalChart);
+        update();
+    }
 
+    public void logOut() {
+        User.getCurrentUser().logoutHandler();
+        FxmlFileManager.getInstance().homeSC.update();
+        try {
+            StudyTimerController.loadInstance().resetTimer();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().homeSC);
+    }
+
+    @FXML
+    public void editStudyGoal() {
+        int second = User.getCurrentUser().getStudyGoal();
+        int hour = second/3600;
+        int minute = second%3600/60;
+        second = second%3600%60;
+
+        try {
+            TimePickerController.loadInstance().hourField.getValueFactory().setValue(hour);
+            TimePickerController.loadInstance().minuteField.getValueFactory().setValue(minute);
+            TimePickerController.loadInstance().secondField.getValueFactory().setValue(second);
+
+            TimePickerController.loadInstance().notification.setText("Your current goal is set to "
+                    + String.format("%dh%dm%ds", hour, minute, second));
+
+            System.out.println("all set");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        timePickerPane.setVisible(true);
+    }
+
+    @FXML
+    public void editProfile() {
+        editPicPane.setVisible(true);
     }
 
     @Override
@@ -60,11 +117,53 @@ public class UserProfileSceneController extends BaseSceneController implements I
 
     @Override
     public void update() {
+        if (User.getCurrentUser().isOnline()) {
+            dailyGoalChart.getData().clear();
+            dailyChart.getData().clear();
+            AccountManager.getInstance().getLabel(rankingLabel, AccountManager.DataCategory.RANKING);
+            AccountManager.getInstance().getLabel(accessTimeLabel, AccountManager.DataCategory.SESSION_TIME);
+            AccountManager.getInstance().getLabel(dailyGoalLabel, AccountManager.DataCategory.DAILY_GOAL);
+            AccountManager.getInstance().getLabel(ratioLabel1, AccountManager.DataCategory.COMPLETION_RATIO);
+            AccountManager.getInstance().getLabel(ratioLabel, AccountManager.DataCategory.COMPLETION_RATIO);
+            AccountManager.getInstance().getLabel(studyTimeLabel, AccountManager.DataCategory.STUDY_TIME);
+            AccountManager.getInstance().getLabel(totalSessionTimeLabel, AccountManager.DataCategory.TOTAL_SESSION_TIME);
+            AccountManager.getInstance().getLabel(totalStudyTimeLabel, AccountManager.DataCategory.TOTAL_STUDY_TIME);
+            AccountManager.getInstance().getLabel(scoreLabel, AccountManager.DataCategory.SCORE);
+            AccountManager.getInstance().getLineChart(dailyChart, AccountManager.DataCategory.STUDY_TIME, "Study time");
+            AccountManager.getInstance().getLineChart(dailyChart, AccountManager.DataCategory.SESSION_TIME, "Access time");
+            AccountManager.getInstance().getPieChart(dailyGoalChart);
+            AccountManager.getInstance().loadProfilePic(profilePic);
+        } else {
 
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        editPicPane.setVisible(false);
+        timePickerPane.setVisible(false);
+        passwordPane.setVisible(false);
+        try {
+            EditProfilePic.loadInstance().addToParent(editPicPane);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
+        try {
+            TimePickerController.loadInstance().addToParent(timePickerPane);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            ChangePasswordController.loadInstance().addToParent(passwordPane);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    public void editPassword() {
+        passwordPane.setVisible(true);
     }
 }

@@ -1,11 +1,16 @@
 package User;
 
 import Main.Database;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 import java.security.MessageDigest;
@@ -101,6 +106,9 @@ public class AccountManager {
             case TOTAL_STUDY_TIME:
                 label.setText(formatTime(User.getCurrentUser().getTotalStudyTime()));
                 break;
+            case RANKING:
+                label.setText(String.valueOf(User.getCurrentUser().getRank()));
+                break;
         }
     }
 
@@ -136,6 +144,27 @@ public class AccountManager {
         }
     }
 
+    public void loadProfilePic(Circle profilePic) {
+        String path = User.getCurrentUser().getImagePath();
+        Image image = new Image(String.valueOf(getClass().getResource(path)));
+        double sideLength = Math.min(image.getWidth(), image.getHeight());
+
+        ImageView imageView = new ImageView(image);
+
+        imageView.setViewport(new Rectangle2D(
+                (image.getWidth() - sideLength) / 2,
+                (image.getHeight() - sideLength) / 2,
+                sideLength,
+                sideLength
+        ));
+
+        Circle circleClip = new Circle(sideLength / 2);
+
+        imageView.setClip(circleClip);
+
+        profilePic.setFill(new ImagePattern(imageView.getImage()));
+    }
+
     private static Tooltip getTooltip(String name, XYChart.Data<String, Number> entry) {
         Integer time = (Integer) entry.getYValue();
         String[] tmp = entry.getXValue().split("-");
@@ -162,6 +191,7 @@ public class AccountManager {
                 User.getCurrentUser().reset();
                 passWord = hashPassword(passWord);
                 User.getCurrentUser().newAccount(userName, passWord);
+                User.getCurrentUser().setImagePath("/png/profilePictures/default.png");
                 User.getCurrentUser().getUserDao().save(User.getCurrentUser());
                 return Status.REGISTERED;
             } else {
@@ -187,9 +217,6 @@ public class AccountManager {
 
             if (!Database.getUserDB().isClosed()) {
                 if (passWord.equals(dbPassword)) {
-
-                    User.getCurrentUser().loginHandler();
-
                     return Status.LOGGED_IN;
                 } else {
                     return Status.INVALID_CREDENTIALS;

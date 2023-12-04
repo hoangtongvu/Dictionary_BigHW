@@ -4,7 +4,11 @@ import Main.Database;
 import Main.SceneControllers.BaseSceneController;
 import Interfaces.IHasNavPane;
 import Main.SceneControllers.Widget.StudyTimerController;
+
 import TodoList.UI.TodoList;
+
+import Ranking.LeaderBoard;
+
 import User.User;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
@@ -38,7 +42,7 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
     PieChart dailyGoalChart;
 
     @FXML
-    protected VBox leaderBoardVbox;
+    protected VBox leaderboardVbox;
     @FXML
     protected ScrollPane leaderBoardScrollPane;
     @FXML
@@ -51,7 +55,7 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
     @FXML
     public void initialize() {
         //this.SwitchToLookUpScene(); //dunno why this bug.
-        leaderBoardVbox.prefWidthProperty().bind(leaderBoardScrollPane.widthProperty());
+//        leaderBoardVbox.prefWidthProperty().bind(leaderBoardScrollPane.widthProperty());
         leaderBoardScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         try {
             StudyTimerController.loadInstance().addToParent(timerPlaceHolder);
@@ -75,6 +79,7 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
             dailyGoalChart.getData().add(incomplete);
             dailyGoalChart.setLabelsVisible(false);
             incomplete.getNode().setStyle("-fx-background-color: grey");
+            dailyChart.getData().clear();
         }
     }
 
@@ -119,7 +124,7 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
 
     @Override
     public void StartShow() {
-        updateChart();
+        update();
     }
 
     @Override
@@ -129,6 +134,12 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
 
     @Override
     public void update() {
-
+        if (User.getCurrentUser().isOnline()) {
+            updateChart();
+        } else {
+            updateChart();
+        }
+        leaderboardVbox.getChildren().clear();
+        LeaderBoard.getInstance().updateGUI(leaderboardVbox);
     }
 }
