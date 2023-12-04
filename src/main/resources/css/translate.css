@@ -14,3 +14,7 @@
     -fx-font-weight: 900;
     -fx-text-fill: "white";
 }
+
+#translatorTitle {
+    -fx-font-size: 60;
+}
