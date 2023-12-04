@@ -266,5 +266,5 @@ public class NavigationPaneSceneController extends BaseSceneController implement
     }
 
     @FXML
-    private void MoveToThesaurusScene() {MoveToScene(FxmlFileManager.getInstance().thesarusSC);}
+    private void MoveToThesaurusScene() {MoveToScene(FxmlFileManager.getInstance().thesaurusSC);}
 }
