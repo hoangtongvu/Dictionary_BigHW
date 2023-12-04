@@ -149,7 +149,7 @@ public class WordleController extends BaseSceneController implements Initializab
 
     public void generateWord() throws FileNotFoundException {
         Random random = new Random();
-        int n = random.nextInt(3103) + 1;
+        int n = random.nextInt(3104) + 1;
         File file = new File("src/main/resources/data/wordsForWordle.txt");
         Scanner sc = new Scanner(file);
 
@@ -240,7 +240,7 @@ public class WordleController extends BaseSceneController implements Initializab
         File file = new File("src/main/resources/data/wordsForWordle.txt");
         Scanner sc = new Scanner(file);
         String str = "";
-        for (int i = 1; i <= 3103; i++) {
+        for (int i = 1; i <= 3104; i++) {
             str = sc.nextLine().toUpperCase();
             if (str.equals(text)) {
                 return true;

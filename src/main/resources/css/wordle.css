@@ -24,7 +24,11 @@
 }
 
 #DialogBox {
-    -fx-background-color: "white";
+    -fx-background-color: "#21252b";
     -fx-font-size: 20;
-    -fx-border-color: "black";
+}
+
+#playAgainLabel {
+    -fx-background-color: "#21252b";
+    -fx-text-fill: "white";
 }
