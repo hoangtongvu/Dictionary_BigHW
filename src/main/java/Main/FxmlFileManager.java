@@ -15,6 +15,7 @@ import Main.SceneControllers.Game.Wordle.WordleController;
 import Interfaces.IHasNavPane;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import Main.SceneControllers.Settings.SettingSceneController;
+import Main.SceneControllers.Thesaurus.ThesaurusController;
 import Main.SceneControllers.Translate.TranslateController;
 import Main.application.App;
 import javafx.fxml.FXMLLoader;
@@ -63,6 +64,7 @@ public class FxmlFileManager
     public final UserProfileSceneController profileSC;
     public final EditProfilePic editProfilePicSC;
     public final TimePickerController timePickerSC;
+    public final ThesaurusController thesaurusSC;
 
 //endregion
 
@@ -126,6 +128,7 @@ public class FxmlFileManager
         this.editProfilePicSC = this.LoadSC("/application/ProfilePicScene.fxml");
 
         this.navigationPaneSC = this.LoadSC("/application/NavigationPaneScene.fxml");
+        this.thesaurusSC = this.LoadSC("/application/thesaurusScene.fxml");
 
     }
 

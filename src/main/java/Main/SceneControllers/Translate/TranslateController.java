@@ -15,8 +15,6 @@ public class TranslateController extends BaseSceneController implements IHasNavP
     @FXML
     private TextArea EngArea;
 
-
-
     @Override
     public void StartShow() {
 
