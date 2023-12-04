@@ -19,7 +19,7 @@
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../png/speaker.png" />
+                  <Image url="@../../png/speaker_black.png" />
                </image>
             </ImageView>
          </graphic>
@@ -33,7 +33,7 @@
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../png/speaker.png" />
+                  <Image url="@../../png/speaker_black.png" />
                </image>
             </ImageView>
          </graphic>
@@ -63,5 +63,15 @@
          </children>
       </AnchorPane>
       <Label fx:id="translatorTitle" layoutY="12.0" prefHeight="76.0" prefWidth="1280.0" text="Translator" />
+      <Button layoutX="132.0" layoutY="685.0" mnemonicParsing="false" onAction="#onMicrophoneButton" prefHeight="40.0" prefWidth="45.0">
+         <graphic>
+            <ImageView fitHeight="50.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../png/mic.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label fx:id="recordingStatus" layoutX="197.0" layoutY="678.0" prefHeight="47.0" prefWidth="113.0" />
    </children>
 </AnchorPane>

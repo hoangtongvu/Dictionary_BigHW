@@ -67,6 +67,8 @@ module MainGroup.application {
     requires org.json;
     requires jlayer;
     requires AnimateFX;
+    requires java.desktop;
+    requires org.apache.commons.text;
 
     exports Main.SceneControllers.Widget;
     opens Main.SceneControllers.Widget to javafx.fxml;
