@@ -1,5 +1,6 @@
 package Main.SceneControllers.Game.CreateWord4DirGame;
 
+import Interfaces.IHasBackButton;
 import Main.FxmlFileManager;
 import Main.SceneControllers.BaseSceneController;
 import javafx.fxml.FXML;
@@ -7,7 +8,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
-public class StartGameScreenSceneController extends BaseSceneController
+public class StartGameScreenSceneController extends BaseSceneController implements IHasBackButton
 {
 
     @FXML
