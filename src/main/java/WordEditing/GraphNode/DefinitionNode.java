@@ -114,7 +114,7 @@ public class DefinitionNode extends DicNode {
 
     @Override
     protected void setOptions() {
-        options.getOptions().getItems().addAll(options.getConnect(),options.getDelete(),options.getAddEx());
+        options.getOptions().getItems().addAll(options.getConnect(),options.getDelete());
     }
 
     public void createNodeGraph() {

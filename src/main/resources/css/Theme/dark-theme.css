@@ -115,6 +115,10 @@
     -fx-prompt-text-fill: white;
 }
 
+.edit-word-text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+
 
 .side-menu-button {
     -fx-alignment: baseline-left;
@@ -129,7 +133,6 @@
 
 .pill-button {
     -fx-font-family: Roboto, sans-serif;
-    -fx-font-size: 12;
     -fx-font-weight: bold;
     -fx-text-fill: white;
     -fx-background-color: #597f9d;

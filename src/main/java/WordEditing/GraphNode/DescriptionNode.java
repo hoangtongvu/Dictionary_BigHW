@@ -78,7 +78,7 @@ public class DescriptionNode extends DicNode {
 
     @Override
     protected void setOptions() {
-        options.getOptions().getItems().addAll(options.getConnect(),options.getDelete(),options.getAddDef(),options.getAddPhrase());
+        options.getOptions().getItems().addAll(options.getConnect(),options.getDelete());
     }
 
     @Override

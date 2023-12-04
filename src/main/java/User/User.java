@@ -74,7 +74,7 @@ public class User {
 
     public void loginHandler() {
         setOnline(true);
-        userDao.get(userName);
+         userDao.get(userName);
         //Start session counter
         SessionTime.getInstance().startCounter();
 
@@ -107,7 +107,7 @@ public class User {
         }
 
         FxmlFileManager.getInstance().navigationPaneSC.update();
-
+        FxmlFileManager.getInstance().homeSC.update();
     }
 
     public double getCompletionRatio() {

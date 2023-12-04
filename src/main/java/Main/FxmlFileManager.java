@@ -61,7 +61,6 @@ public class FxmlFileManager
     public final EditWordSceneController editWordSceneController;
     public final AIConversationSceneController aiSC;
     public final LoginSceneController loginSC;
-    public final SettingSceneController settingSC;
     public final NavigationPaneSceneController navigationPaneSC;
     public final UserProfileSceneController profileSC;
     public final EditProfilePic editProfilePicSC;
@@ -150,7 +149,7 @@ public class FxmlFileManager
         this.wordleSC = this.LoadSC("/Game/Wordle/WordleScene.fxml");
         this.timePickerSC = this.LoadSC("/application/TimePicker.fxml");
         this.loginSC = this.LoadSC("/application/LoginScreen.fxml");
-        this.settingSC = this.LoadSC("/application/SettingScene.fxml");
+
         this.profileSC = this.LoadSC("/application/UserProfileScene.fxml");
         this.editProfilePicSC = this.LoadSC("/application/ProfilePicScene.fxml");
 

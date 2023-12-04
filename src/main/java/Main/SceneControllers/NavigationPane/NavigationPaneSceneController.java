@@ -88,7 +88,6 @@ public class NavigationPaneSceneController extends BaseSceneController implement
         editSceneButton.setDisable(status);
         chatButton.setDisable(status);
         translateButton.setDisable(status);
-        settingButton.setDisable(status);
         thesaurusButton.setDisable(status);
     }
 
@@ -259,12 +258,6 @@ public class NavigationPaneSceneController extends BaseSceneController implement
     private void MoveToTranslateScene()
     {
         MoveToScene(FxmlFileManager.getInstance().translateSC);
-    }
-
-    @FXML
-    private void MoveToSettingsScene()
-    {
-        MoveToScene(FxmlFileManager.getInstance().settingSC);
     }
 
     @FXML

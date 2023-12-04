@@ -69,7 +69,7 @@ public class PhraseNode extends DicNode {
 
     @Override
     protected void setOptions() {
-        options.getOptions().getItems().addAll(options.getConnect(),options.getDelete(),options.getAddDef());
+        options.getOptions().getItems().addAll(options.getConnect(),options.getDelete());
     }
 
     @Override

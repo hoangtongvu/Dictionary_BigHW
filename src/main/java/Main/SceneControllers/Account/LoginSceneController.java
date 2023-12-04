@@ -163,7 +163,6 @@ public class LoginSceneController extends BaseSceneController {
                     nameField.clear();
                     passwordField.clear();
                     User.getCurrentUser().loginHandler();
-                    FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().homeSC);
                     break;
                 case INVALID_CREDENTIALS:
                     message.setTextFill(Color.RED);

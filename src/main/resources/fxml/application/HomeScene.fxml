@@ -43,7 +43,7 @@
                                           <Insets bottom="20.0" />
                                        </VBox.margin>
                                        <children>
-                                          <Label layoutX="14.0" layoutY="20.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="label-highlight" text="Multiple choice">
+                                          <Label layoutX="14.0" layoutY="20.0" prefHeight="35.0" prefWidth="189.0" style="-fx-font-weight: bold;" styleClass="label-highlight" text="Multiple choice">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
@@ -55,7 +55,7 @@
                                           <Insets bottom="20.0" />
                                        </VBox.margin>
                                        <children>
-                                          <Label layoutX="14.0" layoutY="20.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="label-highlight" text="Wordle">
+                                          <Label layoutX="14.0" layoutY="20.0" prefHeight="35.0" prefWidth="173.0" style="-fx-font-weight: bold;" styleClass="label-highlight" text="Wordle">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
@@ -67,7 +67,7 @@
                                           <Insets bottom="20.0" />
                                        </VBox.margin>
                                        <children>
-                                          <Label layoutX="14.0" layoutY="20.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="label-highlight" text="Arrows">
+                                          <Label layoutX="14.0" layoutY="20.0" prefHeight="35.0" prefWidth="159.0" style="-fx-font-weight: bold;" styleClass="label-highlight" text="Arrows">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
@@ -160,11 +160,11 @@
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <AnchorPane fx:id="timerPlaceHolder111" layoutX="19.0" layoutY="352.0" prefHeight="251.0" prefWidth="562.0" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="352.0">
+                              <AnchorPane fx:id="timerPlaceHolder111" layoutX="19.0" layoutY="352.0" prefHeight="251.0" prefWidth="562.0" styleClass="floating-anchor-pane" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="352.0">
                                  <children>
                                     <AnchorPane layoutY="25.0" prefHeight="251.0" prefWidth="362.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <LineChart fx:id="dailyChart" animated="false" layoutX="-14.0" layoutY="30.0" prefHeight="221.0" prefWidth="362.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                                          <LineChart fx:id="dailyChart" animated="false" layoutX="-14.0" layoutY="30.0" prefHeight="221.0" prefWidth="362.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                                             <xAxis>
                                               <CategoryAxis side="BOTTOM" />
                                             </xAxis>
@@ -174,19 +174,24 @@
                                           </LineChart>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane layoutX="375.0" layoutY="25.0" prefHeight="249.0" prefWidth="200.0" style="-fx-background-color: pink;" styleClass="pie-chart-anchor" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <AnchorPane layoutX="375.0" layoutY="25.0" prefHeight="249.0" prefWidth="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                           <StackPane layoutY="22.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="22.0">
                                              <children>
                                                 <PieChart fx:id="dailyGoalChart" clockwise="false" minWidth="200.0" prefHeight="165.0" prefWidth="200.0" startAngle="90.0" />
-                                                <Circle fill="DODGERBLUE" radius="34.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: pink; -fx-stroke: transparent;" styleClass="pie-chart-cover" />
-                                                <Label fx:id="ratioLabel" style="-fx-font-weight: bold;" styleClass="normal-label" text="0%">
+                                                <Circle fill="DODGERBLUE" radius="34.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent; -fx-fill: #200D3A;" styleClass="pie-chart-cover" />
+                                                <Label fx:id="ratioLabel" style="-fx-font-weight: bold;" styleClass="label-highlight" text="---">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font></Label>
                                              </children>
                                           </StackPane>
-                                          <Label alignment="CENTER" layoutX="28.0" layoutY="191.0" prefHeight="35.0" prefWidth="144.0" style="-fx-font-weight: bold;" styleClass="normal-label" text="Daily goal">
+                                          <Label alignment="CENTER" layoutX="28.0" layoutY="172.0" prefHeight="35.0" prefWidth="144.0" style="-fx-font-weight: bold;" styleClass="label-highlight" text="Daily goal">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="goalLabel" alignment="CENTER" layoutX="70.0" layoutY="207.0" styleClass="label-highlight" text="---" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>

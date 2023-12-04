@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="navPaneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="899.0" styleClass="navigation-scene" stylesheets="@../../css/Theme/dark-theme.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.NavigationPane.NavigationPaneSceneController">
    <children>
@@ -61,6 +62,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <font>
+                              <Font size="24.0" />
+                           </font>
                            <styleClass>
                               <String fx:value="side-menu-button" />
                               <String fx:value="label-highlight" />
@@ -78,6 +82,9 @@
                               <String fx:value="side-menu-button" />
                               <String fx:value="label-highlight" />
                            </styleClass>
+                           <font>
+                              <Font size="24.0" />
+                           </font>
                         </Button>
                         <Button fx:id="gameButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToGamesScene" prefHeight="46.0" prefWidth="248.0" text="Games">
                            <graphic>
@@ -91,6 +98,9 @@
                               <String fx:value="side-menu-button" />
                               <String fx:value="label-highlight" />
                            </styleClass>
+                           <font>
+                              <Font size="24.0" />
+                           </font>
                         </Button>
                         <Button fx:id="editSceneButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToDictionaryEditorScene" prefHeight="46.0" prefWidth="248.0" text="Edit Dictionary">
                            <graphic>
@@ -104,6 +114,9 @@
                               <String fx:value="side-menu-button" />
                               <String fx:value="label-highlight" />
                            </styleClass>
+                           <font>
+                              <Font size="24.0" />
+                           </font>
                         </Button>
                         <Button fx:id="chatButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToAIChatBotScene" prefHeight="46.0" prefWidth="248.0" text="AI Chat">
                            <graphic>
@@ -117,6 +130,9 @@
                               <String fx:value="side-menu-button" />
                               <String fx:value="label-highlight" />
                            </styleClass>
+                           <font>
+                              <Font size="24.0" />
+                           </font>
                         </Button>
                         <Button fx:id="translateButton" layoutX="10.0" layoutY="196.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToTranslateScene" prefHeight="46.0" prefWidth="248.0" text="Translate">
                            <graphic>
@@ -130,6 +146,9 @@
                               <String fx:value="side-menu-button" />
                               <String fx:value="label-highlight" />
                            </styleClass>
+                           <font>
+                              <Font size="24.0" />
+                           </font>
                         </Button>
                         <Button fx:id="thesaurusButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToThesaurusScene" prefHeight="46.0" prefWidth="248.0" text="Thesaurus">
                            <graphic>
@@ -143,19 +162,9 @@
                               <String fx:value="side-menu-button" />
                               <String fx:value="label-highlight" />
                            </styleClass>
-                        </Button>
-                        <Button fx:id="settingButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToSettingsScene" prefHeight="46.0" prefWidth="248.0" styleClass="sideMenuButton" stylesheets="@../../css/Theme/dark-theme.css" text="Settings">
-                           <graphic>
-                              <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../png/gear.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <styleClass>
-                              <String fx:value="side-menu-button" />
-                              <String fx:value="label-highlight" />
-                           </styleClass>
+                           <font>
+                              <Font size="24.0" />
+                           </font>
                         </Button>
                      </children>
                   </VBox>

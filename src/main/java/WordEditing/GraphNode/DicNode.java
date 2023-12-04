@@ -480,6 +480,7 @@ public abstract class DicNode {
                 deselectAll();
                 select(DicNode.this);
                 currentlySelected = DicNode.this;
+
             } else if (event.getButton() == MouseButton.PRIMARY) {
                 deselectAll();
                 select(DicNode.this);

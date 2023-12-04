@@ -107,8 +107,9 @@ public class WordNode extends DicNode {
 
     @Override
     protected void setOptions() {
-
+        options.getOptions().getItems().addAll(options.getConnect());
     }
+
 
     @Override
     protected void labelProperty(Label label, String styleClass) {

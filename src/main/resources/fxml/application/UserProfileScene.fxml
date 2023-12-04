@@ -27,12 +27,12 @@
                   <Circle fx:id="profilePic" fill="DODGERBLUE" layoutX="125.0" layoutY="120.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
                   <Button layoutX="27.0" layoutY="286.0" mnemonicParsing="false" onAction="#editPassword" prefHeight="25.0" prefWidth="197.0" styleClass="pill-button" text="Change password" />
                   <Button layoutX="159.0" layoutY="194.0" mnemonicParsing="false" onAction="#editProfile" text="Edit " />
-                  <Label alignment="CENTER" layoutX="48.0" layoutY="244.0" style="-fx-font-weight: bold;" styleClass="label-highlight" text="username" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <Label fx:id="nameLabel" alignment="CENTER" layoutX="48.0" layoutY="244.0" style="-fx-font-weight: bold;" styleClass="label-highlight" text="username" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Button fx:id="logOutButton" layoutX="99.0" layoutY="520.0" mnemonicParsing="false" onAction="#logOut" text="Logout" AnchorPane.bottomAnchor="14.285714285714302" />
+                  <Button fx:id="logOutButton" layoutX="99.0" layoutY="520.0" mnemonicParsing="false" onAction="#logOut" styleClass="pill-button" text="Logout" AnchorPane.bottomAnchor="14.285714285714302" />
                </children>
             </AnchorPane>
          </left>
@@ -217,7 +217,7 @@
                                  <children>
                                     <PieChart fx:id="dailyGoalChart" clockwise="false" prefWidth="229.0" startAngle="90.0" />
                                     <Circle fill="DODGERBLUE" radius="42.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: #21252b; -fx-stroke: transparent;" styleClass="pie-chart-cover" />
-                                    <Label fx:id="ratioLabel" alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="normal-label" text="0%" textAlignment="CENTER">
+                                    <Label fx:id="ratioLabel" alignment="TOP_LEFT" style="-fx-font-weight: bold;" styleClass="label-highlight" stylesheets="@../../css/Theme/dark-theme.css" text="---" textAlignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>

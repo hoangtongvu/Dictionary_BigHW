@@ -51,6 +51,9 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
     @FXML
     private AnchorPane todoListHolder;
 
+    @FXML
+    protected Label goalLabel;
+
     /**This part is for side menu*/
     @FXML
     public void initialize() {
@@ -64,7 +67,7 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
         }
 
         blurPane.setVisible(false);
-
+        update();
         TodoList todoList = TodoList.CreateInstance();
         todoList.ChangeParent(this.todoListHolder);
 
@@ -85,8 +88,14 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
 
     public void setUpPieChart() {
         dailyGoalChart.getData().clear();
-        AccountManager.getInstance().getPieChart(dailyGoalChart);
-        AccountManager.getInstance().getLabel(ratioLabel, AccountManager.DataCategory.COMPLETION_RATIO);
+        if (User.getCurrentUser().isOnline()) {
+            AccountManager.getInstance().getPieChart(dailyGoalChart);
+            AccountManager.getInstance().getLabel(ratioLabel, AccountManager.DataCategory.COMPLETION_RATIO);
+        } else {
+            dailyGoalChart.getData().add(new PieChart.Data("", 1));
+            dailyGoalChart.setLegendVisible(false);
+        }
+
     }
 
     public void setUpLineChart() {
@@ -97,28 +106,6 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void setUpLeaderBoard() {
-        String query = "SELECT user_name, score FROM user_credentials ORDER BY score, user_name DESC LIMIT 10";
-        try {
-            PreparedStatement statement = Database.getUserDB().prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery();
-            int ranking = 1;
-            while (resultSet.next()) {
-
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void addRankingCard(String userName, int score, int rank) {
-        AnchorPane pane = new AnchorPane();
-        pane.setPrefWidth(260); pane.setPrefHeight(62);
-
     }
 
 
@@ -134,12 +121,11 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
 
     @Override
     public void update() {
-        if (User.getCurrentUser().isOnline()) {
-            updateChart();
-        } else {
-            updateChart();
-        }
+        updateChart();
         leaderboardVbox.getChildren().clear();
+        if (User.getCurrentUser().isOnline()) {
+            AccountManager.getInstance().getLabel(goalLabel, AccountManager.DataCategory.DAILY_GOAL);
+        }
         LeaderBoard.getInstance().updateGUI(leaderboardVbox);
     }
 }
