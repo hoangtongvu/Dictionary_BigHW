@@ -18,3 +18,8 @@
 #translatorTitle {
     -fx-font-size: 60;
 }
+
+#recordingStatus {
+    -fx-text-fill: "black";
+    -fx-font-size: 20;
+}
