@@ -38,36 +38,36 @@
                                  </children></AnchorPane>
                               <VBox layoutX="24.0" layoutY="341.0" prefHeight="286.0" prefWidth="295.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="14.0">
                                  <children>
-                                    <AnchorPane fx:id="timerPlaceHolder112" prefHeight="75.0" prefWidth="296.0" styleClass="pill-button">
+                                    <AnchorPane fx:id="timerPlaceHolder112" onDragDetected="#toChoiceGame" onMouseClicked="#toDictionary" prefHeight="75.0" prefWidth="296.0" styleClass="pill-button">
                                        <VBox.margin>
                                           <Insets bottom="20.0" />
                                        </VBox.margin>
                                        <children>
-                                          <Label layoutX="14.0" layoutY="20.0" prefHeight="35.0" prefWidth="189.0" style="-fx-font-weight: bold;" styleClass="label-highlight" text="Multiple choice">
+                                          <Label layoutX="14.0" layoutY="20.0" prefHeight="35.0" prefWidth="189.0" style="-fx-font-weight: bold;" text="Multiple choice">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
                                           </Label>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane fx:id="timerPlaceHolder1121" prefHeight="75.0" prefWidth="389.0" styleClass="pill-button">
+                                    <AnchorPane fx:id="timerPlaceHolder1121" onDragDetected="#toWordle" onMouseClicked="#toDictionary" prefHeight="75.0" prefWidth="389.0" styleClass="pill-button">
                                        <VBox.margin>
                                           <Insets bottom="20.0" />
                                        </VBox.margin>
                                        <children>
-                                          <Label layoutX="14.0" layoutY="20.0" prefHeight="35.0" prefWidth="173.0" style="-fx-font-weight: bold;" styleClass="label-highlight" text="Wordle">
+                                          <Label layoutX="14.0" layoutY="20.0" prefHeight="35.0" prefWidth="173.0" style="-fx-font-weight: bold;" text="Wordle">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
                                           </Label>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane fx:id="timerPlaceHolder1122" prefHeight="75.0" prefWidth="389.0" styleClass="pill-button">
+                                    <AnchorPane fx:id="timerPlaceHolder1122" onDragDetected="#toArrows" prefHeight="75.0" prefWidth="389.0" styleClass="pill-button">
                                        <VBox.margin>
                                           <Insets bottom="20.0" />
                                        </VBox.margin>
                                        <children>
-                                          <Label layoutX="14.0" layoutY="20.0" prefHeight="35.0" prefWidth="159.0" style="-fx-font-weight: bold;" styleClass="label-highlight" text="Arrows">
+                                          <Label layoutX="14.0" layoutY="20.0" prefHeight="35.0" prefWidth="159.0" style="-fx-font-weight: bold;" text="Arrows">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
@@ -121,7 +121,7 @@
                               <AnchorPane fx:id="timerPlaceHolder113" layoutX="17.0" layoutY="74.0" prefHeight="247.0" prefWidth="264.0" styleClass="floating-anchor-pane" AnchorPane.leftAnchor="17.0" AnchorPane.topAnchor="74.0" />
                               <VBox layoutX="303.0" layoutY="74.0" AnchorPane.leftAnchor="303.0">
                                  <children>
-                                    <AnchorPane fx:id="timerPlaceHolder11232" prefHeight="75.0" prefWidth="275.0" styleClass="pill-button">
+                                    <AnchorPane fx:id="timerPlaceHolder11232" onMouseClicked="#toDictionary" prefHeight="75.0" prefWidth="275.0" styleClass="pill-button">
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
@@ -133,21 +133,21 @@
                                           </Label>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane fx:id="timerPlaceHolder1123" prefHeight="75.0" prefWidth="275.0" styleClass="pill-button">
+                                    <AnchorPane fx:id="timerPlaceHolder1123" onDragDetected="#toChatBot" onMouseClicked="#toDictionary" prefHeight="75.0" prefWidth="275.0" styleClass="pill-button">
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                        <children>
-                                          <Label layoutX="22.0" layoutY="20.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="label-highlight" text="AI Chat bot">
+                                          <Label layoutX="22.0" layoutY="20.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" text="AI Chat bot">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
                                           </Label>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane fx:id="timerPlaceHolder11231" prefHeight="75.0" prefWidth="275.0" styleClass="pill-button">
+                                    <AnchorPane fx:id="timerPlaceHolder11231" onDragDetected="#toTranslate" onMouseClicked="#toDictionary" prefHeight="75.0" prefWidth="275.0" styleClass="pill-button">
                                        <children>
-                                          <Label layoutX="22.0" layoutY="20.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" styleClass="label-highlight" text="Translate">
+                                          <Label layoutX="22.0" layoutY="20.0" prefHeight="17.0" prefWidth="231.0" style="-fx-font-weight: bold;" text="Translate">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>

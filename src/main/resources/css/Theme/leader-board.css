@@ -1,0 +1,23 @@
+.card {
+    -fx-background-color: #CE5E82;
+    -fx-background-radius: 30px;
+    -fx-padding: 0 0 0 10;
+}
+
+.score-label {
+    -fx-font-family: Roboto, sans-serif;
+    -fx-font-weight: bold;
+    -fx-text-fill: #200D3A;
+}
+
+.name-label {
+    -fx-font-family: Roboto, sans-serif;
+    -fx-font-weight: bold;
+    -fx-text-fill:#200D3A;
+}
+
+.rank-label {
+    -fx-font-family: Roboto, sans-serif;
+    -fx-font-weight: bold;
+    -fx-text-fill: #200D3A;
+}

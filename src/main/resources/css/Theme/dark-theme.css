@@ -143,6 +143,15 @@
     -fx-background-color: #3e5b70;
 }
 
+#imageScrollPane .viewport {
+    -fx-background-color: transparent;
+}
+
+#imageScrollPane .scroll-bar {
+    visibility: false;
+}
+
+
 /*scene specific settings*/
 .editor-name {
     -fx-background-color: linear-gradient(to right, #200D3A, #292651, #2E4770);

@@ -1,6 +1,7 @@
 package Main.SceneControllers.Dictionary;
 
 import Main.Database;
+import Main.FxmlFileManager;
 import Main.SceneControllers.BaseSceneController;
 import Interfaces.IHasNavPane;
 import Main.SceneControllers.Widget.StudyTimerController;
@@ -70,7 +71,7 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
         update();
         TodoList todoList = TodoList.CreateInstance();
         todoList.ChangeParent(this.todoListHolder);
-
+        leaderboardVbox.setSpacing(10);
     }
 
     public void updateChart() {
@@ -127,5 +128,34 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
             AccountManager.getInstance().getLabel(goalLabel, AccountManager.DataCategory.DAILY_GOAL);
         }
         LeaderBoard.getInstance().updateGUI(leaderboardVbox);
+    }
+
+    @FXML
+    public void toDictionary() {
+        System.out.println("Yes");
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().dictionarySC);
+    }
+
+    @FXML
+    public void toChatBot() {
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().aiSC);
+    }
+
+    @FXML
+    public void toTranslate() {
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().translateSC);
+    }
+
+    @FXML
+    public void toChoiceGame() {
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameStartSC);
+    }
+
+    public void toWordle() {
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().wordleSC);
+    }
+
+    public void toArrows() {
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().createWord4DirStartSC);
     }
 }

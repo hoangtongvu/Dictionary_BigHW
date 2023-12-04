@@ -1,5 +1,6 @@
 package Ranking;
 
+import Main.ProjectDirectory;
 import User.AccountManager;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
@@ -27,14 +28,14 @@ public class UserCardShape {
     }
 
     public UserCardShape(String name, String path, int score, int rank) {
-//        card.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
         card = new AnchorPane();
+        card.getStylesheets().add(String.valueOf(getClass().getResource("/css/Theme/leader-board.css")));
+        card.getStyleClass().add("card");
         card.setMaxHeight(50.0);
         card.setPrefHeight(128.0);
         card.setPrefWidth(287.0);
-        card.setStyle("-fx-background-color: pink;");
-        VBox.setVgrow(card, Priority.ALWAYS);
+
 
         profilePic = new Circle();
         profilePic.setFill(Color.DODGERBLUE);
@@ -50,8 +51,11 @@ public class UserCardShape {
         AnchorPane.setLeftAnchor(profilePic, 14.0);
         AnchorPane.setTopAnchor(profilePic, 7.0);
 
+
         //Set username
         nameLabel = new Label();
+        nameLabel.getStylesheets().add(String.valueOf(getClass().getResource("/css/Theme/leader-board.css")));
+        nameLabel.getStyleClass().add("name-label");
         nameLabel.setText(name);
 
         nameLabel.setLayoutX(70.0);
@@ -61,8 +65,11 @@ public class UserCardShape {
         AnchorPane.setLeftAnchor(nameLabel, 70.0);
         AnchorPane.setTopAnchor(nameLabel, 7.0);
 
+
         //Set rank
         rankLabel = new Label();
+        rankLabel.getStylesheets().add(String.valueOf(getClass().getResource("/css/Theme/leader-board.css")));
+        rankLabel.getStyleClass().add("rank-label");
         rankLabel.setText(String.valueOf(rank));
 
         rankLabel.setLayoutX(244.0);
@@ -72,9 +79,12 @@ public class UserCardShape {
         AnchorPane.setRightAnchor(rankLabel, 15.0);
         AnchorPane.setTopAnchor(rankLabel, 14.0);
 
+
         //Set score
         scoreLabel = new Label();
         scoreLabel = new Label(String.valueOf(score));
+        scoreLabel.getStylesheets().add(String.valueOf(getClass().getResource("/css/Theme/leader-board.css")));
+        scoreLabel.getStyleClass().add("score-label");
 
         scoreLabel.setLayoutX(70.0);
         scoreLabel.setLayoutY(30.0);
@@ -82,6 +92,21 @@ public class UserCardShape {
 //        scoreLabel.setFont(new Font(18.0));
         AnchorPane.setLeftAnchor(scoreLabel, 70.0);
         AnchorPane.setTopAnchor(scoreLabel, 30.0);
+
+        switch(rank) {
+            case 1:
+                card.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, gold, orange);");
+                break;
+            case 2:
+                card.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, silver, white);");
+                break;
+            case 3:
+                card.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, darkorange, red);");
+                break;
+            default:
+                card.setStyle("-fx-background-color: lightgray;");
+                break;
+        }
 
         card.getChildren().addAll(profilePic, nameLabel, rankLabel, scoreLabel);
     }

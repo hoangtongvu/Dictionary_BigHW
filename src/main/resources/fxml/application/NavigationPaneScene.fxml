@@ -54,7 +54,7 @@
                   </Pane>
                   <VBox alignment="TOP_CENTER" prefHeight="459.0" prefWidth="249.0">
                      <children>
-                        <Button fx:id="homeButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToHomeScene" prefHeight="46.0" prefWidth="248.0" text="Home">
+                        <Button fx:id="homeButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToHomeScene" prefHeight="46.0" prefWidth="248.0" styleClass="side-menu-button" text="Home">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -65,12 +65,8 @@
                            <font>
                               <Font size="24.0" />
                            </font>
-                           <styleClass>
-                              <String fx:value="side-menu-button" />
-                              <String fx:value="label-highlight" />
-                           </styleClass>
                         </Button>
-                        <Button fx:id="dictionaryButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToDictionaryScene" prefHeight="46.0" prefWidth="248.0" text="Dictionary">
+                        <Button fx:id="dictionaryButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToDictionaryScene" prefHeight="46.0" prefWidth="248.0" styleClass="side-menu-button" text="Dictionary">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -78,15 +74,11 @@
                                  </image>
                               </ImageView>
                            </graphic>
-                           <styleClass>
-                              <String fx:value="side-menu-button" />
-                              <String fx:value="label-highlight" />
-                           </styleClass>
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="gameButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToGamesScene" prefHeight="46.0" prefWidth="248.0" text="Games">
+                        <Button fx:id="gameButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToGamesScene" prefHeight="46.0" prefWidth="248.0" styleClass="side-menu-button" text="Games">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -94,15 +86,11 @@
                                  </image>
                               </ImageView>
                            </graphic>
-                           <styleClass>
-                              <String fx:value="side-menu-button" />
-                              <String fx:value="label-highlight" />
-                           </styleClass>
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="editSceneButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToDictionaryEditorScene" prefHeight="46.0" prefWidth="248.0" text="Edit Dictionary">
+                        <Button fx:id="editSceneButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToDictionaryEditorScene" prefHeight="46.0" prefWidth="248.0" styleClass="side-menu-button" text="Edit Dictionary">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -110,15 +98,11 @@
                                  </image>
                               </ImageView>
                            </graphic>
-                           <styleClass>
-                              <String fx:value="side-menu-button" />
-                              <String fx:value="label-highlight" />
-                           </styleClass>
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="chatButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToAIChatBotScene" prefHeight="46.0" prefWidth="248.0" text="AI Chat">
+                        <Button fx:id="chatButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToAIChatBotScene" prefHeight="46.0" prefWidth="248.0" styleClass="side-menu-button" text="AI Chat">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -126,15 +110,11 @@
                                  </image>
                               </ImageView>
                            </graphic>
-                           <styleClass>
-                              <String fx:value="side-menu-button" />
-                              <String fx:value="label-highlight" />
-                           </styleClass>
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="translateButton" layoutX="10.0" layoutY="196.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToTranslateScene" prefHeight="46.0" prefWidth="248.0" text="Translate">
+                        <Button fx:id="translateButton" layoutX="10.0" layoutY="196.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToTranslateScene" prefHeight="46.0" prefWidth="248.0" styleClass="side-menu-button" text="Translate">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -142,15 +122,11 @@
                                  </image>
                               </ImageView>
                            </graphic>
-                           <styleClass>
-                              <String fx:value="side-menu-button" />
-                              <String fx:value="label-highlight" />
-                           </styleClass>
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="thesaurusButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToThesaurusScene" prefHeight="46.0" prefWidth="248.0" text="Thesaurus">
+                        <Button fx:id="thesaurusButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToThesaurusScene" prefHeight="46.0" prefWidth="248.0" styleClass="side-menu-button" text="Thesaurus">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -158,10 +134,6 @@
                                  </image>
                               </ImageView>
                            </graphic>
-                           <styleClass>
-                              <String fx:value="side-menu-button" />
-                              <String fx:value="label-highlight" />
-                           </styleClass>
                            <font>
                               <Font size="24.0" />
                            </font>
