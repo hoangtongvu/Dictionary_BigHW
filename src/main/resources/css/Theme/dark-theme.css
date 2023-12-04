@@ -58,7 +58,8 @@
     -fx-background-position: center;
 }
 
-.scroll-pane .viewport {
+
+.leader-board .viewport {
     -fx-background-color: transparent;
 }
 
@@ -104,7 +105,7 @@
     -fx-padding: 10px;
 }
 
-.text-area {
+.edit-word-text-area {
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
     -fx-background-color: #282c34;
@@ -113,6 +114,7 @@
     -fx-background-radius: 20px;
     -fx-padding: 10px;
     -fx-text-fill: white;
+    -fx-prompt-text-fill: white;
 }
 
 
@@ -194,6 +196,22 @@
 
 .dictionary-scene .speaker-button:hover {
     -fx-background-image: url('../../png/speaker_filled.png');
+}
+
+.x-button {
+    -fx-background-image: url('../../png/x.png');
+}
+
+.x-button:hover {
+    -fx-background-image: url('../../png/x_filled.png');
+}
+
+.menu-button {
+    -fx-background-image: url('../../png/menuIcon.png');
+}
+
+.menu-button:hover {
+    -fx-background-image: url('../../png/menuIcon_filled.png');
 }
 
 .dictionary-scene .clear-history-button {

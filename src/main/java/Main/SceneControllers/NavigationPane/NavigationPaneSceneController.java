@@ -42,7 +42,7 @@ public class NavigationPaneSceneController extends BaseSceneController implement
     @FXML
     private Pane blurPane;
     @FXML
-    private ImageView menuButton;
+    protected Button menuButton;
     @FXML
     private Button backButton;
     @FXML

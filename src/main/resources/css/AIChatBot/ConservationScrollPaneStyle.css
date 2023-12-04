@@ -1,9 +1,7 @@
-
-
-.scroll-pane {
+.chat-box {
     -fx-background-radius: 30;
 }
 
-.scroll-pane > .viewport {
+.chat-box > .viewport {
     -fx-background-radius: 30;
 }
