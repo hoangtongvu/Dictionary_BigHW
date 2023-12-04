@@ -55,10 +55,14 @@
                                        <children>
                                           <HBox fx:id="wordHbox" prefHeight="40.0" prefWidth="281.0">
                                              <children>
-                                                <Label fx:id="wordLabel" maxWidth="1000.0" minWidth="-Infinity" prefHeight="40.0" prefWidth="79.0" styleClass="word-label" text="word" wrapText="true">
+                                                <Label fx:id="wordLabel" maxWidth="1000.0" minWidth="-Infinity" prefHeight="40.0" prefWidth="79.0" text="word" wrapText="true">
                                                    <HBox.margin>
                                                       <Insets left="20.0" />
                                                    </HBox.margin>
+                                                   <styleClass>
+                                                      <String fx:value="label-highlight" />
+                                                      <String fx:value="word-label" />
+                                                   </styleClass>
                                                 </Label>
                                                 <Button id="speakerButton" fx:id="soundButton" mnemonicParsing="false" onAction="#onSoundButton" prefHeight="29.0" prefWidth="29.0">
                                                    <HBox.margin>
@@ -91,7 +95,7 @@
                            <children>
                               <Pane prefHeight="60.0" prefWidth="328.0" styleClass="gradient-pane-2" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Label layoutX="66.0" layoutY="10.0" text="Usage over time" />
+                                    <Label layoutX="97.0" layoutY="15.0" styleClass="label-highlight" text="Usage over time" />
                                  </children></Pane>
                               <AnchorPane fx:id="ngramPlaceHolder" layoutY="60.0" prefHeight="169.0" prefWidth="322.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
                                  <children>

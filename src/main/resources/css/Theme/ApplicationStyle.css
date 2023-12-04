@@ -32,17 +32,6 @@
     -fx-background-radius: 10px;
 }
 
-.sideMenuButton:disabled {
-    -fx-opacity: 1;
-}
-
-.sideMenuButton:hover {
-    -fx-background-color: linear-gradient(to right,#200D3A, #292651, #2E4770);
-    -fx-font-weight: bold;
-    -fx-text-fill: white;
-    -fx-font-size: 20;
-}
-
 .sideMenu {
     -fx-background-color: #21252b;
 }
@@ -67,15 +56,31 @@
     -fx-text-fill: white;
 }
 
-#webView .scroll-bar {
-    visibility: false;
-}
-
 .normal-label {
     -fx-text-fill: white;
     -fx-font-family: Roboto;
 }
 
+.timer-title {
+    -fx-alignment: center;
+    -fx-font-size: 20;
+    -fx-font-family: Roboto;
+    -fx-font-weight: bold;
+    -fx-background-color: #313131;
+    -fx-text-fill: #7c7c7c; /* Neon green */
+    -fx-background-radius: 10 10 0 0;
+}
+
+.timer-label {
+    -fx-font-family: Roboto;
+    -fx-font-weight: bold;
+    -fx-font-size: 40;
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 2px 0;
+    -fx-text-fill:  #7c7c7c; /* Neon green */
+    -fx-alignment: center;
+    -fx-prompt-text-fill:  #7c7c7c; /* Neon green */
+}
 
 
 

@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="timerPane" minWidth="0.0" prefHeight="274.0" prefWidth="288.0" styleClass="timer-card" stylesheets="@../../css/Theme/Home.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Widget.StudyTimerController">
+<AnchorPane fx:id="timerPane" minWidth="0.0" prefHeight="274.0" prefWidth="288.0" stylesheets="@../../css/Theme/dark-theme.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Widget.StudyTimerController">
    <children>
-      <Label prefHeight="63.0" prefWidth="288.0" styleClass="timer-title" stylesheets="@../../css/Theme/Home.css" text="Study Timer" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Button fx:id="startButton" layoutX="19.0" layoutY="231.0" mnemonicParsing="false" onAction="#startTimer" prefHeight="25.0" prefWidth="67.0" text="Start" AnchorPane.bottomAnchor="17.857142857142833" />
-      <Button fx:id="pauseButton" layoutX="97.0" layoutY="231.0" mnemonicParsing="false" onAction="#pauseTimer" prefHeight="25.0" prefWidth="95.0" text="Pause" AnchorPane.bottomAnchor="17.857142857142833" />
-      <Button fx:id="resetButton" layoutX="202.0" layoutY="231.0" mnemonicParsing="false" onAction="#resetTimer" prefHeight="25.0" prefWidth="67.0" text="Reset" AnchorPane.bottomAnchor="17.857142857142833" />
-      <Label fx:id="timerLabel" layoutX="53.0" layoutY="85.0" prefHeight="25.0" prefWidth="183.0" styleClass="timer-label" stylesheets="@../../css/Theme/Home.css" text="00:00:00" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="85.0" />
-      <TextField fx:id="timerTextField" layoutX="169.0" layoutY="152.0" onAction="#onTimerSet" onKeyReleased="#onKeyTyped" prefHeight="25.0" prefWidth="104.0" promptText="minutes" AnchorPane.bottomAnchor="96.85714285714286" AnchorPane.leftAnchor="169.0" AnchorPane.rightAnchor="15.0" />
-      <CheckBox fx:id="soundCheckBox" layoutX="14.0" layoutY="192.0" mnemonicParsing="false" onAction="#onTick" prefHeight="17.0" prefWidth="261.0" stylesheets="@../../css/Theme/Home.css" text="Play sound after timer ends?" AnchorPane.bottomAnchor="60.85714285714286" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="12.857142857142833" />
-      <Label layoutX="17.0" layoutY="152.0" prefHeight="25.0" prefWidth="147.0" styleClass="title-label" stylesheets="@../../css/Theme/Home.css" text="How many minutes?" AnchorPane.bottomAnchor="96.85714285714286" AnchorPane.leftAnchor="17.0" />
+      <Label alignment="CENTER" prefHeight="63.0" prefWidth="288.0" stylesheets="@../../css/Theme/dark-theme.css" text="Study Timer" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <styleClass>
+            <String fx:value="label-highlight" />
+            <String fx:value="gradient-pane-2" />
+            <String fx:value="title-pane" />
+         </styleClass></Label>
+      <Button fx:id="startButton" layoutX="19.0" layoutY="231.0" mnemonicParsing="false" onAction="#startTimer" prefHeight="25.0" prefWidth="67.0" styleClass="pill-button" text="Start" AnchorPane.bottomAnchor="17.857142857142833" />
+      <Button fx:id="pauseButton" layoutX="97.0" layoutY="231.0" mnemonicParsing="false" onAction="#pauseTimer" prefHeight="25.0" prefWidth="95.0" styleClass="pill-button" text="Pause" AnchorPane.bottomAnchor="17.857142857142833" />
+      <Button fx:id="resetButton" layoutX="202.0" layoutY="231.0" mnemonicParsing="false" onAction="#resetTimer" prefHeight="25.0" prefWidth="67.0" styleClass="pill-button" text="Reset" AnchorPane.bottomAnchor="17.857142857142833" />
+      <Label fx:id="timerLabel" layoutX="-1.0" layoutY="85.0" prefHeight="47.0" prefWidth="294.0" style="-fx-alignment: center;" styleClass="timer-label" stylesheets="@../../css/Theme/dark-theme.css" text="00:00:00" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="85.0">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <TextField fx:id="timerTextField" layoutX="171.0" layoutY="146.0" onAction="#onTimerSet" onKeyReleased="#onKeyTyped" prefHeight="25.0" prefWidth="104.0" promptText="minutes" AnchorPane.bottomAnchor="90.28571428571428" AnchorPane.leftAnchor="171.0" AnchorPane.rightAnchor="13.0" />
+      <CheckBox fx:id="soundCheckBox" layoutX="14.0" layoutY="192.0" mnemonicParsing="false" onAction="#onTick" prefHeight="17.0" prefWidth="261.0" stylesheets="@../../css/Theme/dark-theme.css" text="Play sound after timer ends?" AnchorPane.bottomAnchor="60.85714285714286" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="12.857142857142833" />
+      <Label layoutX="17.0" layoutY="152.0" prefHeight="25.0" prefWidth="147.0" styleClass="title-label" stylesheets="@../../css/Theme/dark-theme.css" text="How many minutes?" AnchorPane.bottomAnchor="96.85714285714286" AnchorPane.leftAnchor="17.0" />
    </children>
 </AnchorPane>

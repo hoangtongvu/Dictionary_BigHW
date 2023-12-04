@@ -122,7 +122,7 @@ public abstract class DicNode {
         updateFromChild();
     }
 
-    String theme = "/css/Theme/EditWord.css";
+    String theme = "/css/Theme/dark-theme.css";
 
     public String getTheme() {
         return theme;

@@ -98,7 +98,7 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                <AnchorPane maxWidth="400.0" minHeight="0.0" minWidth="200.0" prefHeight="388.0" prefWidth="237.0" styleClass="anchor-pane">
+                <AnchorPane maxWidth="300.0" minHeight="0.0" minWidth="200.0" prefHeight="388.0" prefWidth="237.0" styleClass="anchor-pane">
                      <children>
                         <AnchorPane fx:id="editorPane" layoutX="10.0" layoutY="283.0" maxWidth="258.0" prefHeight="260.0" prefWidth="235.0" styleClass="floating-anchor-pane" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="283.0" />
                         <AnchorPane layoutY="8.0" prefHeight="248.0" prefWidth="235.0" styleClass="floating-anchor-pane" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="8.0">
@@ -111,7 +111,7 @@
                                     <String fx:value="gradient-pane-2" />
                                  </styleClass>
                                  <children>
-                                    <Label layoutX="29.0" layoutY="6.0" styleClass="label-highlight" text="List of added word" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="6.0" />
+                                    <Label alignment="CENTER" layoutX="10.0" layoutY="4.0" prefHeight="33.0" prefWidth="214.0" styleClass="label-highlight" text="Added word" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="4.0" />
                                  </children>
                               </AnchorPane>
                            </children>
