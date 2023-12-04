@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -17,14 +18,17 @@ public class TodoLabel implements Initializable
 {
     @FXML private HBox rootHbox;
     @FXML private Label label;
+    @FXML private TextField editTextField;
 
     private TodoList todoList;
     public final CustomEvent onDoubleClickEvent;
+    public final CustomEventPackage.OneParameter.CustomEvent<String> onUserConfirmEvent;
 
 
     public TodoLabel()
     {
         this.onDoubleClickEvent = new CustomEvent(this);
+        this.onUserConfirmEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
     }
 
     @Override
@@ -62,7 +66,6 @@ public class TodoLabel implements Initializable
 
     private void OnDoubleClick()
     {
-        System.out.println("hi");
         this.onDoubleClickEvent.Invoke(this);
     }
 
@@ -79,6 +82,20 @@ public class TodoLabel implements Initializable
     public void SetContent(String value)
     {
         this.label.setText(value);
+    }
+
+    public void ToggleEditTextField(boolean value)
+    {
+        this.editTextField.setVisible(value);
+    }
+
+    @FXML
+    private void OnTextFieldConfirm()
+    {
+        String content = this.editTextField.getText();
+        if (content.isEmpty()) return;
+        this.ToggleEditTextField(false);
+        this.onUserConfirmEvent.Invoke(this, content);
     }
 
 }

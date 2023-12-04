@@ -108,4 +108,18 @@ public class TodoList implements Initializable
         this.todoLabels.add(label);
     }
 
+    @FXML
+    private void CreateNewTodoLabel()
+    {
+        //create dummy label.
+        //sub create in manager to onUserConfirm.
+        
+        TodoLabel todoLabel = TodoLabel.CreateInstance(this);
+        todoLabel.SetNewParentPane(this.todoHolderVbox);
+        todoLabel.ToggleEditTextField(true);
+
+        todoLabel.onUserConfirmEvent.AddListener(this.todoListCtrl.getTodoListManager()::CreateNewTodoElement);
+
+    }
+
 }

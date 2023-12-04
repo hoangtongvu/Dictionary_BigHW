@@ -13,7 +13,7 @@
          <children>
             <HBox alignment="TOP_RIGHT">
                <children>
-                  <Button mnemonicParsing="false" text="Add" />
+                  <Button mnemonicParsing="false" onAction="#CreateNewTodoLabel" text="Add" />
                </children>
             </HBox>
             <ScrollPane fitToWidth="true" prefHeight="246.0" prefWidth="600.0">
