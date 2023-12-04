@@ -40,7 +40,8 @@ public class AccountManager {
         RANKING,
         COMPLETION_RATIO,
         TOTAL_STUDY_TIME,
-        TOTAL_SESSION_TIME
+        TOTAL_SESSION_TIME,
+        USER_NAME
     }
 
     private static AccountManager instance;
@@ -108,6 +109,9 @@ public class AccountManager {
                 break;
             case RANKING:
                 label.setText(String.valueOf(User.getCurrentUser().getRank()));
+                break;
+            case USER_NAME:
+                label.setText(String.valueOf(User.getCurrentUser().getUserName()));
                 break;
         }
     }

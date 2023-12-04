@@ -72,7 +72,6 @@
     -fx-font-family: 'Roboto', sans-serif;
     -fx-text-fill:  white;
     -fx-font-weight: bold;
-    -fx-font-size: 12;
     -fx-wrap-text: true;
 }
 
@@ -80,7 +79,6 @@
     -fx-font-family: 'Roboto', sans-serif;
     -fx-text-fill:  #CE5E82;
     -fx-font-weight: bold;
-    -fx-font-size: 20;
     -fx-wrap-text: true;
 }
 
@@ -182,11 +180,11 @@
     -fx-background-image: url('../../png/star_filled.png');
 }
 
-.dictionary-scene .edit-button {
+.edit-button {
     -fx-background-image: url('../../png/edit_dictionary.png');
 }
 
-.dictionary-scene .edit-button:hover {
+.edit-button:hover {
     -fx-background-image: url('../../png/edit_filled.png');
 }
 
