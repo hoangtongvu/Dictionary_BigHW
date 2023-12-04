@@ -8,7 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
-public class ExampleEditor {
+public class ExampleEditor extends Editor {
     protected TextArea exampleTextArea = new TextArea();
     protected TextArea translationTextArea = new TextArea();
     protected Label exampleLabel = new Label("EXAMPLE");
@@ -71,15 +71,14 @@ public class ExampleEditor {
         exampleTextArea.addEventHandler(KeyEvent.KEY_RELEASED, exampleTypeHandler);
         translationTextArea.addEventHandler(KeyEvent.KEY_RELEASED, translationTypeHandler);
 
-        editorPane.getStylesheets().add(String.valueOf(getClass().getResource("/css/Theme/EditWord.css")));
+        editorPane.getStylesheets().add(String.valueOf(getClass().getResource(theme)));
 
         // Assign style classes
-        editorPane.getStyleClass().add("editor-anchor-pane");
-        exampleTextArea.getStyleClass().add("editor-text-field");
-        translationTextArea.getStyleClass().add("editor-text-field");
-        exampleLabel.getStyleClass().add("editor-name");
-        exampleTextLabel.getStyleClass().add("field-name");
-        translationLabel.getStyleClass().add("field-name");
+        exampleTextArea.getStyleClass().add(textAreaStyle);
+        translationTextArea.getStyleClass().add(textAreaStyle);
+        exampleLabel.getStyleClass().add(editorNameStyle);
+        exampleTextLabel.getStyleClass().add(fieldNameStyle);
+        translationLabel.getStyleClass().add(fieldNameStyle);
     }
 
     EventHandler<KeyEvent> exampleTypeHandler = new EventHandler<KeyEvent>() {

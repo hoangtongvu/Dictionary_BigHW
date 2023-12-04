@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
-public class DescriptionEditor {
+public class DescriptionEditor extends Editor {
     protected TextField wordTypeTextField = new TextField();
     protected Label wordTypeLabel = new Label("Word Type");
     protected Label descriptionLabel = new Label("DESCRIPTION");
@@ -51,13 +51,12 @@ public class DescriptionEditor {
         editorPane.getChildren().addAll(descriptionLabel, wordTypeTextField, wordTypeLabel);
         wordTypeTextField.addEventHandler(KeyEvent.KEY_RELEASED, typeHandler);
 
-        editorPane.getStylesheets().add(String.valueOf(getClass().getResource("/css/Theme/EditWord.css")));
+        editorPane.getStylesheets().add(String.valueOf(getClass().getResource(theme)));
 
         // Assign style classes
-        editorPane.getStyleClass().add("editor-anchor-pane");
-        wordTypeTextField.getStyleClass().add("editor-text-field");
-        descriptionLabel.getStyleClass().add("editor-name");
-        wordTypeLabel.getStyleClass().add("field-name");
+        wordTypeTextField.getStyleClass().add(textFieldStyle);
+        descriptionLabel.getStyleClass().add(editorNameStyle);
+        wordTypeLabel.getStyleClass().add(fieldNameStyle);
     }
     EventHandler<KeyEvent> typeHandler = new EventHandler<KeyEvent>() {
         @Override
