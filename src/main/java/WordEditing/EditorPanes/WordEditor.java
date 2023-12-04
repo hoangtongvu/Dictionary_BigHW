@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
-public class WordEditor {
+public class WordEditor extends Editor {
     private TextField wordTextField = new TextField();
     private TextField soundTextField = new TextField();
     private Label wordBlockLabel = new Label("WORD");
@@ -48,11 +48,11 @@ public class WordEditor {
         AnchorPane.setRightAnchor(wordTextField, 12.0);
 
         soundLabel.setLayoutX(14.0);
-        soundLabel.setLayoutY(72.0);
+        soundLabel.setLayoutY(100);
         soundLabel.setPrefSize(65.0, 17.0);
 
         soundTextField.setLayoutX(79.0);
-        soundTextField.setLayoutY(68.0);
+        soundTextField.setLayoutY(90);
         AnchorPane.setLeftAnchor(soundTextField, 79.0);
         AnchorPane.setRightAnchor(soundTextField, 12.0);
 
@@ -60,15 +60,14 @@ public class WordEditor {
         wordTextField.addEventHandler(KeyEvent.KEY_RELEASED, wordTypeHandler);
         soundTextField.addEventHandler(KeyEvent.KEY_RELEASED, soundTypeHandler);
 
-        editorPane.getStylesheets().add(String.valueOf(getClass().getResource("/css/EditWord.css")));
+        editorPane.getStylesheets().add(String.valueOf(getClass().getResource(theme)));
 
         // Assign style classes
-        editorPane.getStyleClass().add("editor-anchor-pane");
-        wordTextField.getStyleClass().add("editor-text-field");
-        wordBlockLabel.getStyleClass().add("editor-name");
-        wordLabel.getStyleClass().add("field-name");
-        soundTextField.getStyleClass().add("editor-text-field");
-        soundLabel.getStyleClass().add("field-name");
+        wordTextField.getStyleClass().add(textFieldStyle);
+        wordBlockLabel.getStyleClass().add(editorNameStyle);
+        wordLabel.getStyleClass().add(fieldNameStyle);
+        soundTextField.getStyleClass().add(textFieldStyle);
+        soundLabel.getStyleClass().add(fieldNameStyle);
     }
 
     EventHandler<KeyEvent> wordTypeHandler = new EventHandler<KeyEvent>() {

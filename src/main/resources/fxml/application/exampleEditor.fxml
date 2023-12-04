@@ -4,12 +4,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="240.0" styleClass="anchor-pane" stylesheets="@../../css/EditWord.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="240.0" styleClass="anchor-pane" stylesheets="@../../css/Theme/dark-theme.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="61.0" layoutY="25.0" prefHeight="26.0" prefWidth="197.0" styleClass="editor-name" stylesheets="@../../css/EditWord.css" text="WORD" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Label layoutX="7.0" layoutY="41.0" prefHeight="17.0" prefWidth="65.0" styleClass="field-name" stylesheets="@../../css/EditWord.css" text="Example" AnchorPane.leftAnchor="14.0" />
-      <Label layoutX="14.0" layoutY="72.0" prefHeight="17.0" prefWidth="65.0" styleClass="field-name" stylesheets="@../../css/EditWord.css" text="Translation" AnchorPane.leftAnchor="14.0" />
-      <TextField layoutX="79.0" layoutY="37.0" styleClass="editor-text-field" stylesheets="@../../css/EditWord.css" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="12.0" />
-      <TextField layoutX="79.0" layoutY="68.0" styleClass="editor-text-field" stylesheets="@../../css/EditWord.css" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="12.0" />
+      <Label layoutX="61.0" layoutY="25.0" prefHeight="26.0" prefWidth="197.0" styleClass="editor-name" stylesheets="@../../css/Theme/dark-theme.css" text="WORD" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label layoutX="7.0" layoutY="41.0" prefHeight="17.0" prefWidth="65.0" styleClass="field-name" stylesheets="@../../css/Theme/dark-theme.css" text="Example" AnchorPane.leftAnchor="14.0" />
+      <Label layoutX="14.0" layoutY="72.0" prefHeight="17.0" prefWidth="65.0" styleClass="field-name" stylesheets="@../../css/Theme/dark-theme.css" text="Translation" AnchorPane.leftAnchor="14.0" />
+      <TextField layoutX="79.0" layoutY="37.0" styleClass="editor-text-field" stylesheets="@../../css/Theme/dark-theme.css" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="12.0" />
+      <TextField layoutX="79.0" layoutY="68.0" styleClass="editor-text-field" stylesheets="@../../css/Theme/dark-theme.css" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="12.0" />
    </children>
 </AnchorPane>

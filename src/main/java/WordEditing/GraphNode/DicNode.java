@@ -122,6 +122,16 @@ public abstract class DicNode {
         updateFromChild();
     }
 
+    String theme = "/css/Theme/dark-theme.css";
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
     public DicNode getParent() {
         return parent;
     }
@@ -163,7 +173,7 @@ public abstract class DicNode {
 
     public void setStyleSheet(Node object) {
         try {
-            object.getStyleClass().getClass().getResource("/css/EditWord.css");
+            object.getStyleClass().getClass().getResource(theme);
         } catch (Exception e) {
             System.out.println(e);
             System.out.println("INVALID TYPE");
@@ -204,8 +214,8 @@ public abstract class DicNode {
         title = new Label();
         title.setText(titleString);
 
-        title.getStylesheets().getClass().getResource("/css/EditWord.css");
-        nodePane.getStylesheets().getClass().getResource("/css/EditWord.css");
+        title.getStylesheets().getClass().getResource(theme);
+        nodePane.getStylesheets().getClass().getResource(theme);
         setStyleSheet(title);
         setStyleSheet(nodePane);
         setStyleClass(title, "node-title");

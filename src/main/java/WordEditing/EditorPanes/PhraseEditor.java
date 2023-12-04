@@ -8,7 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
-public class PhraseEditor {
+public class PhraseEditor extends Editor{
     protected TextArea phraseTextArea = new TextArea();
     protected Label phraseLabel = new Label("PHRASE");
     protected Label phraseTextLabel = new Label("Phrase");
@@ -53,13 +53,12 @@ public class PhraseEditor {
         editorPane.getChildren().addAll(phraseLabel, phraseTextLabel, phraseTextArea);
         phraseTextArea.addEventHandler(KeyEvent.KEY_RELEASED, typeHandler);
 
-        editorPane.getStylesheets().add(String.valueOf(getClass().getResource("/css/EditWord.css")));
+        editorPane.getStylesheets().add(String.valueOf(getClass().getResource(theme)));
 
         // Assign style classes
-        editorPane.getStyleClass().add("editor-anchor-pane");
-        phraseTextArea.getStyleClass().add("editor-text-field");
-        phraseLabel.getStyleClass().add("editor-name");
-        phraseTextLabel.getStyleClass().add("field-name");
+        phraseTextArea.getStyleClass().add(textAreaStyle);
+        phraseLabel.getStyleClass().add(editorNameStyle);
+        phraseTextLabel.getStyleClass().add(fieldNameStyle);
     }
 
     EventHandler<KeyEvent> typeHandler = new EventHandler<KeyEvent>() {
