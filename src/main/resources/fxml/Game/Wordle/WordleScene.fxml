@@ -12,8 +12,8 @@
 <AnchorPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" stylesheets="@../../../css/wordle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Game.Wordle.WordleController">
    <children>
       <Label fx:id="titleLabel" prefHeight="88.0" prefWidth="1280.0" text="Wordle!" />
-      <Button fx:id="button" layoutX="603.0" layoutY="713.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSubmitButtonClick" prefHeight="35.0" prefWidth="74.0" text="Submit" />
-      <TextField fx:id="guessBox" layoutX="529.0" layoutY="662.0" prefHeight="35.0" prefWidth="222.0" promptText="Enter here...">
+      <Button fx:id="button" layoutX="604.0" layoutY="719.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSubmitButtonClick" prefHeight="35.0" prefWidth="74.0" text="Submit" />
+      <TextField fx:id="guessBox" layoutX="529.0" layoutY="669.0" prefHeight="35.0" prefWidth="222.0" promptText="Enter here...">
          <font>
             <Font size="18.0" />
          </font>
@@ -25,23 +25,28 @@
                   <Label fx:id="box00" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box01" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box02" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box03" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box04" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="600.0">
@@ -49,23 +54,28 @@
                   <Label fx:id="box10" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box11" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box12" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box13" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box14" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="600.0">
@@ -73,23 +83,28 @@
                   <Label fx:id="box20" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box21" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box22" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box23" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box24" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="600.0">
@@ -97,23 +112,28 @@
                   <Label fx:id="box30" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box31" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box32" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box33" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box34" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="600.0">
@@ -121,23 +141,28 @@
                   <Label fx:id="box40" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box41" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box42" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box43" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box44" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="600.0">
@@ -145,28 +170,43 @@
                   <Label fx:id="box50" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box51" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box52" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box53" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                   <Label fx:id="box54" prefHeight="100.0" prefWidth="100.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                </children>
             </HBox>
          </children>
       </VBox>
-      <Label fx:id="report" layoutY="595.0" prefHeight="58.0" prefWidth="1280.0" />
-      <Button layoutX="170.0" layoutY="341.0" mnemonicParsing="false" onAction="#playAgain" prefHeight="35.0" prefWidth="74.0" text="Play Again" />
+      <Label fx:id="report" layoutY="595.0" prefHeight="44.0" prefWidth="1280.0" />
+      <AnchorPane layoutX="248.0" layoutY="79.0" prefHeight="541.0" prefWidth="785.0">
+         <children>
+            <AnchorPane fx:id="DialogBox" layoutX="268.0" layoutY="95.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label layoutY="22.0" prefHeight="58.0" prefWidth="249.0" text="Play Again?" />
+                  <Button layoutX="146.0" layoutY="132.0" mnemonicParsing="false" onAction="#noPlayAgain" prefHeight="35.0" prefWidth="74.0" text="No" />
+                  <Button layoutX="26.0" layoutY="132.0" mnemonicParsing="false" onAction="#playAgain" prefHeight="35.0" prefWidth="74.0" text="Yes" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

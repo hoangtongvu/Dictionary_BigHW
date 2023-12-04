@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -115,6 +116,9 @@ public class WordleController extends BaseSceneController implements Initializab
     @FXML
     private Label box54 = new Label();
 
+    @FXML
+    private AnchorPane DialogBox;
+
     private String answer;
     private final String green = "#538D4E";
     private final String yellow = "#F1D669";
@@ -152,6 +156,7 @@ public class WordleController extends BaseSceneController implements Initializab
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        DialogBox.setVisible(false);
         this.wordleCtrl = GamesCtrl.getInstance().getWordleCtrl();
         guesses = 0;
         try {
@@ -200,6 +205,7 @@ public class WordleController extends BaseSceneController implements Initializab
 
             if (text.equals(answer)) {
                 report.setText("Congratulations! You win!");
+                DialogBox.setVisible(true);
                 return;
             }
             guesses += 1;
@@ -211,6 +217,7 @@ public class WordleController extends BaseSceneController implements Initializab
 
         if(guesses == 6) {
             report.setText("You lose! The correct answer is: " + answer);
+            DialogBox.setVisible(true);
         }
     }
 
@@ -254,5 +261,10 @@ public class WordleController extends BaseSceneController implements Initializab
         generateWord();
         guesses = 0;
         report.setText("");
+        DialogBox.setVisible(false);
+    }
+
+    public void noPlayAgain(ActionEvent e) {
+        DialogBox.setVisible(false);
     }
 }

@@ -23,6 +23,8 @@
     -fx-background-color: "#404140";
 }
 
-#guess {
-    -fx-border-radius: 10;
+#DialogBox {
+    -fx-background-color: "white";
+    -fx-font-size: 20;
+    -fx-border-color: "black";
 }
