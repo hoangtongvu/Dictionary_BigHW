@@ -1,3 +1,16 @@
 #Pane {
     -fx-background-color: "#21252b";
 }
+
+#langPane {
+    -fx-background-color: "#9042f5";
+    -fx-background-radius: 25 25 25 25;
+}
+
+.label {
+    -fx-font-size: 30;
+    -fx-font-family:"Helvetica Neue";
+    -fx-alignment: center;
+    -fx-font-weight: 900;
+    -fx-text-fill: "white";
+}
