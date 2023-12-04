@@ -14,7 +14,7 @@ public class ThesaurusAPI {
         //String word = "";
         String apiURL = "https://api.api-ninjas.com/v1/thesaurus?word=" + word;
         String apiKey = "jWtGX6M7EGJA5Ye2ZmZ1fw==GRKT4LDQIQniLvzC";
-        JSONObject res = new JSONObject("{\"hypernyms\":[],\"synonyms\":[],\"antonyms\":[],\"hyponyms\":[]}");
+        JSONObject res = new JSONObject("{\"synonyms\":[],\"antonyms\":[]}");
         try {
             URL url = new URL(apiURL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
