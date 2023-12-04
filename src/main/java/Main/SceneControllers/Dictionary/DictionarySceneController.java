@@ -161,7 +161,13 @@ public class DictionarySceneController extends BaseSceneController implements In
             if (!SearchHistory.getInstance().getWordHistory().isEmpty()) {
                 historyListView.getItems().addAll(SearchHistory.getInstance().getWordHistory());
             }
-            updateGraph();
+            try {
+                updateGraph();
+            } catch (Exception e) {
+                System.out.println("Cant get NGRAM");
+                wordUsageGraph.getData().clear();
+            }
+
 
             enableTasks();
         }

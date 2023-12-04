@@ -31,9 +31,9 @@ public class App extends Application {
         this.primaryStage = primaryStage;
         myHostServices = getHostServices();
 
-        LoginSceneController initSC = FxmlFileManager.getInstance().loginSC;
+        HomeSceneController initSC = FxmlFileManager.getInstance().homeSC;
         FxmlFileManager.SwitchToInitScene(initSC);
-        Scene scene = new Scene(FxmlFileManager.getInstance().loginSC.getRoot());
+        Scene scene = new Scene(FxmlFileManager.getInstance().homeSC.getRoot());
 
         primaryStage.setMinWidth(1280);
         primaryStage.setMinHeight(768);
