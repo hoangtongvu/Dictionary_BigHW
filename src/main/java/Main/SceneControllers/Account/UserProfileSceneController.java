@@ -66,6 +66,8 @@ public class UserProfileSceneController extends BaseSceneController implements I
     protected Label rankingLabel;
     @FXML
     protected Label accessTimeLabel;
+    @FXML
+    protected Label nameLabel;
 
     @Override
     public void StartShow() {
@@ -133,6 +135,7 @@ public class UserProfileSceneController extends BaseSceneController implements I
             AccountManager.getInstance().getLineChart(dailyChart, AccountManager.DataCategory.SESSION_TIME, "Access time");
             AccountManager.getInstance().getPieChart(dailyGoalChart);
             AccountManager.getInstance().loadProfilePic(profilePic);
+            AccountManager.getInstance().getLabel(nameLabel, AccountManager.DataCategory.USER_NAME);
         } else {
 
         }
