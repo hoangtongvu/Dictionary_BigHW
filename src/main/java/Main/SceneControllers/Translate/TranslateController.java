@@ -2,8 +2,10 @@ package Main.SceneControllers.Translate;
 
 import Main.SceneControllers.BaseSceneController;
 import Interfaces.IHasNavPane;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import LanguageTranslation.TranslatorAPI;
 
@@ -15,7 +17,8 @@ public class TranslateController extends BaseSceneController implements IHasNavP
     @FXML
     private TextArea EngArea;
 
-
+    @FXML
+    private Label recordingStatus;
 
     @Override
     public void StartShow() {
@@ -61,6 +64,27 @@ public class TranslateController extends BaseSceneController implements IHasNavP
         String text = EngArea.getText();
         if (!text.isEmpty()) {
             TextToSpeech.EnTextToSpeech(text);
+        }
+    }
+
+    @FXML
+    public void onMicrophoneButton(ActionEvent e) {
+        if (!AudioManager.isRecording()) {
+            recordingStatus.setText("Listening...");
+            Thread voiceRegThread = new Thread(() -> {
+                AudioManager.startRecording();
+                EngArea.setText("Processing...");
+                String searchRes = SpeechToText.getSpeechToText();
+                Platform.runLater(() -> {
+                    EngArea.setText(searchRes);
+                });
+            });
+            voiceRegThread.setDaemon(true);
+            voiceRegThread.start();
+        } else {
+            recordingStatus.setText("");
+            AudioManager.stopRecording();
+            System.out.println("Recording stopped");
         }
     }
 }

@@ -69,6 +69,8 @@ public class NavigationPaneSceneController extends BaseSceneController implement
     protected StackPane loginPane;
     @FXML
     protected AnchorPane loginPlaceholder;
+    @FXML
+    protected Button thesaurusButton;
 
     private TranslateTransition drawerTranslateTransition;
     private FadeTransition blurPaneFadeTransition;
@@ -87,6 +89,7 @@ public class NavigationPaneSceneController extends BaseSceneController implement
         chatButton.setDisable(status);
         translateButton.setDisable(status);
         settingButton.setDisable(status);
+        thesaurusButton.setDisable(status);
     }
 
     //TODO: set all buttons on nav pane to disable until animation is done
@@ -170,9 +173,11 @@ public class NavigationPaneSceneController extends BaseSceneController implement
         }
     }
 
-    public static void AddNavPaneComponentsToRoot(Parent root)
+    public static void AddNavPaneComponentsToRoot(Parent root)//Checking BaseSC reference has better performance.
     {
-        ((Pane) root).getChildren().addAll(nodes);
+        List<Node> children = ((Pane) root).getChildren();
+        if (children.containsAll(nodes)) return;
+        children.addAll(nodes);
     }
 
 
@@ -261,4 +266,7 @@ public class NavigationPaneSceneController extends BaseSceneController implement
     {
         MoveToScene(FxmlFileManager.getInstance().settingSC);
     }
+
+    @FXML
+    private void MoveToThesaurusScene() {MoveToScene(FxmlFileManager.getInstance().thesaurusSC);}
 }

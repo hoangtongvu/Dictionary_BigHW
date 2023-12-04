@@ -1,11 +1,13 @@
 package Main;
 
+import Interfaces.IHasBackButton;
 import Logger.LoggersCtrl;
 import Main.SceneControllers.AIChatBot.AIConversationSceneController;
 import Main.SceneControllers.Account.EditProfilePic;
 import Main.SceneControllers.Account.LoginSceneController;
 import Main.SceneControllers.Account.TimePickerController;
 import Main.SceneControllers.Account.UserProfileSceneController;
+import Main.SceneControllers.BackButton.BackButton;
 import Main.SceneControllers.BaseSceneController;
 import Main.SceneControllers.Dictionary.DictionarySceneController;
 import Main.SceneControllers.Dictionary.EditWordSceneController;
@@ -15,6 +17,7 @@ import Main.SceneControllers.Game.Wordle.WordleController;
 import Interfaces.IHasNavPane;
 import Main.SceneControllers.NavigationPane.NavigationPaneSceneController;
 import Main.SceneControllers.Settings.SettingSceneController;
+import Main.SceneControllers.Thesaurus.ThesaurusController;
 import Main.SceneControllers.Translate.TranslateController;
 import Main.application.App;
 import javafx.fxml.FXMLLoader;
@@ -63,8 +66,9 @@ public class FxmlFileManager
     public final UserProfileSceneController profileSC;
     public final EditProfilePic editProfilePicSC;
     public final TimePickerController timePickerSC;
+    public final ThesaurusController thesaurusSC;
 
-//endregion
+    //endregion
 
     //region SwitchScene functions.
     public static void SwitchToInitScene(BaseSceneController initSC)
@@ -75,6 +79,25 @@ public class FxmlFileManager
 
 
     public static void SwitchScene(BaseSceneController newSceneController)
+    {
+        if (currentSC == newSceneController) return;
+        if (currentSC != null) currentSC.EndShow();
+        newSceneController.setPrevSC(currentSC);
+        currentSC = newSceneController;
+        currentSC.StartShow();
+
+
+        Stage primaryStage = App.getPrimaryStage();
+
+        primaryStage.getScene().setRoot(newSceneController.getRoot());
+        primaryStage.show();
+
+        //Check if SC implements IHasNavPane flag -> add navPane to that scene.
+        TryAddNavPane(newSceneController);
+        TryAddBackButton(newSceneController);
+    }
+
+    public static void SwitchBack2PrevScene(BaseSceneController newSceneController)
     {
         if (currentSC == newSceneController) return;
         if (currentSC != null) currentSC.EndShow();
@@ -89,7 +112,7 @@ public class FxmlFileManager
 
         //Check if SC implements IHasNavPane flag -> add navPane to that scene.
         TryAddNavPane(newSceneController);
-
+        TryAddBackButton(newSceneController);
     }
 
     private static void TryAddNavPane(BaseSceneController newSceneController)
@@ -98,8 +121,14 @@ public class FxmlFileManager
         else LoggersCtrl.systemLogger.Log(newSceneController.getClass() + " does not have IHasNavPane flag");
     }
 
+    private static void TryAddBackButton(BaseSceneController newSC)
+    {
+        if (newSC instanceof IHasBackButton) BackButton.GetInstance().setParentSC(newSC);
+        else LoggersCtrl.systemLogger.Log(newSC.getClass() + " does not have IHasBackButton flag");
+    }
 
-//endregion
+
+    //endregion
 
 
     private FxmlFileManager()
@@ -126,6 +155,7 @@ public class FxmlFileManager
         this.editProfilePicSC = this.LoadSC("/application/ProfilePicScene.fxml");
 
         this.navigationPaneSC = this.LoadSC("/application/NavigationPaneScene.fxml");
+        this.thesaurusSC = this.LoadSC("/application/thesaurusScene.fxml");
 
     }
 

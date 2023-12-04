@@ -22,3 +22,13 @@
 #Pane {
     -fx-background-color: "#404140";
 }
+
+#DialogBox {
+    -fx-background-color: "#21252b";
+    -fx-font-size: 20;
+}
+
+#playAgainLabel {
+    -fx-background-color: "#21252b";
+    -fx-text-fill: "white";
+}

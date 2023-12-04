@@ -131,7 +131,16 @@
                               <String fx:value="label-highlight" />
                            </styleClass>
                         </Button>
-                        <Button fx:id="settingButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToSettingsScene" prefHeight="46.0" prefWidth="248.0" text="Settings">
+                        <Button fx:id="thesaurusButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToThesaurusScene" prefHeight="46.0" prefWidth="248.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Thesaurus">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../png/magGlass.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="settingButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MoveToSettingsScene" prefHeight="46.0" prefWidth="248.0" styleClass="sideMenuButton" stylesheets="@../../css/ApplicationStyle.css" text="Settings">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

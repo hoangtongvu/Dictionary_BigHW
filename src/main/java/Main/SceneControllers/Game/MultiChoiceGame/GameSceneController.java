@@ -2,6 +2,7 @@ package Main.SceneControllers.Game.MultiChoiceGame;
 
 import Game.GamesCtrl;
 import Game.MultiChoiceGame.*;
+import Interfaces.IHasBackButton;
 import Main.FxmlFileManager;
 import Main.SceneControllers.BaseSceneController;
 import User.User;
@@ -22,7 +23,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class GameSceneController extends BaseSceneController implements Initializable
+public class GameSceneController extends BaseSceneController implements Initializable, IHasBackButton
 {
 
     //region FXML
@@ -354,7 +355,7 @@ public class GameSceneController extends BaseSceneController implements Initiali
 
     private void SwitchBackToStartScreen()
     {
-        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameStartSC);
+        FxmlFileManager.SwitchBack2PrevScene(this.getPrevSC());
     }
     
 

@@ -103,7 +103,7 @@
                      <right>
                         <AnchorPane prefHeight="642.0" prefWidth="340.0" BorderPane.alignment="CENTER">
                            <children>
-                              <AnchorPane fx:id="timerPlaceHolder1" layoutY="312.0" prefHeight="291.0" prefWidth="325.0" styleClass="floating-anchor-pane" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="312.0">
+                              <AnchorPane fx:id="todoListHolder" layoutY="312.0" prefHeight="291.0" prefWidth="325.0" styleClass="widget" stylesheets="@../../css/Home.css" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="312.0">
                                  <children>
                                     <Label layoutY="-15.0" prefHeight="30.0" prefWidth="96.0" style="-fx-font-weight: bold;" styleClass="label-highlight" text="To-do list">
                                        <font>

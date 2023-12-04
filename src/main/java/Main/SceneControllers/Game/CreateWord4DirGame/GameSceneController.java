@@ -4,6 +4,7 @@ import Game.CreateWord4DirGame.CreateWord4DirGameCtrl;
 import Game.CreateWord4DirGame.CreateWord4DirGameManager;
 import Game.CreateWord4DirGame.UI.OnFinishWordAnimator;
 import Game.GamesCtrl;
+import Interfaces.IHasBackButton;
 import Main.FxmlFileManager;
 import Main.SceneControllers.BaseSceneController;
 import Main.application.App;
@@ -13,7 +14,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
-import javafx.css.SizeUnits;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class GameSceneController extends BaseSceneController implements Initializable
+public class GameSceneController extends BaseSceneController implements Initializable, IHasBackButton
 {
 
     @FXML
@@ -363,7 +363,7 @@ public class GameSceneController extends BaseSceneController implements Initiali
 
     private void MoveBackToStartScreen()
     {
-        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().createWord4DirStartSC);
+        FxmlFileManager.SwitchBack2PrevScene(this.getPrevSC());
     }
 
     private void ToggleTimerText(boolean useTimer)
