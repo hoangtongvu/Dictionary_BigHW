@@ -1,8 +1,11 @@
-package TodoList;
+package TodoList.FileManager;
 
+import TodoList.TickStatus;
+import TodoList.TodoListCtrl;
 import UnsortedScript.FileManager.FileLoader;
 import UnsortedScript.FileManager.FileManager;
 import UnsortedScript.FileManager.FileSaver;
+import javafx.collections.ListChangeListener;
 import javafx.util.Pair;
 
 public class TodoListFileManager extends FileManager<Pair<TickStatus, String>>
@@ -11,6 +14,8 @@ public class TodoListFileManager extends FileManager<Pair<TickStatus, String>>
 
     public TodoListFileManager(TodoListCtrl todoListCtrl) {
         super(todoListCtrl.getTodoListManager().getList());
+        this.getLoader().Load();
+        this.getObservableList().addListener((ListChangeListener<Pair<TickStatus, String>>) change -> getSaver().Save());
     }
 
     @Override

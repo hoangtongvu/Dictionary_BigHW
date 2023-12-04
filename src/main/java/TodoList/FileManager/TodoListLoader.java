@@ -1,5 +1,6 @@
-package TodoList;
+package TodoList.FileManager;
 
+import TodoList.TickStatus;
 import UnsortedScript.FileManager.FileLoader;
 import UnsortedScript.FileManager.FileManager;
 import javafx.util.Pair;

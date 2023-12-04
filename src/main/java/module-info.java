@@ -34,6 +34,9 @@ module MainGroup.application {
     exports Main.SceneControllers.AIChatBot;
     opens Main.SceneControllers.AIChatBot to javafx.fxml;
 
+    exports TodoList.UI;
+    opens TodoList.UI to javafx.fxml;
+
 
     exports CustomEventPackage.OneParameter;
     opens CustomEventPackage.OneParameter to javafx.fxml;

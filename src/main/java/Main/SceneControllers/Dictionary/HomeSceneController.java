@@ -4,6 +4,7 @@ import Main.Database;
 import Main.SceneControllers.BaseSceneController;
 import Interfaces.IHasNavPane;
 import Main.SceneControllers.Widget.StudyTimerController;
+import TodoList.UI.TodoList;
 import User.User;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
@@ -43,6 +44,9 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
     @FXML
     protected Label ratioLabel;
 
+    @FXML
+    private AnchorPane todoListHolder;
+
     /**This part is for side menu*/
     @FXML
     public void initialize() {
@@ -56,6 +60,9 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
         }
 
         blurPane.setVisible(false);
+
+        TodoList todoList = TodoList.CreateInstance();
+        todoList.ChangeParent(this.todoListHolder);
 
     }
 
