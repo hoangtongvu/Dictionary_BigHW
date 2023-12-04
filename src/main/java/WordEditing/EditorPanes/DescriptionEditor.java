@@ -51,7 +51,7 @@ public class DescriptionEditor {
         editorPane.getChildren().addAll(descriptionLabel, wordTypeTextField, wordTypeLabel);
         wordTypeTextField.addEventHandler(KeyEvent.KEY_RELEASED, typeHandler);
 
-        editorPane.getStylesheets().add(String.valueOf(getClass().getResource("/css/EditWord.css")));
+        editorPane.getStylesheets().add(String.valueOf(getClass().getResource("/css/Theme/EditWord.css")));
 
         // Assign style classes
         editorPane.getStyleClass().add("editor-anchor-pane");

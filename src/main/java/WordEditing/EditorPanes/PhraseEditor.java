@@ -53,7 +53,7 @@ public class PhraseEditor {
         editorPane.getChildren().addAll(phraseLabel, phraseTextLabel, phraseTextArea);
         phraseTextArea.addEventHandler(KeyEvent.KEY_RELEASED, typeHandler);
 
-        editorPane.getStylesheets().add(String.valueOf(getClass().getResource("/css/EditWord.css")));
+        editorPane.getStylesheets().add(String.valueOf(getClass().getResource("/css/Theme/EditWord.css")));
 
         // Assign style classes
         editorPane.getStyleClass().add("editor-anchor-pane");

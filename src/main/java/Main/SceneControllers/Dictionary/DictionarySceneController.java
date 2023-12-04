@@ -100,7 +100,7 @@ public class DictionarySceneController extends BaseSceneController implements In
 
     private static WordBlock currentWordBlock = null;
 
-    private final String cssPath = getClass().getResource("/css/htmlStyle.css").toExternalForm();
+    private final String cssPath = getClass().getResource("/css/Theme/htmlStyle.css").toExternalForm();
     private final String  styleSheet = "<link rel=\"stylesheet\" href=\"" + cssPath + "\">";
 
     private WebEngine webEngine;

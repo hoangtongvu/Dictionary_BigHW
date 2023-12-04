@@ -12,35 +12,35 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" stylesheets="@../../css/EditWord.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Dictionary.EditWordSceneController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" stylesheets="@../../css/Theme/EditWord.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Dictionary.EditWordSceneController">
    <children>
-      <Pane layoutX="10.0" layoutY="10.0" prefHeight="41.0" prefWidth="854.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane layoutX="10.0" layoutY="10.0" prefHeight="41.0" prefWidth="854.0" styleClass="topBar" stylesheets="@../../css/Theme/ApplicationStyle.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button id="learning_button" fx:id="dictionary_button" layoutX="205.0" layoutY="5.0" mnemonicParsing="false" onAction="#toDictionary" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Dictionary" />
-            <Button id="statistics_button" layoutX="136.0" layoutY="5.0" mnemonicParsing="false" onAction="#toGames" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Games" />
-            <Button id="dictionary_button" layoutX="54.0" layoutY="5.0" mnemonicParsing="false" onAction="#toTranslate" styleClass="horizontalButton" stylesheets="@../../css/ApplicationStyle.css" text="Translate" />
+            <Button id="learning_button" fx:id="dictionary_button" layoutX="205.0" layoutY="5.0" mnemonicParsing="false" onAction="#toDictionary" styleClass="horizontalButton" stylesheets="@../../css/Theme/ApplicationStyle.css" text="Dictionary" />
+            <Button id="statistics_button" layoutX="136.0" layoutY="5.0" mnemonicParsing="false" onAction="#toGames" styleClass="horizontalButton" stylesheets="@../../css/Theme/ApplicationStyle.css" text="Games" />
+            <Button id="dictionary_button" layoutX="54.0" layoutY="5.0" mnemonicParsing="false" onAction="#toTranslate" styleClass="horizontalButton" stylesheets="@../../css/Theme/ApplicationStyle.css" text="Translate" />
          </children>
       </Pane>
-      <AnchorPane layoutX="-14.0" layoutY="41.0" prefHeight="559.0" prefWidth="1214.0" styleClass="anchor-pane" stylesheets="@../../css/EditWord.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="41.0">
+      <AnchorPane layoutX="-14.0" layoutY="41.0" prefHeight="559.0" prefWidth="1214.0" styleClass="anchor-pane" stylesheets="@../../css/Theme/EditWord.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="41.0">
          <children>
             <SplitPane dividerPositions="0.7822041984732824" prefHeight="520.0" prefWidth="800.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="558.0" prefWidth="852.0" styleClass="anchor-pane">
                      <children>
-                        <ScrollPane fx:id="canvas" layoutY="74.0" prefHeight="484.0" prefWidth="934.0" stylesheets="@../../css/EditWord.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+                        <ScrollPane fx:id="canvas" layoutY="74.0" prefHeight="484.0" prefWidth="934.0" stylesheets="@../../css/Theme/EditWord.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
                           <content>
-                            <AnchorPane maxHeight="4000.0" maxWidth="4000.0" minHeight="4000.0" minWidth="4000.0" prefHeight="4000.0" prefWidth="4000.0" styleClass="anchor-pane" stylesheets="@../../css/EditWord.css">
+                            <AnchorPane maxHeight="4000.0" maxWidth="4000.0" minHeight="4000.0" minWidth="4000.0" prefHeight="4000.0" prefWidth="4000.0" styleClass="anchor-pane" stylesheets="@../../css/Theme/EditWord.css">
                                  <children>
                                     <Rectangle fx:id="selectionRectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" layoutX="-5.0" layoutY="-5.0" stroke="BLACK" strokeType="INSIDE" styleClass="selectionRectangle" />
                                  </children>
                               </AnchorPane>
                           </content>
                         </ScrollPane>
-                        <AnchorPane prefHeight="60.0" prefWidth="934.0" styleClass="tool-pane" stylesheets="@../../css/EditWord.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane prefHeight="60.0" prefWidth="934.0" styleClass="tool-pane" stylesheets="@../../css/Theme/EditWord.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <AnchorPane fx:id="toolBar" layoutX="25.0" layoutY="9.0" minHeight="0.0" prefHeight="46.0" prefWidth="894.0" styleClass="tool-bar" stylesheets="@../../css/EditWord.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="50.0">
+                              <AnchorPane fx:id="toolBar" layoutX="25.0" layoutY="9.0" minHeight="0.0" prefHeight="46.0" prefWidth="894.0" styleClass="tool-bar" stylesheets="@../../css/Theme/EditWord.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="50.0">
                                  <children>
-                                    <Button fx:id="descriptionButton" layoutX="108.0" layoutY="6.0" mnemonicParsing="false" onAction="#addDescription" prefHeight="33.0" prefWidth="112.0" styleClass="tool-buttons" stylesheets="@../../css/EditWord.css" text="Description" AnchorPane.leftAnchor="108.0">
+                                    <Button fx:id="descriptionButton" layoutX="108.0" layoutY="6.0" mnemonicParsing="false" onAction="#addDescription" prefHeight="33.0" prefWidth="112.0" styleClass="tool-buttons" stylesheets="@../../css/Theme/EditWord.css" text="Description" AnchorPane.leftAnchor="108.0">
                                        <graphic>
                                           <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -49,7 +49,7 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="definitionButton" layoutX="226.0" layoutY="6.0" mnemonicParsing="false" onAction="#addDefinition" prefHeight="33.0" prefWidth="112.0" styleClass="tool-buttons" stylesheets="@../../css/EditWord.css" text="Definition" AnchorPane.leftAnchor="226.0">
+                                    <Button fx:id="definitionButton" layoutX="226.0" layoutY="6.0" mnemonicParsing="false" onAction="#addDefinition" prefHeight="33.0" prefWidth="112.0" styleClass="tool-buttons" stylesheets="@../../css/Theme/EditWord.css" text="Definition" AnchorPane.leftAnchor="226.0">
                                        <graphic>
                                           <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -58,7 +58,7 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="phraseButton" layoutX="344.0" layoutY="6.0" mnemonicParsing="false" onAction="#addPhrase" prefHeight="33.0" prefWidth="87.0" styleClass="tool-buttons" stylesheets="@../../css/EditWord.css" text="Phrase" AnchorPane.leftAnchor="344.0">
+                                    <Button fx:id="phraseButton" layoutX="344.0" layoutY="6.0" mnemonicParsing="false" onAction="#addPhrase" prefHeight="33.0" prefWidth="87.0" styleClass="tool-buttons" stylesheets="@../../css/Theme/EditWord.css" text="Phrase" AnchorPane.leftAnchor="344.0">
                                        <graphic>
                                           <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -67,7 +67,7 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="exampleButton" layoutX="437.0" layoutY="6.0" mnemonicParsing="false" onAction="#addExample" prefHeight="33.0" prefWidth="109.0" styleClass="tool-buttons" stylesheets="@../../css/EditWord.css" text="Example" AnchorPane.leftAnchor="437.0">
+                                    <Button fx:id="exampleButton" layoutX="437.0" layoutY="6.0" mnemonicParsing="false" onAction="#addExample" prefHeight="33.0" prefWidth="109.0" styleClass="tool-buttons" stylesheets="@../../css/Theme/EditWord.css" text="Example" AnchorPane.leftAnchor="437.0">
                                        <graphic>
                                           <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -76,14 +76,14 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="saveButton" layoutX="563.0" layoutY="6.0" mnemonicParsing="false" onAction="#saveWord" prefHeight="33.0" prefWidth="49.0" styleClass="tool-buttons" stylesheets="@../../css/EditWord.css" text="Save" AnchorPane.rightAnchor="247.14285714285722" />
-                                    <Button fx:id="deleteButton" layoutX="767.0" layoutY="6.0" mnemonicParsing="false" onAction="#deleteWord" prefHeight="33.0" prefWidth="71.0" styleClass="tool-buttons" stylesheets="@../../css/EditWord.css" text="Delete" AnchorPane.rightAnchor="20.85714285714289" />
-                                    <ToggleButton fx:id="connectButton" layoutX="616.0" layoutY="6.0" mnemonicParsing="false" onAction="#toggleConnectMode" prefHeight="33.0" prefWidth="141.0" styleClass="tool-buttons" stylesheets="@../../css/EditWord.css" text="Toggle Connect Mode" AnchorPane.rightAnchor="99.0" />
+                                    <Button fx:id="saveButton" layoutX="563.0" layoutY="6.0" mnemonicParsing="false" onAction="#saveWord" prefHeight="33.0" prefWidth="49.0" styleClass="tool-buttons" stylesheets="@../../css/Theme/EditWord.css" text="Save" AnchorPane.rightAnchor="247.14285714285722" />
+                                    <Button fx:id="deleteButton" layoutX="767.0" layoutY="6.0" mnemonicParsing="false" onAction="#deleteWord" prefHeight="33.0" prefWidth="71.0" styleClass="tool-buttons" stylesheets="@../../css/Theme/EditWord.css" text="Delete" AnchorPane.rightAnchor="20.85714285714289" />
+                                    <ToggleButton fx:id="connectButton" layoutX="616.0" layoutY="6.0" mnemonicParsing="false" onAction="#toggleConnectMode" prefHeight="33.0" prefWidth="141.0" styleClass="tool-buttons" stylesheets="@../../css/Theme/EditWord.css" text="Toggle Connect Mode" AnchorPane.rightAnchor="99.0" />
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="-46.0" layoutY="2.0" prefHeight="53.0" prefWidth="179.0" style="-fx-background-radius: 90;" styleClass="editor-anchor-pane" stylesheets="@../../css/EditWord.css" AnchorPane.leftAnchor="-46.0">
+                              <AnchorPane layoutX="-46.0" layoutY="2.0" prefHeight="53.0" prefWidth="179.0" style="-fx-background-radius: 90;" styleClass="editor-anchor-pane" stylesheets="@../../css/Theme/EditWord.css" AnchorPane.leftAnchor="-46.0">
                                  <children>
-                                    <Button fx:id="addWordButton" layoutX="69.0" layoutY="3.0" mnemonicParsing="false" onAction="#addNewWord" prefHeight="46.0" prefWidth="112.0" styleClass="tool-buttons" stylesheets="@../../css/EditWord.css" text="New word">
+                                    <Button fx:id="addWordButton" layoutX="69.0" layoutY="3.0" mnemonicParsing="false" onAction="#addNewWord" prefHeight="46.0" prefWidth="112.0" styleClass="tool-buttons" stylesheets="@../../css/Theme/EditWord.css" text="New word">
                                        <graphic>
                                           <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -100,8 +100,8 @@
                   </AnchorPane>
                 <AnchorPane maxWidth="400.0" minHeight="0.0" minWidth="200.0" prefHeight="388.0" prefWidth="237.0" style="-fx-background-color: black;">
                      <children>
-                        <AnchorPane fx:id="editorPane" layoutY="240.0" maxWidth="258.0" prefHeight="318.0" prefWidth="258.0" styleClass="editor-anchor-pane" stylesheets="@../../css/EditWord.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="240.0" />
-                        <AnchorPane prefHeight="240.0" prefWidth="258.0" styleClass="editor-anchor-pane" stylesheets="@../../css/EditWord.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="editorPane" layoutY="240.0" maxWidth="258.0" prefHeight="318.0" prefWidth="258.0" styleClass="editor-anchor-pane" stylesheets="@../../css/Theme/EditWord.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="240.0" />
+                        <AnchorPane prefHeight="240.0" prefWidth="258.0" styleClass="editor-anchor-pane" stylesheets="@../../css/Theme/EditWord.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <ListView fx:id="wordListView" editable="true" layoutX="14.0" layoutY="50.0" onMouseClicked="#listViewMouseClicked" prefHeight="160.0" prefWidth="230.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="65.0" />
                               <TextField fx:id="editWordSearchBar" layoutX="13.0" layoutY="25.0" onKeyTyped="#searchEditable" prefHeight="25.0" prefWidth="236.0" promptText="search for added words" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
@@ -113,6 +113,6 @@
             </SplitPane>
          </children>
       </AnchorPane>
-      <Pane fx:id="blurPane" prefHeight="494.0" prefWidth="855.0" styleClass="blur" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Pane fx:id="blurPane" prefHeight="494.0" prefWidth="855.0" styleClass="blur" stylesheets="@../../css/Theme/ApplicationStyle.css" AnchorPane.bottomAnchor="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>

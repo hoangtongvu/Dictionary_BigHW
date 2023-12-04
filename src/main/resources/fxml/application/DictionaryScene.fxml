@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
@@ -12,7 +13,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -20,14 +20,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" styleClass="anchorPane" stylesheets="@../../css/ApplicationStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Dictionary.DictionarySceneController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" styleClass="dictionary-scene" stylesheets="@../../css/Theme/dark-theme.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Dictionary.DictionarySceneController">
    <children>
       <VBox prefHeight="600.0" prefWidth="1202.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane prefHeight="41.0" prefWidth="1200.0" styleClass="topBar" stylesheets="@../../css/ApplicationStyle.css" />
-            <Pane id="main_search_bar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="126.0" prefWidth="1200.0" styleClass="secondaryTopBar" stylesheets="@../../css/ApplicationStyle.css">
+            <Pane prefHeight="41.0" prefWidth="1200.0" styleClass="pane" />
+            <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="126.0" prefWidth="1200.0" styleClass="gradient-pane-1">
                <children>
-                  <TextField id="searchBar" fx:id="searchBar" layoutX="40.0" layoutY="48.0" onAction="#LookupWord" onKeyTyped="#OnTextChange" prefHeight="31.0" prefWidth="645.0" promptText="Type your word here...">
+                  <TextField id="searchBar" fx:id="searchBar" layoutX="40.0" layoutY="48.0" onAction="#LookupWord" onKeyTyped="#OnTextChange" prefHeight="31.0" prefWidth="645.0" promptText="Type your word here..." styleClass="search-bar">
                      <font>
                         <Font name="System Italic" size="15.0" />
                      </font>
@@ -41,15 +41,23 @@
                         <WebView fx:id="webView" layoutY="137.0" prefHeight="301.0" prefWidth="826.0" style="-fx-context-menu-enabled: false;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0" />
                         <AnchorPane id="wordAnchor" prefHeight="126.0" prefWidth="826.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <children>
-                              <AnchorPane fx:id="wordDisplay" layoutX="14.0" layoutY="14.0" prefHeight="105.0" prefWidth="746.0" styleClass="right-nav-box" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="42.0">
+                              <AnchorPane fx:id="wordDisplay" layoutX="14.0" layoutY="14.0" prefHeight="105.0" prefWidth="746.0" styleClass="floating-anchor-pane" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="42.0">
                                  <children>
-                                    <Button id="starButton" fx:id="starButton" layoutX="714.0" layoutY="18.0" mnemonicParsing="false" onAction="#addToStarList" prefHeight="31.0" prefWidth="36.0" styleClass="starButton" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.rightAnchor="18.0" />
-                                    <Button id="editButton" fx:id="editButton" layoutX="714.0" layoutY="55.0" mnemonicParsing="false" onAction="#editCurrentWord" prefHeight="31.0" prefWidth="36.0" AnchorPane.rightAnchor="18.0" />
+                                    <Button id="starButton" fx:id="starButton" layoutX="714.0" layoutY="18.0" mnemonicParsing="false" onAction="#addToStarList" prefHeight="31.0" prefWidth="36.0" AnchorPane.rightAnchor="18.0">
+                                       <styleClass>
+                                          <String fx:value="star-button" />
+                                          <String fx:value="icon-button" />
+                                       </styleClass></Button>
+                                    <Button id="editButton" fx:id="editButton" layoutX="714.0" layoutY="55.0" mnemonicParsing="false" onAction="#editCurrentWord" prefHeight="31.0" prefWidth="36.0" AnchorPane.rightAnchor="18.0">
+                                       <styleClass>
+                                          <String fx:value="edit-button" />
+                                          <String fx:value="icon-button" />
+                                       </styleClass></Button>
                                     <VBox layoutY="14.0" prefHeight="72.0" prefWidth="410.0" AnchorPane.leftAnchor="0.0">
                                        <children>
                                           <HBox fx:id="wordHbox" prefHeight="40.0" prefWidth="281.0">
                                              <children>
-                                                <Label fx:id="wordLabel" maxWidth="1000.0" minWidth="-Infinity" prefHeight="40.0" prefWidth="79.0" styleClass="wordLabel" stylesheets="@../../css/ApplicationStyle.css" text="word" wrapText="true">
+                                                <Label fx:id="wordLabel" maxWidth="1000.0" minWidth="-Infinity" prefHeight="40.0" prefWidth="79.0" text="word" wrapText="true">
                                                    <HBox.margin>
                                                       <Insets left="20.0" />
                                                    </HBox.margin>
@@ -58,10 +66,14 @@
                                                    <HBox.margin>
                                                       <Insets top="6.0" />
                                                    </HBox.margin>
+                                                   <styleClass>
+                                                      <String fx:value="speaker-button" />
+                                                      <String fx:value="icon-button" />
+                                                   </styleClass>
                                                 </Button>
                                              </children>
                                           </HBox>
-                                          <Label fx:id="soundLabel" prefHeight="32.0" prefWidth="412.0" styleClass="soundLabel" text="[sound label]">
+                                          <Label fx:id="soundLabel" prefHeight="32.0" prefWidth="412.0" styleClass="sound-label" text="[sound label]">
                                              <padding>
                                                 <Insets left="20.0" />
                                              </padding>
@@ -72,7 +84,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="-15.0" layoutY="128.0" prefHeight="18.0" prefWidth="849.0" style="-fx-background-color: grey;" AnchorPane.leftAnchor="-15.0" AnchorPane.rightAnchor="-8.0">
+                        <AnchorPane layoutX="-15.0" layoutY="128.0" prefHeight="18.0" prefWidth="849.0" AnchorPane.leftAnchor="-15.0" AnchorPane.rightAnchor="-8.0">
                            <effect>
                               <Shadow blurType="GAUSSIAN">
                                  <color>
@@ -81,20 +93,19 @@
                               </Shadow>
                            </effect>
                         </AnchorPane>
-                        <FlowPane layoutX="28.0" layoutY="146.0" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="436.0" prefWidth="398.0" styleClass="dictionaryRightNav" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane prefHeight="436.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <AnchorPane layoutX="25.0" layoutY="14.0" prefHeight="229.0" prefWidth="330.0" styleClass="right-nav-box" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="14.0">
+                        <AnchorPane layoutX="25.0" layoutY="14.0" prefHeight="229.0" prefWidth="330.0" styleClass="floating-anchor-pane" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="14.0">
                            <children>
-                              <Pane prefHeight="60.0" prefWidth="328.0" styleClass="pane-title" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Pane prefHeight="60.0" prefWidth="328.0" styleClass="gradient-pane-2" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Label layoutX="66.0" layoutY="10.0" styleClass="wordLabel" text="Usage over time" />
+                                    <Label layoutX="66.0" layoutY="10.0" text="Usage over time" />
                                  </children></Pane>
                               <AnchorPane fx:id="ngramPlaceHolder" layoutY="60.0" prefHeight="169.0" prefWidth="322.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
                                  <children>
-                                    <LineChart id="wordUsage" fx:id="wordUsageGraph" alternativeRowFillVisible="false" animated="false" horizontalZeroLineVisible="false" layoutX="-2.0" layoutY="2.0" legendVisible="false" prefHeight="161.0" prefWidth="345.0" styleClass="graph" stylesheets="@../../css/ApplicationStyle.css" verticalGridLinesVisible="false" verticalZeroLineVisible="false" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
+                                    <LineChart id="wordUsage" fx:id="wordUsageGraph" alternativeRowFillVisible="false" animated="false" horizontalZeroLineVisible="false" layoutX="-2.0" layoutY="2.0" legendVisible="false" prefHeight="161.0" prefWidth="345.0" verticalGridLinesVisible="false" verticalZeroLineVisible="false" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
                                       </xAxis>
@@ -106,29 +117,30 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="26.0" layoutY="277.0" prefHeight="135.0" prefWidth="324.0" styleClass="right-nav-box" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="276.0">
+                        <AnchorPane layoutX="26.0" layoutY="277.0" prefHeight="135.0" prefWidth="324.0" styleClass="floating-anchor-pane" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="276.0">
                            <children>
                               <TabPane id="tabPane" layoutX="67.0" layoutY="-25.0" prefHeight="137.0" prefWidth="324.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <tabs>
                                   <Tab text="Favourite Words">
                                     <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="274.0" styleClass="tab-anchor" stylesheets="@../../css/ApplicationStyle.css">
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="274.0">
                                              <children>
-                                                <ListView fx:id="starredWordListView" layoutX="5.0" onMouseClicked="#listViewMouseClicked" prefHeight="110.0" prefWidth="321.0" styleClass="tab-pane-list-view" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0" />
+                                                <ListView fx:id="starredWordListView" layoutX="5.0" onMouseClicked="#listViewMouseClicked" prefHeight="110.0" prefWidth="321.0" styleClass="tab-pane-list-view" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0" />
                                              </children>
                                           </AnchorPane>
                                     </content>
                                   </Tab>
                                   <Tab text="Search History">
                                     <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="331.0" styleClass="tab-anchor" stylesheets="@../../css/ApplicationStyle.css">
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="331.0">
                                              <children>
-                                                <ListView id="historyListView" fx:id="historyListView" layoutX="2.0" layoutY="2.0" onMouseClicked="#getWordFromHistory" prefHeight="77.0" prefWidth="337.0" styleClass="tab-pane-list-view" stylesheets="@../../css/ApplicationStyle.css" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                                <AnchorPane id="clearHistoryPane" layoutX="2.0" layoutY="77.85713958740234" prefHeight="29.0" prefWidth="337.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                                                   <children>
-                                                      <Button id="clearHistoryButton" fx:id="clearHistory" layoutX="209.0" mnemonicParsing="false" onAction="#clearHistory" prefHeight="29.0" prefWidth="125.0" stylesheets="@../../css/ApplicationStyle.css" text="Clear History" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="209.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0" />
-                                                   </children>
-                                                </AnchorPane>
+                                                <ListView id="historyListView" fx:id="historyListView" layoutX="2.0" layoutY="2.0" onMouseClicked="#getWordFromHistory" prefHeight="77.0" prefWidth="337.0" styleClass="tab-pane-list-view" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                <Button id="clearHistoryButton" fx:id="clearHistory" layoutX="223.0" layoutY="76.0" mnemonicParsing="false" onAction="#clearHistory" prefHeight="29.0" prefWidth="137.0" text="Clear History" AnchorPane.bottomAnchor="-1.0" AnchorPane.rightAnchor="-13.0">
+                                                   <styleClass>
+                                                      <String fx:value="clear-history-button" />
+                                                      <String fx:value="icon-button" />
+                                                   </styleClass>
+                                                </Button>
                                              </children>
                                           </AnchorPane>
                                     </content>

@@ -71,7 +71,7 @@ public class ExampleEditor {
         exampleTextArea.addEventHandler(KeyEvent.KEY_RELEASED, exampleTypeHandler);
         translationTextArea.addEventHandler(KeyEvent.KEY_RELEASED, translationTypeHandler);
 
-        editorPane.getStylesheets().add(String.valueOf(getClass().getResource("/css/EditWord.css")));
+        editorPane.getStylesheets().add(String.valueOf(getClass().getResource("/css/Theme/EditWord.css")));
 
         // Assign style classes
         editorPane.getStyleClass().add("editor-anchor-pane");

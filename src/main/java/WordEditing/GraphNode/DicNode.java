@@ -163,7 +163,7 @@ public abstract class DicNode {
 
     public void setStyleSheet(Node object) {
         try {
-            object.getStyleClass().getClass().getResource("/css/EditWord.css");
+            object.getStyleClass().getClass().getResource("/css/Theme/EditWord.css");
         } catch (Exception e) {
             System.out.println(e);
             System.out.println("INVALID TYPE");
@@ -204,8 +204,8 @@ public abstract class DicNode {
         title = new Label();
         title.setText(titleString);
 
-        title.getStylesheets().getClass().getResource("/css/EditWord.css");
-        nodePane.getStylesheets().getClass().getResource("/css/EditWord.css");
+        title.getStylesheets().getClass().getResource("/css/Theme/EditWord.css");
+        nodePane.getStylesheets().getClass().getResource("/css/Theme/EditWord.css");
         setStyleSheet(title);
         setStyleSheet(nodePane);
         setStyleClass(title, "node-title");
