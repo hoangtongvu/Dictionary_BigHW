@@ -31,6 +31,9 @@ module MainGroup.application {
     exports Main.SceneControllers.NavigationPane;
     opens Main.SceneControllers.NavigationPane to javafx.fxml;
 
+    exports Main.SceneControllers.BackButton;
+    opens Main.SceneControllers.BackButton to javafx.fxml;
+
     exports Main.SceneControllers.AIChatBot;
     opens Main.SceneControllers.AIChatBot to javafx.fxml;
 

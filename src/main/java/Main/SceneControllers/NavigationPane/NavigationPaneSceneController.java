@@ -170,9 +170,11 @@ public class NavigationPaneSceneController extends BaseSceneController implement
         }
     }
 
-    public static void AddNavPaneComponentsToRoot(Parent root)
+    public static void AddNavPaneComponentsToRoot(Parent root)//Checking BaseSC reference has better performance.
     {
-        ((Pane) root).getChildren().addAll(nodes);
+        List<Node> children = ((Pane) root).getChildren();
+        if (children.containsAll(nodes)) return;
+        children.addAll(nodes);
     }
 
 

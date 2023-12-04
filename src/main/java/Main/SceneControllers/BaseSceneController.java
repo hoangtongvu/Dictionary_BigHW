@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 public abstract class BaseSceneController
 {
     private Parent root;
+    private BaseSceneController prevSC;
 
 
     public void setRoot(Parent root) {
@@ -15,7 +16,16 @@ public abstract class BaseSceneController
         return root;
     }
 
+    public void setPrevSC(BaseSceneController prevSC) {
+        this.prevSC = prevSC;
+    }
+
+    public BaseSceneController getPrevSC() {
+        return prevSC;
+    }
+
     public abstract void StartShow();
+
     public abstract void EndShow();
 
     public abstract void update();
