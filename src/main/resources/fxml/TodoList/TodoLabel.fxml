@@ -19,6 +19,6 @@
             <TextField fx:id="editTextField" onAction="#OnTextFieldConfirm" visible="false" />
          </children>
       </StackPane>
-      <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="10.0" prefWidth="29.0" HBox.hgrow="NEVER" />
+      <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#Delete" prefHeight="10.0" prefWidth="29.0" HBox.hgrow="NEVER" />
    </children>
 </HBox>

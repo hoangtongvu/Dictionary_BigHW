@@ -22,12 +22,14 @@ public class TodoLabel implements Initializable
 
     private TodoList todoList;
     public final CustomEvent onDoubleClickEvent;
+    public final CustomEvent onDeleteEvent;
     public final CustomEventPackage.OneParameter.CustomEvent<String> onUserConfirmEvent;
 
 
     public TodoLabel()
     {
         this.onDoubleClickEvent = new CustomEvent(this);
+        this.onDeleteEvent = new CustomEvent(this);
         this.onUserConfirmEvent = new CustomEventPackage.OneParameter.CustomEvent<>(this);
     }
 
@@ -96,6 +98,12 @@ public class TodoLabel implements Initializable
         if (content.isEmpty()) return;
         this.ToggleEditTextField(false);
         this.onUserConfirmEvent.Invoke(this, content);
+    }
+
+    @FXML
+    private void Delete()
+    {
+        this.onDeleteEvent.Invoke(this);
     }
 
 }

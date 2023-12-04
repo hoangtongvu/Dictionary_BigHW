@@ -1,6 +1,7 @@
 package TodoList.UI;
 
 import TodoList.TodoListCtrl;
+import TodoList.TodoListManager;
 import TodoList.TickStatus;
 
 import javafx.collections.ListChangeListener;
@@ -81,17 +82,19 @@ public class TodoList implements Initializable
 
     private void SubEventsForAllLabels()
     {
+        TodoListManager todoListManager = this.todoListCtrl.getTodoListManager();
         for (int i = 0; i < this.todoLabels.size(); i++)
         {
             TodoLabel label = this.todoLabels.get(i);
             int finalI = i;
-            label.onDoubleClickEvent.AddListener(() -> this.todoListCtrl.getTodoListManager().Tick(finalI));
+            label.onDoubleClickEvent.AddListener(() -> todoListManager.Tick(finalI));
+            label.onDeleteEvent.AddListener(() -> todoListManager.DeleteTodoElementAt(finalI));
         }
     }
 
     private void CreateNewTodoLabel(Pair<TickStatus, String> pair)
     {
-        System.out.println(pair);
+        //System.out.println(pair);
         TickStatus tickStatus = pair.getKey();
         String content = pair.getValue();
 
@@ -113,7 +116,7 @@ public class TodoList implements Initializable
     {
         //create dummy label.
         //sub create in manager to onUserConfirm.
-        
+
         TodoLabel todoLabel = TodoLabel.CreateInstance(this);
         todoLabel.SetNewParentPane(this.todoHolderVbox);
         todoLabel.ToggleEditTextField(true);

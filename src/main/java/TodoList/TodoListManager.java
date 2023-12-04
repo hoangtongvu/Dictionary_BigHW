@@ -19,7 +19,6 @@ public class TodoListManager
 
     public void Tick(int i)
     {
-        System.out.println("hei");
         Pair<TickStatus, String> oldPair = this.list.get(i);
         TickStatus newStatus = (oldPair.getKey() == TickStatus.YES)? TickStatus.NO :TickStatus.YES;
         this.list.set(i, new Pair<>(newStatus, oldPair.getValue()));
@@ -29,6 +28,11 @@ public class TodoListManager
     {
         Pair<TickStatus, String> newPair = new Pair<>(TickStatus.NO, content);
         this.list.add(newPair);
+    }
+
+    public void DeleteTodoElementAt(int i)
+    {
+        this.list.remove(i);
     }
 
 }
