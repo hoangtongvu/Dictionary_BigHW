@@ -22,7 +22,7 @@ public class AudioManager {
             microphone.open(format);
             microphone.start();
             AudioInputStream ais = new AudioInputStream(microphone);
-            AudioSystem.write(ais, AudioFileFormat.Type.WAVE, new File("F:\\IDEA_Projects\\wordle\\WordleDemo\\src\\main\\resources\\com\\example\\wordledemo\\sound.wav"));
+            AudioSystem.write(ais, AudioFileFormat.Type.WAVE, new File("src/main/resources/sound.wav"));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

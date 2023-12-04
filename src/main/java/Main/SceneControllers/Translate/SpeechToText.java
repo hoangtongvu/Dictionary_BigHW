@@ -105,7 +105,7 @@ public class SpeechToText {
     }
 
     public static String getSpeechToText() {
-        String url_path = uploadFileSpeech("F:\\IDEA_Projects\\wordle\\WordleDemo\\src\\main\\resources\\com\\example\\wordledemo\\sound.wav");
+        String url_path = uploadFileSpeech("src/main/resources/sound.wav");
         String idApiServer = postSpeechToTextApi(url_path);
         String WordTranslate;
         while (true) {
