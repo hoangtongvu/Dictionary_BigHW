@@ -2,7 +2,9 @@ package Main.SceneControllers.Game.Wordle;
 
 import Game.GamesCtrl;
 import Game.Wordle.WordleCtrl;
-import Interfaces.IHasNavPane;
+
+import Interfaces.IHasBackButton;
+
 import Main.SceneControllers.BaseSceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +20,9 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-public class WordleController extends BaseSceneController implements Initializable, IHasNavPane {
+
+public class WordleController extends BaseSceneController implements Initializable, IHasBackButton {
+
 
     @FXML
     private TextField guessBox;

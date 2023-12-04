@@ -4,6 +4,7 @@ import Game.CreateWord4DirGame.CreateWord4DirGameCtrl;
 import Game.CreateWord4DirGame.CreateWord4DirGameManager;
 import Game.CreateWord4DirGame.UI.OnFinishWordAnimator;
 import Game.GamesCtrl;
+import Interfaces.IHasBackButton;
 import Main.FxmlFileManager;
 import Main.SceneControllers.BaseSceneController;
 import Main.application.App;
@@ -34,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class GameSceneController extends BaseSceneController implements Initializable
+public class GameSceneController extends BaseSceneController implements Initializable, IHasBackButton
 {
 
     @FXML
