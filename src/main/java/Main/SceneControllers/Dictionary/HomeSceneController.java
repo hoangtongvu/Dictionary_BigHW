@@ -4,6 +4,7 @@ import Main.Database;
 import Main.FxmlFileManager;
 import Main.SceneControllers.BaseSceneController;
 import Interfaces.IHasNavPane;
+import Main.SceneControllers.TodayDateTimeBox;
 import Main.SceneControllers.Widget.StudyTimerController;
 
 import TodoList.UI.TodoList;
@@ -53,6 +54,9 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
     private AnchorPane todoListHolder;
 
     @FXML
+    private AnchorPane todayPlaceHolder;
+
+    @FXML
     protected Label goalLabel;
 
     /**This part is for side menu*/
@@ -72,6 +76,13 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
         TodoList todoList = TodoList.CreateInstance();
         todoList.ChangeParent(this.todoListHolder);
         leaderboardVbox.setSpacing(10);
+        this.UpdateTodayPlaceHolder();
+    }
+
+    private void UpdateTodayPlaceHolder()
+    {
+        TodayDateTimeBox todayDateTimeBox = TodayDateTimeBox.CreateInstance();
+        todayDateTimeBox.SetNewParentPane(this.todayPlaceHolder);
     }
 
     public void updateChart() {
