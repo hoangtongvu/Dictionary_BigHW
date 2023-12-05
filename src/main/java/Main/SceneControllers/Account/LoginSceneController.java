@@ -162,6 +162,7 @@ public class LoginSceneController extends BaseSceneController {
                     message.setText("Login successful!");
                     nameField.clear();
                     passwordField.clear();
+                    message.setText("");
                     User.getCurrentUser().loginHandler();
                     break;
                 case INVALID_CREDENTIALS:
@@ -221,7 +222,6 @@ public class LoginSceneController extends BaseSceneController {
         AnchorPane.setBottomAnchor(root, 0d);
 
         parent.getChildren().addAll(root);
-        continueWithoutAccountButton.setVisible(continueButtonStatus);
 
     }
 

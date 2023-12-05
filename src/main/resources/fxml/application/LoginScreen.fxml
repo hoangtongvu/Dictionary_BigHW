@@ -70,11 +70,6 @@
             </Label>
             <Button fx:id="registerButton" alignment="CENTER" mnemonicParsing="false" onAction="#onRegister" styleClass="pill-button" text="Register a new account" textAlignment="CENTER">
                <VBox.margin>
-                  <Insets bottom="20.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="continueWithoutAccountButton" mnemonicParsing="false" onAction="#continueWithoutAccount" styleClass="pill-button" text="Continue without an account">
-               <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Button>
