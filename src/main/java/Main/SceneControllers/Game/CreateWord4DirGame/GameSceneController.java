@@ -9,6 +9,8 @@ import Main.FxmlFileManager;
 import Main.SceneControllers.BaseSceneController;
 import Main.application.App;
 import User.User;
+import animatefx.animation.FadeInLeft;
+import animatefx.animation.FadeOutRight;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -37,66 +39,28 @@ import java.util.ResourceBundle;
 public class GameSceneController extends BaseSceneController implements Initializable, IHasBackButton
 {
 
-    @FXML
-    private GridPane gameGridPane;
+    @FXML private Button downButton;
+    @FXML private Text downText;
+    @FXML private Text hintText;
+    @FXML private Button leftButton;
+    @FXML private Text leftText;
+    @FXML private Button rightButton;
+    @FXML private Text rightText;
+    @FXML private Button upButton;
+    @FXML private Text upText;
+    @FXML private Text finalPointText;
+    @FXML private HBox wordHbox;
+    @FXML private VBox endGameVbox;
+    @FXML private Text endGamePointText;
+    @FXML private Text timerText;
+    @FXML private Button continueButton;
+    @FXML private Pane blurPane;
 
-    @FXML
-    private Button downButton;
-
-    @FXML
-    private Text downText;
-
-    @FXML
-    private Text hintText;
-
-    @FXML
-    private Button leftButton;
-
-    @FXML
-    private Text leftText;
-
-    @FXML
-    private Button rightButton;
-
-    @FXML
-    private Text rightText;
-
-    @FXML
-    private Button upButton;
-
-    @FXML
-    private Text upText;
-
-    @FXML
-    private Text finalPointText;
-
-    @FXML
-    private HBox wordHbox;
-
-    @FXML
-    private VBox endGameVbox;
-
-    @FXML
-    private Text endGamePointText;
-
-    @FXML
-    private Text timerText;
-
-    @FXML
-    private Button continueButton;
-
-    @FXML
-    private Pane blurPane;
-
-    private CreateWord4DirGameCtrl gameCtrl;
-
+    private final CreateWord4DirGameCtrl gameCtrl;
     private EventHandler<KeyEvent> keyPressedEventHandler;
-
     private final double fontSize = 30;
     private final double labelPrefWidth = 30;
-
     private FadeTransition blurPaneFadeTransition;
-
     private final List<Label> wordLabels;
     private final OnFinishWordAnimator onFinishWordAnimator;
 
@@ -104,6 +68,7 @@ public class GameSceneController extends BaseSceneController implements Initiali
 
     public GameSceneController()
     {
+        this.gameCtrl = GamesCtrl.getInstance().getCreateWord4DirGameCtrl();
         this.wordLabels = new ArrayList<>();
         this.onFinishWordAnimator = new OnFinishWordAnimator(this.wordLabels);
     }
@@ -111,23 +76,11 @@ public class GameSceneController extends BaseSceneController implements Initiali
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        this.gameCtrl = GamesCtrl.getInstance().getCreateWord4DirGameCtrl();
         this.SubEvent();
-
-        this.keyPressedEventHandler = keyEvent ->
-        {
-            KeyCode keyCode = keyEvent.getCode();
-            switch (keyCode)
-            {
-                case UP -> FireButton(upButton);
-                case RIGHT -> FireButton(rightButton);
-                case DOWN -> FireButton(downButton);
-                case LEFT -> FireButton(leftButton);
-            }
-        };
+        this.keyPressedEventHandler = this.GetKeyPressedEventHandler();
 
         this.continueButton.addEventHandler(ActionEvent.ACTION, e -> {
-            this.ToggleEndGameVbox();
+            this.HideEndGameVbox();
             this.BlurPaneDisappear();
             this.MoveBackToStartScreen();
         });
@@ -148,7 +101,8 @@ public class GameSceneController extends BaseSceneController implements Initiali
     }
 
     @Override
-    public void update() {
+    public void update()
+    {
 
     }
 
@@ -180,6 +134,21 @@ public class GameSceneController extends BaseSceneController implements Initiali
             Button button = GetButtonIndex(index);
             SetButtonChose(button, isCorrect);
         });
+    }
+
+    private EventHandler<KeyEvent> GetKeyPressedEventHandler()
+    {
+        return keyEvent ->
+        {
+            KeyCode keyCode = keyEvent.getCode();
+            switch (keyCode)
+            {
+                case UP -> FireButton(upButton);
+                case RIGHT -> FireButton(rightButton);
+                case DOWN -> FireButton(downButton);
+                case LEFT -> FireButton(leftButton);
+            }
+        };
     }
 
     private void AddKeyBoardEvent()
@@ -326,30 +295,33 @@ public class GameSceneController extends BaseSceneController implements Initiali
             User.getCurrentUser().setScore(tempPoint);
             User.getCurrentUser().updateScore();
         }
-        this.ToggleEndGameVbox();
+        this.ShowEndGameVbox();
         this.endGamePointText.setText("Your point is " + finalPoint + ".");
     }
 
-    private void ToggleEndGameVbox()
+    private void ShowEndGameVbox()
     {
-        this.endGameVbox.setDisable(!this.endGameVbox.isDisabled());
-        this.endGameVbox.setVisible(!this.endGameVbox.isVisible());
+        this.endGameVbox.setVisible(true);
+        new FadeInLeft(this.endGameVbox).play();
+    }
+
+    private void HideEndGameVbox()
+    {
+        this.endGameVbox.setVisible(false);
+        new FadeOutRight(this.endGameVbox).play();
     }
 
     private void ToggleBlurPane(double fromValue, double toValue)
     {
         this.blurPaneFadeTransition.setFromValue(fromValue);
-        this.blurPaneFadeTransition.setFromValue(toValue);
+        this.blurPaneFadeTransition.setToValue(toValue);
         this.blurPaneFadeTransition.play();
     }
 
     private void BlurPaneAppear()
     {
         this.blurPane.setVisible(true);
-        //this.ToggleBlurPane(0, 1);
-        this.blurPaneFadeTransition.setFromValue(0);
-        this.blurPaneFadeTransition.setFromValue(1);
-        this.blurPaneFadeTransition.play();
+        this.ToggleBlurPane(0, 1);
     }
 
     private void BlurPaneDisappear()

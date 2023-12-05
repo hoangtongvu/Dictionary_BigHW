@@ -48,7 +48,7 @@
                   </Text>
                </children>
             </VBox>
-            <GridPane fx:id="gameGridPane" maxHeight="250.0" maxWidth="250.0" minHeight="250.0" minWidth="250.0" prefHeight="250.0" prefWidth="250.0">
+            <GridPane maxHeight="250.0" maxWidth="250.0" minHeight="250.0" minWidth="250.0" prefHeight="250.0" prefWidth="250.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -120,8 +120,8 @@
             </GridPane>
          </children>
       </VBox>
-      <Pane fx:id="blurPane" prefHeight="600.0" prefWidth="1000.0" styleClass="blurPane" stylesheets="@../../../css/Game/CreateWord4Dir/EndGameStyle.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <VBox fx:id="endGameVbox" alignment="CENTER" disable="true" prefHeight="600.0" prefWidth="1000.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="blurPane" opacity="0.0" prefHeight="600.0" prefWidth="1000.0" styleClass="blurPane" stylesheets="@../../../css/Game/CreateWord4Dir/EndGameStyle.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <VBox fx:id="endGameVbox" alignment="CENTER" opacity="0.0" prefHeight="600.0" prefWidth="1000.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="1000.0" spacing="10.0" style="-fx-background-color: #386150;">
                <children>
