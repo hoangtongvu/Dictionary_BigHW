@@ -57,7 +57,7 @@
                                     <Font size="28.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" layoutX="405.0" layoutY="43.0" prefHeight="35.0" prefWidth="610.0" styleClass="label-normal" text="Motivational quote that say something motivational" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="43.0">
+                              <Label alignment="CENTER" layoutX="405.0" layoutY="43.0" prefHeight="35.0" prefWidth="610.0" styleClass="label-normal" text="The only place where success comes before work is in the dictionary!" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="43.0">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
