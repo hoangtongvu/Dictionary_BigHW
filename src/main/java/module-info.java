@@ -79,4 +79,7 @@ module MainGroup.application {
 
     exports Main.SceneControllers.Thesaurus;
     opens Main.SceneControllers.Thesaurus to javafx.fxml;
+
+    exports Main.SceneControllers;
+    opens Main.SceneControllers to javafx.fxml;
 }
