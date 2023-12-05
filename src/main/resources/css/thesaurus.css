@@ -1,14 +1,17 @@
 .label {
-    -fx-font-size: 20;
+    -fx-font-size: 25;
     -fx-font-family:"Helvetica Neue";
     -fx-alignment: center;
     -fx-font-weight: 900;
     -fx-text-fill: "white";
+    -fx-background-color: "#200D3A";
+    -fx-border-radius: 15 15 15 15;
+    -fx-background-radius: 15 15 15 15;
 }
 
 #thesaurusTitle {
     -fx-font-size: 60;
-    -fx-text-fill: "white";
+    -fx-background-color: transparent;
 }
 
 #Pane {

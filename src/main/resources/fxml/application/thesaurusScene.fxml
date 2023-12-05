@@ -16,16 +16,16 @@
             <Font size="18.0" />
          </font></TextField>
       <Button layoutX="608.0" layoutY="201.0" mnemonicParsing="false" onAction="#onContinueButton" text="Continue" />
-      <TextArea fx:id="synonymArea" editable="false" layoutX="189.0" layoutY="246.0" prefHeight="497.0" prefWidth="301.0" wrapText="true">
+      <TextArea fx:id="synonymArea" editable="false" layoutX="189.0" layoutY="287.0" prefHeight="449.0" prefWidth="301.0" wrapText="true">
          <font>
             <Font size="24.0" />
          </font></TextArea>
-      <TextArea fx:id="antonymArea" editable="false" layoutX="793.0" layoutY="246.0" prefHeight="497.0" prefWidth="301.0" wrapText="true">
+      <TextArea fx:id="antonymArea" editable="false" layoutX="794.0" layoutY="287.0" prefHeight="449.0" prefWidth="301.0" wrapText="true">
          <font>
             <Font size="24.0" />
          </font></TextArea>
-      <Label layoutX="189.0" layoutY="197.0" prefHeight="33.0" prefWidth="108.0" text="Synonyms" />
-      <Label layoutX="794.0" layoutY="197.0" prefHeight="33.0" prefWidth="108.0" text="Antonyms" />
+      <Label layoutX="189.0" layoutY="236.0" prefHeight="33.0" prefWidth="301.0" text="Synonyms" />
+      <Label layoutX="794.0" layoutY="236.0" prefHeight="33.0" prefWidth="301.0" text="Antonyms" />
       <Label fx:id="thesaurusTitle" layoutY="33.0" prefHeight="72.0" prefWidth="1280.0" text="Thesaurus" />
       <Pane layoutX="1.0" prefHeight="41.0" prefWidth="200.0" styleClass="pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>

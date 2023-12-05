@@ -132,7 +132,6 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
 
     @FXML
     public void toDictionary() {
-        System.out.println("Yes");
         FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().dictionarySC);
     }
 
@@ -147,15 +146,12 @@ public class HomeSceneController extends BaseSceneController implements IHasNavP
     }
 
     @FXML
-    public void toChoiceGame() {
-        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().multiChoiceGameStartSC);
+    public void toGames() {
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().chooseGameSC);
     }
 
-    public void toWordle() {
-        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().wordleSC);
-    }
-
-    public void toArrows() {
-        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().createWord4DirStartSC);
+    @FXML
+    public void toThesaurus() {
+        FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().thesaurusSC);
     }
 }
