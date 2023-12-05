@@ -6,7 +6,6 @@ import Game.Wordle.WordleCtrl;
 import Interfaces.IHasBackButton;
 
 import Main.SceneControllers.BaseSceneController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -124,8 +123,8 @@ public class WordleController extends BaseSceneController implements Initializab
     private AnchorPane DialogBox;
 
     private String answer;
-    private final String green = "#538D4E";
-    private final String yellow = "#F1D669";
+    private static final String green = "#538D4E";
+    private static final String yellow = "#F1D669";
 
     private int guesses;
 
@@ -158,6 +157,7 @@ public class WordleController extends BaseSceneController implements Initializab
         }
         System.out.println(answer);
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         DialogBox.setVisible(false);
@@ -171,7 +171,7 @@ public class WordleController extends BaseSceneController implements Initializab
     }
 
     @FXML
-    public void onSubmitButtonClick(ActionEvent e) throws NullPointerException, FileNotFoundException {
+    public void onSubmitButtonClick() throws NullPointerException, FileNotFoundException {
         Label[] row = getLabels(guesses);
         int[] state = {-1, -1, -1, -1, -1};
         String text = guessBox.getText().toUpperCase();
@@ -260,7 +260,7 @@ public class WordleController extends BaseSceneController implements Initializab
         }
     }
     @FXML
-    public void playAgain(ActionEvent e) throws FileNotFoundException {
+    public void playAgain() throws FileNotFoundException {
         clearLabels();
         generateWord();
         guesses = 0;
@@ -268,7 +268,7 @@ public class WordleController extends BaseSceneController implements Initializab
         DialogBox.setVisible(false);
     }
 
-    public void noPlayAgain(ActionEvent e) {
+    public void noPlayAgain() {
         DialogBox.setVisible(false);
     }
 }
