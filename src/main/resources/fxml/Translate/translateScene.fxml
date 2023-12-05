@@ -12,12 +12,12 @@
 
 <AnchorPane prefHeight="768.0" prefWidth="1280.0" styleClass="anchor-pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.Translate.TranslateController">
    <children>
-      <TextArea fx:id="EngArea" layoutX="84.0" layoutY="254.0" prefHeight="473.0" prefWidth="516.0" promptText="Enter text here" wrapText="true">
+      <TextArea fx:id="EngArea" layoutX="84.0" layoutY="254.0" prefHeight="454.0" prefWidth="516.0" promptText="Enter text here" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>
       </TextArea>
-      <Button layoutX="84.0" layoutY="687.0" mnemonicParsing="false" onAction="#EnSoundButton" prefHeight="40.0" prefWidth="45.0">
+      <Button layoutX="84.0" layoutY="667.0" mnemonicParsing="false" onAction="#EnSoundButton" prefHeight="40.0" prefWidth="45.0">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -26,12 +26,12 @@
             </ImageView>
          </graphic>
       </Button>
-      <TextArea fx:id="VietArea" layoutX="693.0" layoutY="254.0" prefHeight="473.0" prefWidth="516.0" promptText="Nhập vào đây" wrapText="true">
+      <TextArea fx:id="VietArea" layoutX="693.0" layoutY="254.0" prefHeight="454.0" prefWidth="516.0" promptText="Nhập vào đây" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>
       </TextArea>
-      <Button layoutX="693.0" layoutY="687.0" mnemonicParsing="false" onAction="#ViSoundButton" prefHeight="40.0" prefWidth="45.0">
+      <Button layoutX="693.0" layoutY="667.0" mnemonicParsing="false" onAction="#ViSoundButton" prefHeight="40.0" prefWidth="45.0">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -40,7 +40,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <AnchorPane fx:id="langPane" layoutX="84.0" layoutY="148.0" prefHeight="89.0" prefWidth="1125.0" styleClass="floating-anchor-pane" stylesheets="@../../css/Theme/dark-theme.css">
+      <AnchorPane fx:id="langPane" layoutX="84.0" layoutY="137.0" prefHeight="89.0" prefWidth="1125.0" styleClass="floating-anchor-pane" stylesheets="@../../css/Theme/dark-theme.css">
          <children>
             <Label layoutX="609.0" layoutY="18.0" prefHeight="54.0" prefWidth="516.0" text="Tiếng Việt" />
             <Label layoutY="21.0" prefHeight="47.0" prefWidth="516.0" text="English" />
@@ -65,7 +65,7 @@
          </children>
       </AnchorPane>
       <Label fx:id="translatorTitle" alignment="CENTER" layoutY="41.0" prefHeight="76.0" prefWidth="1280.0" styleClass="label-highlight" text="Translator" />
-      <Button layoutX="132.0" layoutY="687.0" mnemonicParsing="false" onAction="#onMicrophoneButton" prefHeight="40.0" prefWidth="45.0">
+      <Button layoutX="132.0" layoutY="667.0" mnemonicParsing="false" onAction="#onMicrophoneButton" prefHeight="40.0" prefWidth="45.0">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
