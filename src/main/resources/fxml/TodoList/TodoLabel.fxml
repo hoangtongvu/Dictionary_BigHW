@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="rootHbox" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="149.0" style="-fx-background-color: red;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TodoList.UI.TodoLabel">
+<HBox fx:id="rootHbox" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="149.0" stylesheets="@../../css/Theme/dark-theme.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TodoList.UI.TodoLabel">
    <children>
       <StackPane maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
          <children>
-            <Label fx:id="label" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="125.0" style="-fx-background-color: Green;" text="sdfasdfasdfas" wrapText="true">
+            <Label fx:id="label" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="125.0" text="asdfasd" wrapText="true">
                <font>
                   <Font size="15.0" />
                </font>
@@ -23,6 +23,9 @@
             <TextField fx:id="editTextField" onAction="#OnTextFieldConfirm" visible="false" />
          </children>
       </StackPane>
-      <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#Delete" prefHeight="10.0" prefWidth="29.0" HBox.hgrow="NEVER" />
+      <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#Delete" prefHeight="10.0" prefWidth="29.0" HBox.hgrow="NEVER">
+         <HBox.margin>
+            <Insets top="5.0" />
+         </HBox.margin></Button>
    </children>
 </HBox>

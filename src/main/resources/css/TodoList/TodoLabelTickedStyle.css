@@ -1,4 +1,18 @@
 
 .label .text {
     -fx-strikethrough: true;
+    -fx-wrap-text: true;
+    -fx-font-family: Roboto, sans-serif;
+    -fx-text-fill: white;
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
 }
+
+.label {
+    -fx-background-color:  #ce5e82;
+}
+
+.label:hover {
+    -fx-background-color: #c53c69;
+}
+

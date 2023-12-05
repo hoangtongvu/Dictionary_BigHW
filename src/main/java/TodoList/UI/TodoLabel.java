@@ -84,7 +84,9 @@ public class TodoLabel implements Initializable
         String tickedStyle = this.todoList.labelTickedStyle;
 
         styles.remove(tickedStyle);
-        if (!styles.contains(normStyle)) styles.add(normStyle);
+        if (!styles.contains(normStyle)) {
+            styles.add(normStyle);
+        }
     }
 
     public void SetStrikeThrough()
@@ -94,7 +96,9 @@ public class TodoLabel implements Initializable
         String tickedStyle = this.todoList.labelTickedStyle;
 
         styles.remove(normStyle);
-        if (!styles.contains(tickedStyle)) styles.add(tickedStyle);
+        if (!styles.contains(tickedStyle)) {
+            styles.add(tickedStyle);
+        }
     }
 
     public void SetContent(String value)
