@@ -256,6 +256,15 @@
     -fx-background-image: url('../../png/delete_filled.png');
 }
 
+.delete-button {
+    -fx-background-image: url('../../png/delete.png');
+}
+
+.delete-button:hover {
+    -fx-background-image: url('../../png/delete_filled.png');
+}
+
+
 #word-anchor-web-view-blur {
     -fx-effect: dropshadow(three-pass-box, #21252b, 10, 0, 0, 0);
 }

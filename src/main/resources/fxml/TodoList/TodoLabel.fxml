@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="rootHbox" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="149.0" stylesheets="@../../css/Theme/dark-theme.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TodoList.UI.TodoLabel">
+
+<AnchorPane fx:id="rootHbox" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TodoList.UI.TodoLabel">
    <children>
-      <StackPane maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+      <AnchorPane prefHeight="26.0" prefWidth="149.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="label" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="125.0" text="asdfasd" wrapText="true">
+            <Label fx:id="label" layoutY="5.714285850524902" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="119.0" text="asdfasd" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font size="15.0" />
                </font>
@@ -20,12 +21,14 @@
                   <Insets left="5.0" />
                </padding>
             </Label>
-            <TextField fx:id="editTextField" onAction="#OnTextFieldConfirm" visible="false" />
+            <TextField fx:id="editTextField" layoutX="51.42856979370117" onAction="#OnTextFieldConfirm" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
-      </StackPane>
-      <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#Delete" prefHeight="10.0" prefWidth="29.0" HBox.hgrow="NEVER">
-         <HBox.margin>
-            <Insets top="5.0" />
-         </HBox.margin></Button>
+      </AnchorPane>
+      <Button layoutX="155.42857360839844" layoutY="9.142857551574707" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#Delete" prefHeight="10.0" prefWidth="29.0" stylesheets="@../../css/Theme/dark-theme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <styleClass>
+            <String fx:value="icon-button" />
+            <String fx:value="delete-button" />
+         </styleClass>
+      </Button>
    </children>
-</HBox>
+</AnchorPane>

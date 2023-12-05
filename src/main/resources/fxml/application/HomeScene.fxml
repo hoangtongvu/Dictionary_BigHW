@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -67,13 +68,21 @@
                      <right>
                         <AnchorPane prefHeight="642.0" prefWidth="340.0" BorderPane.alignment="CENTER">
                            <children>
-                              <AnchorPane fx:id="todoListHolder" layoutX="13.0" layoutY="307.0" prefHeight="291.0" prefWidth="325.0" styleClass="widget" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="307.0">
+                              <AnchorPane fx:id="todoListHolder" layoutX="13.0" layoutY="307.0" prefHeight="291.0" prefWidth="325.0" styleClass="floating-anchor-pane" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="307.0">
                                  <children>
-                                    <Label layoutY="-15.0" prefHeight="35.0" prefWidth="146.0" style="-fx-font-weight: bold;" styleClass="label-highlight" text="To-do list">
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                    </Label>
+                                    <AnchorPane layoutX="25.0" layoutY="-28.0" prefHeight="41.0" prefWidth="314.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label alignment="TOP_CENTER" layoutY="5.0" prefHeight="35.0" prefWidth="125.0" style="-fx-font-weight: bold;" styleClass="label-highlight" text="To-do list" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <styleClass>
+                                          <String fx:value="title-pane" />
+                                          <String fx:value="gradient-pane-2" />
+                                       </styleClass>
+                                    </AnchorPane>
                                  </children></AnchorPane>
                               <AnchorPane fx:id="timerPlaceHolder" layoutX="-33.0" prefHeight="288.0" prefWidth="324.0" styleClass="floating-anchor-pane" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="0.0" />
                            </children>

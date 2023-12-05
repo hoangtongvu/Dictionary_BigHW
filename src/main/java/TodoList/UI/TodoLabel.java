@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
@@ -17,7 +18,7 @@ import java.util.ResourceBundle;
 
 public class TodoLabel implements Initializable
 {
-    @FXML private HBox rootHbox;
+    @FXML private AnchorPane rootHbox;
     @FXML private Label label;
     @FXML private TextField editTextField;
 
