@@ -84,7 +84,7 @@
                                     <Font size="23.0" />
                                  </font>
                               </Text>
-                              <Text fx:id="rightAnswerIfIncorrectText" layoutX="10.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Right answer is B" wrappingWidth="478.13670349121094">
+                              <Text fx:id="rightAnswerIfIncorrectText" fill="#ce5e82" layoutX="10.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Right answer is B" wrappingWidth="478.13670349121094">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -98,12 +98,12 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="394.0" prefWidth="241.0" spacing="12.0">
                      <children>
-                        <Text fx:id="finalPointText" strokeType="OUTSIDE" strokeWidth="0.0" text="Point: 8.0" textAlignment="CENTER" visible="false" wrappingWidth="184.0">
+                        <Text fx:id="finalPointText" fill="#bad4ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Point: 8.0" textAlignment="CENTER" visible="false" wrappingWidth="184.0">
                            <font>
                               <Font size="23.0" />
                            </font>
                         </Text>
-                        <Text fx:id="timerText" fill="#ce5e82" strokeType="INSIDE" strokeWidth="0.0" style="-fx-text-fill: #CE5E82;" text="0:0" textAlignment="CENTER" wrappingWidth="184.0">
+                        <Text fx:id="timerText" fill="#ce5e82" strokeType="INSIDE" strokeWidth="0.0" text="0:0" textAlignment="CENTER" wrappingWidth="184.0">
                            <font>
                               <Font size="23.0" />
                            </font>
@@ -162,7 +162,7 @@
                   <Insets />
                </VBox.margin>
                <children>
-                  <ProgressBar fx:id="answeredProgress" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="797.0" progress="0.0">
+                  <ProgressBar fx:id="answeredProgress" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="797.0" progress="0.0" stylesheets="@../../../css/Game/MultiChoice/ProgressBarStyle.css">
                      <VBox.margin>
                         <Insets bottom="30.0" left="50.0" right="50.0" />
                      </VBox.margin>
