@@ -103,6 +103,15 @@
     -fx-padding: 10px;
 }
 
+.todo-list-item .text-field {
+    -fx-background-color: #282c34;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-text-fill: white;
+    -fx-padding: 0;
+}
+
+
 .edit-word-text-area {
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
@@ -125,6 +134,12 @@
     -fx-padding: 0 0 0 20;
     -fx-background-color: transparent;
     -fx-graphic-text-gap: 30;
+    -fx-font-size: 20;
+    -fx-text-fill: #ce5e82;
+}
+
+.side-menu-button:disabled {
+    -fx-opacity: 1;
 }
 
 .side-menu-button:hover {

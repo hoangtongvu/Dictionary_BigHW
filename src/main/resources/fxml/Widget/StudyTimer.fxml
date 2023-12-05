@@ -44,7 +44,7 @@
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <CheckBox fx:id="soundCheckBox" mnemonicParsing="false" onAction="#onTick" prefHeight="17.0" prefWidth="261.0" styleClass="tick-box" stylesheets="@../../css/Theme/dark-theme.css" text="Play sound after timer ends?" />
+                  <CheckBox fx:id="soundCheckBox" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#onTick" prefHeight="21.0" prefWidth="243.0" styleClass="tick-box" stylesheets="@../../css/Theme/dark-theme.css" text="Play sound after timer ends?" />
                </children>
             </HBox>
             <HBox alignment="CENTER" spacing="10.0">
