@@ -36,8 +36,6 @@ import java.util.List;
 import static java.util.Collections.sort;
 
 public class EditWordSceneController extends BaseSceneController implements IHasNavPane {
-
-    private static EditWordSceneController sceneController;
     private double mouseStartX;
     private double mouseStartY;
     protected AnchorPane canvasPane;
@@ -94,9 +92,11 @@ public class EditWordSceneController extends BaseSceneController implements IHas
     @Override
     public void EndShow() {
         try {
-            if (!DicNode.isChangesSaved()) {
+            if (!DicNode.isChangesSaved() && DicNode.getCurrentlyEditedWord() != null) {
                 changeSceneSave();
             }
+            hideToolBar();
+            DicNode.reset();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -180,20 +180,6 @@ public class EditWordSceneController extends BaseSceneController implements IHas
 
     }
 
-    @FXML
-    public void toDictionary() {
-        //FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().dictionaryScene);
-    }
-
-    @FXML
-    public void toGames() {
-        //FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().chooseGameScene);
-    }
-
-    @FXML
-    public void toTranslate() {
-        //FxmlFileManager.SwitchScene(FxmlFileManager.getInstance().translateScene);
-    }
 
 
     @FXML
@@ -341,10 +327,18 @@ public class EditWordSceneController extends BaseSceneController implements IHas
     public void deleteWord() throws SQLException {
         //Delete -> Reset -> Empty
         if (Warnings.getInstance().showDeleteWordWarning()) {
-            DicManager.getInstance().getDictionary().getWordBlocks().remove(DicNode.getCurrentlyEditedWord().getWordBlock());
-            editableWordList.remove(DicNode.getCurrentlyEditedWord().getWordBlock());
-            DicNode.getCurrentlyEditedWord().getWordBlock().deleteFromDatabase();
-            SearchHistory.getInstance().deleteWord(DicNode.getCurrentlyEditedWord().getWordBlock().getWord());
+            WordBlock currentWordBlock = DicNode.getCurrentlyEditedWord().getWordBlock();
+            DicManager.getInstance().getDictionary().getWordBlocks().remove(currentWordBlock);
+            editableWordList.remove(currentWordBlock);
+            currentWordBlock.deleteFromDatabase();
+            SearchHistory.getInstance().deleteWord(currentWordBlock.getWord());
+
+            try {
+                DictionarySceneController.getStarredWordList().remove(FxmlFileManager.getInstance().dictionarySC.getStarredWord(currentWordBlock.getWord()));
+            } catch (Exception e) {
+
+            }
+
 
             ListView historyListView =  FxmlFileManager.getInstance().dictionarySC.getHistoryListView();
             historyListView.getItems().clear();

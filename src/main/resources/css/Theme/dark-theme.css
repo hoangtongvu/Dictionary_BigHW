@@ -489,7 +489,6 @@
 .node-pane {
     -fx-min-width: 200;
     -fx-background-color: #ffffff;
-    -fx-border-style: transparent;
     -fx-border-width: 2px;
     -fx-background-radius: 5;
     -fx-border-radius: 5;
@@ -500,6 +499,32 @@
     -fx-background-color: #426A70FF;
     -fx-border-color: #006d79;
 
+}
+
+.spinner {
+    -fx-background-color: #262a32;
+}
+
+.spinner .increment-arrow-button {
+    -fx-background-color: #262a32;
+}
+.spinner .decrement-arrow-button {
+    -fx-background-color: #262a32;
+}
+
+.spinner .increment-arrow-button:hover {
+    -fx-background-color: #3e424b;
+}
+.spinner .decrement-arrow-button:hover {
+    -fx-background-color: #3e424b;
+}
+
+.spinner .increment-arrow {
+    -fx-background-color: #985d80;
+}
+
+.spinner .decrement-arrow {
+    -fx-background-color: #985d80;
 }
 
 .node-title {

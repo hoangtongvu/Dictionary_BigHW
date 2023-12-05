@@ -94,6 +94,7 @@ public class SearchHistory {
                 break;
             }
         }
+        saveStatus();
     }
 
 

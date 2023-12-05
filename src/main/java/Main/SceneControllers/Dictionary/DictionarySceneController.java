@@ -98,6 +98,10 @@ public class DictionarySceneController extends BaseSceneController implements In
         }
     }
 
+    public static List<String> getStarredWordStringList() {
+        return starredWordStringList;
+    }
+
     private static WordBlock currentWordBlock = null;
 
     private final String cssPath = getClass().getResource("/css/Theme/htmlStyle.css").toExternalForm();
@@ -126,7 +130,7 @@ public class DictionarySceneController extends BaseSceneController implements In
     @Override
     public void StartShow()
     {
-        updateHistoryView();
+        update();
     }
 
     @Override
@@ -137,7 +141,9 @@ public class DictionarySceneController extends BaseSceneController implements In
 
     @Override
     public void update() {
-
+        updateHistoryView();
+        updateStarListView();
+        updateNgramGraph();
     }
 
     @FXML
@@ -158,15 +164,20 @@ public class DictionarySceneController extends BaseSceneController implements In
             SearchHistory.getInstance().updateHistory(lookUpRes.getWord());
 
             updateHistoryView();
-            try {
-                updateGraph();
-            } catch (Exception e) {
-                System.out.println("Cant get NGRAM");
-                wordUsageGraph.getData().clear();
-            }
+            updateNgramGraph();
 
 
             enableTasks();
+        }
+    }
+
+    private void updateNgramGraph() {
+        try {
+            wordUsageGraph.getData().clear();
+            updateGraph();
+        } catch (Exception e) {
+            System.out.println("Cant get NGRAM");
+            wordUsageGraph.getData().clear();
         }
     }
 
@@ -206,6 +217,10 @@ public class DictionarySceneController extends BaseSceneController implements In
                 starredWordList.remove(currentWordBlock);
             }
         }
+        updateStarListView();
+    }
+
+    private void updateStarListView() {
         starredWordStringList.clear();
         starredWordListView.getItems().clear();
         for (WordBlock wordBlock : starredWordList) {
@@ -281,6 +296,7 @@ public class DictionarySceneController extends BaseSceneController implements In
         if (event.getClickCount() > 1) {
             String currentlySelectedItem = starredWordListView.getSelectionModel().getSelectedItem().toString();
             WordBlock starredWord = getStarredWord(currentlySelectedItem);
+            updateNgramGraph();
             currentWordBlock = starredWord;
             enableTasks();
             starredWord.loadData(starredWord.getWordID());
