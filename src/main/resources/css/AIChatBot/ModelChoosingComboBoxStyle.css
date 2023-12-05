@@ -9,6 +9,7 @@
     -fx-alignment: center;
     -fx-font-size: 15;
     -fx-background-color: #282c34;
+    -fx-text-fill: white;
 }
 
 .combo-box .list-view {
