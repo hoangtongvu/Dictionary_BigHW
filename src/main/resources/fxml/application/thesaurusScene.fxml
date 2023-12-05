@@ -24,8 +24,8 @@
          <font>
             <Font size="24.0" />
          </font></TextArea>
-      <Label layoutX="189.0" layoutY="236.0" prefHeight="33.0" prefWidth="301.0" text="Synonyms" />
-      <Label layoutX="794.0" layoutY="236.0" prefHeight="33.0" prefWidth="301.0" text="Antonyms" />
+      <Label layoutX="189.0" layoutY="236.0" prefHeight="33.0" prefWidth="301.0" styleClass="floating-anchor-pane" stylesheets="@../../css/Theme/dark-theme.css" text="Synonyms" />
+      <Label layoutX="794.0" layoutY="236.0" prefHeight="33.0" prefWidth="301.0" styleClass="floating-anchor-pane" stylesheets="@../../css/Theme/dark-theme.css" text="Antonyms" />
       <Label fx:id="thesaurusTitle" layoutY="33.0" prefHeight="72.0" prefWidth="1280.0" text="Thesaurus" />
       <Pane layoutX="1.0" prefHeight="41.0" prefWidth="200.0" styleClass="pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
