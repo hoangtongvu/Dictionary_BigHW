@@ -239,6 +239,14 @@
     -fx-background-image: url('../../png/menuIcon_filled.png');
 }
 
+.back-button {
+    -fx-background-image: url('../../png/back.png');
+}
+
+.back-button:hover {
+    -fx-background-image: url('../../png/back_filled.png');
+}
+
 .icon-button-big {
     -fx-background-radius: 20px;
     -fx-background-color: #2E4770;
