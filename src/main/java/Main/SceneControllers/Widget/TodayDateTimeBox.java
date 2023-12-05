@@ -1,4 +1,4 @@
-package Main.SceneControllers;
+package Main.SceneControllers.Widget;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -64,7 +64,18 @@ public class TodayDateTimeBox implements Initializable
     private void SetTime(LocalDateTime localDateTime)
     {
         this.timeLabel.setText(localDateTime.getHour() + ":" + localDateTime.getMinute() + ":" + localDateTime.getSecond());
-        this.timeLabel.setText(String.format("%02d:%02d:%02d", localDateTime.getHour(), localDateTime.getMinute(), localDateTime.getSecond()));
+        String dayTime;
+        if (localDateTime.getHour() >= 12) {
+            dayTime = "PM";
+        } else {
+            dayTime = "AM";
+        }
+
+        int time = localDateTime.getHour();
+        if (time > 12) {
+            time = time - 12;
+        }
+        this.timeLabel.setText(String.format("%02d:%02d " + dayTime, time , localDateTime.getMinute()));
     }
 
     private void SetDay(LocalDateTime localDateTime)

@@ -223,6 +223,7 @@ public abstract class DicNode {
         clicked = PseudoClass.getPseudoClass("clicked");
 
         title.prefWidthProperty().bind(nodePane.widthProperty());
+
         nodePane.setMinWidth(150);
         nodePane.setMaxWidth(150);
         nodePane.getChildren().add(title);
