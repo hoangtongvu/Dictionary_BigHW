@@ -25,7 +25,7 @@
             <Pane prefHeight="41.0" prefWidth="1200.0" styleClass="pane" />
             <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="126.0" prefWidth="1200.0" styleClass="gradient-pane-1">
                <children>
-                  <TextField id="searchBar" fx:id="searchBar" layoutX="40.0" layoutY="48.0" onAction="#LookupWord" onKeyTyped="#OnTextChange" prefHeight="31.0" prefWidth="645.0" promptText="Type your word here..." styleClass="search-bar">
+                  <TextField id="search-bar" fx:id="searchBar" layoutX="40.0" layoutY="48.0" onAction="#LookupWord" onKeyTyped="#OnTextChange" prefHeight="31.0" prefWidth="645.0" promptText="Type your word here..." styleClass="search-bar">
                      <font>
                         <Font name="System Italic" size="15.0" />
                      </font>
@@ -95,7 +95,10 @@
                            <children>
                               <Pane prefHeight="60.0" prefWidth="328.0" styleClass="gradient-pane-2" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Label layoutX="97.0" layoutY="15.0" styleClass="label-highlight" text="Usage over time" />
+                                    <Label layoutX="82.0" layoutY="13.0" styleClass="label-highlight" text="Usage over time">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font></Label>
                                  </children></Pane>
                               <AnchorPane fx:id="ngramPlaceHolder" layoutY="60.0" prefHeight="169.0" prefWidth="322.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
                                  <children>

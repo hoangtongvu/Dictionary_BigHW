@@ -22,9 +22,9 @@
          <font>
             <Font size="24.0" />
          </font></Label>
-      <VBox layoutY="82.0" prefHeight="183.0" prefWidth="288.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="82.0">
+      <VBox alignment="TOP_CENTER" layoutY="82.0" prefHeight="183.0" prefWidth="288.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="82.0">
          <children>
-            <Label fx:id="timerLabel" prefHeight="47.0" prefWidth="294.0" style="-fx-alignment: center;" styleClass="label-highlight" stylesheets="@../../css/Theme/dark-theme.css" text="00:00:00">
+            <Label fx:id="timerLabel" alignment="CENTER" prefHeight="47.0" prefWidth="294.0" style="-fx-alignment: center;" styleClass="label-highlight" stylesheets="@../../css/Theme/dark-theme.css" text="00:00:00">
                <font>
                   <Font size="40.0" />
                </font>
