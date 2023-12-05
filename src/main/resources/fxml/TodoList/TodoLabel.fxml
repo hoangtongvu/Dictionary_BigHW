@@ -8,12 +8,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="rootHbox" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TodoList.UI.TodoLabel">
    <children>
       <AnchorPane prefHeight="26.0" prefWidth="149.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="label" layoutY="5.714285850524902" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="119.0" text="asdfasd" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Label fx:id="label" layoutY="5.714285850524902" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="119.0" style="-fx-text-fill: white;" text="asdfasd" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font size="15.0" />
                </font>

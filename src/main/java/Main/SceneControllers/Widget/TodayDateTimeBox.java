@@ -85,7 +85,9 @@ public class TodayDateTimeBox implements Initializable
 
     private void SetDate(LocalDateTime localDateTime)
     {
-        this.dateLabel.setText(localDateTime.getDayOfMonth() + " " + localDateTime.getMonth() + " " + localDateTime.getYear());
+        String month = String.valueOf(localDateTime.getMonth());
+        month = month.substring(0, 1).toUpperCase() + month.substring(1).toLowerCase();
+        this.dateLabel.setText(localDateTime.getDayOfMonth() + " " + month + " " + localDateTime.getYear());
     }
 
 

@@ -36,17 +36,17 @@
                <children>
                   <AnchorPane fx:id="contentAnchorPane" prefHeight="438.0" prefWidth="802.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="398.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <WebView fx:id="webView" layoutY="137.0" prefHeight="301.0" prefWidth="826.0" style="-fx-context-menu-enabled: false;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0" />
-                        <AnchorPane id="wordAnchor" prefHeight="126.0" prefWidth="826.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <WebView fx:id="webView" layoutY="151.0" prefHeight="284.0" prefWidth="802.0" style="-fx-context-menu-enabled: false;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="151.0" />
+                        <AnchorPane id="wordAnchor" prefHeight="99.0" prefWidth="802.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <children>
-                              <AnchorPane fx:id="wordDisplay" layoutX="14.0" layoutY="14.0" prefHeight="105.0" prefWidth="746.0" styleClass="floating-anchor-pane" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="42.0">
+                              <AnchorPane fx:id="wordDisplay" layoutX="14.0" layoutY="14.0" prefHeight="119.0" prefWidth="746.0" styleClass="floating-anchor-pane" AnchorPane.bottomAnchor="-8.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="42.0">
                                  <children>
-                                    <Button id="starButton" fx:id="starButton" layoutX="714.0" layoutY="18.0" mnemonicParsing="false" onAction="#addToStarList" prefHeight="31.0" prefWidth="36.0" AnchorPane.rightAnchor="18.0">
+                                    <Button id="starButton" fx:id="starButton" layoutX="696.0" layoutY="44.0" mnemonicParsing="false" onAction="#addToStarList" prefHeight="31.0" prefWidth="36.0" AnchorPane.rightAnchor="14.0">
                                        <styleClass>
                                           <String fx:value="star-button" />
                                           <String fx:value="icon-button" />
                                        </styleClass></Button>
-                                    <Button id="editButton" fx:id="editButton" layoutX="714.0" layoutY="55.0" mnemonicParsing="false" onAction="#editCurrentWord" prefHeight="31.0" prefWidth="36.0" AnchorPane.rightAnchor="18.0">
+                                    <Button id="editButton" fx:id="editButton" layoutX="696.0" layoutY="80.0" mnemonicParsing="false" onAction="#editCurrentWord" prefHeight="31.0" prefWidth="36.0" AnchorPane.rightAnchor="14.0">
                                        <styleClass>
                                           <String fx:value="edit-button" />
                                           <String fx:value="icon-button" />
@@ -64,15 +64,6 @@
                                                       <String fx:value="word-label" />
                                                    </styleClass>
                                                 </Label>
-                                                <Button id="speakerButton" fx:id="soundButton" mnemonicParsing="false" onAction="#onSoundButton" prefHeight="29.0" prefWidth="29.0">
-                                                   <HBox.margin>
-                                                      <Insets top="6.0" />
-                                                   </HBox.margin>
-                                                   <styleClass>
-                                                      <String fx:value="speaker-button" />
-                                                      <String fx:value="icon-button" />
-                                                   </styleClass>
-                                                </Button>
                                              </children>
                                           </HBox>
                                           <Label fx:id="soundLabel" prefHeight="32.0" prefWidth="412.0" styleClass="sound-label" text="[sound label]">
@@ -82,11 +73,17 @@
                                           </Label>
                                        </children>
                                     </VBox>
+                                    <Button id="speakerButton" fx:id="soundButton" layoutX="699.0" layoutY="8.0" mnemonicParsing="false" onAction="#onSoundButton" prefHeight="29.0" prefWidth="29.0" AnchorPane.rightAnchor="17.85714285714289">
+                                       <styleClass>
+                                          <String fx:value="speaker-button" />
+                                          <String fx:value="icon-button" />
+                                       </styleClass>
+                                    </Button>
                                  </children>
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane id="word-anchor-web-view-blur" layoutY="128.0" prefHeight="18.0" prefWidth="831.0" styleClass="anchor-pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-29.0" />
+                        <AnchorPane id="word-anchor-web-view-blur" layoutY="142.0" prefHeight="18.0" prefWidth="831.0" styleClass="anchor-pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-29.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="436.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
