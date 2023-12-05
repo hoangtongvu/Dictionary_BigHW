@@ -8,6 +8,7 @@ import User.User;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -34,10 +35,10 @@ public class App extends Application {
         HomeSceneController initSC = FxmlFileManager.getInstance().homeSC;
         FxmlFileManager.SwitchToInitScene(initSC);
         Scene scene = new Scene(FxmlFileManager.getInstance().homeSC.getRoot());
-
+        primaryStage.getIcons().add(new Image(String.valueOf(getClass().getResource("/png/nerd.png"))));
         primaryStage.setMinWidth(1280);
         primaryStage.setMinHeight(768);
-        primaryStage.setTitle("MyBigDic");
+            primaryStage.setTitle("Dictionary");
         primaryStage.setScene(scene);
         primaryStage.show();
 
