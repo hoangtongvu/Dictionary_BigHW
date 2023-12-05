@@ -489,25 +489,30 @@
 .node-pane {
     -fx-min-width: 200;
     -fx-background-color: #ffffff;
-    -fx-border-style: solid;
-    -fx-border-color: black;
+    -fx-border-style: transparent;
     -fx-border-width: 2px;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
 }
 
 /*noinspection CssInvalidPseudoSelector*/
 .node-pane:clicked {
     -fx-background-color: #426A70FF;
     -fx-border-color: #006d79;
+
 }
 
 .node-title {
     -fx-background-color: #ffee92;
     -fx-text-fill: #000000;
     -fx-alignment: center;
+    -fx-border-radius: 5 5 0 0;
+    -fx-background-radius: 5 5 0 0;
 }
 
 .node-content {
     -fx-alignment: baseline-left;
+    -fx-text-alignment: center;
 }
 
 .check-box {

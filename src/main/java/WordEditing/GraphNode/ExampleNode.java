@@ -38,6 +38,7 @@ public class ExampleNode extends DicNode {
         example = new WordExample("<EMPTY>","<EMPTY>");
         exampleLabel = new Label("Example:\n"  + example.getExample());
         translationLabel = new Label("Translation:\n" + example.getTranslation());
+
         labelProperty(exampleLabel, "node-content");
         labelProperty(translationLabel, "node-content");
         nodePane.getChildren().addAll(exampleLabel, translationLabel);

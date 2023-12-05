@@ -1,10 +1,9 @@
 package Main.SceneControllers.Dictionary;
 
-import Main.Database;
 import Main.FxmlFileManager;
 import Main.SceneControllers.BaseSceneController;
 import Interfaces.IHasNavPane;
-import Main.SceneControllers.TodayDateTimeBox;
+import Main.SceneControllers.Widget.TodayDateTimeBox;
 import Main.SceneControllers.Widget.StudyTimerController;
 
 import TodoList.UI.TodoList;
@@ -21,9 +20,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javafx.scene.layout.VBox;
 import User.AccountManager;

@@ -126,7 +126,7 @@ public class DictionarySceneController extends BaseSceneController implements In
     @Override
     public void StartShow()
     {
-
+        updateHistoryView();
     }
 
     @Override
@@ -157,10 +157,7 @@ public class DictionarySceneController extends BaseSceneController implements In
             setupWebView(lookUpRes.GetInfo());
             SearchHistory.getInstance().updateHistory(lookUpRes.getWord());
 
-            historyListView.getItems().clear();
-            if (!SearchHistory.getInstance().getWordHistory().isEmpty()) {
-                historyListView.getItems().addAll(SearchHistory.getInstance().getWordHistory());
-            }
+            updateHistoryView();
             try {
                 updateGraph();
             } catch (Exception e) {
@@ -170,6 +167,13 @@ public class DictionarySceneController extends BaseSceneController implements In
 
 
             enableTasks();
+        }
+    }
+
+    private void updateHistoryView() {
+        historyListView.getItems().clear();
+        if (!SearchHistory.getInstance().getWordHistory().isEmpty()) {
+            historyListView.getItems().addAll(SearchHistory.getInstance().getWordHistory());
         }
     }
 
