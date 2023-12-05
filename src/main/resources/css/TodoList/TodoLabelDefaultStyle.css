@@ -8,12 +8,12 @@
 }
 
 .label {
-    -fx-background-color:  #ce5e82;
+    -fx-background-color: #2E4770;
     -fx-background-radius: 20;
 }
 
 .label:hover {
-    -fx-background-color: #c53c69;
+    -fx-background-color: #243c62;
 }
 
 .anchor {

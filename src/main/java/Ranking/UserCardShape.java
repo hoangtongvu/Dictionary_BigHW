@@ -32,9 +32,9 @@ public class UserCardShape {
         card = new AnchorPane();
         card.getStylesheets().add(String.valueOf(getClass().getResource("/css/Theme/leader-board.css")));
         card.getStyleClass().add("card");
-        card.setMaxHeight(50.0);
+        card.setMaxHeight(45);
         card.setPrefHeight(128.0);
-        card.setPrefWidth(287.0);
+        card.setPrefWidth(100);
 
 
         profilePic = new Circle();

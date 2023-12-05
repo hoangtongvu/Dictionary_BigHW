@@ -239,6 +239,45 @@
     -fx-background-image: url('../../png/menuIcon_filled.png');
 }
 
+.icon-button-big {
+    -fx-background-radius: 20px;
+    -fx-background-color: #2E4770;
+    -fx-background-size: 60px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.icon-button-big:hover {
+    -fx-background-color: #243c62;
+}
+
+.icon-button-big:pressed {
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+
+
+.icon-button-big:hover {
+
+}
+
+.dictionary-button {
+    -fx-background-image: url('../../png/book.png');
+}
+
+.translate-button {
+    -fx-background-image: url('../../png/translate.png');
+}
+
+.chat-button {
+    -fx-background-image: url('../../png/robot.png');
+}
+
+.thesaurus-button {
+    -fx-background-image: url('../../png/magGlass.png');
+}
+
 .dictionary-scene .clear-history-button {
     -fx-background-image: url('../../png/delete.png');
     -fx-alignment: baseline-left;
@@ -521,6 +560,26 @@
 
 .spinner .increment-arrow {
     -fx-background-color: #985d80;
+}
+
+
+.play-button {
+    -fx-effect: dropshadow(three-pass-box, #ce5e82,0,1,5,5);
+    -fx-background-radius: 10px;
+    -fx-background-color: #200D3A;
+    -fx-font-size: 24;
+    -fx-text-fill: #ce5e82;
+    -fx-font-weight: bold;
+}
+
+.play-button:hover {
+    -fx-text-fill: #f6dcac;
+}
+
+.play-button:pressed {
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+    -fx-font-size: 24;
 }
 
 .spinner .decrement-arrow {
