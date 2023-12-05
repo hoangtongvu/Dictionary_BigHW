@@ -56,13 +56,7 @@
                               <Button id="play-button" layoutX="27.0" layoutY="515.0" mnemonicParsing="false" onAction="#toGames" prefHeight="55.0" prefWidth="295.0" styleClass="play-button" text="Play now">
                                  <font>
                                     <Font size="24.0" />
-<<<<<<< HEAD
                                  </font></Button>
-=======
-                                 </font>
-                              </Label>
-                              <Button layoutX="24.0" layoutY="547.0" mnemonicParsing="false" onAction="#toGames" prefHeight="41.0" prefWidth="291.0" text="Games" />
->>>>>>> c684deff1a4dd336184430dc2302023056121433
                            </children>
                         </AnchorPane>
                      </left>
