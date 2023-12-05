@@ -38,6 +38,7 @@ public class App extends Application {
         primaryStage.getIcons().add(new Image(String.valueOf(getClass().getResource("/png/nerd.png"))));
         primaryStage.setMinWidth(1280);
         primaryStage.setMinHeight(768);
+        primaryStage.setResizable(false);
             primaryStage.setTitle("Dictionary");
         primaryStage.setScene(scene);
         primaryStage.show();
