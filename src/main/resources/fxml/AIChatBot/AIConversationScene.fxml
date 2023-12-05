@@ -15,9 +15,8 @@
 
 <AnchorPane fx:id="rootAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@../../css/Theme/dark-theme.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.SceneControllers.AIChatBot.AIConversationSceneController">
    <children>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" style="-fx-background-color: #adbad5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" layoutY="58.0" prefHeight="542.0" prefWidth="1000.0" spacing="20.0" style="-fx-background-color: #21252b;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="41.0">
          <children>
-            <ComboBox fx:id="modelComboBox" onAction="#OnModelComboBoxChoose" prefHeight="53.0" prefWidth="291.0" styleClass="combo-box" stylesheets="@../../css/AIChatBot/ModelChoosingComboBoxStyle.css" />
             <ScrollPane fx:id="messageScrollPane" fitToWidth="true" prefHeight="450.0" prefWidth="600.0" style="-fx-border-color: transparent;" styleClass="chat-box" stylesheets="@../../css/AIChatBot/ConservationScrollPaneStyle.css" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets />
@@ -60,5 +59,10 @@
             <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
          </padding>
       </VBox>
+      <HBox alignment="CENTER" prefHeight="41.0" prefWidth="1000.0" styleClass="pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ComboBox fx:id="modelComboBox" onAction="#OnModelComboBoxChoose" prefHeight="23.0" prefWidth="291.0" styleClass="combo-box" stylesheets="@../../css/AIChatBot/ModelChoosingComboBoxStyle.css" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

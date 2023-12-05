@@ -4,4 +4,5 @@
 
 .chat-box > .viewport {
     -fx-background-radius: 30;
+    -fx-background-color: #282c34;
 }

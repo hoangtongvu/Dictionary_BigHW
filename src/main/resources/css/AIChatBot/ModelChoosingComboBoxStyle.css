@@ -1,12 +1,14 @@
 
 
 .combo-box {
+    -fx-background-color: #282c34;
     -fx-background-radius: 30;
 }
 
 .combo-box>.list-cell {
     -fx-alignment: center;
     -fx-font-size: 15;
+    -fx-background-color: #282c34;
 }
 
 .combo-box .list-view {

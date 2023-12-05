@@ -64,6 +64,7 @@ public class TodayDateTimeBox implements Initializable
     private void SetTime(LocalDateTime localDateTime)
     {
         this.timeLabel.setText(localDateTime.getHour() + ":" + localDateTime.getMinute() + ":" + localDateTime.getSecond());
+        this.timeLabel.setText(String.format("%02d:%02d:%02d", localDateTime.getHour(), localDateTime.getMinute(), localDateTime.getSecond()));
     }
 
     private void SetDay(LocalDateTime localDateTime)
