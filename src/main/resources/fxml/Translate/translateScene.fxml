@@ -40,7 +40,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <AnchorPane fx:id="langPane" layoutX="84.0" layoutY="148.0" prefHeight="89.0" prefWidth="1125.0">
+      <AnchorPane fx:id="langPane" layoutX="84.0" layoutY="148.0" prefHeight="89.0" prefWidth="1125.0" styleClass="floating-anchor-pane" stylesheets="@../../css/Theme/dark-theme.css">
          <children>
             <Label layoutX="609.0" layoutY="18.0" prefHeight="54.0" prefWidth="516.0" text="Tiếng Việt" />
             <Label layoutY="21.0" prefHeight="47.0" prefWidth="516.0" text="English" />
