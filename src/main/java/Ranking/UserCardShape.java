@@ -95,16 +95,16 @@ public class UserCardShape {
 
         switch(rank) {
             case 1:
-                card.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, gold, orange);");
+                card.setStyle("-fx-background-color: gold");
                 break;
             case 2:
-                card.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, silver, white);");
+                card.setStyle("-fx-background-color: #e0e0e0");
                 break;
             case 3:
-                card.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, darkorange, red);");
+                card.setStyle("-fx-background-color: #a66626");
                 break;
             default:
-                card.setStyle("-fx-background-color: lightgray;");
+                card.setStyle("-fx-background-color: gray");
                 break;
         }
 
